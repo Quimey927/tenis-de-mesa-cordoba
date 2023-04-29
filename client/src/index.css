@@ -1,7 +1,5 @@
 :root {
-  --color-primary: #75aadb;
-  --color-primary-variant: #4b8cc9;
-  --color-secondary: #dba675;
+  --color-primary: #e76922;
 }
 
 *,
@@ -15,6 +13,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: serif;
 }
 
 body {
@@ -36,9 +35,9 @@ img {
 main {
   flex-grow: 1;
   padding-block: 2rem;
-  background-image: url(../src/assets/red-tiger.png);
-  background-size: cover;
-  background-position: center;
+  /* background-image: url(../src/assets/red-tiger.png); */
+  background-color: #333;
+  color: white;
 }
 
 .text-center {
