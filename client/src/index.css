@@ -1,0 +1,70 @@
+:root {
+  --color-primary: #75aadb;
+  --color-primary-variant: #4b8cc9;
+  --color-secondary: #dba675;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+  padding-block: 2rem;
+  background-image: url(../src/assets/red-tiger.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* this container classes are the ones bootstrap uses */
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
