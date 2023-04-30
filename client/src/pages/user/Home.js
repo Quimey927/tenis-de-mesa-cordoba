@@ -6,14 +6,9 @@ import { getCurrentEvents } from '../../api';
 const HomePage = () => {
   const currentEvents = useLoaderData();
 
-  console.log(currentEvents);
-
   return (
     <>
-      <div>
-        <h1 className="text-center">Holaaa</h1>
-        <CurrentEvents events={currentEvents} />
-      </div>
+      <CurrentEvents events={currentEvents} />
     </>
   );
 };
