@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import RootLayout from './pages/user/Root';
 import ErrorPage from './pages/user/Error';
-import HomePage /* , { loader as homeLoader } */ from './pages/user/Home';
+import HomePage, { loader as homeLoader } from './pages/user/Home';
 import EventPage, { loader as eventLoader } from './pages/user/Event';
 // import AdminRoot from './pages/admin/AdminRoot';
 // import AdminPage from './pages/admin/Admin';
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
-        // loader: homeLoader,
+        loader: homeLoader,
       },
       {
         path: './:event',

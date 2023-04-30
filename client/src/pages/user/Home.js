@@ -1,16 +1,18 @@
-// import { useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
-// import CurrentEvents from '../../components/Home/CurrentEvents/CurrentEvents';
-// import { getCurrentEvents } from '../../api';
+import CurrentEvents from '../../components/Home/CurrentEvents/CurrentEvents';
+import { getCurrentEvents } from '../../api';
 
 const HomePage = () => {
-  // const currentEvents = useLoaderData();
+  const currentEvents = useLoaderData();
+
+  console.log(currentEvents);
 
   return (
     <>
       <div>
         <h1 className="text-center">Holaaa</h1>
-        {/* <CurrentEvents events={currentEvents} /> */}
+        <CurrentEvents events={currentEvents} />
       </div>
     </>
   );
@@ -18,6 +20,6 @@ const HomePage = () => {
 
 export default HomePage;
 
-// export async function loader() {
-//   return getCurrentEvents();
-// }
+export async function loader() {
+  return getCurrentEvents();
+}
