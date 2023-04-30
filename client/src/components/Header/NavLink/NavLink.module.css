@@ -25,6 +25,6 @@
 }
 
 .not-active {
-  color: #ccc;
+  color: var(--color-white);
   transition: color 300ms ease;
 }

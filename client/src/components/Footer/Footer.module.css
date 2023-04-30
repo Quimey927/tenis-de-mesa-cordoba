@@ -1,7 +1,7 @@
 .footer {
   padding: 1rem;
-  background-color: #111;
-  color: white;
+  background-color: var(--color-black);
+  color: var(--color-white);
   text-align: center;
   border-top: 2px solid white;
   display: flex;
@@ -11,6 +11,6 @@
 }
 
 .footer span {
-  color: white;
+  color: var(--color-white);
   text-shadow: -2px 2px 2px black;
 }
