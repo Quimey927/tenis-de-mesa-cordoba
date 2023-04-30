@@ -1,0 +1,26 @@
+.logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: serif;
+  text-transform: uppercase;
+}
+
+.logo span {
+  text-shadow: -2px 2px 2px black;
+}
+
+.logo span:first-child,
+.logo span:last-child {
+  font-family: monospace;
+  color: var(--color-primary);
+  font-size: 1.3rem;
+  letter-spacing: 4px;
+  font-weight: 700;
+}
+
+.logo span:nth-child(2) {
+  color: white;
+  font-size: 1rem;
+}
