@@ -24,14 +24,19 @@ const router = createBrowserRouter([
         loader: homeLoader,
       },
       {
-        path: '/torneos',
-        element: <TournamentsPage />,
-        loader: tournamentsLoader,
-      },
-      {
-        path: '/torneos/:tournamentId',
-        element: <TournamentPage />,
-        loader: tournamentLoader,
+        path: 'torneos',
+        children: [
+          {
+            index: true,
+            element: <TournamentsPage />,
+            loader: tournamentsLoader,
+          },
+          {
+            path: ':tournamentId',
+            element: <TournamentPage />,
+            loader: tournamentLoader,
+          },
+        ],
       },
     ],
   },
