@@ -10,8 +10,7 @@ export async function getCurrentTournaments() {
       status: 500,
     });
   }
-  const resData = await response.json();
-  return resData;
+  return response.json();
 }
 
 export async function getTournaments() {
@@ -22,8 +21,7 @@ export async function getTournaments() {
       status: 500,
     });
   }
-  const resData = await response.json();
-  return resData;
+  return response.json();
 }
 
 export async function getTournament(tournamentId) {
@@ -34,8 +32,7 @@ export async function getTournament(tournamentId) {
       status: 500,
     });
   }
-  const resData = await response.json();
-  return resData;
+  return response.json();
 }
 
 export async function getRoundsOfTheMonth(month, year) {
@@ -46,6 +43,5 @@ export async function getRoundsOfTheMonth(month, year) {
       status: 500,
     });
   }
-  const resData = await response.json();
-  return resData;
+  return response.json();
 }
