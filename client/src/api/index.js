@@ -2,17 +2,50 @@ import { json } from 'react-router-dom';
 
 const baseUrl = 'http://localhost:8080/api';
 
-export async function getCurrentEvents() {
-  const response = await fetch(`${baseUrl}/events`);
+export async function getCurrentTournaments() {
+  const response = await fetch(`${baseUrl}/tournaments/current-tournaments`);
   if (!response.ok) {
     throw json({
-      message: 'No pudimos cargar los eventos actuales.',
+      message: 'No pudimos cargar los torneos actuales.',
       status: 500,
     });
   }
-  return response.json();
+  const resData = await response.json();
+  return resData;
 }
 
-export async function getEvent(eventId) {}
+export async function getTournaments() {
+  const response = await fetch(`${baseUrl}/tournaments`);
+  if (!response.ok) {
+    throw json({
+      message: 'No pudimos cargar los torneos.',
+      status: 500,
+    });
+  }
+  const resData = await response.json();
+  return resData;
+}
 
-export async function getPlayer(playerId) {}
+export async function getTournament(tournamentId) {
+  const response = await fetch(`${baseUrl}/tournaments/${tournamentId}`);
+  if (!response.ok) {
+    throw json({
+      message: 'No pudimos cargar el torneo.',
+      status: 500,
+    });
+  }
+  const resData = await response.json();
+  return resData;
+}
+
+export async function getRoundsOfTheMonth(month, year) {
+  const response = await fetch(`${baseUrl}/rounds?month=${month}&year=${year}`);
+  if (!response.ok) {
+    throw json({
+      message: 'No pudimos cargar las fechas.',
+      status: 500,
+    });
+  }
+  const resData = await response.json();
+  return resData;
+}
