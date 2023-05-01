@@ -8,7 +8,7 @@
 }
 
 .logo span {
-  text-shadow: -2px 2px 2px black;
+  text-shadow: -2px 2px 2px var(--color-black);
 }
 
 .logo span:first-child,
