@@ -3,17 +3,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import RootLayout from './pages/user/Root';
 import ErrorPage from './pages/user/Error';
 import HomePage, { loader as homeLoader } from './pages/user/Home';
-import EventPage, { loader as eventLoader } from './pages/user/Event';
+import TournamentsPage, {
+  loader as tournamentsLoader,
+} from './pages/user/Tournaments';
+import TournamentPage, {
+  loader as tournamentLoader,
+} from './pages/user/Tournament';
 // import AdminRoot from './pages/admin/AdminRoot';
 // import AdminPage from './pages/admin/Admin';
-// import PlayersAdminPage, {
-//   loader as playersLoader,
-// } from './pages/admin/PlayersAdmin';
-// import EditPlayerPage, {
-//   loader as playerLoader,
-// } from './pages/admin/EditPlayer';
-// import { action as manipulatePlayerAction } from './components/Admin/Players/PlayerForm';
-// import NewPlayerPage from './pages/admin/NewPlayer';
 
 const router = createBrowserRouter([
   {
@@ -27,9 +24,14 @@ const router = createBrowserRouter([
         loader: homeLoader,
       },
       {
-        path: './:event',
-        element: <EventPage />,
-        loader: eventLoader,
+        path: '/torneos',
+        element: <TournamentsPage />,
+        loader: tournamentsLoader,
+      },
+      {
+        path: '/torneos/:tournamentId',
+        element: <TournamentPage />,
+        loader: tournamentLoader,
       },
     ],
   },
