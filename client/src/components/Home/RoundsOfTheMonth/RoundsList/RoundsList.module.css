@@ -1,0 +1,15 @@
+.rounds-list {
+  background-color: var(--color-primary);
+  box-shadow: -4px 4px 6px rgba(0, 0, 0, 0.8);
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .rounds-list {
+    border-radius: 0 10px 10px 0;
+  }
+}

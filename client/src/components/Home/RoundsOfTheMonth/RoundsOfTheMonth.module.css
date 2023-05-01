@@ -1,0 +1,10 @@
+.current-month-rounds {
+  background-color: var(--color-light-black);
+}
+
+@media (min-width: 768px) {
+  .current-month-rounds__container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+  }
+}
