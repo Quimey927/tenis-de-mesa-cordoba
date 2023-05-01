@@ -1,11 +1,15 @@
 .rounds-list {
   background-color: var(--color-primary);
   box-shadow: -4px 4px 6px rgba(0, 0, 0, 0.8);
-  display: grid;
-  place-items: center;
   border-radius: 10px;
   margin: 0;
-  padding: 0;
+  padding: 1rem;
+}
+
+.no-rounds {
+  text-align: center;
+  color: var(--color-white);
+  text-shadow: -2px 2px 2px var(--color-light-black);
 }
 
 @media (min-width: 768px) {
