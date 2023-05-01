@@ -1,5 +1,6 @@
 :root {
-  --color-primary: #e76922;
+  --color-primary: #cc6b33;
+  --color-primary-darker: #bb5316;
   --color-black: #111;
   --color-light-black: #333;
   --color-light-grey: #ccc;
@@ -38,10 +39,19 @@ img {
 
 main {
   flex-grow: 1;
-  padding-block: 2rem;
-  /* background-image: url(../src/assets/red-tiger.png); */
-  background-color: var(--color-light-black);
+}
+
+section {
+  padding-block: 4rem;
+}
+
+.section-title {
   color: var(--color-white);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: -2px 2px 5px var(--color-primary-darker);
+  text-align: center;
+  margin-top: 0;
 }
 
 .text-center {
