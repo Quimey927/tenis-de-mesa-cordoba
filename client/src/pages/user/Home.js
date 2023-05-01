@@ -1,14 +1,16 @@
 import { useLoaderData } from 'react-router-dom';
 
-import CurrentEvents from '../../components/Home/CurrentEvents/CurrentEvents';
-import { getCurrentEvents } from '../../api';
+import CurrentTournaments from '../../components/Home/CurrentTournaments/CurrentTournaments';
+import RoundsOfTheMonth from '../../components/Home/RoundsOfTheMonth/RoundsOfTheMonth';
+import { getCurrentTournaments, getRoundsOfTheMonth } from '../../api';
 
 const HomePage = () => {
-  const currentEvents = useLoaderData();
+  const { currentTournaments, roundsOfTheMonth } = useLoaderData();
 
   return (
     <>
-      <CurrentEvents events={currentEvents} />
+      <CurrentTournaments tournaments={currentTournaments} />
+      <RoundsOfTheMonth roundsOfTheMonth={roundsOfTheMonth} />
     </>
   );
 };
@@ -16,5 +18,12 @@ const HomePage = () => {
 export default HomePage;
 
 export async function loader() {
-  return getCurrentEvents();
+  const currentDay = new Date();
+  const currentMonth = currentDay.getMonth();
+  const currentYear = currentDay.getFullYear();
+
+  return {
+    currentTournaments: await getCurrentTournaments(),
+    roundsOfTheMonth: await getRoundsOfTheMonth(currentMonth, currentYear),
+  };
 }
