@@ -1,0 +1,17 @@
+.ui-btn {
+  background-color: var(--color-primary-darker);
+  color: var(--color-white);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: inherit;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: -2px 2px 4px rgba(0, 0, 0, 1);
+  transition: background-color 300ms ease;
+}
+
+.ui-btn:hover {
+  background-color: var(--color-primary);
+}
