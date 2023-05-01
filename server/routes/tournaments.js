@@ -9,6 +9,6 @@ const {
 
 router.get('/', getTournaments);
 router.get('/current-tournaments', getCurrentTournaments);
-router.get('/:tournamentUrl', getTournament);
+router.get('/:tournamentId', getTournament);
 
 module.exports = router;
