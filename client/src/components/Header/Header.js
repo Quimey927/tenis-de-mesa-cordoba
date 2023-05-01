@@ -17,9 +17,9 @@ const Header = () => {
         <ul className={classes['nav-links']}>
           <NavLinkItem to="/" hasActiveLogic="true" innerText="Inicio" />
           <NavLinkItem
-            to="/eventos"
+            to="/torneos"
             hasActiveLogic="true"
-            innerText="Eventos"
+            innerText="Torneos"
           />
           <NavLinkItem
             to="/jugadores"
@@ -27,6 +27,7 @@ const Header = () => {
             innerText="Jugadores"
           />
         </ul>
+
         <div className={classes['header__search']}>
           <label htmlFor="search">
             <FontAwesomeIcon icon={faSearch} color="white" />
