@@ -17,6 +17,8 @@
   justify-content: space-between;
   transform: scale(1);
   transition: transform 300ms ease;
+  font-family: monospace;
+  letter-spacing: 2px;
 }
 
 .tournament:hover {
@@ -27,12 +29,11 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  transition: background-color 300ms ease;
+  background-color: rgba(0, 0, 0, 0.85);
 }
 
 .tournament:hover::before {
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .tournament * {
@@ -43,7 +44,6 @@
 
 .tournament h3 {
   margin-block: 0 0.5rem;
-  letter-spacing: 1px;
   font-weight: 700;
   font-size: 1.3rem;
   color: var(--color-white);
@@ -66,4 +66,19 @@
 .tournament .btn {
   width: max-content;
   margin-inline: auto;
+  scale: 1;
+  font-family: sans-serif;
+  transition: scale 300ms ease, opacity 400ms ease;
+}
+
+.tournament:hover .btn {
+  background-color: var(--color-primary);
+}
+
+.tournament .btn:hover {
+  opacity: 0.8;
+}
+
+.tournament .btn:active {
+  scale: 0.95;
 }

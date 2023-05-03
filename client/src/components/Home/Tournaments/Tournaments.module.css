@@ -1,8 +1,8 @@
-.current-tournaments {
-  background-color: var(--color-light-black);
+.tournaments {
+  background-color: var(--color-secondary);
 }
 
-.current-tournaments__list {
+.tournaments__list {
   display: grid;
   justify-content: center;
   gap: 2rem;
@@ -11,7 +11,7 @@
 }
 
 @media (min-width: 350px) {
-  .current-tournaments__list {
+  .tournaments__list {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 }
