@@ -5,11 +5,47 @@ import { getCurrentMonthDaysArray } from '../../../../services/utils/getCurrentM
 import { months } from '../../../../services/constants/months';
 import classes from './Calendar.module.css';
 
-const Calendar = ({ year, month, setYear, setMonth }) => {
+const Calendar = ({ year, month, setYear, setMonth, tournamentDays }) => {
   const currentMonthDaysArray = getCurrentMonthDaysArray(year, month);
 
+  const currentDate = new Date();
+  const [currentDay, currentMonth, currentYear] = [
+    currentDate.getDate(),
+    currentDate.getMonth(),
+    currentDate.getFullYear(),
+  ];
+
+  const isCurrentMonth = year === currentYear && month === currentMonth;
+
   const calendarBody = currentMonthDaysArray.map((day) => (
-    <div key={day}>{day > 0 && day}</div>
+    <div
+      key={day}
+      style={
+        tournamentDays.includes(day) && day === currentDay && isCurrentMonth
+          ? {
+              backgroundColor: 'rgba(0,0,0,0.3)',
+              borderColor: 'var(--color-light-black)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+            }
+          : tournamentDays.includes(day) && day !== currentDay
+          ? {
+              backgroundColor: 'rgba(0,0,0,0.3)',
+            }
+          : !tournamentDays.includes(day) &&
+            day === currentDay &&
+            isCurrentMonth
+          ? {
+              borderColor: 'var(--color-light-black)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+            }
+          : {}
+      }
+      className={classes['day-number']}
+    >
+      {day > 0 && day}
+    </div>
   ));
 
   const prevMonthHandler = () => {

@@ -1,16 +1,20 @@
 import { useLoaderData } from 'react-router-dom';
 
-import CurrentTournaments from '../../components/Home/CurrentTournaments/CurrentTournaments';
+import Tournaments from '../../components/Home/Tournaments/Tournaments';
 import RoundsOfTheMonth from '../../components/Home/RoundsOfTheMonth/RoundsOfTheMonth';
-import { getCurrentTournaments, getRoundsOfTheMonth } from '../../api';
+import { getTournaments, getRoundsOfTheMonth } from '../../api';
+import { getTournamentDays } from '../../services/utils/getTournamentDays';
 
 const HomePage = () => {
-  const { currentTournaments, roundsOfTheMonth } = useLoaderData();
+  const { tournaments, roundsOfTheMonth } = useLoaderData();
 
   return (
     <>
-      <CurrentTournaments tournaments={currentTournaments} />
-      <RoundsOfTheMonth roundsOfTheMonth={roundsOfTheMonth} />
+      <Tournaments tournaments={tournaments} />
+      <RoundsOfTheMonth
+        roundsOfTheMonth={roundsOfTheMonth}
+        currentTournamentDays={getTournamentDays(roundsOfTheMonth)}
+      />
     </>
   );
 };
@@ -18,12 +22,12 @@ const HomePage = () => {
 export default HomePage;
 
 export async function loader() {
-  const currentDay = new Date();
-  const currentMonth = currentDay.getMonth();
-  const currentYear = currentDay.getFullYear();
+  const currentDate = new Date();
+  const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  const currentYear = currentDate.getFullYear();
 
   return {
-    currentTournaments: await getCurrentTournaments(),
+    tournaments: await getTournaments(),
     roundsOfTheMonth: await getRoundsOfTheMonth(currentMonth, currentYear),
   };
 }
