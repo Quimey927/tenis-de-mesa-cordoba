@@ -2,17 +2,6 @@ import { json } from 'react-router-dom';
 
 const baseUrl = 'http://localhost:8080/api';
 
-export async function getCurrentTournaments() {
-  const response = await fetch(`${baseUrl}/tournaments/current-tournaments`);
-  if (!response.ok) {
-    throw json({
-      message: 'No pudimos cargar los torneos actuales.',
-      status: 500,
-    });
-  }
-  return response.json();
-}
-
 export async function getTournaments() {
   const response = await fetch(`${baseUrl}/tournaments`);
   if (!response.ok) {
