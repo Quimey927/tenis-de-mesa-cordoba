@@ -30,7 +30,7 @@ const Header = () => {
 
         <div className={classes['header__search']}>
           <label htmlFor="search">
-            <FontAwesomeIcon icon={faSearch} color="white" />
+            <FontAwesomeIcon icon={faSearch} className={classes.icon} />
           </label>
           <input type="text" id="search" placeholder="Buscar..." />
         </div>
