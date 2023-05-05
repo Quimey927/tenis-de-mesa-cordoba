@@ -8,10 +8,13 @@ import {
 import classes from './Tournament.module.css';
 
 const Tournament = ({ tournament }) => {
-  const { title, season } = tournament;
+  const { tournamentTitle, season } = tournament;
 
-  const encodedTournamentUrl = getEncodedTournamentUrl(title, season);
-  const hyphenedTournamentPath = getHyphenedTournamentPath(title, season);
+  const encodedTournamentUrl = getEncodedTournamentUrl(tournamentTitle, season);
+  const hyphenedTournamentPath = getHyphenedTournamentPath(
+    tournamentTitle,
+    season
+  );
 
   return (
     <li
@@ -21,7 +24,7 @@ const Tournament = ({ tournament }) => {
       }}
     >
       <div>
-        <h3 className={classes['tournament__title']}>{title}</h3>
+        <h3 className={classes['tournament__title']}>{tournamentTitle}</h3>
         <h4 className={classes['tournament__season']}> {season}</h4>
       </div>
       <Button className={classes.btn}>

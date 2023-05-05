@@ -35,6 +35,17 @@ export async function getRoundsOfTheMonth(month, year) {
   return response.json();
 }
 
+export async function getRound(roundId) {
+  const response = await fetch(`${baseUrl}/rounds/${roundId}`);
+  if (!response.ok) {
+    throw json({
+      message: 'No pudimos cargar la fecha.',
+      status: 500,
+    });
+  }
+  return response.json();
+}
+
 export async function getPlayers() {
   const response = await fetch(`${baseUrl}/players`);
   if (!response.ok) {

@@ -1,20 +1,17 @@
 import { useLoaderData } from 'react-router-dom';
 
+import Tournament from '../../components/Tournament/Tournament';
 import { getTournament } from '../../api/index';
 
 const TournamentPage = () => {
   const tournament = useLoaderData();
 
-  return (
-    <h3>
-      {tournament.title} - {tournament.season}
-    </h3>
-  );
+  return <Tournament tournament={tournament} />;
 };
 
 export default TournamentPage;
 
 export async function loader({ params }) {
-  const { tournamentId } = params;
-  return getTournament(tournamentId);
+  const { tournamentId, season } = params;
+  return getTournament(tournamentId, season);
 }

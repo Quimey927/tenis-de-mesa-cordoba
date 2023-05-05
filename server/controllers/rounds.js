@@ -1,46 +1,40 @@
 const allRounds = [
   {
     id: 1,
-    title: 'Primer Provincial',
+    roundName: 'Primer Provincial',
     roundNumber: 1,
     tournament: 'Liga Provincial',
     season: 'Temporada 2023',
     startDate: '2023-03-04',
     finishDate: '2023-03-05',
     location: 'A.S.C.A',
-    description:
-      'Torneo oficial de la Fe.Co.Te.Me. (Federación Cordobesa de Tenis de Mesa). En cada torneo se disputan las categorías Séptima, Sexta, Quinta, Cuarta, Tercera, Segunda, Primera, SuperFECOTEME, Sub 23, Menores, Maxi 40 A-B y Sub 40. \n Entre las categorías SuperFECOTEME, Primera, Segunda, Tercera, Cuarta, Quinta, Sexta habrá ascensos y descensos (6 ascensos, y una cantidad variable de descensos de acuerdo a la cantidad de inscriptos). Además, habrá 6 ascensos de Séptima a Sexta (aunque no habrá descensos de sexta a séptima). \n El torneo otorga puntaje para el ranking anual, según la siguiente tabla: .',
     address: 'Juan José Paso 260',
   },
   {
     id: 2,
-    title: 'Segundo Provincial',
+    roundName: 'Segundo Provincial',
     roundNumber: 2,
     tournament: 'Liga Provincial',
     season: 'Temporada 2023',
     startDate: '2023-04-01',
     finishDate: '2023-04-02',
     location: 'Braitem',
-    description:
-      'Torneo oficial de la Fe.Co.Te.Me. (Federación Cordobesa de Tenis de Mesa). En cada torneo se disputan las categorías Séptima, Sexta, Quinta, Cuarta, Tercera, Segunda, Primera, SuperFECOTEME, Sub 23, Menores, Maxi 40 A-B y Sub 40. \n Entre las categorías SuperFECOTEME, Primera, Segunda, Tercera, Cuarta, Quinta, Sexta habrá ascensos y descensos (6 ascensos, y una cantidad variable de descensos de acuerdo a la cantidad de inscriptos). Además, habrá 6 ascensos de Séptima a Sexta (aunque no habrá descensos de sexta a séptima). \n El torneo otorga puntaje para el ranking anual, según la siguiente tabla: .',
     address: 'Av. Las Malvinas 9225',
   },
   {
     id: 3,
-    title: 'Tercer Provincial',
+    roundName: 'Tercer Provincial',
     roundNumber: 2,
     tournament: 'Liga Provincial',
     season: 'Temporada 2023',
     startDate: '2023-05-13',
     finishDate: '2023-05-14',
     location: 'Escuela Dante Alighieri',
-    description:
-      'Torneo oficial de la Fe.Co.Te.Me. (Federación Cordobesa de Tenis de Mesa). En cada torneo se disputan las categorías Séptima, Sexta, Quinta, Cuarta, Tercera, Segunda, Primera, SuperFECOTEME, Sub 23, Menores, Maxi 40 A-B y Sub 40. \n Entre las categorías SuperFECOTEME, Primera, Segunda, Tercera, Cuarta, Quinta, Sexta habrá ascensos y descensos (6 ascensos, y una cantidad variable de descensos de acuerdo a la cantidad de inscriptos). Además, habrá 6 ascensos de Séptima a Sexta (aunque no habrá descensos de sexta a séptima). \n El torneo otorga puntaje para el ranking anual, según la siguiente tabla: .',
     address: 'José Javier Díaz 481',
   },
   {
     id: 4,
-    title: 'Primera Fecha Marzo',
+    roundName: 'Primera Fecha Marzo',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
     roundNumber: 4,
@@ -51,7 +45,7 @@ const allRounds = [
   },
   {
     id: 5,
-    title: 'Segunda Fecha Marzo',
+    roundName: 'Segunda Fecha Marzo',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
     roundNumber: 5,
@@ -62,7 +56,7 @@ const allRounds = [
   },
   {
     id: 6,
-    title: 'Tercera Fecha Marzo',
+    roundName: 'Tercera Fecha Marzo',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
     roundNumber: 6,
@@ -73,7 +67,7 @@ const allRounds = [
   },
   {
     id: 7,
-    title: 'Primera Fecha Abril',
+    roundName: 'Primera Fecha Abril',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
     roundNumber: 7,
@@ -84,7 +78,7 @@ const allRounds = [
   },
   {
     id: 8,
-    title: 'Segunda Fecha Abril',
+    roundName: 'Segunda Fecha Abril',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
     roundNumber: 8,
@@ -95,7 +89,7 @@ const allRounds = [
   },
   {
     id: 9,
-    title: 'Tercera Fecha Abril',
+    roundName: 'Tercera Fecha Abril',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
     roundNumber: 9,
@@ -106,7 +100,7 @@ const allRounds = [
   },
   {
     id: 10,
-    title: 'Clasificatorio a Cat A',
+    roundName: 'Clasificatorio a Cat A',
     tournament: 'Torneo +30 HM',
     season: 'Primer Semestre 2023',
     roundNumber: 1,
@@ -117,7 +111,7 @@ const allRounds = [
   },
   {
     id: 11,
-    title: 'Primera Fecha Cat B',
+    roundName: 'Primera Fecha Cat B',
     tournament: 'Torneo +30 HM',
     season: 'Primer Semestre 2023',
     roundNumber: 2,
@@ -128,7 +122,7 @@ const allRounds = [
   },
   {
     id: 12,
-    title: 'Primera Fecha Cat A',
+    roundName: 'Primera Fecha Cat A',
     tournament: 'Torneo +30 HM',
     season: 'Primer Semestre 2023',
     roundNumber: 3,
@@ -139,7 +133,7 @@ const allRounds = [
   },
   {
     id: 13,
-    title: 'Segunda Fecha Cat B',
+    roundName: 'Segunda Fecha Cat B',
     tournament: 'Torneo +30 HM',
     season: 'Primer Semestre 2023',
     roundNumber: 4,
@@ -147,6 +141,17 @@ const allRounds = [
     finishDate: '2023-05-05',
     location: 'Hermau',
     address: 'Luis A. Brown 1451',
+  },
+  {
+    id: 14,
+    roundName: 'Primera Fecha Mayo',
+    tournament: 'Torneo UGAB',
+    season: 'Temporada 2023',
+    roundNumber: 10,
+    startDate: '2023-05-07',
+    finishDate: '2023-05-07',
+    location: 'UGAB',
+    address: 'Av. Patria 921',
   },
 ];
 
@@ -168,6 +173,18 @@ module.exports.getRoundsOfTheMonth = async (req, res) => {
     );
 
     res.status(200).json(sortedRoundsOfTheMatch);
+  } catch (err) {
+    res.send(err);
+  }
+};
+
+module.exports.getRound = async (req, res) => {
+  try {
+    const { roundId } = req.params;
+
+    const requiredRound = allRounds.find((round) => round.id === roundId);
+
+    res.status(200).json(requiredRound);
   } catch (err) {
     res.send(err);
   }

@@ -12,7 +12,7 @@ import classes from './Round.module.css';
 
 const Round = ({ round }) => {
   const {
-    title,
+    roundName,
     tournament,
     season,
     startDate,
@@ -24,7 +24,7 @@ const Round = ({ round }) => {
   const [, month, startDay] = startDate.split('-');
   const [, , finishDay] = finishDate.split('-');
 
-  const encodedRoundUrl = getEncodedRoundUrl(tournament, season, title);
+  const encodedRoundUrl = getEncodedRoundUrl(tournament, season, roundName);
   const hyphenedTournamentPath = getHyphenedTournamentPath(tournament, season);
 
   const roundDays =
@@ -52,7 +52,7 @@ const Round = ({ round }) => {
         </div>
         <div className={classes['description']}>
           <p className={classes['description__tournament']}>{tournament}</p>
-          <p className={classes['description__title']}>{title}</p>
+          <p className={classes['description__title']}>{roundName}</p>
           <Button className={classes.btn}>
             <Link to={encodedRoundUrl}>Ver fecha</Link>
           </Button>
