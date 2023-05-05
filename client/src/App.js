@@ -1,14 +1,18 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from 'react-router-dom';
 
 import RootLayout from './pages/user/Root';
 import ErrorPage from './pages/user/Error';
-import HomePage, { loader as homeLoader } from './pages/user/Home';
 import TournamentsPage, {
   loader as tournamentsLoader,
 } from './pages/user/Tournaments';
 import TournamentPage, {
   loader as tournamentLoader,
 } from './pages/user/Tournament';
+import RoundsPage, { loader as roundsLoader } from './pages/user/Rounds';
 // import AdminRoot from './pages/admin/AdminRoot';
 // import AdminPage from './pages/admin/Admin';
 
@@ -20,8 +24,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
-        loader: homeLoader,
+        element: <Navigate to="/torneos" />,
       },
       {
         path: 'torneos',
@@ -37,6 +40,11 @@ const router = createBrowserRouter([
             loader: tournamentLoader,
           },
         ],
+      },
+      {
+        path: 'fechas',
+        element: <RoundsPage />,
+        loader: roundsLoader,
       },
     ],
   },

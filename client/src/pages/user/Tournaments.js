@@ -1,19 +1,12 @@
 import { useLoaderData } from 'react-router-dom';
 
+import Tournaments from '../../components/Tournaments/Tournaments';
 import { getTournaments } from '../../api/index';
 
 const TournamentsPage = () => {
   const tournaments = useLoaderData();
 
-  return (
-    <>
-      {tournaments.map((tournament) => (
-        <p key={tournament.id}>
-          {tournament.title} - {tournament.season}
-        </p>
-      ))}
-    </>
-  );
+  return <Tournaments tournaments={tournaments} />;
 };
 
 export default TournamentsPage;

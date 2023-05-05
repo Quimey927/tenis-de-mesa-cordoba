@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import Calendar from './Calendar/Calendar';
 import RoundsList from './RoundsList/RoundsList';
-import { getTournamentDays } from '../../../services/utils/getTournamentDays';
+import { getTournamentDays } from '../../services/utils/getTournamentDays';
 import classes from './RoundsOfTheMonth.module.css';
 
 const CurrentMonthRounds = ({ roundsOfTheMonth, currentTournamentDays }) => {
@@ -34,19 +34,16 @@ const CurrentMonthRounds = ({ roundsOfTheMonth, currentTournamentDays }) => {
 
   return (
     <section className={classes['current-month-rounds']}>
-      <div className="container">
-        <h2 className="section-title">Fechas</h2>
-        <div className={classes['current-month-rounds__container']}>
-          <Calendar
-            year={year}
-            month={month}
-            setYear={setYear}
-            setMonth={setMonth}
-            className={classes.calendar}
-            tournamentDays={tournamentDays}
-          />
-          <RoundsList roundsOfTheMonth={currentRoundsOfTheMonth} />
-        </div>
+      <div className={classes['current-month-rounds__container']}>
+        <Calendar
+          year={year}
+          month={month}
+          setYear={setYear}
+          setMonth={setMonth}
+          className={classes.calendar}
+          tournamentDays={tournamentDays}
+        />
+        <RoundsList roundsOfTheMonth={currentRoundsOfTheMonth} />
       </div>
     </section>
   );

@@ -1,14 +1,17 @@
 .round {
-  background-image: url(../../../../../assets/events_images/liga_de_equipos_temporada_2023.jpg);
+  background-image: url(../../../../assets/events_images/liga_de_equipos_temporada_2023.jpg);
   background-size: cover;
   position: relative;
   display: flex;
+  gap: 2rem;
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
   overflow: hidden;
   font-family: monospace;
   box-shadow: -3px 3px 9px var(--color-black);
+  max-width: 700px;
+  margin-inline: auto;
 }
 
 .round::before {
@@ -97,7 +100,6 @@
 }
 
 .btn {
-  box-shadow: -1px 1px 3px var(--color-white);
   transform: translate(1px, -1px);
   transition: opacity 300ms ease-out, transform 300ms ease-out;
   font-family: sans-serif;
@@ -125,7 +127,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 1rem;
+  gap: 0.5rem;
   padding: 1rem;
 }
 

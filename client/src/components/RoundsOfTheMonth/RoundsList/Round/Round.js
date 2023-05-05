@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
-import Button from '../../../../UI/Button/Button';
-import { months } from '../../../../../services/constants/months';
+import Button from '../../../UI/Button/Button';
+import { months } from '../../../../services/constants/months';
 import classes from './Round.module.css';
 
 const Round = ({ round }) => {

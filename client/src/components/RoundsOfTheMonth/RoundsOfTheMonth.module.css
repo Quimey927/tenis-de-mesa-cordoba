@@ -1,8 +1,4 @@
-.current-month-rounds {
-  background-color: var(--color-secondary);
-}
-
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .current-month-rounds__container {
     display: grid;
     grid-template-columns: 350px 1fr;

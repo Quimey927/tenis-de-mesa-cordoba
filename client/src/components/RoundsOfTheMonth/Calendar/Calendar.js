@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
-import { getCurrentMonthDaysArray } from '../../../../services/utils/getCurrentMonthDaysArray';
-import { months } from '../../../../services/constants/months';
+import { getCurrentMonthDaysArray } from '../../../services/utils/getCurrentMonthDaysArray';
+import { months } from '../../../services/constants/months';
 import classes from './Calendar.module.css';
 
 const Calendar = ({ year, month, setYear, setMonth, tournamentDays }) => {

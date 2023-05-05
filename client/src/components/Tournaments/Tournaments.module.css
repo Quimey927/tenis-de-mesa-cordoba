@@ -1,7 +1,3 @@
-.tournaments {
-  background-color: var(--color-secondary);
-}
-
 .tournaments__list {
   display: grid;
   justify-content: center;

@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import ImageHermau from '../../../../assets/events_images/torneo_+30_hermau_primer_semestre_2023.jpg';
-import ImageUgab from '../../../../assets/events_images/torneo_ugab_temporada_2023.png';
-import ImageProvinciales from '../../../../assets/events_images/provinciales_temporada_2023.png';
-import ImageLiga from '../../../../assets/events_images/liga_de_equipos_temporada_2023.jpg';
-import Button from '../../../UI/Button/Button';
+import ImageHermau from '../../../assets/events_images/torneo_+30_hermau_primer_semestre_2023.jpg';
+import ImageUgab from '../../../assets/events_images/torneo_ugab_temporada_2023.png';
+import ImageProvinciales from '../../../assets/events_images/provinciales_temporada_2023.png';
+import ImageLiga from '../../../assets/events_images/liga_de_equipos_temporada_2023.jpg';
+import Button from '../../UI/Button/Button';
 import classes from './Tournament.module.css';
 
 const images = {
