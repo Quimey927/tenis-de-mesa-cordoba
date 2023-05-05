@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,22 +9,12 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <nav>
-        <NavLink to="/" className={classes.logo}>
-          <Logo />
-        </NavLink>
+        <Logo className={classes.logo} />
 
         <ul className={classes['nav-links']}>
-          <NavLinkItem to="/fechas" hasActiveLogic="true" innerText="Fechas" />
-          <NavLinkItem
-            to="/torneos"
-            hasActiveLogic="true"
-            innerText="Torneos"
-          />
-          <NavLinkItem
-            to="/jugadores"
-            hasActiveLogic="true"
-            innerText="Jugadores"
-          />
+          <NavLinkItem to="/fechas" innerText="Fechas" />
+          <NavLinkItem to="/torneos" innerText="Torneos" />
+          <NavLinkItem to="/jugadores" innerText="Jugadores" />
         </ul>
 
         <div className={classes['header__search']}>
