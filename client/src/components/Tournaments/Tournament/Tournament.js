@@ -17,7 +17,7 @@ const Tournament = ({ tournament }) => {
     <li
       className={classes.tournament}
       style={{
-        backgroundImage: `url(/images/tournaments_images/${hyphenedTournamentPath}.png)`,
+        backgroundImage: `url(/images/tournaments_images/${hyphenedTournamentPath}.jpg)`,
       }}
     >
       <div>

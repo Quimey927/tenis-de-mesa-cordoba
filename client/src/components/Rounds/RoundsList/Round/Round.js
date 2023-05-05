@@ -25,7 +25,7 @@ const Round = ({ round }) => {
   const [, , finishDay] = finishDate.split('-');
 
   const encodedRoundUrl = getEncodedRoundUrl(tournament, season, title);
-  const hyphenedTournamentPath = getHyphenedTournamentPath(title, season);
+  const hyphenedTournamentPath = getHyphenedTournamentPath(tournament, season);
 
   const roundDays =
     finishDay !== startDay ? (
@@ -40,7 +40,7 @@ const Round = ({ round }) => {
     <div
       className={classes['round']}
       style={{
-        backgroundImage: `url(/images/tournaments_images/${hyphenedTournamentPath})`,
+        backgroundImage: `url(/images/tournaments_images/${hyphenedTournamentPath}.jpg)`,
       }}
     >
       <div className={classes['round__wrapper']}>
