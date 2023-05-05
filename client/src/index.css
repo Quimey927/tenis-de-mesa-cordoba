@@ -1,5 +1,4 @@
 :root {
-  /* --color-primary: #cc6b33; */
   --color-primary: #ff5d00;
   --color-primary-darker: #bb5316;
   --color-secondary: #623b3b;
@@ -20,7 +19,6 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: serif;
 }
 
 body {
@@ -41,45 +39,9 @@ img {
 
 main {
   flex-grow: 1;
+  background-color: var(--color-secondary);
 }
 
 section {
-  padding-block: 4rem;
-}
-
-.section-title {
-  color: var(--color-white);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-shadow: -2px 2px 5px var(--color-primary-darker);
-  text-align: center;
-  margin-top: 0;
-}
-
-.text-center {
-  text-align: center;
-}
-
-/* this container classes are the ones bootstrap uses */
-
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
+  padding: 2rem;
 }
