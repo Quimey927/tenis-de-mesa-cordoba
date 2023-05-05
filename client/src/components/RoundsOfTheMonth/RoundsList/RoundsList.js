@@ -8,7 +8,7 @@ const RoundsList = ({ roundsOfTheMonth }) => {
 
   if (roundsOfTheMonth.length > 0) {
     roundsList = roundsOfTheMonth.map((round) => (
-      <Round key={round.title} round={round} />
+      <Round key={round.id} round={round} />
     ));
   }
 
