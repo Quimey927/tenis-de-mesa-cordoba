@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import Calendar from './Calendar/Calendar';
 import RoundsList from './RoundsList/RoundsList';
 import { getTournamentDays } from '../../services/utils/getTournamentDays';
-import classes from './RoundsOfTheMonth.module.css';
+import classes from './Rounds.module.css';
 
-const CurrentMonthRounds = ({ roundsOfTheMonth, currentTournamentDays }) => {
+const Rounds = ({ roundsOfTheMonth, currentTournamentDays }) => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth());
   const [tournamentDays, setTournamentDays] = useState(currentTournamentDays);
@@ -49,4 +49,4 @@ const CurrentMonthRounds = ({ roundsOfTheMonth, currentTournamentDays }) => {
   );
 };
 
-export default CurrentMonthRounds;
+export default Rounds;

@@ -40,7 +40,7 @@ const Round = ({ round }) => {
     <div
       className={classes['round']}
       style={{
-        backgroundImage: `url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg)`,
+        backgroundImage: `url(/images/tournaments_images/${hyphenedTournamentPath})`,
       }}
     >
       <div className={classes['round__wrapper']}>

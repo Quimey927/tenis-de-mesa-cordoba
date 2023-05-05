@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 
-import RoundsOfTheMonth from '../../components/RoundsOfTheMonth/RoundsOfTheMonth';
+import Rounds from '../../components/Rounds/Rounds';
 import { getRoundsOfTheMonth } from '../../api';
 import { getTournamentDays } from '../../services/utils/getTournamentDays';
 
@@ -8,7 +8,7 @@ const RoundsPage = () => {
   const roundsOfTheMonth = useLoaderData();
 
   return (
-    <RoundsOfTheMonth
+    <Rounds
       roundsOfTheMonth={roundsOfTheMonth}
       currentTournamentDays={getTournamentDays(roundsOfTheMonth)}
     />
