@@ -39,6 +39,7 @@ const allRounds = [
     address: 'José Javier Díaz 481',
   },
   {
+    id: 4,
     title: 'Primera Fecha Marzo',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
@@ -49,6 +50,7 @@ const allRounds = [
     address: 'Av. Patria 921',
   },
   {
+    id: 5,
     title: 'Segunda Fecha Marzo',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
@@ -59,6 +61,7 @@ const allRounds = [
     address: 'Av. Patria 921',
   },
   {
+    id: 6,
     title: 'Tercera Fecha Marzo',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
@@ -69,6 +72,7 @@ const allRounds = [
     address: 'Av. Patria 921',
   },
   {
+    id: 7,
     title: 'Primera Fecha Abril',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
@@ -79,6 +83,7 @@ const allRounds = [
     address: 'Av. Patria 921',
   },
   {
+    id: 8,
     title: 'Segunda Fecha Abril',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
@@ -89,6 +94,7 @@ const allRounds = [
     address: 'Av. Patria 921',
   },
   {
+    id: 9,
     title: 'Tercera Fecha Abril',
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
@@ -99,6 +105,7 @@ const allRounds = [
     address: 'Av. Patria 921',
   },
   {
+    id: 10,
     title: 'Clasificatorio a Cat A',
     tournament: 'Torneo +30 HM',
     season: 'Primer Semestre 2023',
@@ -109,6 +116,7 @@ const allRounds = [
     address: 'Luis A. Brown 1451',
   },
   {
+    id: 11,
     title: 'Primera Fecha Cat B',
     tournament: 'Torneo +30 HM',
     season: 'Primer Semestre 2023',
@@ -119,6 +127,7 @@ const allRounds = [
     address: 'Luis A. Brown 1451',
   },
   {
+    id: 12,
     title: 'Primera Fecha Cat A',
     tournament: 'Torneo +30 HM',
     season: 'Primer Semestre 2023',
@@ -129,6 +138,7 @@ const allRounds = [
     address: 'Luis A. Brown 1451',
   },
   {
+    id: 13,
     title: 'Segunda Fecha Cat B',
     tournament: 'Torneo +30 HM',
     season: 'Primer Semestre 2023',

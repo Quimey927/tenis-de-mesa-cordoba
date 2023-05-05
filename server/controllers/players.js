@@ -1,9 +1,11 @@
 const allPlayers = [
   {
+    id: 1,
     name: 'Quimey Mata',
     club: 'Dante Alighieri',
   },
   {
+    id: 2,
     name: 'Marcelo Gianoboli',
     club: 'Hermau',
   },
