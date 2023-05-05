@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import classes from './NavLink.module.css';
+import classes from './NavLinkItem.module.css';
 
 const NavLinkItem = ({ to, hasActiveLogic, innerText }) => {
   const navLinkClasses = hasActiveLogic
