@@ -13,6 +13,7 @@ import TournamentPage, {
   loader as tournamentLoader,
 } from './pages/user/Tournament';
 import RoundsPage, { loader as roundsLoader } from './pages/user/Rounds';
+import PlayersPage, { loader as playersLoader } from './pages/user/Players';
 // import AdminRoot from './pages/admin/AdminRoot';
 // import AdminPage from './pages/admin/Admin';
 
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/torneos" />,
+        element: <Navigate to="/fechas" />,
       },
       {
         path: 'torneos',
@@ -45,6 +46,11 @@ const router = createBrowserRouter([
         path: 'fechas',
         element: <RoundsPage />,
         loader: roundsLoader,
+      },
+      {
+        path: 'jugadores',
+        element: <PlayersPage />,
+        loader: playersLoader,
       },
     ],
   },
