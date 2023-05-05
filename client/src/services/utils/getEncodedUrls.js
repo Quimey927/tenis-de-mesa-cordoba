@@ -19,11 +19,3 @@ export const getEncodedRoundUrl = (tournament, season, round) => {
   const roundUrl = `${tournamentTitleUrl}-${tournamentSeasonUrl}-${tournamentRoundUrl}`;
   return roundUrl;
 };
-
-export const getHyphenedRoundPath = (tournament, season, round) => {
-  const tournamentTitlePath = tournament.toLowerCase().split(' ').join('_');
-  const tournamentSeasonPath = season.toLowerCase().split(' ').join('_');
-  const tournamentRoundPath = round.toLowerCase().split(' ').join('_');
-  const roundPath = `${tournamentTitlePath}_${tournamentSeasonPath}_${tournamentRoundPath}`;
-  return roundPath;
-};
