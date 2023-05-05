@@ -4,11 +4,28 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../../UI/Button/Button';
 import { months } from '../../../../services/constants/months';
+import {
+  getHyphenedTournamentPath,
+  getEncodedRoundUrl,
+} from '../../../../services/utils/getEncodedUrls';
 import classes from './Round.module.css';
 
 const Round = ({ round }) => {
-  const [, month, startDay] = round.startDate.split('-');
-  const [, , finishDay] = round.finishDate.split('-');
+  const {
+    title,
+    tournament,
+    season,
+    startDate,
+    finishDate,
+    location,
+    address,
+  } = round;
+
+  const [, month, startDay] = startDate.split('-');
+  const [, , finishDay] = finishDate.split('-');
+
+  const encodedRoundUrl = getEncodedRoundUrl(tournament, season, title);
+  const hyphenedTournamentPath = getHyphenedTournamentPath(title, season);
 
   const roundDays =
     finishDay !== startDay ? (
@@ -19,14 +36,13 @@ const Round = ({ round }) => {
       <p>{+startDay}</p>
     );
 
-  const encodedTournament = round.tournament.toLowerCase().split(' ').join('-');
-  const encodedSeason = round.season.toLowerCase().split(' ').join('-');
-  const encodedTitle = round.title.toLowerCase().split(' ').join('-');
-
-  const encodedUrl = `/${encodedTournament}/${encodedSeason}/${encodedTitle}`;
-
   return (
-    <div className={classes['round']}>
+    <div
+      className={classes['round']}
+      style={{
+        backgroundImage: `url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg)`,
+      }}
+    >
       <div className={classes['round__wrapper']}>
         <div className={`${classes['calendar']} calendar`}>
           <span className={classes['calendar__month']}>
@@ -35,19 +51,17 @@ const Round = ({ round }) => {
           <div className={classes['calendar__days']}>{roundDays}</div>
         </div>
         <div className={classes['description']}>
-          <p className={classes['description__tournament']}>
-            {round.tournament}
-          </p>
-          <p className={classes['description__title']}>{round.title}</p>
+          <p className={classes['description__tournament']}>{tournament}</p>
+          <p className={classes['description__title']}>{title}</p>
           <Button className={classes.btn}>
-            <Link to={encodedUrl}>Ver fecha</Link>
+            <Link to={encodedRoundUrl}>Ver fecha</Link>
           </Button>
         </div>
       </div>
       <div className={classes.location}>
         <div className={classes['location__info']}>
-          <p>{round.location}</p>
-          <p>{round.address}</p>
+          <p>{location}</p>
+          <p>{address}</p>
         </div>
         <FontAwesomeIcon
           icon={faLocationDot}

@@ -1,30 +1,23 @@
 import { Link } from 'react-router-dom';
 
-import ImageHermau from '../../../assets/events_images/torneo_+30_hermau_primer_semestre_2023.jpg';
-import ImageUgab from '../../../assets/events_images/torneo_ugab_temporada_2023.png';
-import ImageProvinciales from '../../../assets/events_images/provinciales_temporada_2023.png';
-import ImageLiga from '../../../assets/events_images/liga_de_equipos_temporada_2023.jpg';
 import Button from '../../UI/Button/Button';
+import {
+  getEncodedTournamentUrl,
+  getHyphenedTournamentPath,
+} from '../../../services/utils/getEncodedUrls';
 import classes from './Tournament.module.css';
 
-const images = {
-  4: ImageProvinciales,
-  5: ImageLiga,
-  6: ImageHermau,
-  7: ImageUgab,
-};
-
 const Tournament = ({ tournament }) => {
-  const { title, season, id } = tournament;
-  const tournamentTitleUrl = title.toLowerCase().split(' ').join('-');
-  const tournamentSeasonUrl = season.toLowerCase().split(' ').join('-');
-  const tournamentUrl = `${tournamentTitleUrl}/${tournamentSeasonUrl}`;
+  const { title, season } = tournament;
+
+  const encodedTournamentUrl = getEncodedTournamentUrl(title, season);
+  const hyphenedTournamentPath = getHyphenedTournamentPath(title, season);
 
   return (
     <li
       className={classes.tournament}
       style={{
-        backgroundImage: `url(${images[id]})`,
+        backgroundImage: `url(/images/tournaments_images/${hyphenedTournamentPath}.png)`,
       }}
     >
       <div>
@@ -32,7 +25,7 @@ const Tournament = ({ tournament }) => {
         <h4 className={classes['tournament__season']}> {season}</h4>
       </div>
       <Button className={classes.btn}>
-        <Link to={`/${tournamentUrl}`}>Ver torneo</Link>
+        <Link to={`/${encodedTournamentUrl}`}>Ver torneo</Link>
       </Button>
     </li>
   );
