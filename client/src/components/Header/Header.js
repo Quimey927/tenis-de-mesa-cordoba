@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import Logo from './Logo/Logo';
-import NavLinkItem from './NavLink/NavLink';
+import NavLinkItem from './NavLinkItem/NavLinkItem';
 import classes from './Header.module.css';
 
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
         </NavLink>
 
         <ul className={classes['nav-links']}>
-          <NavLinkItem to="/" hasActiveLogic="true" innerText="Inicio" />
+          <NavLinkItem to="/fechas" hasActiveLogic="true" innerText="Fechas" />
           <NavLinkItem
             to="/torneos"
             hasActiveLogic="true"
