@@ -1,7 +1,8 @@
 :root {
   --color-primary: #ff5d00;
   --color-primary-darker: #bb5316;
-  --color-secondary: #623b3b;
+  --color-secondary: #00a8e8;
+  --color-secondary-lighter: #2fabdb;
   --color-black: #111;
   --color-light-black: #333;
   --color-light-grey: #ccc;
@@ -39,7 +40,12 @@ img {
 
 main {
   flex-grow: 1;
-  background-color: var(--color-secondary);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-white),
+    var(--color-secondary)
+  );
 }
 
 section {
