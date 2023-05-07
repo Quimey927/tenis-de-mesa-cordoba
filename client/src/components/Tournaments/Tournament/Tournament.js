@@ -1,26 +1,19 @@
 import { Link } from 'react-router-dom';
 
 import Button from '../../UI/Button/Button';
-import {
-  getEncodedTournamentUrl,
-  getHyphenedTournamentPath,
-} from '../../../services/utils/getEncodedUrls';
+import { getEncodedTournamentUrl } from '../../../services/utils/getEncodedUrls';
 import classes from './Tournament.module.css';
 
 const Tournament = ({ tournament }) => {
-  const { tournamentTitle, season } = tournament;
+  const { tournamentTitle, season, imagePath } = tournament;
 
   const encodedTournamentUrl = getEncodedTournamentUrl(tournamentTitle, season);
-  const hyphenedTournamentPath = getHyphenedTournamentPath(
-    tournamentTitle,
-    season
-  );
 
   return (
     <li
       className={classes.tournament}
       style={{
-        backgroundImage: `url(/images/tournaments_images/${hyphenedTournamentPath}.jpg)`,
+        backgroundImage: `${imagePath}`,
       }}
     >
       <div>

@@ -5,13 +5,6 @@ export const getEncodedTournamentUrl = (tournament, season) => {
   return tournamentUrl;
 };
 
-export const getHyphenedTournamentPath = (tournament, season) => {
-  const tournamentTitlePath = tournament.toLowerCase().split(' ').join('_');
-  const tournamentSeasonPath = season.toLowerCase().split(' ').join('_');
-  const tournamentPath = `${tournamentTitlePath}_${tournamentSeasonPath}`;
-  return tournamentPath;
-};
-
 export const getEncodedRoundUrl = (tournament, season, round) => {
   const tournamentTitleUrl = tournament.toLowerCase().split(' ').join('-');
   const tournamentSeasonUrl = season.toLowerCase().split(' ').join('-');

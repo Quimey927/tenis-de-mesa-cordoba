@@ -4,10 +4,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../../UI/Button/Button';
 import { months } from '../../../../services/constants/months';
-import {
-  getHyphenedTournamentPath,
-  getEncodedRoundUrl,
-} from '../../../../services/utils/getEncodedUrls';
+import { getEncodedRoundUrl } from '../../../../services/utils/getEncodedUrls';
 import classes from './Round.module.css';
 
 const Round = ({ round }) => {
@@ -19,13 +16,13 @@ const Round = ({ round }) => {
     finishDate,
     location,
     address,
+    imagePath,
   } = round;
 
   const [, month, startDay] = startDate.split('-');
   const [, , finishDay] = finishDate.split('-');
 
   const encodedRoundUrl = getEncodedRoundUrl(tournament, season, roundName);
-  const hyphenedTournamentPath = getHyphenedTournamentPath(tournament, season);
 
   const roundDays =
     finishDay !== startDay ? (
@@ -40,7 +37,7 @@ const Round = ({ round }) => {
     <div
       className={classes['round']}
       style={{
-        backgroundImage: `url(/images/tournaments_images/${hyphenedTournamentPath}.jpg)`,
+        backgroundImage: `${imagePath}`,
       }}
     >
       <div className={classes['round__wrapper']}>
