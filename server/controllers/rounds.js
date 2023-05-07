@@ -9,6 +9,8 @@ const allRounds = [
     finishDate: '2023-03-05',
     location: 'A.S.C.A',
     address: 'Juan José Paso 260',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 2,
@@ -20,6 +22,8 @@ const allRounds = [
     finishDate: '2023-04-02',
     location: 'Braitem',
     address: 'Av. Las Malvinas 9225',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 3,
@@ -31,6 +35,8 @@ const allRounds = [
     finishDate: '2023-05-14',
     location: 'Escuela Dante Alighieri',
     address: 'José Javier Díaz 481',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 4,
@@ -42,6 +48,8 @@ const allRounds = [
     finishDate: '2023-03-09',
     location: 'UGAB',
     address: 'Av. Patria 921',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 5,
@@ -53,6 +61,8 @@ const allRounds = [
     finishDate: '2023-03-23',
     location: 'UGAB',
     address: 'Av. Patria 921',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 6,
@@ -64,6 +74,8 @@ const allRounds = [
     finishDate: '2023-03-30',
     location: 'UGAB',
     address: 'Av. Patria 921',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 7,
@@ -75,6 +87,8 @@ const allRounds = [
     finishDate: '2023-04-13',
     location: 'UGAB',
     address: 'Av. Patria 921',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 8,
@@ -86,6 +100,8 @@ const allRounds = [
     finishDate: '2023-04-20',
     location: 'UGAB',
     address: 'Av. Patria 921',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 9,
@@ -97,6 +113,8 @@ const allRounds = [
     finishDate: '2023-04-30',
     location: 'UGAB',
     address: 'Av. Patria 921',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 10,
@@ -108,6 +126,8 @@ const allRounds = [
     finishDate: '2023-03-24',
     location: 'Hermau',
     address: 'Luis A. Brown 1451',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 11,
@@ -119,6 +139,8 @@ const allRounds = [
     finishDate: '2023-03-31',
     location: 'Hermau',
     address: 'Luis A. Brown 1451',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 12,
@@ -130,6 +152,7 @@ const allRounds = [
     finishDate: '2023-04-21',
     location: 'Hermau',
     address: 'Luis A. Brown 1451',
+    imagePath: '/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 13,
@@ -141,6 +164,8 @@ const allRounds = [
     finishDate: '2023-05-05',
     location: 'Hermau',
     address: 'Luis A. Brown 1451',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
     id: 14,
@@ -148,10 +173,12 @@ const allRounds = [
     tournament: 'Torneo UGAB',
     season: 'Temporada 2023',
     roundNumber: 10,
-    startDate: '2023-05-07',
-    finishDate: '2023-05-07',
+    startDate: '2023-05-06',
+    finishDate: '2023-05-06',
     location: 'UGAB',
     address: 'Av. Patria 921',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
 ];
 
