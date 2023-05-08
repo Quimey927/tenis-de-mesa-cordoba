@@ -1,5 +1,7 @@
 .ui-btn {
   background-color: var(--color-primary-darker);
+  box-shadow: -2px 2px 4px var(--color-black);
+  font-weight: 700;
   color: var(--color-white);
   border: none;
   padding: 0.5rem 1.5rem;
@@ -7,5 +9,5 @@
   font-size: 1rem;
   outline: inherit;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 5px;
 }
