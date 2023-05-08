@@ -36,9 +36,11 @@ const Calendar = ({ year, month, setYear, setMonth, tournamentDays }) => {
             day === currentDay &&
             isCurrentMonth
           ? {
-              borderColor: 'var(--color-light-black)',
-              borderWidth: '1px',
-              borderStyle: 'solid',
+              backgroundColor: 'var(--color-secondary)',
+              color: 'var(--color-white)',
+              borderRadius: '50%',
+              width: '32px',
+              marginInline: 'auto',
             }
           : {}
       }
