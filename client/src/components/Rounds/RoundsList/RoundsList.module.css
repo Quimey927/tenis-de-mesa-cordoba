@@ -5,8 +5,10 @@
 
 .no-rounds {
   text-align: center;
-  color: var(--color-white);
-  text-shadow: -2px 2px 2px var(--color-light-black);
+  color: var(--color-light-black);
+  font-family: sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
 }
 
 @media (min-width: 768px) {

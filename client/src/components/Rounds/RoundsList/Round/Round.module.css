@@ -50,7 +50,8 @@
   margin-inline: 1rem;
   background-color: rgb(255 123 123 / 30%);
   border-radius: 10px;
-  width: max-content;
+  /* width: max-content; */
+  width: 160px;
 }
 
 .calendar__month {
