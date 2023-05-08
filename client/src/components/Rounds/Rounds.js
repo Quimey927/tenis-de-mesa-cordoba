@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import Calendar from './Calendar/Calendar';
 import RoundsList from './RoundsList/RoundsList';
+import useFetchRoundsOfTheMonth from '../../hooks/useFetchRoundsOfTheMonth';
 import { getTournamentDays } from '../../services/utils/getTournamentDays';
 import classes from './Rounds.module.css';
 
@@ -9,28 +10,17 @@ const Rounds = ({ roundsOfTheMonth, currentTournamentDays }) => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth());
   const [tournamentDays, setTournamentDays] = useState(currentTournamentDays);
-  const [isFirstRender, setIsFirstRender] = useState(true);
   const [currentRoundsOfTheMonth, setCurrentRoundsOfTheMonth] =
     useState(roundsOfTheMonth);
 
   const formattedMonth = (month + 1).toString().padStart(2, '0'); // in case month is march, transform 2 to 03
 
-  useEffect(() => {
-    if (!isFirstRender) {
-      fetch(
-        `http://localhost:8080/api/rounds?month=${formattedMonth}&year=${year}`
-      )
-        .then((response) => response.json())
-        .then((currRounds) => {
-          setCurrentRoundsOfTheMonth(currRounds);
-          setTournamentDays(getTournamentDays(currRounds));
-        })
-        .catch((err) => console.log(err));
-    } else {
-      setIsFirstRender(false);
-    }
-    // eslint-disable-next-line
-  }, [month, year]);
+  const applyData = (currRounds) => {
+    setCurrentRoundsOfTheMonth(currRounds);
+    setTournamentDays(getTournamentDays(currRounds));
+  };
+
+  useFetchRoundsOfTheMonth(formattedMonth, year, applyData);
 
   return (
     <section className={classes['current-month-rounds']}>
