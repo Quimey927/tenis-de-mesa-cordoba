@@ -40,12 +40,13 @@ img {
 
 main {
   flex-grow: 1;
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     var(--color-primary),
-    var(--color-white),
+    var(--color-light-grey),
     var(--color-secondary)
-  );
+  ); */
+  background-color: #72e1e1;
 }
 
 section {
