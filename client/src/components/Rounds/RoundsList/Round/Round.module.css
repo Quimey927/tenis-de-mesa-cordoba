@@ -10,17 +10,22 @@
   box-shadow: -3px 3px 9px var(--color-black);
   max-width: 700px;
   margin-inline: auto;
+  filter: grayscale(10%);
+}
+
+.round:hover {
+  filter: grayscale(0%);
 }
 
 .round::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .round:hover::before {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .round + .round {
@@ -82,7 +87,6 @@
   margin: 0;
   color: var(--color-white);
   letter-spacing: 1px;
-  text-shadow: -1px 1px 2px var(--color-light-black);
 }
 
 .description__title {
@@ -93,14 +97,23 @@
   margin-block: 0.5rem 1.5rem;
 }
 
-.round:hover .btn {
-  background-color: var(--color-primary);
+.description a {
+  text-decoration: none;
+  color: var(--color-white);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: color 300ms ease;
 }
 
 .btn {
   transform: translate(1px, -1px);
-  transition: opacity 300ms ease-out, transform 300ms ease-out;
-  font-family: sans-serif;
+  transition: opacity 300ms ease-out, background-color 200ms ease,
+    transform 300ms ease-out;
+}
+
+.btn a {
+  font-weight: 700;
 }
 
 .btn:hover {
@@ -110,15 +123,7 @@
 .btn:active {
   color: var(--color-primary-darker);
   transform: translate(-1px, 1px);
-}
-
-.description a {
-  text-decoration: none;
-  color: var(--color-white);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  font-weight: 500;
-  transition: color 300ms ease;
+  box-shadow: -1px 1px 4px black;
 }
 
 .location {
