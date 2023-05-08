@@ -78,10 +78,15 @@ module.exports.getTournaments = async (req, res) => {
 
 module.exports.getTournament = async (req, res) => {
   try {
-    const { tournamentId } = req.params;
+    const { tournamentTitle, season } = req.params;
+
     const requiredTournament = allTournaments.find(
-      (tournament) => tournament.id === tournamentId
+      (tournament) =>
+        tournament.tournamentTitle.toLowerCase().split(' ').join('-') ===
+          tournamentTitle &&
+        tournament.season.toLowerCase().split(' ').join('-') === season
     );
+
     res.status(200).json(requiredTournament);
   } catch (err) {
     res.send(err);

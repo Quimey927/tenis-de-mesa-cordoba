@@ -21,7 +21,7 @@ const Tournament = ({ tournament }) => {
         <h4 className={classes['tournament__season']}> {season}</h4>
       </div>
       <Button className={classes.btn}>
-        <Link to={`/${encodedTournamentUrl}`}>Ver torneo</Link>
+        <Link to={`/torneos/${encodedTournamentUrl}`}>Ver torneo</Link>
       </Button>
     </li>
   );

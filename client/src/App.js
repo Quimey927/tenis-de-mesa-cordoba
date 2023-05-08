@@ -28,6 +28,7 @@ const router = createBrowserRouter([
         index: true,
         element: <Navigate to="/fechas" />,
       },
+
       {
         path: 'torneos',
         children: [
@@ -37,14 +38,9 @@ const router = createBrowserRouter([
             loader: tournamentsLoader,
           },
           {
-            path: ':tournamentId/:season',
+            path: ':tournamentTitle/:season',
             element: <TournamentPage />,
             loader: tournamentLoader,
-          },
-          {
-            path: ':tournamentId/:season/:roundId',
-            element: <RoundPage />,
-            loader: roundLoader,
           },
         ],
       },
@@ -55,8 +51,23 @@ const router = createBrowserRouter([
       },
       {
         path: 'jugadores',
-        element: <PlayersPage />,
-        loader: playersLoader,
+        children: [
+          {
+            index: true,
+            element: <PlayersPage />,
+            loader: playersLoader,
+          },
+          /* {
+            path: ':playerTitle',
+            element: <PlayerPage />,
+            loader: playerLoader,
+          }, */
+        ],
+      },
+      {
+        path: ':roundName/:tournamentTitle/:season',
+        element: <RoundPage />,
+        loader: roundLoader,
       },
     ],
   },

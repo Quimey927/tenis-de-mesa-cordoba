@@ -5,8 +5,8 @@ const Tournament = ({ tournament }) => {
 
   return (
     <div className={classes.tournament}>
-      <p>{tournamentTitle}</p>
-      <p>{season}</p>
+      <h1>{tournamentTitle}</h1>
+      <h2>{season}</h2>
     </div>
   );
 };

@@ -13,8 +13,10 @@ export async function getTournaments() {
   return response.json();
 }
 
-export async function getTournament(tournamentId) {
-  const response = await fetch(`${baseUrl}/tournaments/${tournamentId}`);
+export async function getTournament(tournamentTitle, season) {
+  const response = await fetch(
+    `${baseUrl}/tournaments/${tournamentTitle}/${season}`
+  );
   if (!response.ok) {
     throw json({
       message: 'No pudimos cargar el torneo.',
@@ -35,8 +37,10 @@ export async function getRoundsOfTheMonth(month, year) {
   return response.json();
 }
 
-export async function getRound(roundId) {
-  const response = await fetch(`${baseUrl}/rounds/${roundId}`);
+export async function getRound(tournamentTitle, season, roundName) {
+  const response = await fetch(
+    `${baseUrl}/rounds/${roundName}/${tournamentTitle}/${season}`
+  );
   if (!response.ok) {
     throw json({
       message: 'No pudimos cargar la fecha.',

@@ -220,9 +220,15 @@ module.exports.getRoundsOfTheMonth = async (req, res) => {
 
 module.exports.getRound = async (req, res) => {
   try {
-    const { roundId } = req.params;
+    const { roundName, tournamentTitle, season } = req.params;
 
-    const requiredRound = allRounds.find((round) => round.id === roundId);
+    const requiredRound = allRounds.find(
+      (round) =>
+        round.roundName.toLowerCase().split(' ').join('-') === roundName &&
+        round.tournament.toLowerCase().split(' ').join('-') ===
+          tournamentTitle &&
+        round.season.toLowerCase().split(' ').join('-') === season
+    );
 
     res.status(200).json(requiredRound);
   } catch (err) {

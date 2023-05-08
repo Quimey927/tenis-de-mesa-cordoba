@@ -12,6 +12,6 @@ const TournamentPage = () => {
 export default TournamentPage;
 
 export async function loader({ params }) {
-  const { tournamentId, season } = params;
-  return getTournament(tournamentId, season);
+  const { tournamentTitle, season } = params;
+  return getTournament(tournamentTitle, season);
 }

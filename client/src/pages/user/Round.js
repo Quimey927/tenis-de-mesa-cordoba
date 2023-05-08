@@ -12,6 +12,6 @@ const RoundPage = () => {
 export default RoundPage;
 
 export async function loader({ params }) {
-  const { tournamentId, season, roundId } = params;
-  return getRound(tournamentId, season, roundId);
+  const { roundName, tournamentTitle, season } = params;
+  return getRound(roundName, tournamentTitle, season);
 }

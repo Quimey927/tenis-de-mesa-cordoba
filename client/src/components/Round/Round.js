@@ -1,13 +1,13 @@
 import classes from './Round.module.css';
 
 const Round = ({ round }) => {
-  const { roundTitle, season, tournamentTitle } = round;
+  const { roundName, season, tournament } = round;
 
   return (
     <div className={classes.round}>
-      <p>{tournamentTitle}</p>
+      <p>{roundName}</p>
+      <p>{tournament}</p>
       <p>{season}</p>
-      <p>{roundTitle}</p>
     </div>
   );
 };
