@@ -180,6 +180,19 @@ const allRounds = [
     imagePath:
       'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
+  {
+    id: 154,
+    roundName: 'Segunda Fecha Cat A',
+    tournament: 'Torneo +30 HM',
+    season: 'Primer Semestre 2023',
+    roundNumber: 5,
+    startDate: '2023-05-19',
+    finishDate: '2023-05-19',
+    location: 'Hermau',
+    address: 'Luis A. Brown 1451',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
+  },
 ];
 
 module.exports.getRoundsOfTheMonth = async (req, res) => {
