@@ -9,7 +9,9 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <nav>
-        <Logo className={classes.logo} />
+        <div className={classes.logo}>
+          <Logo />
+        </div>
 
         <ul className={classes['nav-links']}>
           <NavLinkItem to="/fechas" innerText="Fechas" />
