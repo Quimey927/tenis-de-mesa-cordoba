@@ -6,9 +6,9 @@ export const getEncodedTournamentUrl = (tournament, season) => {
 };
 
 export const getEncodedRoundUrl = (tournament, season, round) => {
+  const tournamentRoundUrl = round.toLowerCase().split(' ').join('-');
   const tournamentTitleUrl = tournament.toLowerCase().split(' ').join('-');
   const tournamentSeasonUrl = season.toLowerCase().split(' ').join('-');
-  const tournamentRoundUrl = round.toLowerCase().split(' ').join('-');
-  const roundUrl = `${tournamentTitleUrl}/${tournamentSeasonUrl}/${tournamentRoundUrl}`;
+  const roundUrl = `${tournamentRoundUrl}/${tournamentTitleUrl}/${tournamentSeasonUrl}`;
   return roundUrl;
 };

@@ -37,7 +37,7 @@ export async function getRoundsOfTheMonth(month, year) {
   return response.json();
 }
 
-export async function getRound(tournamentTitle, season, roundName) {
+export async function getRound(roundName, tournamentTitle, season) {
   const response = await fetch(
     `${baseUrl}/rounds/${roundName}/${tournamentTitle}/${season}`
   );

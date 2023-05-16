@@ -51,7 +51,7 @@ const Round = ({ round }) => {
           <p className={classes['description__tournament']}>{tournament}</p>
           <p className={classes['description__title']}>{roundName}</p>
           <Button className={classes.btn}>
-            <Link to={`/${encodedRoundUrl}`}>Ver fecha</Link>
+            <Link to={`/fechas/${encodedRoundUrl}`}>Ver fecha</Link>
           </Button>
         </div>
       </div>
