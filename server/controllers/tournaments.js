@@ -5,7 +5,7 @@ const allTournaments = [
     season: 'Temporada 2022',
     year: 2022,
     imagePath:
-      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
+      'url(/images/tournaments_images/torneo_+30_hermau_primer_semestre_2023.jpg',
   },
   {
     id: 2,
@@ -18,8 +18,8 @@ const allTournaments = [
   {
     id: 3,
     tournamentTitle: 'Supercopa de Clubes',
-    season: 'Temporada 2022',
-    year: 2022,
+    season: 'Temporada 2023',
+    year: 2023,
     imagePath:
       'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
