@@ -3,7 +3,7 @@ import classes from './RoundsList.module.css';
 
 const RoundsList = ({ roundsOfTheMonth }) => {
   let roundsList = (
-    <p className={classes['no-rounds']}>No hay fechas este mes.</p>
+    <p className={classes['no-rounds']}>No hay fechas registradas este mes.</p>
   );
 
   if (roundsOfTheMonth.length > 0) {
