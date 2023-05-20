@@ -46,7 +46,7 @@ main {
     var(--color-light-grey),
     var(--color-secondary)
   );
-  /* background-color: #72e1e1; */
+  background-attachment: fixed;
 }
 
 section {
