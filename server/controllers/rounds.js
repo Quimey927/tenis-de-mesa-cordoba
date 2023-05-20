@@ -181,7 +181,7 @@ const allRounds = [
       'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
   {
-    id: 154,
+    id: 15,
     roundName: 'Segunda Fecha Cat A',
     tournament: 'Torneo +30 HM',
     season: 'Primer Semestre 2023',
@@ -190,6 +190,19 @@ const allRounds = [
     finishDate: '2023-05-19',
     location: 'Hermau',
     address: 'Luis A. Brown 1451',
+    imagePath:
+      'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
+  },
+  {
+    id: 16,
+    roundName: 'Segunda Fecha Mayo',
+    tournament: 'Torneo UGAB',
+    season: 'Temporada 2023',
+    roundNumber: 11,
+    startDate: '2023-05-18',
+    finishDate: '2023-05-18',
+    location: 'UGAB',
+    address: 'Av. Patria 921',
     imagePath:
       'url(/images/tournaments_images/liga_de_equipos_temporada_2023.jpg',
   },
