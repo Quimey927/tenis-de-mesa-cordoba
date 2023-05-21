@@ -70,7 +70,7 @@ const router = createBrowserRouter([
             loader: playersLoader,
           },
           /* {
-            path: ':playerTitle',
+            path: ':playerName',
             element: <PlayerPage />,
             loader: playerLoader,
           }, */
