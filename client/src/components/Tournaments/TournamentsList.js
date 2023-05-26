@@ -1,7 +1,7 @@
 import Tournament from './Tournament/Tournament';
-import classes from './Tournaments.module.css';
+import classes from './TournamentsList.module.css';
 
-const Tournaments = ({ tournaments }) => {
+const TournamentsList = ({ tournaments }) => {
   return (
     <section className={classes['tournaments']}>
       <ul className={classes['tournaments__list']}>
@@ -13,4 +13,4 @@ const Tournaments = ({ tournaments }) => {
   );
 };
 
-export default Tournaments;
+export default TournamentsList;
