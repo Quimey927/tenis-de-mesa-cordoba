@@ -70,6 +70,21 @@
   position: relative;
 }
 
+.is-current-date {
+  font-weight: 700;
+}
+
+.is-current-date::after {
+  content: '';
+  position: absolute;
+  background-color: var(--color-secondary);
+  border-radius: 50%;
+  width: 32px;
+  inset: 0;
+  margin: auto;
+  opacity: 0.4;
+}
+
 .day-number {
   justify-self: stretch;
 }

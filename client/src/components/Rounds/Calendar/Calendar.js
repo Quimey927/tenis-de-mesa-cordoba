@@ -21,30 +21,17 @@ const Calendar = ({ year, month, setYear, setMonth, tournamentDays }) => {
     <div
       key={day}
       style={
-        tournamentDays.includes(day) && day === currentDay && isCurrentMonth
+        tournamentDays.includes(day)
           ? {
               backgroundColor: 'rgba(0,0,0,0.3)',
-              borderColor: 'var(--color-light-black)',
-              borderWidth: '1px',
-              borderStyle: 'solid',
-            }
-          : tournamentDays.includes(day) && day !== currentDay
-          ? {
-              backgroundColor: 'rgba(0,0,0,0.3)',
-            }
-          : !tournamentDays.includes(day) &&
-            day === currentDay &&
-            isCurrentMonth
-          ? {
-              backgroundColor: 'var(--color-secondary)',
-              color: 'var(--color-white)',
-              borderRadius: '50%',
-              width: '32px',
-              marginInline: 'auto',
             }
           : {}
       }
-      className={classes['day-number']}
+      className={
+        day === currentDay && isCurrentMonth
+          ? `${classes['day-number']} ${classes['is-current-date']}`
+          : classes['day-number']
+      }
     >
       {day > 0 && day}
     </div>
