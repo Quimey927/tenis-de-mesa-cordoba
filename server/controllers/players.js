@@ -1,9 +1,9 @@
 const pool = require('../db/db');
 const playerQueries = require('../db/queries/players');
 
-module.exports.getPlayersNames = async (req, res) => {
+module.exports.getPlayers = async (req, res) => {
   try {
-    pool.query(playerQueries.getPlayersNames, (err, results) => {
+    pool.query(playerQueries.getPlayers, (err, results) => {
       if (err) throw new Error('No pudimos cargar los países.');
       res.status(200).json(results.rows);
     });

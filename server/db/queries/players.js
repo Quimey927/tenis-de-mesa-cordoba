@@ -1,5 +1,5 @@
-const getPlayersNames =
-  'SELECT id, first_name, middle_name, last_name, second_last_name FROM players';
+const getPlayers =
+  'SELECT id, first_name, middle_name, last_name, second_last_name, player_image, club_name, fecoteme_category FROM players ORDER BY last_name, second_last_name, first_name, middle_name';
 
 const createPlayer =
   'INSERT INTO players (first_name, middle_name, last_name, second_last_name, birthdate, email, club_name, is_federated, fecoteme_category) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)';
@@ -12,7 +12,7 @@ const updatePlayer =
 const deletePlayer = 'DELETE FROM players WHERE id = $1';
 
 module.exports = {
-  getPlayersNames,
+  getPlayers,
   createPlayer,
   getPlayer,
   updatePlayer,
