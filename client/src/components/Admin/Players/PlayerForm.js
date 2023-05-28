@@ -42,31 +42,30 @@ const PlayerForm = ({ method, player }) => {
       />
       <Input
         id="birthdate"
-        required="true"
         label="Fecha de Nacimiento (yyyy-mm-dd)"
-        defaultValue={player ? player[0].birthdate.substring(0, 10) : ''}
+        defaultValue={
+          player && player[0].birthdate !== null
+            ? player[0].birthdate.substring(0, 10)
+            : ''
+        }
       />
       <Input
         id="email"
-        required="true"
         label="Email"
         defaultValue={player ? player[0].email : ''}
       />
       <Input
         id="club_name"
-        required="true"
         label="Club"
         defaultValue={player ? player[0].club_name : ''}
       />
       <Input
         id="is_federated"
-        required="true"
         label="¿Es federado? ('true' - 'false')"
         defaultValue={player ? player[0].is_federated : ''}
       />
       <Input
         id="fecoteme_category"
-        required="true"
         label="Categoría FeCoTeMe"
         defaultValue={player ? player[0].fecoteme_category : ''}
       />
