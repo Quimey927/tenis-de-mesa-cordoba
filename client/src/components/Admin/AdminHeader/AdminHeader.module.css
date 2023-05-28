@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding-block: 0.8rem;
+  background-color: #333;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.active {
+  color: white;
+}
+
+.not-active {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 300ms ease;
+}
+
+.not-active:hover {
+  color: white;
+}

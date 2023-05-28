@@ -1,0 +1,9 @@
+.form {
+  max-width: 400px;
+  margin-inline: auto;
+  margin-top: 2rem;
+  padding: 3rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: white;
+}
