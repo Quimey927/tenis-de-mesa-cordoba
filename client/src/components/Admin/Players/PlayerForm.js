@@ -75,6 +75,7 @@ const PlayerForm = ({ method, player }) => {
           <option value="SuperFECOTEME">SuperFECOTEME</option>
           <option value="Primera">Primera</option>
           <option value="Segunda">Segunda</option>
+          <option value="Tercera">Tercera</option>
           <option value="Cuarta">Cuarta</option>
           <option value="Quinta">Quinta</option>
           <option value="Sexta">Sexta</option>
