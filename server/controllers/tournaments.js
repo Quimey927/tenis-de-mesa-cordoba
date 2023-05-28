@@ -138,8 +138,6 @@ module.exports.getTournamentByTitle = async (req, res) => {
   const formattedTitle = tournamentTitle.split('-').join(' ');
   const formattedSeason = season.split('-').join(' ');
 
-  // RESOLVER CUESTIONES DE FORMATO: liga-provincial => Liga Provincial
-
   try {
     pool.query(
       tournamentQueries.getTournamentByTitle,
