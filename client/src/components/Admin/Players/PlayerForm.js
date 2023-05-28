@@ -64,11 +64,23 @@ const PlayerForm = ({ method, player }) => {
         label="¿Es federado? ('true' - 'false')"
         defaultValue={player ? player[0].is_federated : ''}
       />
-      <Input
-        id="fecoteme_category"
-        label="Categoría FeCoTeMe"
-        defaultValue={player ? player[0].fecoteme_category : ''}
-      />
+      <div className={classes.select}>
+        <label htmlFor="fecoteme_category">Categoría FeCoTeMe</label>
+        <select
+          id="fecoteme_category"
+          name="fecoteme_category"
+          defaultValue={player ? player[0].fecoteme_category : 'no_category'}
+        >
+          <option value="no_category">Sin Categoría</option>
+          <option value="SuperFECOTEME">SuperFECOTEME</option>
+          <option value="Primera">Primera</option>
+          <option value="Segunda">Segunda</option>
+          <option value="Cuarta">Cuarta</option>
+          <option value="Quinta">Quinta</option>
+          <option value="Sexta">Sexta</option>
+          <option value="Séptima">Séptima</option>
+        </select>
+      </div>
       <div className={classes.actions}>
         <Button onClick={cancelHandler} disabled={isSubmitting}>
           Cerrar
@@ -100,7 +112,10 @@ export async function action({ request, params }) {
     email: data.get('email'),
     club_name: data.get('club_name'),
     is_federated: data.get('is_federated'),
-    fecoteme_category: data.get('fecoteme_category'),
+    fecoteme_category:
+      data.get('fecoteme_category') !== 'no_category'
+        ? data.get('fecoteme_category')
+        : null,
   };
 
   if (method === 'POST') {

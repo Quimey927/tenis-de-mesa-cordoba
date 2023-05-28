@@ -12,6 +12,16 @@
   font-size: 2rem;
 }
 
+.form .select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form .select select {
+  padding: 0.4rem;
+}
+
 .form .actions {
   display: flex;
   justify-content: space-around;
