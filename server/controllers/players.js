@@ -4,7 +4,7 @@ const playerQueries = require('../db/queries/players');
 module.exports.getPlayers = async (req, res) => {
   try {
     pool.query(playerQueries.getPlayers, (err, results) => {
-      if (err) throw new Error('No pudimos cargar los países.');
+      if (err) throw new Error('No pudimos cargar los jugadores.');
       res.status(200).json(results.rows);
     });
   } catch (err) {
@@ -30,18 +30,18 @@ module.exports.createPlayer = async (req, res) => {
       playerQueries.createPlayer,
       [
         first_name,
-        middle_name,
+        middle_name !== '' ? middle_name : null,
         last_name,
-        second_last_name,
-        birthdate,
-        email,
-        club_name,
-        is_federated,
-        fecoteme_category,
+        second_last_name !== '' ? second_last_name : null,
+        birthdate !== '' ? birthdate : null,
+        email !== '' ? email : null,
+        club_name !== '' ? club_name : null,
+        is_federated !== '' ? is_federated : null,
+        fecoteme_category !== '' ? fecoteme_category : null,
       ],
       (err, results) => {
-        if (err) throw new Error('No pudimos crear el equipo.');
-        res.status(201).send('Equipo creado exitosamente.');
+        if (err) throw new Error('No pudimos crear el jugador.');
+        res.status(201).send('Jugador creado exitosamente.');
       }
     );
   } catch (err) {
@@ -54,7 +54,7 @@ module.exports.getPlayer = async (req, res) => {
 
   try {
     pool.query(playerQueries.getPlayer, [id], (err, results) => {
-      if (err) throw new Error('No pudimos encontrar el equipo.');
+      if (err) throw new Error('No pudimos encontrar el jugador.');
       res.status(200).json(results.rows);
     });
   } catch (err) {
@@ -78,31 +78,31 @@ module.exports.updatePlayer = async (req, res) => {
 
   try {
     pool.query(playerQueries.getPlayer, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el equipo');
+      if (err) throw new Error('No pudimos buscar el jugador');
 
-      const equipoNoEncontrado = !results.rows.length;
+      const playerNotFound = !results.rows.length;
 
-      if (equipoNoEncontrado) {
-        res.send('El equipo no existe en la base de datos');
+      if (playerNotFound) {
+        res.send('El jugador no existe en la base de datos');
       }
 
       pool.query(
         playerQueries.updatePlayer,
         [
           first_name,
-          middle_name,
+          middle_name !== '' ? middle_name : null,
           last_name,
-          second_last_name,
-          birthdate,
-          email,
-          club_name,
-          is_federated,
-          fecoteme_category,
+          second_last_name !== '' ? second_last_name : null,
+          birthdate !== '' ? birthdate : null,
+          email !== '' ? email : null,
+          club_name !== '' ? club_name : null,
+          is_federated !== '' ? is_federated : null,
+          fecoteme_category !== '' ? fecoteme_category : null,
           id,
         ],
         (err, results) => {
-          if (err) throw new Error('No pudimos editar el equipo.');
-          res.status(200).send('Equipo editado correctamente.');
+          if (err) throw new Error('No pudimos editar el jugador.');
+          res.status(200).send('Jugador editado correctamente.');
         }
       );
     });
@@ -116,17 +116,17 @@ module.exports.deletePlayer = async (req, res) => {
 
   try {
     pool.query(playerQueries.getPlayer, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el equipo');
+      if (err) throw new Error('No pudimos buscar el jugador');
 
-      const equipoNoEncontrado = !results.rows.length;
+      const playerNotFound = !results.rows.length;
 
-      if (equipoNoEncontrado) {
-        res.send('El equipo no existe en la base de datos');
+      if (playerNotFound) {
+        res.send('El jugador no existe en la base de datos');
       }
 
       pool.query(playerQueries.deletePlayer, [id], (err, results) => {
-        if (err) throw new Error('No pudimos eliminar el equipo.');
-        res.status(200).send('Equipo eliminado correctamente.');
+        if (err) throw new Error('No pudimos eliminar el jugador.');
+        res.status(200).send('Jugador eliminado correctamente.');
       });
     });
   } catch (err) {
