@@ -1,10 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
-
-import Button from '../../UI/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
-import classes from './PlayersList.module.css';
+
+import Button from '../../UI/Button/Button';
 import { deletePlayer } from '../../../api';
+import { getFullName } from '../../../services/utils/getFullName';
+import classes from './PlayersList.module.css';
 
 const PlayersList = ({ players }) => {
   const navigate = useNavigate();
@@ -40,12 +41,12 @@ const PlayersList = ({ players }) => {
           {players.map((player) => (
             <tr key={player.id} role="row">
               <td role="cell" data-cell="nombre">
-                {player.second_last_name
-                  ? `${player.last_name} ${player.second_last_name},`
-                  : `${player.last_name},`}{' '}
-                {player.middle_name
-                  ? `${player.first_name} ${player.middle_name}`
-                  : player.first_name}
+                {getFullName(
+                  player.first_name,
+                  player.middle_name,
+                  player.last_name,
+                  player.second_last_name
+                )}
               </td>
               <td role="cell" data-cell="editar">
                 <Link to={player.id.toString()}>
