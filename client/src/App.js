@@ -23,9 +23,7 @@ import AdminRoot from './pages/admin/AdminRoot';
 import AdminPage from './pages/admin/Admin';
 import LoginPage from './pages/admin/Login';
 
-import TournamentsAdminPage, {
-  loader as tournamentsAdminLoader,
-} from './pages/admin/Tournaments/Tournaments';
+import TournamentsAdminPage from './pages/admin/Tournaments/Tournaments';
 import EditTournamentPage, {
   loader as tournamentAdminLoader,
 } from './pages/admin/Tournaments/EditTournament';
@@ -121,7 +119,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <TournamentsAdminPage />,
-            loader: tournamentsAdminLoader,
+            loader: tournamentsLoader,
           },
           {
             path: ':tournamentId',
