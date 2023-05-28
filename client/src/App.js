@@ -6,25 +6,37 @@ import {
 
 import RootLayout from './pages/user/Root';
 import ErrorPage from './pages/user/Error';
+
 import TournamentsPage, {
   loader as tournamentsLoader,
 } from './pages/user/Tournaments';
 import TournamentPage, {
   loader as tournamentLoader,
 } from './pages/user/Tournament';
+
 import RoundsPage, { loader as roundsLoader } from './pages/user/Rounds';
 import RoundPage, { loader as roundLoader } from './pages/user/Round';
+
 import PlayersPage, { loader as playersLoader } from './pages/user/Players';
 
 import AdminRoot from './pages/admin/AdminRoot';
 import AdminPage from './pages/admin/Admin';
 import LoginPage from './pages/admin/Login';
 
+import TournamentsAdminPage, {
+  loader as tournamentsAdminLoader,
+} from './pages/admin/Tournaments/Tournaments';
+import EditTournamentPage, {
+  loader as tournamentAdminLoader,
+} from './pages/admin/Tournaments/EditTournament';
+import { action as manipulateTournamentAction } from './components/Admin/Tournaments/TournamentForm';
+import NewTournamentPage from './pages/admin/Tournaments/NewTournament';
+
 import PlayersAdminPage, {
   loader as playersAdminLoader,
 } from './pages/admin/Players/Players';
 import EditPlayerPage, {
-  loader as playerLoader,
+  loader as playerAdminLoader,
 } from './pages/admin/Players/EditPlayer';
 import { action as manipulatePlayerAction } from './components/Admin/Players/PlayerForm';
 import NewPlayerPage from './pages/admin/Players/NewPlayer';
@@ -102,6 +114,29 @@ const router = createBrowserRouter([
         path: 'login',
         element: <LoginPage />,
       },
+
+      {
+        path: 'torneos',
+        children: [
+          {
+            index: true,
+            element: <TournamentsAdminPage />,
+            loader: tournamentsAdminLoader,
+          },
+          {
+            path: ':tournamentId',
+            element: <EditTournamentPage />,
+            loader: tournamentAdminLoader,
+            action: manipulateTournamentAction,
+          },
+          {
+            path: 'nuevo',
+            element: <NewTournamentPage />,
+            action: manipulateTournamentAction,
+          },
+        ],
+      },
+
       {
         path: 'jugadores',
         children: [
@@ -113,7 +148,7 @@ const router = createBrowserRouter([
           {
             path: ':playerId',
             element: <EditPlayerPage />,
-            loader: playerLoader,
+            loader: playerAdminLoader,
             action: manipulatePlayerAction,
           },
           {
@@ -123,27 +158,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-      //     {
-      //       path: 'eventos',
-      //       children: [
-      //         {
-      //           index: true,
-      //           element: <EventAdminPage />,
-      //           loader: eventsLoader,
-      //           action: manipulateEventAction
-      //         },
-      //         {
-      //           path: ':eventName',
-      //           element: <EditEventPage />,
-      //           loader: eventLoader,
-      //           action: manipulateEventAction
-      //         },
-      //         {
-      //           path: 'nuevo',
-      //           element: <NewEventPage />,
-      //         }
-      //       ],
-      //     },
     ],
   },
 ]);

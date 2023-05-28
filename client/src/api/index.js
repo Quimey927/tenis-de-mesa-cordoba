@@ -1,4 +1,11 @@
-export { getTournaments, getTournament } from './tournaments';
+export {
+  getTournaments,
+  createTournament,
+  getTournamentById,
+  getTournamentByTitle,
+  updateTournament,
+  deleteTournament,
+} from './tournaments';
 
 export { getRoundsOfTheMonth, getRound } from './rounds';
 

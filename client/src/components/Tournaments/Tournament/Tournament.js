@@ -5,19 +5,19 @@ import { getEncodedTournamentUrl } from '../../../services/utils/getEncodedUrls'
 import classes from './Tournament.module.css';
 
 const Tournament = ({ tournament }) => {
-  const { tournamentTitle, season, imagePath } = tournament;
+  const { title, season, tournament_image } = tournament;
 
-  const encodedTournamentUrl = getEncodedTournamentUrl(tournamentTitle, season);
+  const encodedTournamentUrl = getEncodedTournamentUrl(title, season);
 
   return (
     <li
       className={classes.tournament}
       style={{
-        backgroundImage: `${imagePath}`,
+        backgroundImage: `${tournament_image}`,
       }}
     >
       <div>
-        <h3 className={classes['tournament__title']}>{tournamentTitle}</h3>
+        <h3 className={classes['tournament__title']}>{title}</h3>
         <h4 className={classes['tournament__season']}> {season}</h4>
       </div>
       <Button className={classes.btn}>

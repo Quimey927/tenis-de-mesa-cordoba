@@ -1,11 +1,11 @@
 import classes from './Tournament.module.css';
 
 const Tournament = ({ tournament }) => {
-  const { tournamentTitle, season } = tournament;
+  const { title, season } = tournament[0];
 
   return (
     <div className={classes.tournament}>
-      <h1>{tournamentTitle}</h1>
+      <h1>{title}</h1>
       <h2>{season}</h2>
     </div>
   );
