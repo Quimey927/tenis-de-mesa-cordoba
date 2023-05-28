@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 
-import PlayerForm from '../../components/Admin/Players/PlayerForm';
-import { getPlayer } from '../../api';
+import PlayerForm from '../../../components/Admin/Players/PlayerForm';
+import { getPlayer } from '../../../api';
 
 const EditPlayerPage = () => {
   const player = useLoaderData();
