@@ -130,6 +130,7 @@ const router = createBrowserRouter([
           {
             path: 'nuevo',
             element: <NewTournamentPage />,
+            loader: tournamentAdminLoader,
             action: manipulateTournamentAction,
           },
         ],

@@ -1,7 +1,11 @@
+import { useLoaderData } from 'react-router-dom';
+
 import TournamentForm from '../../../components/Admin/Tournaments/TournamentForm';
 
 const NewTournamentPage = () => {
-  return <TournamentForm method="POST" />;
+  const { tournaments } = useLoaderData();
+
+  return <TournamentForm method="POST" tournaments={tournaments} />;
 };
 
 export default NewTournamentPage;

@@ -1,12 +1,18 @@
 import { useLoaderData } from 'react-router-dom';
 
 import TournamentForm from '../../../components/Admin/Tournaments/TournamentForm';
-import { getTournamentById } from '../../../api';
+import { getTournamentById, getTournaments } from '../../../api';
 
 const EditTournamentPage = () => {
-  const tournament = useLoaderData();
+  const { tournament, tournaments } = useLoaderData();
 
-  return <TournamentForm method="PUT" tournament={tournament} />;
+  return (
+    <TournamentForm
+      method="PUT"
+      tournament={tournament}
+      tournaments={tournaments}
+    />
+  );
 };
 
 export default EditTournamentPage;
@@ -14,5 +20,8 @@ export default EditTournamentPage;
 export async function loader({ params }) {
   const { tournamentId } = params;
 
-  return getTournamentById(tournamentId);
+  return {
+    tournament: tournamentId ? await getTournamentById(tournamentId) : null,
+    tournaments: await getTournaments(),
+  };
 }

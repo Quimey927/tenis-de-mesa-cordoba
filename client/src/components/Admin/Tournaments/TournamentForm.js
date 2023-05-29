@@ -5,7 +5,7 @@ import Button from '../../UI/Button/Button';
 import { createTournament, updateTournament } from '../../../api';
 import classes from './TournamentForm.module.css';
 
-const TournamentForm = ({ method, tournament }) => {
+const TournamentForm = ({ method, tournament, tournaments }) => {
   const navigate = useNavigate();
   const navigation = useNavigation();
 
@@ -64,7 +64,41 @@ const TournamentForm = ({ method, tournament }) => {
         label="Descripción"
         defaultValue={tournament ? tournament[0].description : ''}
       />
-      <Input
+      <div className={classes.select}>
+        <label htmlFor="previous_edition_id">Edición anterior</label>
+        <select
+          id="previous_edition_id"
+          name="previous_edition_id"
+          defaultValue={
+            tournament ? tournament[0].previous_edition_id : 'no_tournament'
+          }
+        >
+          <option value="no_tournament">No hay torneo previo</option>
+          {tournaments.map((tournament) => (
+            <option key={tournament.id} value={tournament.id}>
+              {tournament.title} {tournament.season}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className={classes.select}>
+        <label htmlFor="next_edition_id">Edición siguiente</label>
+        <select
+          id="next_edition_id"
+          name="next_edition_id"
+          defaultValue={
+            tournament ? tournament[0].next_edition_id : 'no_tournament'
+          }
+        >
+          <option value="no_tournament">No hay torneo siguiente</option>
+          {tournaments.map((tournament) => (
+            <option key={tournament.id} value={tournament.id}>
+              {tournament.title} {tournament.season}
+            </option>
+          ))}
+        </select>
+      </div>
+      {/* <Input
         id="previous_edition_id"
         label="Edición anterior (id)"
         defaultValue={tournament ? tournament[0].previous_edition_id : ''}
@@ -73,7 +107,7 @@ const TournamentForm = ({ method, tournament }) => {
         id="next_edition_id"
         label="Edición posterior (id)"
         defaultValue={tournament ? tournament[0].next_edition_id : ''}
-      />
+      /> */}
       <div className={classes.actions}>
         <Button onClick={cancelHandler} disabled={isSubmitting}>
           Cerrar
@@ -104,8 +138,14 @@ export async function action({ request, params }) {
     start_date: data.get('start_date'),
     finish_date: data.get('finish_date'),
     description: data.get('description'),
-    previous_edition_id: data.get('previous_edition_id'),
-    next_edition_id: data.get('next_edition_id'),
+    previous_edition_id:
+      data.get('previous_edition_id') !== 'no_tournament'
+        ? data.get('previous_edition_id')
+        : null,
+    next_edition_id:
+      data.get('next_edition_id') !== 'no_tournament'
+        ? data.get('next_edition_id')
+        : null,
   };
 
   if (method === 'POST') {
