@@ -64,6 +64,7 @@ const TournamentForm = ({ method, tournament, tournaments }) => {
         label="Descripción"
         defaultValue={tournament ? tournament[0].description : ''}
       />
+
       <div className={classes.select}>
         <label htmlFor="previous_edition_id">Edición anterior</label>
         <select
@@ -81,6 +82,7 @@ const TournamentForm = ({ method, tournament, tournaments }) => {
           ))}
         </select>
       </div>
+
       <div className={classes.select}>
         <label htmlFor="next_edition_id">Edición siguiente</label>
         <select
@@ -98,16 +100,7 @@ const TournamentForm = ({ method, tournament, tournaments }) => {
           ))}
         </select>
       </div>
-      {/* <Input
-        id="previous_edition_id"
-        label="Edición anterior (id)"
-        defaultValue={tournament ? tournament[0].previous_edition_id : ''}
-      />
-      <Input
-        id="next_edition_id"
-        label="Edición posterior (id)"
-        defaultValue={tournament ? tournament[0].next_edition_id : ''}
-      /> */}
+
       <div className={classes.actions}>
         <Button onClick={cancelHandler} disabled={isSubmitting}>
           Cerrar
