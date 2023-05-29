@@ -4,7 +4,7 @@ const pool = new Pool({
   user: 'quimey',
   host: 'localhost',
   database: 'table_tennis_cordoba',
-  password: 'Jhlukhrtjncb.927',
+  password: process.env.DB_PASSWORD,
   port: 5432,
 });
 
