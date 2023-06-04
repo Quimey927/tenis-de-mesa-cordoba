@@ -2,12 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 import classes from './NavLinkCustomizado.module.css';
 
-const NavLinkCustomizado = ({ to, textoInterno }) => {
-  const controladorEncogerNavbar = () => {
-    const nav = document.querySelector('nav');
-    nav.classList.add('nav-encogido');
-  };
-
+const NavLinkCustomizado = ({ to, textoInterno, onClick }) => {
   return (
     <NavLink
       to={`/admin/${to}`}
@@ -16,7 +11,7 @@ const NavLinkCustomizado = ({ to, textoInterno }) => {
           ? `${classes.activo} ${classes['nav-link']}`
           : `${classes['no-activo']} ${classes['nav-link']}`
       }
-      onClick={controladorEncogerNavbar}
+      onClick={onClick}
     >
       {textoInterno}
     </NavLink>

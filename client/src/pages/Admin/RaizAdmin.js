@@ -21,7 +21,7 @@ const RaizAdmin = () => {
     return (
       <>
         {token && <AdminHeader />}
-        {token && <AdminNavbar />}
+        {token && <AdminNavbar navEncogido={true} />}
         <main className={classes['main-mobile']}>
           <Outlet />
         </main>
@@ -33,7 +33,7 @@ const RaizAdmin = () => {
     <>
       {token && <AdminHeader />}
       <main className={token ? classes['main-desktop'] : ''}>
-        {token && <AdminNavbar />}
+        {token && <AdminNavbar navEncogido={false} />}
         <div>
           <Outlet />
         </div>
