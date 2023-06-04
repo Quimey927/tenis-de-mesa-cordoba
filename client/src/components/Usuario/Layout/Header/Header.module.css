@@ -1,0 +1,77 @@
+.header {
+  background-color: var(--color-black);
+  border-bottom: 2px solid var(--color-white);
+  padding-block: 0.5rem;
+}
+
+.header * {
+  text-decoration: none;
+}
+
+.header nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logo {
+  display: none;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.header__buscar .icono {
+  color: hsl(0, 0%, 67%);
+}
+
+.header__buscar input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid hsl(0, 0%, 67%);
+  margin-left: 0.5rem;
+  color: var(--color-white);
+  font: inherit;
+  outline: none;
+  padding-bottom: 0.3rem;
+}
+
+.header__buscar:is(:focus-within) .icono {
+  color: var(--color-white);
+  opacity: 1;
+}
+
+.header__buscar input:focus {
+  border-bottom: 1px solid var(--color-white);
+}
+
+.header__buscar input::placeholder {
+  color: hsl(0, 0%, 67%);
+}
+
+.header__buscar input:focus::placeholder {
+  color: var(--color-white);
+  opacity: 1;
+}
+
+@media (min-width: 550px) {
+  .header nav {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-links {
+    gap: 2rem;
+  }
+
+  .logo {
+    display: block;
+  }
+}

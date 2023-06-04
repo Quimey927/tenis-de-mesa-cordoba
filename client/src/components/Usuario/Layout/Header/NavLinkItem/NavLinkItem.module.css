@@ -1,0 +1,31 @@
+.nav-link-item {
+  list-style: none;
+}
+
+.nav-link-item a {
+  transition: color 300ms ease;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.nav-link-item a:hover {
+  color: var(--color-primary);
+}
+
+.activo {
+  color: var(--color-primary);
+  cursor: default;
+}
+
+.activo::after {
+  content: '';
+  background-color: var(--color-primary);
+  width: 100%;
+  height: 1px;
+  display: block;
+}
+
+.no-activo {
+  color: var(--color-white);
+  transition: color 300ms ease;
+}

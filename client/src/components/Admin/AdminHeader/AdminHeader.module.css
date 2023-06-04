@@ -1,26 +1,75 @@
-.navbar {
+.header {
+  background-color: #f8f8f8;
   display: flex;
-  justify-content: space-around;
-  padding-block: 0.8rem;
-  background-color: #333;
-  color: white;
+  justify-content: space-between;
+  align-items: center;
+  height: 3.4rem;
+  border-bottom: 1px solid #ddd;
 }
 
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.active {
-  color: white;
-}
-
-.not-active {
-  color: #ccc;
+.brand {
   text-decoration: none;
-  transition: color 300ms ease;
+  color: #777;
+  font-size: 1.2em;
+  display: none;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
 
-.not-active:hover {
-  color: white;
+.brand:focus-within,
+.brand:hover {
+  text-decoration: underline;
+  outline-color: #f8f8f8;
+}
+
+.usuario {
+  color: #337ab7;
+  font-size: 0.9em;
+  line-height: 1.5;
+  padding: 1rem;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.bars {
+  display: block;
+  margin: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  height: 1.3rem;
+  width: 1.3rem;
+  color: #777;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.bars:hover {
+  border-color: #aaa;
+}
+
+.usuario:hover,
+.bars:hover {
+  background-color: #dcdcdc;
+}
+
+.usuario:focus {
+  outline-color: transparent;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.iconos {
+  margin-inline: 0.2rem;
+}
+
+@media (min-width: 768px) {
+  .brand {
+    display: block;
+  }
+
+  .bars {
+    display: none;
+  }
 }

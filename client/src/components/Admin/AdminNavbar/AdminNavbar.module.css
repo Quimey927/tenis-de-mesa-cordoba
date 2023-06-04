@@ -1,0 +1,14 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    width: 250px;
+    border-right: 1px solid #ccc;
+    max-height: 30000px;
+  }
+}

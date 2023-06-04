@@ -1,0 +1,63 @@
+.torneo {
+  height: 200px;
+  padding: 1.5rem 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  list-style: none;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-size: cover;
+  position: relative;
+  box-shadow: -4px 4px 6px rgba(0, 0, 0, 0.9);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 300ms ease;
+  font-family: monospace;
+  letter-spacing: 2px;
+}
+
+.torneo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.torneo:hover::before {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.torneo * {
+  position: relative;
+  z-index: 1;
+  text-transform: uppercase;
+}
+
+.torneo__titulo {
+  margin-block: 0 0.5rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--color-white);
+}
+
+.torneo__temporada {
+  margin-block: 0.5rem 0;
+  color: var(--color-primary);
+  font-weight: 400;
+  font-size: 1.1rem;
+  text-shadow: -4px 4px 2px black;
+}
+
+.torneo a {
+  color: var(--color-white);
+  font-size: 0.8rem;
+  transition: color 300ms ease;
+  text-decoration: none;
+}
+
+.torneo .btn {
+  margin-inline: auto;
+}

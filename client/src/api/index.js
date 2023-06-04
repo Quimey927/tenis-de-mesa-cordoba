@@ -1,18 +1,42 @@
 export {
-  getTournaments,
-  createTournament,
-  getTournamentById,
-  getTournamentByTitle,
-  updateTournament,
-  deleteTournament,
-} from './tournaments';
-
-export { getRoundsOfTheMonth, getRound } from './rounds';
+  obtenerTorneos,
+  crearTorneo,
+  obtenerTorneo,
+  obtenerTorneoPorSlug,
+  editarTorneo,
+  borrarTorneo,
+} from './torneos';
 
 export {
-  getPlayers,
-  createPlayer,
-  getPlayer,
-  updatePlayer,
-  deletePlayer,
-} from './players';
+  obtenerFechas,
+  crearFecha,
+  obtenerFecha,
+  obtenerFechaPorSlug,
+  editarFecha,
+  borrarFecha,
+  obtenerFechasDelMes,
+} from './fechas';
+
+export {
+  obtenerJugadores,
+  crearJugador,
+  obtenerJugador,
+  editarJugador,
+  borrarJugador,
+} from './jugadores';
+
+export {
+  obtenerClubes,
+  crearClub,
+  obtenerClub,
+  editarClub,
+  borrarClub,
+} from './clubes';
+
+export {
+  obtenerCiudades,
+  crearCiudad,
+  obtenerCiudad,
+  editarCiudad,
+  borrarCiudad,
+} from './ciudades';

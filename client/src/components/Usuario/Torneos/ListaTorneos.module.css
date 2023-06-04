@@ -1,0 +1,13 @@
+.lista-torneos {
+  display: grid;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 350px) {
+  .lista-torneos {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}

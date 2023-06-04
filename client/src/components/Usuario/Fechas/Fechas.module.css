@@ -1,0 +1,7 @@
+@media (min-width: 992px) {
+  .fechas-del-mes__container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 1rem;
+  }
+}

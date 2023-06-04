@@ -56,3 +56,8 @@ section {
 .text-center {
   text-align: center;
 }
+
+.nav-encogido {
+  max-height: 0;
+  overflow: hidden;
+}

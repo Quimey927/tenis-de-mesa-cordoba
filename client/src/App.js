@@ -4,50 +4,79 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-import RootLayout from './pages/user/Root';
-import ErrorPage from './pages/user/Error';
+import Raiz from './pages/Usuario/Raiz';
+import PaginaError from './pages/Usuario/Error';
 
-import TournamentsPage, {
-  loader as tournamentsLoader,
-} from './pages/user/Tournaments';
-import TournamentPage, {
-  loader as tournamentLoader,
-} from './pages/user/Tournament';
+import PaginaTorneos, {
+  loader as loaderTorneos,
+} from './pages/Usuario/Torneos';
+import PaginaTorneo, { loader as loaderTorneo } from './pages/Usuario/Torneo';
 
-import RoundsPage, { loader as roundsLoader } from './pages/user/Rounds';
-import RoundPage, { loader as roundLoader } from './pages/user/Round';
+import PaginaFechas, { loader as loaderFechas } from './pages/Usuario/Fechas';
+import PaginaFecha, { loader as loaderFecha } from './pages/Usuario/Fecha';
 
-import PlayersPage, { loader as playersLoader } from './pages/user/Players';
+import PaginaJugadores, {
+  loader as loaderJugadores,
+} from './pages/Usuario/Jugadores';
 
-import AdminRoot from './pages/admin/AdminRoot';
-import AdminPage from './pages/admin/Admin';
-import LoginPage from './pages/admin/Login';
+import RaizAdmin from './pages/Admin/RaizAdmin';
+import PaginaAdmin from './pages/Admin/Admin';
+import PaginaLogin from './pages/Admin/Login';
 
-import TournamentsAdminPage from './pages/admin/Tournaments/Tournaments';
-import EditTournamentPage, {
-  loader as tournamentAdminLoader,
-} from './pages/admin/Tournaments/EditTournament';
-import { action as manipulateTournamentAction } from './components/Admin/Tournaments/TournamentForm';
-import NewTournamentPage from './pages/admin/Tournaments/NewTournament';
+import PaginaTorneosAdmin, {
+  loader as loaderTorneosAdmin,
+} from './pages/Admin/Torneos/Torneos';
+import PaginaEditarTorneo, {
+  loader as loaderTorneoAdmin,
+} from './pages/Admin/Torneos/EditarTorneo';
+import { action as actionManipularTorneo } from './components/Admin/Torneos/FormularioTorneo';
+import PaginaNuevoTorneo from './pages/Admin/Torneos/NuevoTorneo';
 
-import PlayersAdminPage, {
-  loader as playersAdminLoader,
-} from './pages/admin/Players/Players';
-import EditPlayerPage, {
-  loader as playerAdminLoader,
-} from './pages/admin/Players/EditPlayer';
-import { action as manipulatePlayerAction } from './components/Admin/Players/PlayerForm';
-import NewPlayerPage from './pages/admin/Players/NewPlayer';
+import PaginaFechasAdmin, {
+  loader as loaderFechasAdmin,
+} from './pages/Admin/Fechas/Fechas';
+import PaginaEditarFecha, {
+  loader as loaderFechaAdmin,
+} from './pages/Admin/Fechas/EditarFecha';
+import { action as actionManipularFecha } from './components/Admin/Fechas/FormularioFecha';
+import PaginaNuevaFecha from './pages/Admin/Fechas/NuevaFecha';
+
+import PaginaJugadoresAdmin, {
+  loader as loaderJugadoresAdmin,
+} from './pages/Admin/Jugadores/Jugadores';
+import PaginaEditarJugador, {
+  loader as loaderJugadorAdmin,
+} from './pages/Admin/Jugadores/EditarJugador';
+import { action as actionManipularJugador } from './components/Admin/Jugadores/FormularioJugador';
+import PaginaNuevoJugador from './pages/Admin/Jugadores/NuevoJugador';
+
+import PaginaClubesAdmin, {
+  loader as loaderClubesAdmin,
+} from './pages/Admin/Clubes/Clubes';
+import PaginaEditarClub, {
+  loader as loaderClubAdmin,
+} from './pages/Admin/Clubes/EditarClub';
+import { action as actionManipularClub } from './components/Admin/Clubes/FormularioClub';
+import PaginaNuevoClub from './pages/Admin/Clubes/NuevoClub';
+
+import PaginaCiudadesAdmin, {
+  loader as loaderCiudadesAdmin,
+} from './pages/Admin/Ciudades/Ciudades';
+import PaginaEditarCiudad, {
+  loader as loaderCiudadAdmin,
+} from './pages/Admin/Ciudades/EditarCiudad';
+import { action as actionManipularCiudad } from './components/Admin/Ciudades/FormularioCiudad';
+import PaginaNuevaCiudad from './pages/Admin/Ciudades/NuevaCiudad';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
-    errorElement: <ErrorPage />,
+    element: <Raiz />,
+    errorElement: <PaginaError />,
     children: [
       {
         index: true,
-        element: <Navigate to="/fechas" />,
+        element: <Navigate to="/torneos" />,
       },
 
       {
@@ -55,13 +84,13 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <TournamentsPage />,
-            loader: tournamentsLoader,
+            element: <PaginaTorneos />,
+            loader: loaderTorneos,
           },
           {
-            path: ':tournamentTitle/:season',
-            element: <TournamentPage />,
-            loader: tournamentLoader,
+            path: ':slugTorneo',
+            element: <PaginaTorneo />,
+            loader: loaderTorneo,
           },
         ],
       },
@@ -71,13 +100,13 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <RoundsPage />,
-            loader: roundsLoader,
+            element: <PaginaFechas />,
+            loader: loaderFechas,
           },
           {
-            path: ':roundName/:tournamentTitle/:season',
-            element: <RoundPage />,
-            loader: roundLoader,
+            path: ':slugFecha',
+            element: <PaginaFecha />,
+            loader: loaderFecha,
           },
         ],
       },
@@ -87,13 +116,13 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <PlayersPage />,
-            loader: playersLoader,
+            element: <PaginaJugadores />,
+            loader: loaderJugadores,
           },
           /* {
-            path: ':playerName',
-            element: <PlayerPage />,
-            loader: playerLoader,
+            path: ':idJugador',
+            element: <PaginaJugador />,
+            loader: loaderJugador,
           }, */
         ],
       },
@@ -102,15 +131,15 @@ const router = createBrowserRouter([
 
   {
     path: '/admin',
-    element: <AdminRoot />,
+    element: <RaizAdmin />,
     children: [
       {
         index: true,
-        element: <AdminPage />,
+        element: <PaginaAdmin />,
       },
       {
         path: 'login',
-        element: <LoginPage />,
+        element: <PaginaLogin />,
       },
 
       {
@@ -118,20 +147,43 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <TournamentsAdminPage />,
-            loader: tournamentsLoader,
+            element: <PaginaTorneosAdmin />,
+            loader: loaderTorneosAdmin,
           },
           {
-            path: ':tournamentId',
-            element: <EditTournamentPage />,
-            loader: tournamentAdminLoader,
-            action: manipulateTournamentAction,
+            path: ':idTorneo',
+            element: <PaginaEditarTorneo />,
+            loader: loaderTorneoAdmin,
+            action: actionManipularTorneo,
           },
           {
             path: 'nuevo',
-            element: <NewTournamentPage />,
-            loader: tournamentAdminLoader,
-            action: manipulateTournamentAction,
+            element: <PaginaNuevoTorneo />,
+            loader: loaderTorneoAdmin,
+            action: actionManipularTorneo,
+          },
+        ],
+      },
+
+      {
+        path: 'fechas',
+        children: [
+          {
+            index: true,
+            element: <PaginaFechasAdmin />,
+            loader: loaderFechasAdmin,
+          },
+          {
+            path: ':idFecha',
+            element: <PaginaEditarFecha />,
+            loader: loaderFechaAdmin,
+            action: actionManipularFecha,
+          },
+          {
+            path: 'nuevo',
+            element: <PaginaNuevaFecha />,
+            loader: loaderFechaAdmin,
+            action: actionManipularFecha,
           },
         ],
       },
@@ -141,19 +193,66 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <PlayersAdminPage />,
-            loader: playersAdminLoader,
+            element: <PaginaJugadoresAdmin />,
+            loader: loaderJugadoresAdmin,
           },
           {
-            path: ':playerId',
-            element: <EditPlayerPage />,
-            loader: playerAdminLoader,
-            action: manipulatePlayerAction,
+            path: ':idJugador',
+            element: <PaginaEditarJugador />,
+            loader: loaderJugadorAdmin,
+            action: actionManipularJugador,
           },
           {
             path: 'nuevo',
-            element: <NewPlayerPage />,
-            action: manipulatePlayerAction,
+            element: <PaginaNuevoJugador />,
+            loader: loaderJugadorAdmin,
+            action: actionManipularJugador,
+          },
+        ],
+      },
+
+      {
+        path: 'clubes',
+        children: [
+          {
+            index: true,
+            element: <PaginaClubesAdmin />,
+            loader: loaderClubesAdmin,
+          },
+          {
+            path: ':idClub',
+            element: <PaginaEditarClub />,
+            loader: loaderClubAdmin,
+            action: actionManipularClub,
+          },
+          {
+            path: 'nuevo',
+            element: <PaginaNuevoClub />,
+            loader: loaderClubAdmin,
+            action: actionManipularClub,
+          },
+        ],
+      },
+
+      {
+        path: 'ciudades',
+        children: [
+          {
+            index: true,
+            element: <PaginaCiudadesAdmin />,
+            loader: loaderCiudadesAdmin,
+          },
+          {
+            path: ':idCiudad',
+            element: <PaginaEditarCiudad />,
+            loader: loaderCiudadAdmin,
+            action: actionManipularCiudad,
+          },
+          {
+            path: 'nuevo',
+            element: <PaginaNuevaCiudad />,
+            loader: loaderCiudadAdmin,
+            action: actionManipularCiudad,
           },
         ],
       },

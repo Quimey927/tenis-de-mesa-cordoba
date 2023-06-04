@@ -6,40 +6,61 @@ import Button from '../../UI/Button/Button';
 import classes from './Login.module.css';
 
 const Login = () => {
-  const [form, setForm] = useState({
-    username: '',
-    password: '',
+  const [valoresIngresados, setValoresIngresados] = useState({
+    usuario: '',
+    contraseña: '',
   });
 
   const navigate = useNavigate();
 
-  const handleChange = (evt) => {
-    setForm((prevForm) => {
-      const newForm = { ...prevForm, [evt.target.name]: evt.target.value };
-      return newForm;
+  const controladorCambio = (evt) => {
+    setValoresIngresados((valoresPrevios) => {
+      const nuevosValores = {
+        ...valoresPrevios,
+        [evt.target.name]: evt.target.value,
+      };
+      return nuevosValores;
     });
   };
 
-  const handleSubmit = async (evt) => {
+  const controladorSubmit = async (evt) => {
     evt.preventDefault();
 
-    if (form.password !== 'santi.lorenzo') {
-      alert('La contraseña es incorrecta');
+    if (
+      valoresIngresados.usuario.trim() === '' ||
+      valoresIngresados.contraseña.trim() === ''
+    ) {
+      alert('No dejés campos vacíos');
       return;
     }
 
+    if (
+      valoresIngresados.usuario !== 'Quimey' ||
+      valoresIngresados.contraseña !== 'santi.lorenzo'
+    ) {
+      alert('El usuario o la contraseña son incorrectos');
+      return;
+    }
+
+    localStorage.setItem('usuario', 'Quimey');
     localStorage.setItem('token', 'santi.lorenzo');
 
     navigate('/admin');
   };
 
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form className={classes.form} onSubmit={controladorSubmit}>
+      <Input
+        label="Usuario"
+        id="usuario"
+        autoFocus="true"
+        onChange={controladorCambio}
+      />
       <Input
         type="password"
         label="Contraseña"
-        id="password"
-        onChange={handleChange}
+        id="contraseña"
+        onChange={controladorCambio}
       />
       <Button type="submit">Ingresar</Button>
     </form>

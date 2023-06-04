@@ -1,40 +1,35 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faCaretDown, faBars } from '@fortawesome/free-solid-svg-icons';
 
 import classes from './AdminHeader.module.css';
 
 function AdminHeader() {
+  const controladorCambiarEstadoNav = () => {
+    const nav = document.querySelector('nav');
+    nav.classList.toggle('nav-encogido');
+  };
+
   return (
-    <header>
-      <nav className={classes.navbar}>
+    <header className={classes.header}>
+      <Link to={'/admin'} className={classes.brand}>
         <span>Admin Torneos Tenis de Mesa</span>
-        <div className={classes['nav-links']}>
-          <NavLink
-            to="/admin/torneos"
-            className={({ isActive }) =>
-              isActive ? classes.active : classes['not-active']
-            }
-          >
-            Torneos
-          </NavLink>
-          <NavLink
-            to="/admin/rondas"
-            className={({ isActive }) =>
-              isActive ? classes.active : classes['not-active']
-            }
-          >
-            Rondas
-          </NavLink>
-          <NavLink
-            to="/admin/jugadores"
-            className={({ isActive }) =>
-              isActive ? classes.active : classes['not-active']
-            }
-          >
-            Jugadores
-          </NavLink>
-        </div>
-        <span>Quimey</span>
-      </nav>
+      </Link>
+
+      <FontAwesomeIcon
+        className={classes.bars}
+        icon={faBars}
+        onClick={controladorCambiarEstadoNav}
+      />
+      <button className={classes.usuario}>
+        <FontAwesomeIcon className={classes.iconos} icon={faUser} size="sm" />{' '}
+        Quimey Mata{' '}
+        <FontAwesomeIcon
+          className={classes.iconos}
+          icon={faCaretDown}
+          size="sm"
+        />
+      </button>
     </header>
   );
 }

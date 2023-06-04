@@ -1,9 +1,0 @@
-.player-item {
-  padding: 1rem 3rem;
-  color: var(--color-white);
-  text-align: center;
-  border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: fit-content;
-  margin: 1rem auto;
-}

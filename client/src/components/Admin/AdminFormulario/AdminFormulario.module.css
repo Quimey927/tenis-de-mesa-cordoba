@@ -1,0 +1,88 @@
+.form {
+  margin-inline: auto;
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.form input {
+  color: #444;
+}
+
+.campo {
+  margin-bottom: 1rem;
+}
+
+.campo select {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  padding-left: 1rem;
+  border-radius: 3px;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #444;
+}
+
+.campo input[type='number'] {
+  width: 2.4rem;
+  padding-left: 0.3rem;
+}
+
+.form h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.campo textarea {
+  width: 100%;
+  padding: 1rem;
+  font: inherit;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  line-height: 1.6;
+  color: #444;
+}
+
+.acciones {
+  display: flex;
+  justify-content: space-around;
+  margin-block: 1rem;
+}
+
+.acciones .aceptar {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  color: #fff;
+  transition: background-color 300ms ease;
+}
+
+.acciones .aceptar:hover {
+  background-color: #2e6da4;
+}
+
+.acciones .cancelar {
+  color: #333;
+  background-color: #eee;
+  border: 1px solid #aaa;
+  transition: background-color 300ms ease;
+}
+
+.acciones .cancelar:hover {
+  background-color: #ccc;
+}
