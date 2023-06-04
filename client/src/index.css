@@ -40,6 +40,9 @@ img {
 
 main {
   flex-grow: 1;
+}
+
+.main-usuario {
   background: linear-gradient(
     135deg,
     var(--color-primary),

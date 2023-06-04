@@ -7,7 +7,7 @@ const RootLayout = () => {
   return (
     <>
       <Header />
-      <main>
+      <main className="main-usuario">
         <Outlet />
       </main>
       <Footer />
