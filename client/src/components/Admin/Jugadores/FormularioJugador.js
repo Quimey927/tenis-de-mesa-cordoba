@@ -10,7 +10,7 @@ const FormularioJugador = ({ method, jugador, clubes }) => {
       method={method}
       elemento={jugador}
       nombre_tabla="jugador"
-      columna_principal="apellido"
+      columna_principal="nombre_completo"
     >
       <Input
         id="nombre"
