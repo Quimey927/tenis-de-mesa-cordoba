@@ -14,3 +14,8 @@
 .ui-btn:hover {
   background-color: var(--color-primary);
 }
+
+.ui-btn:focus {
+  outline: 2px solid #333;
+  outline-offset: -4px;
+}
