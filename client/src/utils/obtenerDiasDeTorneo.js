@@ -8,9 +8,11 @@ export const obtenerDiasDeTorneo = (fechas) => {
         .substring(0, 10)
         .split('-')[2];
 
-      diasDeTorneo.push(+dia_inicio);
       if (dia_inicio !== dia_finalizacion) {
-        diasDeTorneo.push(+dia_finalizacion);
+        diasDeTorneo.push({ dia: +dia_inicio, border: 'i' }); // borde izquierdo solo en calendario
+        diasDeTorneo.push({ dia: +dia_finalizacion, border: 'd' }); // borde derecho solo en calendario
+      } else {
+        diasDeTorneo.push({ dia: +dia_inicio, border: 'a' }); // ambos bordes en calendario
       }
     });
   }

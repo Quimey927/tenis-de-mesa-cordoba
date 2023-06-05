@@ -17,25 +17,40 @@ const Calendario = ({ año, mes, setAño, setMes, diasDeTorneo }) => {
 
   const esMesActual = año === añoActual && mes === mesActual;
 
-  const cuerpoCalendario = arrayConDiasDelMes.map((dia) => (
-    <div
-      key={dia}
-      style={
-        diasDeTorneo.includes(dia)
-          ? {
-              backgroundColor: 'rgba(0,0,0,0.3)',
-            }
-          : {}
-      }
-      className={
-        dia === diaActual && esMesActual
-          ? `${classes['dia-numero']} ${classes['es-fecha-actual']}`
-          : classes['dia-numero']
-      }
-    >
-      {dia > 0 && dia}
-    </div>
-  ));
+  const cuerpoCalendario = arrayConDiasDelMes.map((dia) => {
+    const diaDeTorneo = diasDeTorneo.find(
+      (diaDeTorneo) => diaDeTorneo.dia === dia
+    );
+
+    return (
+      <div
+        key={dia}
+        style={
+          diasDeTorneo.find((diaDeTorneo) => diaDeTorneo.dia === dia)
+            ? {
+                backgroundColor: 'rgba(0,0,0,0.3)',
+                border: '1px solid #333',
+                borderLeftColor:
+                  diaDeTorneo && diaDeTorneo.border === 'd'
+                    ? 'transparent'
+                    : '#333',
+                borderRightColor:
+                  diaDeTorneo && diaDeTorneo.border === 'i'
+                    ? 'transparent'
+                    : '#333',
+              }
+            : {}
+        }
+        className={
+          dia === diaActual && esMesActual
+            ? `${classes['dia-numero']} ${classes['es-fecha-actual']}`
+            : classes['dia-numero']
+        }
+      >
+        {dia > 0 && dia}
+      </div>
+    );
+  });
 
   const controladorMesAnterior = () => {
     if (mes !== 0) {
