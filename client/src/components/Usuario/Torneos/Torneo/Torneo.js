@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import Button from '../../../UI/Button/Button';
 import classes from './Torneo.module.css';
 
 const Tournament = ({ torneo }) => {
@@ -17,9 +16,9 @@ const Tournament = ({ torneo }) => {
         <h3 className={classes['torneo__titulo']}>{titulo}</h3>
         <h4 className={classes['torneo__temporada']}> {temporada}</h4>
       </div>
-      <Button className={classes.btn}>
+      <div className={classes.btn}>
         <Link to={`/torneos/${slug}`}>Ver torneo</Link>
-      </Button>
+      </div>
     </li>
   );
 };

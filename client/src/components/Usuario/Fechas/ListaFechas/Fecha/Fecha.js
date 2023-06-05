@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
-import Button from '../../../../UI/Button/Button';
 import { meses } from '../../../../../utils/meses';
 import classes from './Fecha.module.css';
 
@@ -45,9 +44,9 @@ const Fecha = ({ fecha }) => {
         <div className={classes['descripcion']}>
           <p className={classes['descripcion__torneo']}>{titulo_torneo}</p>
           <p className={classes['descripcion__nombre']}>{nombre_fecha}</p>
-          <Button className={classes.btn}>
+          <div className={classes.btn}>
             <Link to={`/fechas/${slug}`}>Ver fecha</Link>
-          </Button>
+          </div>
         </div>
       </div>
       <div className={classes.lugar}>
