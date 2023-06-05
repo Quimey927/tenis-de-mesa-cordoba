@@ -1,11 +1,17 @@
 import classes from './Fecha.module.css';
 
 const Fecha = ({ fecha }) => {
-  const { nombre } = fecha;
+  const { nombre, torneo, temporada, fecha_inicio, fecha_finalizacion, lugar } =
+    fecha[0];
 
   return (
     <div className={classes.fecha}>
       <p>{nombre}</p>
+      <p>{torneo}</p>
+      <p>{temporada}</p>
+      <p>{fecha_inicio}</p>
+      <p>{fecha_finalizacion}</p>
+      <p>{lugar}</p>
     </div>
   );
 };
