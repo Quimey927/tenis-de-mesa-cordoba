@@ -1,15 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const {
+import express from 'express';
+
+import {
   obtenerClubes,
   crearClub,
   obtenerClub,
   editarClub,
   borrarClub,
-} = require('../controladores/clubes');
+} from '../controladores/clubes.js';
+
+const router = express.Router();
 
 router.route('/').get(obtenerClubes).post(crearClub);
 
 router.route('/:idClub').get(obtenerClub).put(editarClub).delete(borrarClub);
 
-module.exports = router;
+export default router;

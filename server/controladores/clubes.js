@@ -1,7 +1,7 @@
-const pool = require('../db/db');
-const consultasClubes = require('../db/consultas/clubes');
+import pool from '../db/db.js';
+import consultasClubes from '../db/consultas/clubes.js';
 
-module.exports.obtenerClubes = async (req, res) => {
+export const obtenerClubes = async (req, res) => {
   try {
     pool.query(consultasClubes.obtenerClubes, (err, results) => {
       if (err) throw new Error('No pudimos cargar los clubes.');
@@ -12,7 +12,7 @@ module.exports.obtenerClubes = async (req, res) => {
   }
 };
 
-module.exports.crearClub = async (req, res) => {
+export const crearClub = async (req, res) => {
   const { nombre, direccion, id_ciudad, escudo_club } = req.body;
 
   try {
@@ -29,7 +29,7 @@ module.exports.crearClub = async (req, res) => {
   }
 };
 
-module.exports.obtenerClub = async (req, res) => {
+export const obtenerClub = async (req, res) => {
   const id = parseInt(req.params.idClub);
 
   try {
@@ -42,7 +42,7 @@ module.exports.obtenerClub = async (req, res) => {
   }
 };
 
-module.exports.editarClub = async (req, res) => {
+export const editarClub = async (req, res) => {
   const id = parseInt(req.params.idClub);
   const { nombre, direccion, id_ciudad, escudo_club } = req.body;
 
@@ -76,7 +76,7 @@ module.exports.editarClub = async (req, res) => {
   }
 };
 
-module.exports.borrarClub = async (req, res) => {
+export const borrarClub = async (req, res) => {
   const id = parseInt(req.params.idClub);
 
   try {

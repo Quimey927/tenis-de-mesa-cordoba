@@ -1,7 +1,7 @@
-const pool = require('../db/db');
-const consultasTorneos = require('../db/consultas/torneos');
+import pool from '../db/db.js';
+import consultasTorneos from '../db/consultas/torneos.js';
 
-module.exports.obtenerTorneos = async (req, res) => {
+export const obtenerTorneos = async (req, res) => {
   try {
     pool.query(consultasTorneos.obtenerTorneos, (err, results) => {
       if (err) throw new Error('No pudimos cargar los torneos.');
@@ -12,7 +12,7 @@ module.exports.obtenerTorneos = async (req, res) => {
   }
 };
 
-module.exports.crearTorneo = async (req, res) => {
+export const crearTorneo = async (req, res) => {
   const {
     titulo,
     temporada,
@@ -51,7 +51,7 @@ module.exports.crearTorneo = async (req, res) => {
   }
 };
 
-module.exports.obtenerTorneo = async (req, res) => {
+export const obtenerTorneo = async (req, res) => {
   const id = parseInt(req.params.idTorneo);
 
   try {
@@ -64,7 +64,7 @@ module.exports.obtenerTorneo = async (req, res) => {
   }
 };
 
-module.exports.obtenerTorneoPorSlug = async (req, res) => {
+export const obtenerTorneoPorSlug = async (req, res) => {
   const { slugTorneo } = req.params;
 
   try {
@@ -81,7 +81,7 @@ module.exports.obtenerTorneoPorSlug = async (req, res) => {
   }
 };
 
-module.exports.editarTorneo = async (req, res) => {
+export const editarTorneo = async (req, res) => {
   const id = parseInt(req.params.idTorneo);
   const {
     titulo,
@@ -132,7 +132,7 @@ module.exports.editarTorneo = async (req, res) => {
   }
 };
 
-module.exports.borrarTorneo = async (req, res) => {
+export const borrarTorneo = async (req, res) => {
   const id = parseInt(req.params.idTorneo);
 
   try {

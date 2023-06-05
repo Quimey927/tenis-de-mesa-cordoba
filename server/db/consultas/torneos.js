@@ -12,7 +12,7 @@ const editarTorneo =
 
 const borrarTorneo = 'DELETE FROM torneos WHERE id = $1';
 
-module.exports = {
+export default {
   obtenerTorneos,
   crearTorneo,
   obtenerTorneo,

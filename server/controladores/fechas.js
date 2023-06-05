@@ -1,7 +1,7 @@
-const pool = require('../db/db');
-const consultasFechas = require('../db/consultas/fechas');
+import pool from '../db/db.js';
+import consultasFechas from '../db/consultas/fechas.js';
 
-module.exports.obtenerFechas = async (req, res) => {
+export const obtenerFechas = async (req, res) => {
   try {
     pool.query(consultasFechas.obtenerFechas, (err, results) => {
       if (err) throw new Error('No pudimos cargar las fechas.');
@@ -12,7 +12,7 @@ module.exports.obtenerFechas = async (req, res) => {
   }
 };
 
-module.exports.obtenerFechasDelMes = async (req, res) => {
+export const obtenerFechasDelMes = async (req, res) => {
   const { mes, año } = req.query;
 
   const fecha_limite_inicial = `${año}-${mes}-01`;
@@ -36,7 +36,7 @@ module.exports.obtenerFechasDelMes = async (req, res) => {
   }
 };
 
-module.exports.crearFecha = async (req, res) => {
+export const crearFecha = async (req, res) => {
   const {
     nombre,
     num_fecha,
@@ -69,7 +69,7 @@ module.exports.crearFecha = async (req, res) => {
   }
 };
 
-module.exports.obtenerFecha = async (req, res) => {
+export const obtenerFecha = async (req, res) => {
   const id = parseInt(req.params.idFecha);
 
   try {
@@ -82,7 +82,7 @@ module.exports.obtenerFecha = async (req, res) => {
   }
 };
 
-module.exports.obtenerFechaPorSlug = async (req, res) => {
+export const obtenerFechaPorSlug = async (req, res) => {
   const { slugFecha } = req.params;
 
   try {
@@ -99,7 +99,7 @@ module.exports.obtenerFechaPorSlug = async (req, res) => {
   }
 };
 
-module.exports.editarFecha = async (req, res) => {
+export const editarFecha = async (req, res) => {
   const id = parseInt(req.params.idFecha);
   const { nombre, id_club, fecha_inicio, fecha_finalizacion, slug } = req.body;
 
@@ -127,7 +127,7 @@ module.exports.editarFecha = async (req, res) => {
   }
 };
 
-module.exports.borrarFecha = async (req, res) => {
+export const borrarFecha = async (req, res) => {
   const id = parseInt(req.params.idFecha);
 
   try {

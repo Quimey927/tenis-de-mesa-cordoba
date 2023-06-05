@@ -1,13 +1,14 @@
-const express = require('express');
-const app = express();
-const cors = require('cors');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import 'dotenv/config';
 
-const rutasTorneos = require('./rutas/torneos');
-const rutasFechas = require('./rutas/fechas');
-const rutasJugadores = require('./rutas/jugadores');
-const rutasClubes = require('./rutas/clubes');
-const rutasCiudades = require('./rutas/ciudades');
+const app = express();
+
+import rutasTorneos from './rutas/torneos.js';
+import rutasFechas from './rutas/fechas.js';
+import rutasJugadores from './rutas/jugadores.js';
+import rutasClubes from './rutas/clubes.js';
+import rutasCiudades from './rutas/ciudades.js';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

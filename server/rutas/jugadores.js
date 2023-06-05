@@ -1,12 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const {
+import express from 'express';
+
+import {
   obtenerJugadores,
   crearJugador,
   obtenerJugador,
   editarJugador,
   borrarJugador,
-} = require('../controladores/jugadores');
+} from '../controladores/jugadores.js';
+
+const router = express.Router();
 
 router.route('/').get(obtenerJugadores).post(crearJugador);
 
@@ -16,4 +18,4 @@ router
   .put(editarJugador)
   .delete(borrarJugador);
 
-module.exports = router;
+export default router;

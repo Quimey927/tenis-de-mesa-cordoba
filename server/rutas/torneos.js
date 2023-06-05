@@ -1,13 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const {
+import express from 'express';
+
+import {
   obtenerTorneos,
   crearTorneo,
   obtenerTorneo,
   obtenerTorneoPorSlug,
   editarTorneo,
   borrarTorneo,
-} = require('../controladores/torneos');
+} from '../controladores/torneos.js';
+
+const router = express.Router();
 
 router.route('/').get(obtenerTorneos).post(crearTorneo);
 
@@ -19,4 +21,4 @@ router
   .put(editarTorneo)
   .delete(borrarTorneo);
 
-module.exports = router;
+export default router;

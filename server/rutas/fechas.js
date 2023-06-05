@@ -1,7 +1,6 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
 
-const {
+import {
   obtenerFechas,
   crearFecha,
   obtenerFecha,
@@ -9,7 +8,9 @@ const {
   editarFecha,
   borrarFecha,
   obtenerFechasDelMes,
-} = require('../controladores/fechas');
+} from '../controladores/fechas.js';
+
+const router = express.Router();
 
 router.route('/').get(obtenerFechas).post(crearFecha);
 
@@ -22,4 +23,4 @@ router
   .put(editarFecha)
   .delete(borrarFecha);
 
-module.exports = router;
+export default router;

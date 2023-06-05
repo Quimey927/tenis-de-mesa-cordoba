@@ -12,7 +12,7 @@ const editarJugador =
 
 const borrarJugador = 'DELETE FROM jugadores WHERE id = $1';
 
-module.exports = {
+export default {
   obtenerJugadores,
   crearJugador,
   obtenerJugador,

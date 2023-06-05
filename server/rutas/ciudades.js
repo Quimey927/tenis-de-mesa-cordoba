@@ -1,12 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const {
+import express from 'express';
+
+import {
   obtenerCiudades,
   crearCiudad,
   obtenerCiudad,
   editarCiudad,
   borrarCiudad,
-} = require('../controladores/ciudades');
+} from '../controladores/ciudades.js';
+
+const router = express.Router();
 
 router.route('/').get(obtenerCiudades).post(crearCiudad);
 
@@ -16,4 +18,4 @@ router
   .put(editarCiudad)
   .delete(borrarCiudad);
 
-module.exports = router;
+export default router;

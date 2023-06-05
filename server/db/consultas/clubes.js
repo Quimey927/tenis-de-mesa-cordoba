@@ -10,7 +10,7 @@ const editarClub =
 
 const borrarClub = 'DELETE FROM clubes WHERE id = $1';
 
-module.exports = {
+export default {
   obtenerClubes,
   crearClub,
   obtenerClub,

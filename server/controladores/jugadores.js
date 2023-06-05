@@ -1,7 +1,7 @@
-const pool = require('../db/db');
-const consultasJugadores = require('../db/consultas/jugadores');
+import pool from '../db/db.js';
+import consultasJugadores from '../db/consultas/jugadores.js';
 
-module.exports.obtenerJugadores = async (req, res) => {
+export const obtenerJugadores = async (req, res) => {
   try {
     pool.query(consultasJugadores.obtenerJugadores, (err, results) => {
       if (err) throw new Error('No pudimos cargar los jugadores.');
@@ -12,7 +12,7 @@ module.exports.obtenerJugadores = async (req, res) => {
   }
 };
 
-module.exports.crearJugador = async (req, res) => {
+export const crearJugador = async (req, res) => {
   const {
     nombre,
     segundo_nombre,
@@ -51,7 +51,7 @@ module.exports.crearJugador = async (req, res) => {
   }
 };
 
-module.exports.obtenerJugador = async (req, res) => {
+export const obtenerJugador = async (req, res) => {
   const id = parseInt(req.params.idJugador);
 
   try {
@@ -64,7 +64,7 @@ module.exports.obtenerJugador = async (req, res) => {
   }
 };
 
-module.exports.editarJugador = async (req, res) => {
+export const editarJugador = async (req, res) => {
   const id = parseInt(req.params.idJugador);
   const {
     nombre,
@@ -115,7 +115,7 @@ module.exports.editarJugador = async (req, res) => {
   }
 };
 
-module.exports.borrarJugador = async (req, res) => {
+export const borrarJugador = async (req, res) => {
   const id = parseInt(req.params.idJugador);
 
   try {

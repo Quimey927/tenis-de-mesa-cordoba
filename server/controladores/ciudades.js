@@ -1,7 +1,7 @@
-const pool = require('../db/db');
-const consultasCiudades = require('../db/consultas/ciudades');
+import pool from '../db/db.js';
+import consultasCiudades from '../db/consultas/ciudades.js';
 
-module.exports.obtenerCiudades = async (req, res) => {
+export const obtenerCiudades = async (req, res) => {
   try {
     pool.query(consultasCiudades.obtenerCiudades, (err, results) => {
       if (err) throw new Error('No pudimos cargar las ciudades.');
@@ -12,7 +12,7 @@ module.exports.obtenerCiudades = async (req, res) => {
   }
 };
 
-module.exports.crearCiudad = async (req, res) => {
+export const crearCiudad = async (req, res) => {
   const { nombre } = req.body;
 
   try {
@@ -25,7 +25,7 @@ module.exports.crearCiudad = async (req, res) => {
   }
 };
 
-module.exports.obtenerCiudad = async (req, res) => {
+export const obtenerCiudad = async (req, res) => {
   const id = parseInt(req.params.idCiudad);
 
   try {
@@ -38,7 +38,7 @@ module.exports.obtenerCiudad = async (req, res) => {
   }
 };
 
-module.exports.editarCiudad = async (req, res) => {
+export const editarCiudad = async (req, res) => {
   const id = parseInt(req.params.idCiudad);
   const { nombre } = req.body;
 
@@ -66,7 +66,7 @@ module.exports.editarCiudad = async (req, res) => {
   }
 };
 
-module.exports.borrarCiudad = async (req, res) => {
+export const borrarCiudad = async (req, res) => {
   const id = parseInt(req.params.idCiudad);
 
   try {

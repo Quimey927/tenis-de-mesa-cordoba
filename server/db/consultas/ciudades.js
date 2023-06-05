@@ -8,7 +8,7 @@ const editarCiudad = 'UPDATE ciudades SET nombre = $1 WHERE id = $2';
 
 const borrarCiudad = 'DELETE FROM ciudades WHERE id = $1';
 
-module.exports = {
+export default {
   obtenerCiudades,
   crearCiudad,
   obtenerCiudad,
