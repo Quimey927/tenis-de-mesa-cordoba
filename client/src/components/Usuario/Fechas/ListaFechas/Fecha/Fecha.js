@@ -18,8 +18,8 @@ const Fecha = ({ fecha }) => {
     slug,
   } = fecha;
 
-  const [, mes, diaInicio] = fecha_inicio.split('-');
-  const [, , diaFin] = fecha_finalizacion.split('-');
+  const [, mes, diaInicio] = fecha_inicio.substring(0, 10).split('-');
+  const [, , diaFin] = fecha_finalizacion.substring(0, 10).split('-');
 
   const diasFecha =
     diaFin !== diaInicio ? (
@@ -31,7 +31,7 @@ const Fecha = ({ fecha }) => {
     );
 
   return (
-    <div
+    <li
       className={classes['fecha']}
       style={{
         backgroundImage: `${imagen_torneo}`,
@@ -60,7 +60,7 @@ const Fecha = ({ fecha }) => {
           className={classes['lugar__icono']}
         />
       </div>
-    </div>
+    </li>
   );
 };
 
