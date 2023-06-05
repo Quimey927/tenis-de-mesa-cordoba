@@ -18,7 +18,9 @@ module.exports.obtenerFechasDelMes = async (req, res) => {
   const fecha_limite_inicial = `${año}-${mes}-01`;
 
   const fecha_limite_final =
-    mes !== 12 ? `${año}-${+mes + 1}-01` : `${año}-${mes}-31`;
+    mes !== '12'
+      ? `${año}-${(+mes + 1).toString().padStart(2, '0')}-01`
+      : `${año}-${mes.toString().padStart(2, '0')}-31`;
 
   try {
     pool.query(
