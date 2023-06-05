@@ -10,7 +10,7 @@ const crearFecha =
 const obtenerFecha = 'SELECT * FROM fechas WHERE id = $1';
 
 const obtenerFechaPorSlug =
-  'SELECT f.nombre AS nombre,  f.fecha_inicio AS fecha_inicio, f.fecha_finalizacion AS fecha_finalizacion, t.titulo AS torneo, t.temporada AS temporada, c.nombre AS lugar FROM fechas AS f INNER JOIN torneos AS t ON t.id = f.id_torneo INNER JOIN clubes AS c ON c.id = f.id_club WHERE f.slug = $1';
+  'SELECT f.nombre AS nombre,  f.fecha_inicio AS fecha_inicio, f.fecha_finalizacion AS fecha_finalizacion, t.titulo AS torneo, t.temporada AS temporada, t.imagen_torneo AS imagen_torneo, c.nombre AS lugar FROM fechas AS f INNER JOIN torneos AS t ON t.id = f.id_torneo INNER JOIN clubes AS c ON c.id = f.id_club WHERE f.slug = $1';
 
 const editarFecha =
   'UPDATE fechas SET nombre = $1, id_club = $2, fecha_inicio = $3, fecha_finalizacion = $4, slug = $5 WHERE id = $6';
