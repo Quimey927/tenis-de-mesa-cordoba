@@ -36,6 +36,7 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
         id="nombre"
         required="true"
         label="Nombre*"
+        disabled={method !== 'POST'}
         defaultValue={fecha ? fecha[0].nombre : ''}
       />
 
