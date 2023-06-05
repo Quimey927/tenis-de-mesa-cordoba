@@ -91,3 +91,23 @@
 .acciones .cancelar:hover {
   background-color: #ccc;
 }
+
+.form input,
+.campo select,
+.campo input,
+.campo textarea {
+  transition: box-shadow 200ms ease;
+}
+
+.form input:focus,
+.form input:active,
+.campo select:focus,
+.campo select:active,
+.campo input:focus,
+.campo input:active,
+.campo textarea:focus,
+.campo textarea:active {
+  outline: none;
+  box-shadow: 0 0 15px -2px #cc201a79;
+  background-color: #cc201a0c;
+}

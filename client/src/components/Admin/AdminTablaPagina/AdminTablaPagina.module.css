@@ -16,6 +16,14 @@
   padding: 0.3rem;
   border: 1px solid #ccc;
   border-radius: 3px;
+  transition: box-shadow 200ms ease;
+}
+
+.buscar input:focus,
+.buscar input:active {
+  outline: none;
+  box-shadow: 0 0 15px -2px #cc201a79;
+  background-color: #cc201a0c;
 }
 
 .buscar label {
