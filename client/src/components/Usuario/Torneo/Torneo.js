@@ -1,7 +1,7 @@
 import classes from './Torneo.module.css';
 
 const Torneo = ({ torneo }) => {
-  const { titulo, temporada } = torneo;
+  const { titulo, temporada } = torneo[0];
 
   return (
     <div className={classes.torneo}>
