@@ -47,7 +47,7 @@ export const editarClub = async (id, datosClub) => {
     throw json({ message: 'No pudimos editar el club.' }, { status: 500 });
   }
 
-  return redirect('/admin/Clubes');
+  return redirect('/admin/clubes');
 };
 
 export const borrarClub = async (id) => {
