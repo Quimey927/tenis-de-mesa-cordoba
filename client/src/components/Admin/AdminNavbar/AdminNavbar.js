@@ -3,7 +3,10 @@ import classes from './AdminNavbar.module.css';
 
 const AdminNavbar = ({ navEncogido }) => {
   return (
-    <nav className={`${classes.navbar} ${navEncogido ? 'nav-encogido' : ''}`}>
+    <nav
+      id="admin-navbar"
+      className={`${classes.navbar} ${navEncogido ? 'nav-encogido' : ''}`}
+    >
       <NavLinkCustomizado
         to=""
         textoInterno="Inicio"

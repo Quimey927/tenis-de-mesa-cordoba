@@ -6,7 +6,7 @@ import classes from './AdminHeader.module.css';
 
 function AdminHeader() {
   const controladorCambiarEstadoNav = () => {
-    const nav = document.querySelector('nav');
+    const nav = document.getElementById('admin-navbar');
     nav.classList.toggle('nav-encogido');
   };
 
