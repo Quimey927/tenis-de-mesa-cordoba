@@ -9,16 +9,19 @@ const AdminTablaPagina = ({
   array,
   controladorBorrarElemento,
   encabezadosColumnas,
+  mostrarCantidadEntradasYFiltro,
 }) => {
   return (
     <div className={classes['admin-tabla-pagina']}>
-      <div className={classes.entradas}>
-        <span>Cantidad de entradas: {array.length}</span>
-        <div className={classes.buscar}>
-          <input id="search" />
-          <label htmlFor="search">Buscar</label>
+      {mostrarCantidadEntradasYFiltro && (
+        <div className={classes.entradas}>
+          <span>Cantidad de entradas: {array.length}</span>
+          <div className={classes.buscar}>
+            <input id="search" />
+            <label htmlFor="search">Buscar</label>
+          </div>
         </div>
-      </div>
+      )}
       <table className={classes.tabla} role="table" border="1">
         <thead>
           <tr role="row">

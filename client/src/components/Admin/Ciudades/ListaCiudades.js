@@ -29,6 +29,7 @@ const ListaCiudades = ({ ciudades }) => {
         array={ciudades}
         controladorBorrarElemento={controladorBorrarCiudad}
         encabezadosColumnas={['nombre']}
+        mostrarCantidadEntradasYFiltro={true}
       />
     </>
   );
