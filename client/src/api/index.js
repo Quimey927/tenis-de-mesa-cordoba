@@ -40,3 +40,11 @@ export {
   editarCiudad,
   borrarCiudad,
 } from './ciudades';
+
+export {
+  obtenerCategoriasTorneo,
+  crearCategoriaTorneo,
+  obtenerCategoriaTorneo,
+  editarCategoriaTorneo,
+  borrarCategoriaTorneo,
+} from './categoriasTorneos';
