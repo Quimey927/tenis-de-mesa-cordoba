@@ -53,11 +53,17 @@ const FormularioTorneo = ({ method, torneo, torneos }) => {
             : ''
         }
       />
-      <Input
-        id="descripcion"
-        label="Descripción"
-        defaultValue={torneo ? torneo[0].descripcion : ''}
-      />
+
+      <div className={classes.campo}>
+        <label htmlFor="descripcion">Descripción*</label>
+        <textarea
+          id="descripcion"
+          name="descripcion"
+          label="Descripcion"
+          rows="4"
+          defaultValue={torneo ? torneo[0].descripcion : ''}
+        ></textarea>
+      </div>
 
       <div className={classes.campo}>
         <label htmlFor="id_edicion_previa">Edición anterior</label>

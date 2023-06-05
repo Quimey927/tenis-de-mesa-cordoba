@@ -10,10 +10,6 @@ const {
 
 router.route('/').get(obtenerClubes).post(crearClub);
 
-router
-  .route('/:nombreClub')
-  .get(obtenerClub)
-  .put(editarClub)
-  .delete(borrarClub);
+router.route('/:idClub').get(obtenerClub).put(editarClub).delete(borrarClub);
 
 module.exports = router;

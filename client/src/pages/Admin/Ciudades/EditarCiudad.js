@@ -12,7 +12,9 @@ const PaginaEditarCiudad = () => {
 export default PaginaEditarCiudad;
 
 export async function loader({ params }) {
-  const { nombreCiudad } = params;
+  const { idCiudad } = params;
 
-  return obtenerCiudad(nombreCiudad);
+  return {
+    ciudad: idCiudad ? await obtenerCiudad(idCiudad) : undefined,
+  };
 }

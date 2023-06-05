@@ -18,11 +18,12 @@ module.exports.crearJugador = async (req, res) => {
     segundo_nombre,
     apellido,
     segundo_apellido,
-    cumpleaños,
+    fecha_nacimiento,
     email,
-    nombre_club,
-    es_federado,
+    foto_perfil,
+    id_club,
     categoria_fecoteme,
+    slug,
   } = req.body;
 
   try {
@@ -33,12 +34,12 @@ module.exports.crearJugador = async (req, res) => {
         segundo_nombre !== '' ? segundo_nombre : null,
         apellido,
         segundo_apellido !== '' ? segundo_apellido : null,
-        cumpleaños !== '' ? cumpleaños : null,
+        fecha_nacimiento !== '' ? fecha_nacimiento : null,
         email !== '' ? email : null,
         foto_perfil !== '' ? foto_perfil : null,
-        nombre_club !== '' ? nombre_club : null,
-        es_federado !== '' ? es_federado : null,
+        id_club !== '' ? id_club : null,
         categoria_fecoteme !== '' ? categoria_fecoteme : null,
+        slug,
       ],
       (err, results) => {
         if (err) throw new Error('No pudimos crear el jugador.');
@@ -70,11 +71,12 @@ module.exports.editarJugador = async (req, res) => {
     segundo_nombre,
     apellido,
     segundo_apellido,
-    cumpleaños,
+    fecha_nacimiento,
     email,
-    nombre_club,
-    es_federado,
+    foto_perfil,
+    id_club,
     categoria_fecoteme,
+    slug,
   } = req.body;
 
   try {
@@ -94,12 +96,12 @@ module.exports.editarJugador = async (req, res) => {
           segundo_nombre !== '' ? segundo_nombre : null,
           apellido,
           segundo_apellido !== '' ? segundo_apellido : null,
-          cumpleaños !== '' ? cumpleaños : null,
+          fecha_nacimiento !== '' ? fecha_nacimiento : null,
           email !== '' ? email : null,
           foto_perfil !== '' ? foto_perfil : null,
-          nombre_club !== '' ? nombre_club : null,
-          es_federado !== '' ? es_federado : null,
+          id_club !== '' ? id_club : null,
           categoria_fecoteme !== '' ? categoria_fecoteme : null,
+          slug,
           id,
         ],
         (err, results) => {

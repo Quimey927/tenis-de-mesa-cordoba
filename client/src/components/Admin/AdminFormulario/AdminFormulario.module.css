@@ -1,6 +1,6 @@
 .form {
   margin-inline: auto;
-  margin-top: 2rem;
+  margin-block: 2rem;
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -36,6 +36,11 @@
   border: 1px solid #ccc;
   background-color: white;
   color: #444;
+  cursor: pointer;
+}
+
+.campo select:disabled {
+  cursor: not-allowed;
 }
 
 .campo input[type='number'] {

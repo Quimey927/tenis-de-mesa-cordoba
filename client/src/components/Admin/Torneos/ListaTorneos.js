@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import AdminTablaPagina from '../AdminTablaPagina/AdminTablaPagina';
-import { borrarJugador } from '../../../api';
+import { borrarTorneo } from '../../../api';
 
 const ListaTorneos = ({ torneos }) => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const ListaTorneos = ({ torneos }) => {
     );
 
     if (confirmar) {
-      borrarJugador(id);
+      borrarTorneo(id);
       navigate('/admin/torneos');
     }
   };

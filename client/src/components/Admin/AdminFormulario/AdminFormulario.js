@@ -38,20 +38,20 @@ const AdminFormulario = ({
             className={classes.cancelar}
             onClick={controladorCancelar}
             disabled={isSubmitting}
-            textoInterno="Cerrar"
-          />
+          >
+            Cerrar
+          </Button>
           <Button
             className={classes.aceptar}
             type="submit"
             disabled={isSubmitting}
-            textoInterno={
-              isSubmitting
-                ? 'Subiendo...'
-                : method === 'POST'
-                ? 'Agregar'
-                : 'Guardar'
-            }
-          />
+          >
+            {isSubmitting
+              ? 'Subiendo...'
+              : method === 'POST'
+              ? 'Agregar'
+              : 'Guardar'}
+          </Button>
         </div>
       </Form>
     </>

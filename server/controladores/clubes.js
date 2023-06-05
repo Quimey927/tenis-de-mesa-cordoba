@@ -13,17 +13,12 @@ module.exports.obtenerClubes = async (req, res) => {
 };
 
 module.exports.crearClub = async (req, res) => {
-  const { nombre, direccion, nombre_ciudad, escudo_club } = req.body;
+  const { nombre, direccion, id_ciudad, escudo_club } = req.body;
 
   try {
     pool.query(
       consultasClubes.crearClub,
-      [
-        nombre,
-        direccion,
-        nombre_ciudad,
-        escudo_club !== '' ? escudo_club : null,
-      ],
+      [nombre, direccion, id_ciudad, escudo_club !== '' ? escudo_club : null],
       (err, results) => {
         if (err) throw new Error('No pudimos crear el club.');
         res.status(201).send('Club creado exitosamente.');
@@ -35,10 +30,10 @@ module.exports.crearClub = async (req, res) => {
 };
 
 module.exports.obtenerClub = async (req, res) => {
-  const { nombreClub } = req.params;
+  const id = parseInt(req.params.idClub);
 
   try {
-    pool.query(consultasClubes.obtenerClub, [nombreClub], (err, results) => {
+    pool.query(consultasClubes.obtenerClub, [id], (err, results) => {
       if (err) throw new Error('No pudimos encontrar el club.');
       res.status(200).json(results.rows);
     });
@@ -48,11 +43,11 @@ module.exports.obtenerClub = async (req, res) => {
 };
 
 module.exports.editarClub = async (req, res) => {
-  const { nombreClub } = req.params;
-  const { nombre, direccion, nombre_ciudad, escudo_club } = req.body;
+  const id = parseInt(req.params.idClub);
+  const { nombre, direccion, id_ciudad, escudo_club } = req.body;
 
   try {
-    pool.query(consultasClubes.obtenerClub, [nombreClub], (err, results) => {
+    pool.query(consultasClubes.obtenerClub, [id], (err, results) => {
       if (err) throw new Error('No pudimos buscar el club');
 
       const clubNoEncontrado = !results.rows.length;
@@ -66,9 +61,9 @@ module.exports.editarClub = async (req, res) => {
         [
           nombre,
           direccion,
-          nombre_ciudad,
+          id_ciudad,
           escudo_club !== '' ? escudo_club : null,
-          nombreClub,
+          id,
         ],
         (err, results) => {
           if (err) throw new Error('No pudimos editar el club.');
@@ -82,10 +77,10 @@ module.exports.editarClub = async (req, res) => {
 };
 
 module.exports.borrarClub = async (req, res) => {
-  const { nombreClub } = req.params;
+  const id = parseInt(req.params.idClub);
 
   try {
-    pool.query(consultasClubes.obtenerClub, [nombreClub], (err, results) => {
+    pool.query(consultasClubes.obtenerClub, [id], (err, results) => {
       if (err) throw new Error('No pudimos buscar el club');
 
       const clubNoEncontrado = !results.rows.length;
@@ -94,7 +89,7 @@ module.exports.borrarClub = async (req, res) => {
         res.send('El club no existe en la base de datos');
       }
 
-      pool.query(consultasClubes.borrarClub, [nombre], (err, results) => {
+      pool.query(consultasClubes.borrarClub, [id], (err, results) => {
         if (err) throw new Error('No pudimos eliminar el club.');
         res.status(200).send('Club eliminado correctamente.');
       });

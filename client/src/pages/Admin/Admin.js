@@ -1,5 +1,11 @@
+import classes from './Admin.module.css';
+
 const AdminPage = () => {
-  return <h1 className="text-center">Bienvenido, Quimey</h1>;
+  return (
+    <div className={classes.header}>
+      <h1>Bienvenido, Quimey</h1>
+    </div>
+  );
 };
 
 export default AdminPage;

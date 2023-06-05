@@ -12,8 +12,15 @@
   width: 100%;
   padding: 0.4rem;
   padding-left: 1rem;
-  border: 1px solid teal;
   border-radius: 3px;
   line-height: 1.6;
   font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #444;
+}
+
+.input input:disabled {
+  cursor: not-allowed;
 }

@@ -1,6 +1,5 @@
 .ui-btn {
   background-color: var(--color-primary-darker);
-  box-shadow: -3px 3px 4px black;
   font-weight: 700;
   color: var(--color-black);
   border: none;

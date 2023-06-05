@@ -74,7 +74,7 @@ export const editarFecha = async (id, datosFecha) => {
     throw json({ message: 'No pudimos editar la fecha.' }, { status: 500 });
   }
 
-  return redirect('/admin/torneos');
+  return redirect('/admin/fechas');
 };
 
 export const borrarFecha = async (id) => {

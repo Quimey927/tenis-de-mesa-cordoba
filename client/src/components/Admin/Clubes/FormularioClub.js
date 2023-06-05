@@ -14,29 +14,32 @@ const FormularioClub = ({ method, club, ciudades }) => {
       <Input
         id="nombre"
         required="true"
-        label="Nombre"
+        label="Nombre*"
         defaultValue={club ? club[0].nombre : ''}
       />
+
       <Input
         id="direccion"
         required="true"
-        label="Dirección"
+        label="Dirección*"
         defaultValue={club ? club[0].direccion : ''}
       />
+
       <div className={classes.campo}>
-        <label htmlFor="nombre_ciudad">Ciudad*</label>
+        <label htmlFor="id_ciudad">Ciudad*</label>
         <select
-          id="nombre_ciudad"
-          name="nombre_ciudad"
-          defaultValue={club ? club[0].nombre_ciudad : 'Córdoba'}
+          id="id_ciudad"
+          name="id_ciudad"
+          defaultValue={club ? club[0].id_ciudad : 'Córdoba'}
         >
           {ciudades.map((ciudad) => (
-            <option key={ciudad.nombre} value={ciudad.nombre}>
+            <option key={ciudad.id} value={ciudad.id}>
               {ciudad.nombre}
             </option>
           ))}
         </select>
       </div>
+
       <Input
         id="escudo_club"
         label="Escudo Club"
@@ -55,7 +58,7 @@ export async function action({ request, params }) {
   const datosClub = {
     nombre: data.get('nombre'),
     direccion: data.get('direccion'),
-    nombre_ciudad: data.get('nombre_ciudad'),
+    id_ciudad: data.get('id_ciudad'),
     escudo_club: data.get('escudo_club'),
   };
 
@@ -63,5 +66,5 @@ export async function action({ request, params }) {
     return crearClub(datosClub);
   }
 
-  return editarClub(params.nombreClub, datosClub);
+  return editarClub(params.idClub, datosClub);
 }

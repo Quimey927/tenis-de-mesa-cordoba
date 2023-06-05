@@ -12,10 +12,10 @@ const PaginaEditarClub = () => {
 export default PaginaEditarClub;
 
 export async function loader({ params }) {
-  const { nombreClub } = params;
+  const { idClub } = params;
 
   return {
-    club: nombreClub ? await obtenerClub(nombreClub) : undefined,
+    club: idClub ? await obtenerClub(idClub) : undefined,
     ciudades: await obtenerCiudades(),
   };
 }

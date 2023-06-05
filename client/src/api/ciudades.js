@@ -26,16 +26,16 @@ export const crearCiudad = async (datosCiudad) => {
   return redirect('/admin/ciudades');
 };
 
-export const obtenerCiudad = async (nombre) => {
-  const response = await fetch(`${baseUrl}/${nombre}`);
+export const obtenerCiudad = async (id) => {
+  const response = await fetch(`${baseUrl}/${id}`);
   if (!response.ok) {
     throw json({ message: 'No pudimos cargar la ciudad.' }, { status: 500 });
   }
   return response.json();
 };
 
-export const editarCiudad = async (nombre, datosCiudad) => {
-  const response = await fetch(`${baseUrl}/${nombre}`, {
+export const editarCiudad = async (id, datosCiudad) => {
+  const response = await fetch(`${baseUrl}/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -50,8 +50,8 @@ export const editarCiudad = async (nombre, datosCiudad) => {
   return redirect('/admin/ciudades');
 };
 
-export const borrarCiudad = async (nombre) => {
-  const response = await fetch(`${baseUrl}/${nombre}`, {
+export const borrarCiudad = async (id) => {
+  const response = await fetch(`${baseUrl}/${id}`, {
     method: 'DELETE',
   });
 

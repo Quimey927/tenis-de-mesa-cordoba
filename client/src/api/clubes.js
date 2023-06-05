@@ -26,16 +26,16 @@ export const crearClub = async (datosClub) => {
   return redirect('/admin/clubes');
 };
 
-export const obtenerClub = async (nombre) => {
-  const response = await fetch(`${baseUrl}/${nombre}`);
+export const obtenerClub = async (id) => {
+  const response = await fetch(`${baseUrl}/${id}`);
   if (!response.ok) {
     throw json({ message: 'No pudimos cargar el club.' }, { status: 500 });
   }
   return response.json();
 };
 
-export const editarClub = async (nombre, datosClub) => {
-  const response = await fetch(`${baseUrl}/${nombre}`, {
+export const editarClub = async (id, datosClub) => {
+  const response = await fetch(`${baseUrl}/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -50,8 +50,8 @@ export const editarClub = async (nombre, datosClub) => {
   return redirect('/admin/Clubes');
 };
 
-export const borrarClub = async (nombre) => {
-  const response = await fetch(`${baseUrl}/${nombre}`, {
+export const borrarClub = async (id) => {
+  const response = await fetch(`${baseUrl}/${id}`, {
     method: 'DELETE',
   });
 

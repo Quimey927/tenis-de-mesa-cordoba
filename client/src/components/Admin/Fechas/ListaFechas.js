@@ -28,7 +28,7 @@ const ListaFechas = ({ fechas }) => {
       <AdminTablaPagina
         array={fechas}
         controladorBorrarElemento={controladorBorrarFecha}
-        encabezadosColumnas={['nombre', 'id_torneo']}
+        encabezadosColumnas={['nombre', 'torneo', 'temporada']}
       />
     </>
   );

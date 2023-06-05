@@ -7,6 +7,7 @@ const Input = ({
   onChange,
   autoFocus,
   required,
+  disabled,
   defaultValue,
 }) => {
   return (
@@ -19,6 +20,7 @@ const Input = ({
         placeholder={`${label}...`}
         autoFocus={autoFocus ? true : false}
         required={required ? true : false}
+        disabled={disabled ? true : false}
         onChange={onChange ? onChange : () => {}}
         defaultValue={defaultValue ? defaultValue : ''}
       />

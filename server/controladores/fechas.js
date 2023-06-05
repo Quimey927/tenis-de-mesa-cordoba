@@ -20,8 +20,6 @@ module.exports.obtenerFechasDelMes = async (req, res) => {
   const fecha_limite_final =
     mes !== 12 ? `${año}-${+mes + 1}-01` : `${año}-${mes}-31`;
 
-  console.log(fecha_limite_inicial, fecha_limite_final);
-
   try {
     pool.query(
       consultasFechas.obtenerFechasDelMes,
@@ -41,11 +39,9 @@ module.exports.crearFecha = async (req, res) => {
     nombre,
     num_fecha,
     id_torneo,
-    nombre_club,
+    id_club,
     fecha_inicio,
     fecha_finalizacion,
-    id_edicion_previa,
-    id_edicion_siguiente,
     slug,
   } = req.body;
 
@@ -56,11 +52,9 @@ module.exports.crearFecha = async (req, res) => {
         nombre,
         num_fecha,
         id_torneo,
-        nombre_club,
+        id_club,
         fecha_inicio,
         fecha_finalizacion,
-        id_edicion_previa !== '' ? id_edicion_previa : null,
-        id_edicion_siguiente !== '' ? id_edicion_siguiente : null,
         slug,
       ],
       (err, results) => {
@@ -105,17 +99,7 @@ module.exports.obtenerFechaPorSlug = async (req, res) => {
 
 module.exports.editarFecha = async (req, res) => {
   const id = parseInt(req.params.idFecha);
-  const {
-    nombre,
-    num_fecha,
-    id_torneo,
-    nombre_club,
-    fecha_inicio,
-    fecha_finalizacion,
-    id_edicion_previa,
-    id_edicion_siguiente,
-    slug,
-  } = req.body;
+  const { nombre, id_club, fecha_inicio, fecha_finalizacion, slug } = req.body;
 
   try {
     pool.query(consultasFechas.obtenerFecha, [id], (err, results) => {
@@ -129,18 +113,7 @@ module.exports.editarFecha = async (req, res) => {
 
       pool.query(
         consultasFechas.editarFecha,
-        [
-          nombre,
-          num_fecha,
-          id_torneo,
-          nombre_club,
-          fecha_inicio,
-          fecha_finalizacion,
-          id_edicion_previa,
-          id_edicion_siguiente,
-          slug,
-          id,
-        ],
+        [nombre, id_club, fecha_inicio, fecha_finalizacion, slug, id],
         (err, results) => {
           if (err) throw new Error('No pudimos editar la fecha.');
           res.status(200).send('Fecha editada correctamente.');

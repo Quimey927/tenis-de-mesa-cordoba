@@ -11,7 +11,7 @@ const {
 router.route('/').get(obtenerCiudades).post(crearCiudad);
 
 router
-  .route('/:nombreCiudad')
+  .route('/:idCiudad')
   .get(obtenerCiudad)
   .put(editarCiudad)
   .delete(borrarCiudad);

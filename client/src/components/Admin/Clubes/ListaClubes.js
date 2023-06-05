@@ -2,33 +2,33 @@ import { useNavigate } from 'react-router-dom';
 
 import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import AdminTablaPagina from '../AdminTablaPagina/AdminTablaPagina';
-import { borrarJugador } from '../../../api';
+import { borrarClub } from '../../../api';
 
-const ListaJugadores = ({ jugadores }) => {
+const ListaJugadores = ({ clubes }) => {
   const navigate = useNavigate();
 
-  const controladorBorrarJugador = (id) => {
+  const controladorBorrarClub = (id) => {
     const continuar = window.confirm(
-      '¿Estás seguro de que querés eliminar el jugador?'
+      '¿Estás seguro de que querés eliminar el club?'
     );
 
     if (continuar) {
-      borrarJugador(id);
-      navigate('/admin/jugadores');
+      borrarClub(id);
+      navigate('/admin/clubes');
     }
   };
 
   return (
     <>
       <AdminTituloPagina
-        titulo="Jugadores"
+        titulo="Clubes"
         to="nuevo"
-        textoInterno="Agregar Jugador"
+        textoInterno="Agregar Club"
       />
       <AdminTablaPagina
-        array={jugadores}
-        controladorBorrarElemento={controladorBorrarJugador}
-        encabezadosColumnas={['nombre', 'apellido']}
+        array={clubes}
+        controladorBorrarElemento={controladorBorrarClub}
+        encabezadosColumnas={['nombre']}
       />
     </>
   );

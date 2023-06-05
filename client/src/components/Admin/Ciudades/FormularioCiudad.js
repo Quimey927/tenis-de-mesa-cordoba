@@ -15,7 +15,7 @@ const FormularioCiudad = ({ method, ciudad }) => {
       <Input
         id="nombre"
         required="true"
-        label="Nombre"
+        label="Nombre*"
         defaultValue={ciudad ? ciudad[0].nombre : ''}
       />
     </AdminFormulario>
@@ -36,5 +36,5 @@ export async function action({ request, params }) {
     return crearCiudad(datosCiudad);
   }
 
-  return editarCiudad(params.nombreCiudad, datosCiudad);
+  return editarCiudad(params.idCiudad, datosCiudad);
 }

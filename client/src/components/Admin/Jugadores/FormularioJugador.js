@@ -1,6 +1,7 @@
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
 import { crearJugador, editarJugador } from '../../../api';
+import { obtenerSlug } from '../../../utils/obtenerSlug';
 import classes from '../AdminFormulario/AdminFormulario.module.css';
 
 const FormularioJugador = ({ method, jugador, clubes }) => {
@@ -17,58 +18,64 @@ const FormularioJugador = ({ method, jugador, clubes }) => {
         label="Nombre"
         defaultValue={jugador ? jugador[0].nombre : ''}
       />
+
       <Input
         id="segundo_nombre"
         label="Segundo Nombre"
         defaultValue={jugador ? jugador[0].segundo_nombre : ''}
       />
+
       <Input
         id="apellido"
         required="true"
         label="Apellido"
         defaultValue={jugador ? jugador[0].apellido : ''}
       />
+
       <Input
         id="segundo_apellido"
         label="Segundo Apellido"
         defaultValue={jugador ? jugador[0].segundo_apellido : ''}
       />
+
       <Input
-        id="cumpleaños"
+        id="fecha_nacimiento"
         label="Fecha de Nacimiento (yyyy-mm-dd)"
         defaultValue={
-          jugador && jugador[0].cumpleaños !== null
-            ? jugador[0].cumpleaños.substring(0, 10)
+          jugador && jugador[0].fecha_nacimiento !== null
+            ? jugador[0].fecha_nacimiento.substring(0, 10)
             : ''
         }
       />
+
       <Input
         id="email"
         label="Email"
         defaultValue={jugador ? jugador[0].email : ''}
       />
 
+      <Input
+        id="foto_perfil"
+        label="Foto de Perfil"
+        defaultValue={jugador ? jugador[0].foto_perfil : ''}
+      />
+
       <div className={classes.campo}>
-        <label htmlFor="nombre_club">Club*</label>
+        <label htmlFor="id_club">Club*</label>
         <select
-          id="nombre_club"
-          name="nombre_club"
-          defaultValue={jugador ? jugador[0].nombre_club : 'sin_club'}
+          id="id_club"
+          name="id_club"
+          defaultValue={jugador ? jugador[0].id_club : 'sin_club'}
         >
           <option value="sin_club">Sin Club</option>
           {clubes.map((club) => (
-            <option key={club.nombre} value={club.nombre}>
+            <option key={club.id} value={club.id}>
               {club.nombre}
             </option>
           ))}
         </select>
       </div>
 
-      <Input
-        id="es_federado"
-        label="¿Es federado? ('true' - 'false')"
-        defaultValue={jugador ? jugador[0].es_federado : ''}
-      />
       <div className={classes.campo}>
         <label htmlFor="categoria_fecoteme">Categoría FeCoTeMe</label>
         <select
@@ -104,15 +111,19 @@ export async function action({ request, params }) {
     segundo_nombre: data.get('segundo_nombre'),
     apellido: data.get('apellido'),
     segundo_apellido: data.get('segundo_apellido'),
-    cumpleaños: data.get('cumpleaños'),
+    fecha_nacimiento: data.get('fecha_nacimiento'),
     email: data.get('email'),
-    nombre_club:
-      data.get('nombre_club') !== 'sin_club' ? data.get('nombre_club') : null,
-    es_federado: data.get('es_federado'),
+    foto_perfil: data.get('foto_perfil'),
+    id_club: data.get('id_club') !== 'sin_club' ? data.get('id_club') : null,
     categoria_fecoteme:
       data.get('categoria_fecoteme') !== 'sin_categoria'
         ? data.get('categoria_fecoteme')
         : null,
+    slug: obtenerSlug(
+      `${data.get('apellido')} ${data.get('segundo_apellido')} ${data.get(
+        'nombre'
+      )} ${data.get('segundo_nombre')}`
+    ),
   };
 
   if (method === 'POST') {
