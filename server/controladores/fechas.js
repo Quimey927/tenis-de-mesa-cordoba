@@ -55,8 +55,8 @@ export const crearFecha = async (req, res) => {
         num_fecha,
         id_torneo,
         id_club,
-        fecha_inicio,
-        fecha_finalizacion,
+        fecha_inicio !== '' ? fecha_inicio : null,
+        fecha_finalizacion !== '' ? fecha_finalizacion : null,
         slug,
       ],
       (err, results) => {
@@ -115,7 +115,14 @@ export const editarFecha = async (req, res) => {
 
       pool.query(
         consultasFechas.editarFecha,
-        [nombre, id_club, fecha_inicio, fecha_finalizacion, slug, id],
+        [
+          nombre,
+          id_club,
+          fecha_inicio !== '' ? fecha_inicio : null,
+          fecha_finalizacion !== '' ? fecha_finalizacion : null,
+          slug,
+          id,
+        ],
         (err, results) => {
           if (err) throw new Error('No pudimos editar la fecha.');
           res.status(200).send('Fecha editada correctamente.');

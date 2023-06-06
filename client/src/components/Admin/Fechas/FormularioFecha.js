@@ -58,7 +58,7 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
       </div>
 
       <div className={classes.campo}>
-        <label htmlFor="id_club">Lugar*</label>
+        <label htmlFor="id_club">Lugar</label>
         <select
           id="id_club"
           name="id_club"
@@ -76,7 +76,7 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
       <Input
         id="fecha_inicio"
         required="true"
-        label="Fecha de inicio* (yyyy-mm-dd)"
+        label="Fecha de inicio (yyyy-mm-dd)"
         defaultValue={
           fecha && fecha[0].fecha_inicio !== null
             ? fecha[0].fecha_inicio.substring(0, 10)
@@ -87,7 +87,7 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
       <Input
         id="fecha_finalizacion"
         required="true"
-        label="Fecha de finalización* (yyyy-mm-dd)"
+        label="Fecha de finalización (yyyy-mm-dd)"
         defaultValue={
           fecha && fecha[0].fecha_finalizacion !== null
             ? fecha[0].fecha_finalizacion.substring(0, 10)
@@ -126,7 +126,7 @@ export async function action({ request, params }) {
     nombre: data.get('nombre'),
     num_fecha: data.get('num_fecha'),
     id_torneo: data.get('id_torneo'),
-    id_club: data.get('id_club'),
+    id_club: data.get('id_club') !== 'elegir_club' ? data.get('id_club') : null,
     fecha_inicio: data.get('fecha_inicio'),
     fecha_finalizacion: data.get('fecha_finalizacion'),
     slug: `${obtenerSlug(data.get('nombre'))}-${data.get('slug_torneo')}`,
