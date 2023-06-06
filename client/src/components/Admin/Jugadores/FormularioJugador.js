@@ -8,11 +8,12 @@ const FormularioJugador = ({ method, jugador, clubes }) => {
   return (
     <AdminFormulario
       method={method}
-      texto_titulo={
+      textoTitulo={
         method === 'POST'
           ? ' Agregar jugador'
           : `Editar ${jugador[0].nombre_completo}`
       }
+      navegarAlCancelar="/admin/jugadores"
     >
       <Input
         id="nombre"

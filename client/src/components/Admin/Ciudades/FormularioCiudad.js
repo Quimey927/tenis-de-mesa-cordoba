@@ -8,9 +8,10 @@ const FormularioCiudad = ({ method, ciudad }) => {
   return (
     <AdminFormulario
       method={method}
-      texto_titulo={
+      textoTitulo={
         method === 'POST' ? ' Agregar ciudad' : `Editar ${ciudad[0].nombre}`
       }
+      navegarAlCancelar="/admin/ciudades"
     >
       <Input
         id="nombre"

@@ -4,15 +4,16 @@ import { crearCategoriaTorneo, editarCategoriaTorneo } from '../../../api';
 // eslint-disable-next-line
 import classes from '../AdminFormulario/AdminFormulario.module.css';
 
-const FormularioCategoriaTorneo = ({ method, categoriaTorneo }) => {
+const FormularioCategoriaTorneo = ({ method, categoriaTorneo, idTorneo }) => {
   return (
     <AdminFormulario
       method={method}
-      texto_titulo={
+      textoTitulo={
         method === 'POST'
           ? ' Agregar categoría torneo'
           : `Editar ${categoriaTorneo[0].categoria}`
       }
+      navegarAlCancelar={`/admin/torneos/${idTorneo}`}
     >
       <Input
         id="categoria"

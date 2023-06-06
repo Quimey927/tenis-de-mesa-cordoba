@@ -4,19 +4,24 @@ import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import Button from '../../UI/Button/Button';
 import classes from './AdminFormulario.module.css';
 
-const AdminFormulario = ({ children, method, texto_titulo }) => {
+const AdminFormulario = ({
+  children,
+  method,
+  textoTitulo,
+  navegarAlCancelar,
+}) => {
   const navigate = useNavigate();
   const navigation = useNavigation();
 
   const isSubmitting = navigation.state === 'submitting';
 
   const controladorCancelar = () => {
-    navigate(-1);
+    navigate(navegarAlCancelar);
   };
 
   return (
     <>
-      <AdminTituloPagina titulo={texto_titulo} />
+      <AdminTituloPagina titulo={textoTitulo} />
 
       <Form method={method} className={classes.form}>
         {children}
@@ -27,7 +32,7 @@ const AdminFormulario = ({ children, method, texto_titulo }) => {
             onClick={controladorCancelar}
             disabled={isSubmitting}
           >
-            Cerrar
+            Cancelar
           </Button>
           <Button
             className={classes.aceptar}

@@ -28,9 +28,10 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
   return (
     <AdminFormulario
       method={method}
-      texto_titulo={
+      textoTitulo={
         method === 'POST' ? ' Agregar fecha' : `Editar ${fecha[0].nombre}`
       }
+      navegarAlCancelar="/admin/fechas"
     >
       <Input
         id="nombre"
