@@ -25,5 +25,5 @@ app.use('/api/categorias_torneos', rutasCategoriasTorneos);
 const puerto = process.env.PUERTO || 8080;
 
 app.listen(puerto, () => {
-  console.log(`Listening on puerto ${puerto}`);
+  console.log(`App escuchando en puerto ${puerto}`);
 });
