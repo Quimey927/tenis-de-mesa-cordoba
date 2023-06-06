@@ -8,9 +8,11 @@ const FormularioCategoriaTorneo = ({ method, categoriaTorneo }) => {
   return (
     <AdminFormulario
       method={method}
-      elemento={categoriaTorneo}
-      nombre_tabla="categoría torneo"
-      columna_principal="categoria"
+      texto_titulo={
+        method === 'POST'
+          ? ' Agregar categoría torneo'
+          : `Editar ${categoriaTorneo[0].categoria}`
+      }
     >
       <Input
         id="categoria"

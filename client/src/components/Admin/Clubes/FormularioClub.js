@@ -7,9 +7,9 @@ const FormularioClub = ({ method, club, ciudades }) => {
   return (
     <AdminFormulario
       method={method}
-      elemento={club}
-      nombre_tabla="club"
-      columna_principal="nombre"
+      texto_titulo={
+        method === 'POST' ? ' Agregar club' : `Editar ${club[0].nombre}`
+      }
     >
       <Input
         id="nombre"

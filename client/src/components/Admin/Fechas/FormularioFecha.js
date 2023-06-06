@@ -28,9 +28,9 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
   return (
     <AdminFormulario
       method={method}
-      elemento={fecha}
-      nombre_tabla="fecha"
-      columna_principal="nombre"
+      texto_titulo={
+        method === 'POST' ? ' Agregar fecha' : `Editar ${fecha[0].nombre}`
+      }
     >
       <Input
         id="nombre"

@@ -26,9 +26,9 @@ const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
     <>
       <AdminFormulario
         method={method}
-        elemento={torneo}
-        nombre_tabla="torneo"
-        columna_principal="titulo"
+        texto_titulo={
+          method === 'POST' ? ' Agregar torneo' : `Editar ${torneo[0].titulo}`
+        }
       >
         <Input
           id="titulo"

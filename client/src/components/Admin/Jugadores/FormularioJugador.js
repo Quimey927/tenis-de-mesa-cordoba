@@ -8,9 +8,11 @@ const FormularioJugador = ({ method, jugador, clubes }) => {
   return (
     <AdminFormulario
       method={method}
-      elemento={jugador}
-      nombre_tabla="jugador"
-      columna_principal="nombre_completo"
+      texto_titulo={
+        method === 'POST'
+          ? ' Agregar jugador'
+          : `Editar ${jugador[0].nombre_completo}`
+      }
     >
       <Input
         id="nombre"
