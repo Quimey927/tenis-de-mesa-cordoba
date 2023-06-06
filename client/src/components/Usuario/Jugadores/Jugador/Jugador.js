@@ -8,7 +8,7 @@ const Jugador = ({ jugador }) => {
     apellido,
     segundo_apellido,
     foto_perfil,
-    nombre_club,
+    club,
     categoria_fecoteme,
   } = jugador;
 
@@ -23,7 +23,7 @@ const Jugador = ({ jugador }) => {
     <li className={classes['jugador']}>
       <img src={foto_perfil} alt="Foto del jugador" />
       <p>{nombreCompleto}</p>
-      <p>{nombre_club}</p>
+      <p>{club}</p>
       <p>{categoria_fecoteme}</p>
     </li>
   );
