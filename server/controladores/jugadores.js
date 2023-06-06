@@ -37,7 +37,7 @@ export const crearJugador = async (req, res) => {
         fecha_nacimiento !== '' ? fecha_nacimiento : null,
         email !== '' ? email : null,
         foto_perfil !== '' ? foto_perfil : null,
-        id_club !== '' ? id_club : null,
+        id_club,
         categoria_fecoteme !== '' ? categoria_fecoteme : null,
         slug,
       ],
