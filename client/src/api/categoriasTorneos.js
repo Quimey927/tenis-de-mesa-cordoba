@@ -13,7 +13,7 @@ export const obtenerCategoriasTorneo = async (idTorneo) => {
   return response.json();
 };
 
-export const crearCategoriaTorneo = async (datosCategoriaTorneo) => {
+export const crearCategoriaTorneo = async (idTorneo, datosCategoriaTorneo) => {
   const response = await fetch(baseUrl, {
     method: 'POST',
     headers: {
@@ -29,7 +29,7 @@ export const crearCategoriaTorneo = async (datosCategoriaTorneo) => {
     );
   }
 
-  return redirect('/admin/torneos');
+  return redirect(`/admin/torneos/${idTorneo}`);
 };
 
 export const obtenerCategoriaTorneo = async (id) => {
@@ -43,8 +43,12 @@ export const obtenerCategoriaTorneo = async (id) => {
   return response.json();
 };
 
-export const editarCategoriaTorneo = async (id, datosCategoriaTorneo) => {
-  const response = await fetch(`${baseUrl}/${id}`, {
+export const editarCategoriaTorneo = async (
+  idCategoriaTorneo,
+  idTorneo,
+  datosCategoriaTorneo
+) => {
+  const response = await fetch(`${baseUrl}/${idCategoriaTorneo}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -59,7 +63,7 @@ export const editarCategoriaTorneo = async (id, datosCategoriaTorneo) => {
     );
   }
 
-  return redirect('/admin/torneos');
+  return redirect(`/admin/torneos/${idTorneo}`);
 };
 
 export const borrarCategoriaTorneo = async (id) => {

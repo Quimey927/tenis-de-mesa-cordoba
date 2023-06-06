@@ -18,7 +18,7 @@ const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
 
     if (continuar) {
       borrarCategoriaTorneo(id);
-      navigate('/admin/torneos');
+      navigate(`/admin/torneos/${torneo[0].id}`);
     }
   };
 
@@ -123,6 +123,7 @@ const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
           </select>
         </div>
       </AdminFormulario>
+
       {method !== 'POST' && (
         <>
           <AdminTituloPagina

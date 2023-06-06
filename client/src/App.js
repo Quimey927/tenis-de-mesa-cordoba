@@ -169,7 +169,7 @@ const router = createBrowserRouter([
                 path: 'categorias',
                 children: [
                   {
-                    path: ':idCategoria',
+                    path: ':idCategoriaTorneo',
                     element: <PaginaEditarCategoriaTorneo />,
                     loader: loaderCategoriaTorneoAdmin,
                     action: actionManipularCategoriaTorneo,

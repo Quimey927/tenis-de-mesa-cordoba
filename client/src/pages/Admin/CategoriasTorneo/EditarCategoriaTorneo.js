@@ -18,11 +18,11 @@ const PaginaEditarCategoriaTorneo = () => {
 export default PaginaEditarCategoriaTorneo;
 
 export async function loader({ params }) {
-  const { idTorneo, idCategoria } = params;
+  const { idTorneo, idCategoriaTorneo } = params;
 
   return {
-    categoriaTorneo: idCategoria
-      ? await obtenerCategoriaTorneo(idCategoria)
+    categoriaTorneo: idCategoriaTorneo
+      ? await obtenerCategoriaTorneo(idCategoriaTorneo)
       : null,
     idTorneo,
   };

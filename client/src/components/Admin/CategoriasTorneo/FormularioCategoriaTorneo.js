@@ -44,8 +44,12 @@ export async function action({ request, params }) {
   };
 
   if (method === 'POST') {
-    return crearCategoriaTorneo(datosCategoriaTorneo);
+    return crearCategoriaTorneo(params.idTorneo, datosCategoriaTorneo);
   }
 
-  return editarCategoriaTorneo(params.idCategoriaTorneo, datosCategoriaTorneo);
+  return editarCategoriaTorneo(
+    params.idCategoriaTorneo,
+    params.idTorneo,
+    datosCategoriaTorneo
+  );
 }
