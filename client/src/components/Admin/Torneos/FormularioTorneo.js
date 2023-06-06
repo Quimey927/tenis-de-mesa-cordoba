@@ -29,7 +29,6 @@ const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
         textoTitulo={
           method === 'POST' ? ' Agregar torneo' : `Editar ${torneo[0].titulo}`
         }
-        navegarAlCancelar="/admin/torneos"
       >
         <Input
           id="titulo"

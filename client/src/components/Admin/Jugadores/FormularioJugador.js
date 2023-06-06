@@ -13,7 +13,6 @@ const FormularioJugador = ({ method, jugador, clubes }) => {
           ? ' Agregar jugador'
           : `Editar ${jugador[0].nombre_completo}`
       }
-      navegarAlCancelar="/admin/jugadores"
     >
       <Input
         id="nombre"

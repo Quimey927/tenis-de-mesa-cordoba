@@ -10,7 +10,6 @@ const FormularioClub = ({ method, club, ciudades }) => {
       textoTitulo={
         method === 'POST' ? ' Agregar club' : `Editar ${club[0].nombre}`
       }
-      navegarAlCancelar="/admin/clubes"
     >
       <Input
         id="nombre"

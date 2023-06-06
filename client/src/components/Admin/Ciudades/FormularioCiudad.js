@@ -11,7 +11,6 @@ const FormularioCiudad = ({ method, ciudad }) => {
       textoTitulo={
         method === 'POST' ? ' Agregar ciudad' : `Editar ${ciudad[0].nombre}`
       }
-      navegarAlCancelar="/admin/ciudades"
     >
       <Input
         id="nombre"

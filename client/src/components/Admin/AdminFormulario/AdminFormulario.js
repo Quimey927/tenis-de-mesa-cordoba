@@ -8,7 +8,7 @@ const AdminFormulario = ({
   children,
   method,
   textoTitulo,
-  navegarAlCancelar,
+  navegarAlCancelar = '..',
 }) => {
   const navigate = useNavigate();
   const navigation = useNavigation();
