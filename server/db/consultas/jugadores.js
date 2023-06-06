@@ -1,5 +1,5 @@
 const obtenerJugadores =
-  'SELECT * FROM jugadores ORDER BY apellido, segundo_apellido, nombre, segundo_nombre';
+  'SELECT j.*, c.nombre AS club FROM jugadores AS j LEFT JOIN clubes AS c ON c.id = j.id_club ORDER BY j.apellido, j.segundo_apellido, j.nombre, j.segundo_nombre';
 
 const crearJugador =
   'INSERT INTO jugadores (nombre, segundo_nombre, apellido, segundo_apellido, fecha_nacimiento, email, foto_perfil, id_club, categoria_fecoteme, slug) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
