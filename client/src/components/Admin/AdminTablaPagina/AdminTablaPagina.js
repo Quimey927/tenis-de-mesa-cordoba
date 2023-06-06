@@ -10,6 +10,7 @@ const AdminTablaPagina = ({
   controladorBorrarElemento,
   encabezadosColumnas,
   mostrarCantidadEntradasYFiltro,
+  prefijoLinkEditar = '',
 }) => {
   return (
     <div className={classes['admin-tabla-pagina']}>
@@ -43,7 +44,10 @@ const AdminTablaPagina = ({
                 </td>
               ))}
               <td role="cell" data-cell="editar">
-                <Link to={elem.id.toString()} className={classes['btn-editar']}>
+                <Link
+                  to={`${prefijoLinkEditar}${elem.id.toString()}`}
+                  className={classes['btn-editar']}
+                >
                   <FontAwesomeIcon icon={faPenToSquare} />
                 </Link>
               </td>
