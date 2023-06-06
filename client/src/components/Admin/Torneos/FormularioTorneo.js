@@ -166,9 +166,12 @@ export async function action({ request, params }) {
       data.get('id_edicion_siguiente') !== 'sin_edicion_siguiente'
         ? data.get('id_edicion_siguiente')
         : null,
-    slug: `${obtenerSlug(data.get('titulo'))}-${obtenerSlug(
-      data.get('temporada')
-    )}`,
+    slug:
+      method === 'POST'
+        ? `${obtenerSlug(data.get('titulo'))}-${obtenerSlug(
+            data.get('temporada')
+          )}`
+        : '',
   };
 
   if (method === 'POST') {

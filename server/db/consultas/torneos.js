@@ -8,7 +8,7 @@ const obtenerTorneo = 'SELECT * FROM torneos WHERE id = $1';
 const obtenerTorneoPorSlug = 'SELECT * FROM torneos WHERE slug = $1';
 
 const editarTorneo =
-  'UPDATE torneos SET titulo = $1, temporada = $2, año = $3, imagen_torneo = $4, fecha_inicio = $5, fecha_finalizacion = $6, descripcion = $7, id_edicion_previa = $8, id_edicion_siguiente = $9, slug = $10 WHERE id = $11';
+  'UPDATE torneos SET año = $1, imagen_torneo = $2, fecha_inicio = $3, fecha_finalizacion = $4, descripcion = $5, id_edicion_previa = $6, id_edicion_siguiente = $7 WHERE id = $8';
 
 const borrarTorneo = 'DELETE FROM torneos WHERE id = $1';
 

@@ -84,8 +84,6 @@ export const obtenerTorneoPorSlug = async (req, res) => {
 export const editarTorneo = async (req, res) => {
   const id = parseInt(req.params.idTorneo);
   const {
-    titulo,
-    temporada,
     año,
     imagen_torneo,
     fecha_inicio,
@@ -93,7 +91,6 @@ export const editarTorneo = async (req, res) => {
     descripcion,
     id_edicion_previa,
     id_edicion_siguiente,
-    slug,
   } = req.body;
 
   try {
@@ -109,8 +106,6 @@ export const editarTorneo = async (req, res) => {
       pool.query(
         consultasTorneos.editarTorneo,
         [
-          titulo,
-          temporada,
           año,
           imagen_torneo !== '' ? imagen_torneo : null,
           fecha_inicio !== '' ? fecha_inicio : null,
@@ -118,7 +113,6 @@ export const editarTorneo = async (req, res) => {
           descripcion !== '' ? descripcion : null,
           id_edicion_previa !== '' ? id_edicion_previa : null,
           id_edicion_siguiente !== '' ? id_edicion_siguiente : null,
-          slug,
           id,
         ],
         (err, results) => {
