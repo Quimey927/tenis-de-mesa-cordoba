@@ -51,8 +51,14 @@ const Fecha = ({ fecha }) => {
       </div>
       <div className={classes.lugar}>
         <div className={classes['lugar__info']}>
-          <p>{club}</p>
-          <p>{direccion}</p>
+          {club ? (
+            <>
+              <p>{club}</p>
+              <p>{direccion}</p>
+            </>
+          ) : (
+            <p>Sin definir</p>
+          )}
         </div>
         <FontAwesomeIcon
           icon={faLocationDot}
