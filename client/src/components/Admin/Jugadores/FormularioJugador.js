@@ -1,8 +1,8 @@
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
+import Select from '../../UI/Select/Select';
 import { crearJugador, editarJugador } from '../../../api';
 import { obtenerSlug } from '../../../utils/obtenerSlug';
-import classes from '../AdminFormulario/AdminFormulario.module.css';
 
 const FormularioJugador = ({ method, jugador, clubes }) => {
   return (
@@ -62,42 +62,38 @@ const FormularioJugador = ({ method, jugador, clubes }) => {
         defaultValue={jugador ? jugador[0].foto_perfil : ''}
       />
 
-      <div className={classes.campo}>
-        <label htmlFor="id_club">Club*</label>
-        <select
-          id="id_club"
-          name="id_club"
-          defaultValue={jugador ? jugador[0].id_club : 'sin_club'}
-        >
-          <option value="sin_club">Sin Club</option>
-          {clubes.map((club) => (
-            <option key={club.id} value={club.id}>
-              {club.nombre}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Select
+        label="Club*"
+        id="id_club"
+        defaultValue={jugador ? jugador[0].id_club : 'sin_club'}
+        options={[
+          { value: 'sin_club', key: 0, texto: 'Sin Club' },
+          ...clubes.map((club) => {
+            return {
+              key: club.id,
+              value: club.id,
+              texto: club.nombre,
+            };
+          }),
+        ]}
+      />
 
-      <div className={classes.campo}>
-        <label htmlFor="categoria_fecoteme">Categoría FeCoTeMe</label>
-        <select
-          id="categoria_fecoteme"
-          name="categoria_fecoteme"
-          defaultValue={
-            jugador ? jugador[0].categoria_fecoteme : 'sin_categoria'
-          }
-        >
-          <option value="sin_categoria">Sin Categoría</option>
-          <option value="SuperFECOTEME">SuperFECOTEME</option>
-          <option value="Primera">Primera</option>
-          <option value="Segunda">Segunda</option>
-          <option value="Tercera">Tercera</option>
-          <option value="Cuarta">Cuarta</option>
-          <option value="Quinta">Quinta</option>
-          <option value="Sexta">Sexta</option>
-          <option value="Séptima">Séptima</option>
-        </select>
-      </div>
+      <Select
+        label="Categoría FeCoTeMe"
+        id="categoria_fecoteme"
+        defaultValue={jugador ? jugador[0].categoria_fecoteme : 'sin_categoria'}
+        options={[
+          { value: 'sin_categoria', texto: 'Sin Categoría' },
+          { value: 'SuperFECOTEME', texto: 'SuperFECOTEME' },
+          { value: 'Primera', texto: 'Primera' },
+          { value: 'Segunda', texto: 'Segunda' },
+          { value: 'Tercera', texto: 'Tercera' },
+          { value: 'Cuarta', texto: 'Cuarta' },
+          { value: 'Quinta', texto: 'Quinta' },
+          { value: 'Sexta', texto: 'Sexta' },
+          { value: 'Séptima', texto: 'Séptima' },
+        ]}
+      />
     </AdminFormulario>
   );
 };

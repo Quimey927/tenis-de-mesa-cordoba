@@ -1,0 +1,25 @@
+.textarea {
+  margin-bottom: 1rem;
+}
+
+.textarea textarea {
+  width: 100%;
+  padding: 1rem;
+  font: inherit;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  line-height: 1.6;
+  color: #444;
+}
+
+.textarea textarea {
+  transition: box-shadow 200ms ease;
+}
+
+.textarea textarea:focus,
+.textarea textarea:active {
+  outline: none;
+  box-shadow: 0 0 15px -2px #cc201a79;
+  background-color: #cc201a0c;
+}

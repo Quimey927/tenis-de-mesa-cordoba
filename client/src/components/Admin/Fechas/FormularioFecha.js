@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
+import Select from '../../UI/Select/Select';
 import { crearFecha, editarFecha } from '../../../api';
 import { obtenerSlug } from '../../../utils/obtenerSlug';
-import classes from '../AdminFormulario/AdminFormulario.module.css';
 
 const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
   const [slugTorneo, setSlugTorneo] = useState(fecha ? fecha.slug_torneo : '');
@@ -39,39 +39,39 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
         defaultValue={fecha ? fecha[0].nombre : ''}
       />
 
-      <div className={classes.campo}>
-        <label htmlFor="id_torneo">Torneo al que pertenece*</label>
-        <select
-          id="id_torneo"
-          name="id_torneo"
-          defaultValue={fecha ? fecha[0].id_torneo : 'elegir_torneo'}
-          onChange={controladorCambio}
-          disabled={method !== 'POST'}
-        >
-          <option value="elegir_torneo">Elegir Torneo</option>
-          {torneos.map((torneo) => (
-            <option key={torneo.id} value={torneo.id}>
-              {torneo.titulo} {torneo.temporada}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Select
+        label="Torneo al que pertenece*"
+        id="id_torneo"
+        defaultValue={fecha ? fecha[0].id_torneo : 'elegir_torneo'}
+        onChange={controladorCambio}
+        disabled={method !== 'POST'}
+        options={[
+          { value: 'elegir_torneo', key: 0, texto: 'Elegir Torneo' },
+          ...torneos.map((torneo) => {
+            return {
+              key: torneo.id,
+              value: torneo.id,
+              texto: `${torneo.titulo} ${torneo.temporada}`,
+            };
+          }),
+        ]}
+      />
 
-      <div className={classes.campo}>
-        <label htmlFor="id_club">Lugar</label>
-        <select
-          id="id_club"
-          name="id_club"
-          defaultValue={fecha ? fecha[0].id_club : 'elegir_club'}
-        >
-          <option value="elegir_club">Elegir Lugar</option>
-          {clubes.map((club) => (
-            <option key={club.id} value={club.id}>
-              {club.nombre}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Select
+        label="Lugar"
+        id="id_club"
+        defaultValue={fecha ? fecha[0].id_club : 'elegir_club'}
+        options={[
+          { value: 'elegir_club', key: 0, texto: 'Elegir Lugar' },
+          ...clubes.map((club) => {
+            return {
+              key: club.id,
+              value: club.id,
+              texto: club.nombre,
+            };
+          }),
+        ]}
+      />
 
       <Input
         id="fecha_inicio"

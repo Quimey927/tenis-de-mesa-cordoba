@@ -1,8 +1,6 @@
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
 import { crearCategoriaTorneo, editarCategoriaTorneo } from '../../../api';
-// eslint-disable-next-line
-import classes from '../AdminFormulario/AdminFormulario.module.css';
 
 const FormularioCategoriaTorneo = ({ method, categoriaTorneo, idTorneo }) => {
   return (

@@ -1,7 +1,7 @@
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
+import Select from '../../UI/Select/Select';
 import { crearClub, editarClub } from '../../../api';
-import classes from '../AdminFormulario/AdminFormulario.module.css';
 
 const FormularioClub = ({ method, club, ciudades }) => {
   return (
@@ -25,20 +25,18 @@ const FormularioClub = ({ method, club, ciudades }) => {
         defaultValue={club ? club[0].direccion : ''}
       />
 
-      <div className={classes.campo}>
-        <label htmlFor="id_ciudad">Ciudad*</label>
-        <select
-          id="id_ciudad"
-          name="id_ciudad"
-          defaultValue={club ? club[0].id_ciudad : 'Córdoba'}
-        >
-          {ciudades.map((ciudad) => (
-            <option key={ciudad.id} value={ciudad.id}>
-              {ciudad.nombre}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Select
+        label="Ciudad"
+        id="id_ciudad"
+        defaultValue={club ? club[0].id_ciudad : '1'}
+        options={ciudades.map((ciudad) => {
+          return {
+            key: ciudad.id,
+            value: ciudad.id,
+            texto: ciudad.nombre,
+          };
+        })}
+      />
 
       <Input
         id="escudo_club"

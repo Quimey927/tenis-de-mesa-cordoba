@@ -1,0 +1,32 @@
+.select {
+  margin-bottom: 1rem;
+}
+
+.select select {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.2rem;
+  padding-left: 0.7rem;
+  border-radius: 3px;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #444;
+}
+
+.select select {
+  transition: box-shadow 200ms ease;
+}
+
+.select select:focus,
+.select select:active {
+  outline: none;
+  box-shadow: 0 0 15px -2px #cc201a79;
+  background-color: #cc201a0c;
+}
+
+.select select:disabled {
+  cursor: not-allowed;
+}

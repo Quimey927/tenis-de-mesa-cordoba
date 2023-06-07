@@ -4,9 +4,10 @@ import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import AdminTablaPagina from '../AdminTablaPagina/AdminTablaPagina';
 import Input from '../../UI/Input/Input';
+import Select from '../../UI/Select/Select';
+import Textarea from '../../UI/Textarea/Textarea';
 import { crearTorneo, editarTorneo, borrarCategoriaTorneo } from '../../../api';
 import { obtenerSlug } from '../../../utils/obtenerSlug';
-import classes from '../AdminFormulario/AdminFormulario.module.css';
 
 const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
   const navigate = useNavigate();
@@ -33,28 +34,32 @@ const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
         <Input
           id="titulo"
           required="true"
-          label="Título"
+          label="Título*"
           disabled={method !== 'POST'}
           defaultValue={torneo ? torneo[0].titulo : ''}
         />
+
         <Input
           id="temporada"
           required="true"
-          label="Temporada"
+          label="Temporada*"
           disabled={method !== 'POST'}
           defaultValue={torneo ? torneo[0].temporada : ''}
         />
+
         <Input
           id="año"
           required="true"
-          label="Año"
+          label="Año*"
           defaultValue={torneo ? torneo[0].año : ''}
         />
+
         <Input
           id="imagen_torneo"
           label="Imagen"
           defaultValue={torneo ? torneo[0].imagen_torneo : ''}
         />
+
         <Input
           id="fecha_inicio"
           label="Fecha de inicio (yyyy-mm-dd)"
@@ -64,6 +69,7 @@ const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
               : ''
           }
         />
+
         <Input
           id="fecha_finalizacion"
           label="Fecha de finalización (yyyy-mm-dd)"
@@ -74,54 +80,56 @@ const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
           }
         />
 
-        <div className={classes.campo}>
-          <label htmlFor="descripcion">Descripción</label>
-          <textarea
-            id="descripcion"
-            name="descripcion"
-            label="Descripcion"
-            rows="4"
-            defaultValue={torneo ? torneo[0].descripcion : ''}
-          ></textarea>
-        </div>
+        <Textarea
+          id="descripcion"
+          label="Descripción"
+          rows="4"
+          defaultValue={torneo ? torneo[0].descripcion : ''}
+        />
 
-        <div className={classes.campo}>
-          <label htmlFor="id_edicion_previa">Edición anterior</label>
-          <select
-            id="id_edicion_previa"
-            name="id_edicion_previa"
-            defaultValue={
-              torneo ? torneo[0].id_edicion_previa : 'sin_edicion_previa'
-            }
-          >
-            <option value="sin_edicion_previa">No hay torneo previo</option>
-            {torneos.map((torneo) => (
-              <option key={torneo.id} value={torneo.id}>
-                {torneo.titulo} {torneo.temporada}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Select
+          label="Edición anterior"
+          id="id_edicion_previa"
+          defaultValue={
+            torneo ? torneo[0].id_edicion_previa : 'sin_edicion_previa'
+          }
+          options={[
+            {
+              value: 'sin_edicion_previa',
+              key: 0,
+              texto: 'No hay torneo previo',
+            },
+            ...torneos.map((torneo) => {
+              return {
+                key: torneo.id,
+                value: torneo.id,
+                texto: `${torneo.titulo} ${torneo.temporada}`,
+              };
+            }),
+          ]}
+        />
 
-        <div className={classes.campo}>
-          <label htmlFor="id_edicion_siguiente">Edición siguiente</label>
-          <select
-            id="id_edicion_siguiente"
-            name="id_edicion_siguiente"
-            defaultValue={
-              torneo ? torneo[0].id_edicion_siguiente : 'sin_edicion_siguiente'
-            }
-          >
-            <option value="sin_edicion_siguiente">
-              No hay torneo siguiente
-            </option>
-            {torneos.map((torneo) => (
-              <option key={torneo.id} value={torneo.id}>
-                {torneo.titulo} {torneo.temporada}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Select
+          label="Edición siguiente"
+          id="id_edicion_siguiente"
+          defaultValue={
+            torneo ? torneo[0].id_edicion_siguiente : 'sin_edicion_siguiente'
+          }
+          options={[
+            {
+              value: 'sin_edicion_siguiente',
+              key: 0,
+              texto: 'No hay torneo siguiente',
+            },
+            ...torneos.map((torneo) => {
+              return {
+                key: torneo.id,
+                value: torneo.id,
+                texto: `${torneo.titulo} ${torneo.temporada}`,
+              };
+            }),
+          ]}
+        />
       </AdminFormulario>
 
       {method !== 'POST' && (

@@ -1,8 +1,6 @@
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
 import { crearCiudad, editarCiudad } from '../../../api';
-// eslint-disable-next-line
-import classes from '../AdminFormulario/AdminFormulario.module.css';
 
 const FormularioCiudad = ({ method, ciudad }) => {
   return (
