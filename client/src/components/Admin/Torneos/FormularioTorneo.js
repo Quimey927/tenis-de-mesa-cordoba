@@ -6,10 +6,21 @@ import AdminTablaPagina from '../AdminTablaPagina/AdminTablaPagina';
 import Input from '../../UI/Input/Input';
 import Select from '../../UI/Select/Select';
 import Textarea from '../../UI/Textarea/Textarea';
-import { crearTorneo, editarTorneo, borrarCategoriaTorneo } from '../../../api';
+import {
+  crearTorneo,
+  editarTorneo,
+  borrarCategoriaTorneo,
+  borrarFecha,
+} from '../../../api';
 import { obtenerSlug } from '../../../utils/obtenerSlug';
 
-const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
+const FormularioTorneo = ({
+  method,
+  torneo,
+  torneos,
+  categoriasTorneo,
+  fechasTorneo,
+}) => {
   const navigate = useNavigate();
 
   const controladorBorrarCategoriaTorneo = (id) => {
@@ -19,6 +30,17 @@ const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
 
     if (continuar) {
       borrarCategoriaTorneo(id);
+      navigate(`/admin/torneos/${torneo[0].id}`);
+    }
+  };
+
+  const controladorBorrarFecha = (id) => {
+    const continuar = window.confirm(
+      '¿Estás seguro de que querés eliminar la fecha del torneo?'
+    );
+
+    if (continuar) {
+      borrarFecha(id);
       navigate(`/admin/torneos/${torneo[0].id}`);
     }
   };
@@ -146,7 +168,23 @@ const FormularioTorneo = ({ method, torneo, torneos, categoriasTorneo }) => {
             mostrarCantidadEntradasYFiltro={false}
             prefijoLinkEditar="categorias/"
           />
-          <button>Agregar fecha</button>
+        </>
+      )}
+
+      {method !== 'POST' && (
+        <>
+          <AdminTituloPagina
+            titulo="Fechas"
+            to="../../fechas/nuevo"
+            textoInterno="Agregar Fecha"
+          />
+          <AdminTablaPagina
+            array={fechasTorneo}
+            controladorBorrarElemento={controladorBorrarFecha}
+            encabezadosColumnas={['nombre', 'orden']}
+            mostrarCantidadEntradasYFiltro={false}
+            prefijoLinkEditar="../../fechas/"
+          />
         </>
       )}
     </>

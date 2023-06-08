@@ -2,6 +2,7 @@ import express from 'express';
 
 import {
   obtenerFechas,
+  obtenerFechasTorneo,
   crearFecha,
   obtenerFecha,
   obtenerFechaPorSlug,
@@ -16,6 +17,7 @@ router.route('/').get(obtenerFechas).post(crearFecha);
 
 router.get('/fechas-del-mes', obtenerFechasDelMes);
 router.get('/slug/:slugFecha', obtenerFechaPorSlug);
+router.get('/torneo/:idTorneo', obtenerFechasTorneo);
 
 router
   .route('/:idFecha')

@@ -12,6 +12,19 @@ export const obtenerFechas = async (req, res) => {
   }
 };
 
+export const obtenerFechasTorneo = async (req, res) => {
+  const id = parseInt(req.params.idTorneo);
+
+  try {
+    pool.query(consultasFechas.obtenerFechasTorneo, [id], (err, results) => {
+      if (err) throw new Error('No pudimos cargar las fechas del torneo.');
+      res.status(200).json(results.rows);
+    });
+  } catch (err) {
+    res.send(err);
+  }
+};
+
 export const obtenerFechasDelMes = async (req, res) => {
   const { mes, año } = req.query;
 

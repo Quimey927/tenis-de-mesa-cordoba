@@ -31,6 +31,7 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
       textoTitulo={
         method === 'POST' ? ' Agregar fecha' : `Editar ${fecha[0].nombre}`
       }
+      navegarAlCancelar={-1}
     >
       <Input
         id="nombre"
@@ -75,7 +76,6 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
 
       <Input
         id="fecha_inicio"
-        required="true"
         label="Fecha de inicio (yyyy-mm-dd)"
         defaultValue={
           fecha && fecha[0].fecha_inicio !== null
@@ -86,7 +86,6 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
 
       <Input
         id="fecha_finalizacion"
-        required="true"
         label="Fecha de finalización (yyyy-mm-dd)"
         defaultValue={
           fecha && fecha[0].fecha_finalizacion !== null

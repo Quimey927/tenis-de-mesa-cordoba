@@ -26,6 +26,17 @@ export const obtenerFechas = async () => {
   return response.json();
 };
 
+export const obtenerFechasTorneo = async (idTorneo) => {
+  const response = await fetch(`${baseUrl}/torneo/${idTorneo}`);
+  if (!response.ok) {
+    throw json({
+      message: 'No pudimos cargar las fechas del torneo.',
+      status: 500,
+    });
+  }
+  return response.json();
+};
+
 export const crearFecha = async (datosFecha) => {
   const response = await fetch(baseUrl, {
     method: 'POST',

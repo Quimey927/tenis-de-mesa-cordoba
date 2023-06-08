@@ -9,6 +9,7 @@ export {
 
 export {
   obtenerFechas,
+  obtenerFechasTorneo,
   crearFecha,
   obtenerFecha,
   obtenerFechaPorSlug,
