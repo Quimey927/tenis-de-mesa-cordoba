@@ -1,17 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
-import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
-import AdminTablaPagina from '../AdminTablaPagina/AdminTablaPagina';
+import ListaCategoriasTorneo from './ListaCategoriasTorneo';
+import ListaFechasTorneo from './ListaFechasTorneo';
 import Input from '../../UI/Input/Input';
 import Select from '../../UI/Select/Select';
 import Textarea from '../../UI/Textarea/Textarea';
-import {
-  crearTorneo,
-  editarTorneo,
-  borrarCategoriaTorneo,
-  borrarFecha,
-} from '../../../api';
+import { crearTorneo, editarTorneo } from '../../../api';
 import { obtenerSlug } from '../../../utils/obtenerSlug';
 
 const FormularioTorneo = ({
@@ -21,30 +14,6 @@ const FormularioTorneo = ({
   categoriasTorneo,
   fechasTorneo,
 }) => {
-  const navigate = useNavigate();
-
-  const controladorBorrarCategoriaTorneo = (id) => {
-    const continuar = window.confirm(
-      '¿Estás seguro de que querés eliminar la categoria del club?'
-    );
-
-    if (continuar) {
-      borrarCategoriaTorneo(id);
-      navigate(`/admin/torneos/${torneo[0].id}`);
-    }
-  };
-
-  const controladorBorrarFecha = (id) => {
-    const continuar = window.confirm(
-      '¿Estás seguro de que querés eliminar la fecha del torneo?'
-    );
-
-    if (continuar) {
-      borrarFecha(id);
-      navigate(`/admin/torneos/${torneo[0].id}`);
-    }
-  };
-
   return (
     <>
       <AdminFormulario
@@ -155,37 +124,16 @@ const FormularioTorneo = ({
       </AdminFormulario>
 
       {method !== 'POST' && (
-        <>
-          <AdminTituloPagina
-            titulo="Categorías"
-            to="categorias/nuevo"
-            textoInterno="Agregar Categoría"
-          />
-          <AdminTablaPagina
-            array={categoriasTorneo}
-            controladorBorrarElemento={controladorBorrarCategoriaTorneo}
-            encabezadosColumnas={['categoria', 'orden']}
-            mostrarCantidadEntradasYFiltro={false}
-            prefijoLinkEditar="categorias/"
-          />
-        </>
+        <ListaCategoriasTorneo
+          categoriasTorneo={categoriasTorneo}
+          navegarA={`/admin/torneos/${torneo[0].id}`}
+        />
       )}
-
       {method !== 'POST' && (
-        <>
-          <AdminTituloPagina
-            titulo="Fechas"
-            to="../../fechas/nuevo"
-            textoInterno="Agregar Fecha"
-          />
-          <AdminTablaPagina
-            array={fechasTorneo}
-            controladorBorrarElemento={controladorBorrarFecha}
-            encabezadosColumnas={['nombre', 'orden']}
-            mostrarCantidadEntradasYFiltro={false}
-            prefijoLinkEditar="../../fechas/"
-          />
-        </>
+        <ListaFechasTorneo
+          fechasTorneo={fechasTorneo}
+          navegarA={`/admin/torneos/${torneo[0].id}`}
+        />
       )}
     </>
   );
