@@ -18,8 +18,8 @@ const Select = ({
         onChange={onChange}
         disabled={disabled}
       >
-        {options.map((opt) => (
-          <option key={opt.key ? opt.key : null} value={opt.value}>
+        {options.map((opt, i) => (
+          <option key={opt.key ? opt.key : i} value={opt.value}>
             {opt.texto}
           </option>
         ))}
