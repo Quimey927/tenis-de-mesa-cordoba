@@ -1,6 +1,6 @@
 import { json, redirect } from 'react-router-dom';
 
-const baseUrl = 'http://localhost:8080/api/categorias_torneos';
+const baseUrl = 'http://localhost:8080/api/categoriasTorneos';
 
 export const obtenerCategoriasTorneo = async (idTorneo) => {
   const response = await fetch(`${baseUrl}/torneo/${idTorneo}`);

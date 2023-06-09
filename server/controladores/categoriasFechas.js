@@ -1,5 +1,5 @@
 import pool from '../db/db.js';
-import consultasCategoriasFechas from '../db/consultas/categorias_fechas.js';
+import consultasCategoriasFechas from '../db/consultas/categoriasFechas.js';
 
 export const obtenerCategoriasFecha = async (req, res) => {
   const idFecha = parseInt(req.params.idFecha);

@@ -6,7 +6,7 @@ import {
   obtenerCategoriaTorneo,
   editarCategoriaTorneo,
   borrarCategoriaTorneo,
-} from '../controladores/categorias_torneos.js';
+} from '../controladores/categoriasTorneos.js';
 
 const router = express.Router();
 

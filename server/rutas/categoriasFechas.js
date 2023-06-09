@@ -6,7 +6,7 @@ import {
   obtenerCategoriaFecha,
   editarCategoriaFecha,
   borrarCategoriaFecha,
-} from '../controladores/categorias_fechas.js';
+} from '../controladores/categoriasFechas.js';
 
 const router = express.Router();
 

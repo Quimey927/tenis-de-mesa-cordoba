@@ -1,5 +1,5 @@
 import pool from '../db/db.js';
-import consultasCategoriasTorneos from '../db/consultas/categorias_torneos.js';
+import consultasCategoriasTorneos from '../db/consultas/categoriasTorneos.js';
 
 export const obtenerCategoriasTorneo = async (req, res) => {
   const idTorneo = parseInt(req.params.idTorneo);

@@ -1,6 +1,6 @@
 import { json, redirect } from 'react-router-dom';
 
-const baseUrl = 'http://localhost:8080/api/categorias_fechas';
+const baseUrl = 'http://localhost:8080/api/categoriasFechas';
 
 export const obtenerCategoriasFecha = async (idFecha) => {
   const response = await fetch(`${baseUrl}/fecha/${idFecha}`);
