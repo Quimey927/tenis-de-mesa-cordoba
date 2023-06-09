@@ -125,13 +125,13 @@ const FormularioTorneo = ({
 
       {method !== 'POST' && (
         <ListaCategoriasTorneo
-          categoriasTorneo={categoriasTorneo}
+          categoriasTorneo={categoriasTorneo ? categoriasTorneo : []}
           navegarA={`/admin/torneos/${torneo[0].id}`}
         />
       )}
       {method !== 'POST' && (
         <ListaFechasTorneo
-          fechasTorneo={fechasTorneo}
+          fechasTorneo={fechasTorneo ? fechasTorneo : []}
           navegarA={`/admin/torneos/${torneo[0].id}`}
           state={torneo[0].id}
         />

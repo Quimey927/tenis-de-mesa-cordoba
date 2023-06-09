@@ -38,6 +38,12 @@ import PaginaEditarCategoriaTorneo, {
 import { action as actionManipularCategoriaTorneo } from './components/Admin/CategoriasTorneo/FormularioCategoriaTorneo';
 import PaginaNuevaCategoriaTorneo from './pages/Admin/CategoriasTorneo/NuevaCategoriaTorneo';
 
+import PaginaEditarCategoriaFecha, {
+  loader as loaderCategoriaFechaAdmin,
+} from './pages/Admin/CategoriasFecha/EditarCategoriaFecha';
+import { action as actionManipularCategoriaFecha } from './components/Admin/CategoriasFecha/FormularioCategoriaFecha';
+import PaginaNuevaCategoriaFecha from './pages/Admin/CategoriasFecha/NuevaCategoriaFecha';
+
 import PaginaFechasAdmin, {
   loader as loaderFechasAdmin,
 } from './pages/Admin/Fechas/Fechas';
@@ -209,9 +215,31 @@ const router = createBrowserRouter([
           },
           {
             path: ':idFecha',
-            element: <PaginaEditarFecha />,
-            loader: loaderFechaAdmin,
-            action: actionManipularFecha,
+            children: [
+              {
+                index: true,
+                element: <PaginaEditarFecha />,
+                loader: loaderFechaAdmin,
+                action: actionManipularFecha,
+              },
+              {
+                path: 'categorias',
+                children: [
+                  {
+                    path: 'nuevo',
+                    element: <PaginaNuevaCategoriaFecha />,
+                    loader: loaderCategoriaFechaAdmin,
+                    action: actionManipularCategoriaFecha,
+                  },
+                  {
+                    path: ':idCategoriaFecha',
+                    element: <PaginaEditarCategoriaFecha />,
+                    loader: loaderCategoriaFechaAdmin,
+                    action: actionManipularCategoriaFecha,
+                  },
+                ],
+              },
+            ],
           },
         ],
       },

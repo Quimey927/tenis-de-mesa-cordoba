@@ -6,10 +6,11 @@ import {
   obtenerTorneos,
   obtenerClubes,
   obtenerFechas,
+  obtenerCategoriasFecha,
 } from '../../../api';
 
 const PaginaEditarFecha = () => {
-  const { fecha, torneos, clubes, fechas } = useLoaderData();
+  const { fecha, torneos, clubes, fechas, categoriasFecha } = useLoaderData();
 
   return (
     <FormularioFecha
@@ -18,6 +19,7 @@ const PaginaEditarFecha = () => {
       torneos={torneos}
       clubes={clubes}
       fechas={fechas}
+      categoriasFecha={categoriasFecha}
     />
   );
 };
@@ -32,5 +34,6 @@ export async function loader({ params }) {
     torneos: await obtenerTorneos(),
     clubes: await obtenerClubes(),
     fechas: await obtenerFechas(),
+    categoriasFecha: await obtenerCategoriasFecha(idFecha),
   };
 }

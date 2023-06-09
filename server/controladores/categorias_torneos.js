@@ -28,7 +28,7 @@ export const crearCategoriaTorneo = async (req, res) => {
       [categoria, id_torneo, orden],
       (err, results) => {
         if (err) throw new Error('No pudimos crear la categoría del torneo.');
-        res.status(201).send('Ciudad creada exitosamente.');
+        res.status(201).send('Categoría del torneo creada exitosamente.');
       }
     );
   } catch (err) {

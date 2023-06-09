@@ -49,3 +49,11 @@ export {
   editarCategoriaTorneo,
   borrarCategoriaTorneo,
 } from './categoriasTorneos';
+
+export {
+  obtenerCategoriasFecha,
+  crearCategoriaFecha,
+  obtenerCategoriaFecha,
+  editarCategoriaFecha,
+  borrarCategoriaFecha,
+} from './categoriasFechas';
