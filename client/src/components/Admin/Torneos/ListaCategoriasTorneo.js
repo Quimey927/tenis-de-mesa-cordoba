@@ -21,7 +21,7 @@ const ListaCategoriasTorneo = ({ categoriasTorneo, navegarA }) => {
   return (
     <>
       <AdminTituloPagina
-        titulo="Categorías"
+        titulo="Categorías del torneo"
         to="categorias/nuevo"
         textoInterno="Agregar Categoría"
       />

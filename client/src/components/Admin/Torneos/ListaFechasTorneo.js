@@ -21,7 +21,7 @@ const ListaFechasTorneo = ({ fechasTorneo, navegarA, state }) => {
   return (
     <>
       <AdminTituloPagina
-        titulo="Fechas"
+        titulo="Fechas del torneo"
         to="../../fechas/nuevo"
         textoInterno="Agregar Fecha"
         state={state}
