@@ -44,6 +44,12 @@ import PaginaEditarCategoriaFecha, {
 import { action as actionManipularCategoriaFecha } from './components/Admin/CategoriasFecha/FormularioCategoriaFecha';
 import PaginaNuevaCategoriaFecha from './pages/Admin/CategoriasFecha/NuevaCategoriaFecha';
 
+import PaginaEditarStream, {
+  loader as loaderStreamAdmin,
+} from './pages/Admin/Streams/EditarStream';
+import { action as actionManipularStream } from './components/Admin/Streams/FormularioStream';
+import PaginaNuevoStream from './pages/Admin/Streams/NuevoStream';
+
 import PaginaFechasAdmin, {
   loader as loaderFechasAdmin,
 } from './pages/Admin/Fechas/Fechas';
@@ -221,6 +227,23 @@ const router = createBrowserRouter([
                 element: <PaginaEditarFecha />,
                 loader: loaderFechaAdmin,
                 action: actionManipularFecha,
+              },
+              {
+                path: 'streams',
+                children: [
+                  {
+                    path: 'nuevo',
+                    element: <PaginaNuevoStream />,
+                    loader: loaderStreamAdmin,
+                    action: actionManipularStream,
+                  },
+                  {
+                    path: ':idStream',
+                    element: <PaginaEditarStream />,
+                    loader: loaderStreamAdmin,
+                    action: actionManipularStream,
+                  },
+                ],
               },
               {
                 path: 'categorias',

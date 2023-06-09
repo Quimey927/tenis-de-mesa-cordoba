@@ -57,3 +57,11 @@ export {
   editarCategoriaFecha,
   borrarCategoriaFecha,
 } from './categoriasFechas';
+
+export {
+  obtenerStreams,
+  crearStream,
+  obtenerStream,
+  editarStream,
+  borrarStream,
+} from './streams';

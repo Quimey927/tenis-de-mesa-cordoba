@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
+import ListaStreams from './ListaStreams';
 import ListaCategoriasFecha from './ListaCategoriasFecha';
 import Input from '../../UI/Input/Input';
 import Select from '../../UI/Select/Select';
@@ -15,6 +16,7 @@ const FormularioFecha = ({
   clubes,
   fechas,
   categoriasFecha,
+  streams,
 }) => {
   const { state } = useLocation();
 
@@ -130,6 +132,13 @@ const FormularioFecha = ({
           style={{ display: 'none' }}
         />
       </AdminFormulario>
+
+      {method !== 'POST' && (
+        <ListaStreams
+          streams={streams}
+          navegarA={`/admin/fechas/${fecha[0].id}`}
+        />
+      )}
 
       {method !== 'POST' && (
         <ListaCategoriasFecha
