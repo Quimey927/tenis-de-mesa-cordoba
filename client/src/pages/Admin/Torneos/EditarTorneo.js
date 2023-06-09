@@ -1,6 +1,8 @@
 import { useLoaderData } from 'react-router-dom';
 
 import FormularioTorneo from '../../../components/Admin/Torneos/FormularioTorneo';
+import ListaCategoriasTorneo from '../../../components/Admin/CategoriasTorneo/ListaCategoriasTorneo';
+import ListaFechasTorneo from '../../../components/Admin/Fechas/ListaFechasTorneo';
 import {
   obtenerTorneo,
   obtenerTorneos,
@@ -12,13 +14,26 @@ const PaginaEditarTorneo = () => {
   const { torneo, torneos, categoriasTorneo, fechasTorneo } = useLoaderData();
 
   return (
-    <FormularioTorneo
-      method="PUT"
-      torneo={torneo}
-      torneos={torneos}
-      categoriasTorneo={categoriasTorneo}
-      fechasTorneo={fechasTorneo}
-    />
+    <>
+      <FormularioTorneo
+        method="PUT"
+        torneo={torneo}
+        torneos={torneos}
+        categoriasTorneo={categoriasTorneo}
+        fechasTorneo={fechasTorneo}
+      />
+
+      <ListaCategoriasTorneo
+        categoriasTorneo={categoriasTorneo ? categoriasTorneo : []}
+        navegarA={`/admin/torneos/${torneo[0].id}`}
+      />
+
+      <ListaFechasTorneo
+        fechasTorneo={fechasTorneo ? fechasTorneo : []}
+        navegarA={`/admin/torneos/${torneo[0].id}`}
+        state={torneo[0].id}
+      />
+    </>
   );
 };
 

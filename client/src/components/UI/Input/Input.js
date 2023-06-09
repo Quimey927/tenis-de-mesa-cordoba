@@ -9,6 +9,7 @@ const Input = ({
   required,
   disabled,
   defaultValue,
+  style = {},
 }) => {
   return (
     <div className={classes.input}>
@@ -23,6 +24,7 @@ const Input = ({
         disabled={disabled ? true : false}
         onChange={onChange ? onChange : () => {}}
         defaultValue={defaultValue ? defaultValue : ''}
+        style={style}
       />
     </div>
   );

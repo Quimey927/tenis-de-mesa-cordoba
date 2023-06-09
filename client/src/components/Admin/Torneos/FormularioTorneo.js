@@ -1,142 +1,119 @@
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
-import ListaCategoriasTorneo from './ListaCategoriasTorneo';
-import ListaFechasTorneo from './ListaFechasTorneo';
+
 import Input from '../../UI/Input/Input';
 import Select from '../../UI/Select/Select';
 import Textarea from '../../UI/Textarea/Textarea';
 import { crearTorneo, editarTorneo } from '../../../api';
 import { obtenerSlug } from '../../../utils/obtenerSlug';
 
-const FormularioTorneo = ({
-  method,
-  torneo,
-  torneos,
-  categoriasTorneo,
-  fechasTorneo,
-}) => {
+const FormularioTorneo = ({ method, torneo, torneos }) => {
   return (
-    <>
-      <AdminFormulario
-        method={method}
-        textoTitulo={
-          method === 'POST' ? ' Agregar torneo' : `Editar ${torneo[0].titulo}`
+    <AdminFormulario
+      method={method}
+      textoTitulo={
+        method === 'POST' ? ' Agregar torneo' : `Editar ${torneo[0].titulo}`
+      }
+    >
+      <Input
+        id="titulo"
+        required="true"
+        label="Título*"
+        disabled={method !== 'POST'}
+        defaultValue={torneo ? torneo[0].titulo : ''}
+      />
+
+      <Input
+        id="temporada"
+        required="true"
+        label="Temporada*"
+        disabled={method !== 'POST'}
+        defaultValue={torneo ? torneo[0].temporada : ''}
+      />
+
+      <Input
+        id="año"
+        required="true"
+        label="Año*"
+        defaultValue={torneo ? torneo[0].año : ''}
+      />
+
+      <Input
+        id="imagen_torneo"
+        label="Imagen"
+        defaultValue={torneo ? torneo[0].imagen_torneo : ''}
+      />
+
+      <Input
+        id="fecha_inicio"
+        label="Fecha de inicio (yyyy-mm-dd)"
+        defaultValue={
+          torneo && torneo[0].fecha_inicio !== null
+            ? torneo[0].fecha_inicio.substring(0, 10)
+            : ''
         }
-      >
-        <Input
-          id="titulo"
-          required="true"
-          label="Título*"
-          disabled={method !== 'POST'}
-          defaultValue={torneo ? torneo[0].titulo : ''}
-        />
+      />
 
-        <Input
-          id="temporada"
-          required="true"
-          label="Temporada*"
-          disabled={method !== 'POST'}
-          defaultValue={torneo ? torneo[0].temporada : ''}
-        />
+      <Input
+        id="fecha_finalizacion"
+        label="Fecha de finalización (yyyy-mm-dd)"
+        defaultValue={
+          torneo && torneo[0].fecha_finalizacion !== null
+            ? torneo[0].fecha_finalizacion.substring(0, 10)
+            : ''
+        }
+      />
 
-        <Input
-          id="año"
-          required="true"
-          label="Año*"
-          defaultValue={torneo ? torneo[0].año : ''}
-        />
+      <Textarea
+        id="descripcion"
+        label="Descripción"
+        rows="4"
+        defaultValue={torneo ? torneo[0].descripcion : ''}
+      />
 
-        <Input
-          id="imagen_torneo"
-          label="Imagen"
-          defaultValue={torneo ? torneo[0].imagen_torneo : ''}
-        />
+      <Select
+        label="Edición anterior"
+        id="id_edicion_previa"
+        defaultValue={
+          torneo ? torneo[0].id_edicion_previa : 'sin_edicion_previa'
+        }
+        options={[
+          {
+            value: 'sin_edicion_previa',
+            key: 0,
+            texto: 'No hay torneo previo',
+          },
+          ...torneos.map((torneo) => {
+            return {
+              key: torneo.id,
+              value: torneo.id,
+              texto: `${torneo.titulo} ${torneo.temporada}`,
+            };
+          }),
+        ]}
+      />
 
-        <Input
-          id="fecha_inicio"
-          label="Fecha de inicio (yyyy-mm-dd)"
-          defaultValue={
-            torneo && torneo[0].fecha_inicio !== null
-              ? torneo[0].fecha_inicio.substring(0, 10)
-              : ''
-          }
-        />
-
-        <Input
-          id="fecha_finalizacion"
-          label="Fecha de finalización (yyyy-mm-dd)"
-          defaultValue={
-            torneo && torneo[0].fecha_finalizacion !== null
-              ? torneo[0].fecha_finalizacion.substring(0, 10)
-              : ''
-          }
-        />
-
-        <Textarea
-          id="descripcion"
-          label="Descripción"
-          rows="4"
-          defaultValue={torneo ? torneo[0].descripcion : ''}
-        />
-
-        <Select
-          label="Edición anterior"
-          id="id_edicion_previa"
-          defaultValue={
-            torneo ? torneo[0].id_edicion_previa : 'sin_edicion_previa'
-          }
-          options={[
-            {
-              value: 'sin_edicion_previa',
-              key: 0,
-              texto: 'No hay torneo previo',
-            },
-            ...torneos.map((torneo) => {
-              return {
-                key: torneo.id,
-                value: torneo.id,
-                texto: `${torneo.titulo} ${torneo.temporada}`,
-              };
-            }),
-          ]}
-        />
-
-        <Select
-          label="Edición siguiente"
-          id="id_edicion_siguiente"
-          defaultValue={
-            torneo ? torneo[0].id_edicion_siguiente : 'sin_edicion_siguiente'
-          }
-          options={[
-            {
-              value: 'sin_edicion_siguiente',
-              key: 0,
-              texto: 'No hay torneo siguiente',
-            },
-            ...torneos.map((torneo) => {
-              return {
-                key: torneo.id,
-                value: torneo.id,
-                texto: `${torneo.titulo} ${torneo.temporada}`,
-              };
-            }),
-          ]}
-        />
-      </AdminFormulario>
-
-      {method !== 'POST' && (
-        <ListaCategoriasTorneo
-          categoriasTorneo={categoriasTorneo ? categoriasTorneo : []}
-          navegarA={`/admin/torneos/${torneo[0].id}`}
-        />
-      )}
-      {method !== 'POST' && (
-        <ListaFechasTorneo
-          fechasTorneo={fechasTorneo ? fechasTorneo : []}
-          navegarA={`/admin/torneos/${torneo[0].id}`}
-          state={torneo[0].id}
-        />
-      )}
-    </>
+      <Select
+        label="Edición siguiente"
+        id="id_edicion_siguiente"
+        defaultValue={
+          torneo ? torneo[0].id_edicion_siguiente : 'sin_edicion_siguiente'
+        }
+        options={[
+          {
+            value: 'sin_edicion_siguiente',
+            key: 0,
+            texto: 'No hay torneo siguiente',
+          },
+          ...torneos.map((torneo) => {
+            return {
+              key: torneo.id,
+              value: torneo.id,
+              texto: `${torneo.titulo} ${torneo.temporada}`,
+            };
+          }),
+        ]}
+      />
+    </AdminFormulario>
   );
 };
 

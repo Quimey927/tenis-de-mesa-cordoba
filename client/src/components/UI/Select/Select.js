@@ -7,6 +7,7 @@ const Select = ({
   options,
   onChange = () => {},
   disabled = false,
+  style = {},
 }) => {
   return (
     <div className={classes.select}>
@@ -17,6 +18,7 @@ const Select = ({
         defaultValue={defaultValue}
         onChange={onChange}
         disabled={disabled}
+        style={style}
       >
         {options.map((opt, i) => (
           <option key={opt.key ? opt.key : i} value={opt.value}>
