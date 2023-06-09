@@ -11,7 +11,6 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
   const { state } = useLocation();
 
   const [slugTorneo, setSlugTorneo] = useState(fecha ? fecha.slug_torneo : '');
-
   const [numFecha, setNumFecha] = useState(fecha ? fecha[0].num_fecha : '');
 
   const fechasDelTorneo = slugTorneo
@@ -52,7 +51,6 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
           fecha ? fecha[0].id_torneo : state !== null ? state : 'elegir_torneo'
         }
         onChange={controladorCambio}
-        disabled={method !== 'POST'}
         options={[
           { value: 'elegir_torneo', key: 0, texto: 'Elegir Torneo' },
           ...torneos.map((torneo) => {
@@ -128,10 +126,12 @@ export async function action({ request, params }) {
   const method = request.method;
   const data = await request.formData();
 
+  const idTorneo = data.get('id_torneo');
+
   const datosFecha = {
     nombre: data.get('nombre'),
     num_fecha: data.get('num_fecha'),
-    id_torneo: data.get('id_torneo'),
+    id_torneo: idTorneo,
     id_club: data.get('id_club') !== 'elegir_club' ? data.get('id_club') : null,
     fecha_inicio: data.get('fecha_inicio'),
     fecha_finalizacion: data.get('fecha_finalizacion'),
@@ -139,8 +139,8 @@ export async function action({ request, params }) {
   };
 
   if (method === 'POST') {
-    return crearFecha(datosFecha);
+    return crearFecha(datosFecha, idTorneo);
   }
 
-  return editarFecha(params.idFecha, datosFecha);
+  return editarFecha(params.idFecha, datosFecha, idTorneo);
 }

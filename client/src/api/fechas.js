@@ -37,7 +37,7 @@ export const obtenerFechasTorneo = async (idTorneo) => {
   return response.json();
 };
 
-export const crearFecha = async (datosFecha) => {
+export const crearFecha = async (datosFecha, idTorneo) => {
   const response = await fetch(baseUrl, {
     method: 'POST',
     headers: {
@@ -50,7 +50,7 @@ export const crearFecha = async (datosFecha) => {
     throw json({ message: 'No pudimos crear la fecha.' }, { status: 500 });
   }
 
-  return redirect('/admin/fechas');
+  return redirect(`/admin/torneos/${idTorneo}`);
 };
 
 export const obtenerFecha = async (id) => {
@@ -72,7 +72,7 @@ export const obtenerFechaPorSlug = async (slugFecha) => {
   return response.json();
 };
 
-export const editarFecha = async (id, datosFecha) => {
+export const editarFecha = async (id, datosFecha, idTorneo) => {
   const response = await fetch(`${baseUrl}/${id}`, {
     method: 'PUT',
     headers: {
@@ -85,7 +85,7 @@ export const editarFecha = async (id, datosFecha) => {
     throw json({ message: 'No pudimos editar la fecha.' }, { status: 500 });
   }
 
-  return redirect('/admin/fechas');
+  return redirect(`/admin/torneos/${idTorneo}`);
 };
 
 export const borrarFecha = async (id) => {
