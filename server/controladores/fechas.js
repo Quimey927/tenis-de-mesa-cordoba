@@ -118,12 +118,12 @@ export const editarFecha = async (req, res) => {
 
   try {
     pool.query(consultasFechas.obtenerFecha, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar la fecha');
+      if (err) throw new Error('No pudimos buscar la fecha.');
 
       const fechaNoEncontrada = !results.rows.length;
 
       if (fechaNoEncontrada) {
-        res.send('La fecha no existe en la base de datos');
+        res.send('La fecha no existe en la base de datos.');
       }
 
       pool.query(
@@ -152,12 +152,12 @@ export const borrarFecha = async (req, res) => {
 
   try {
     pool.query(consultasFechas.obtenerFecha, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar la fecha');
+      if (err) throw new Error('No pudimos buscar la fecha.');
 
       const fechaNoEncontrada = !results.rows.length;
 
       if (fechaNoEncontrada) {
-        res.send('La fecha no existe en la base de datos');
+        res.send('La fecha no existe en la base de datos.');
       }
 
       pool.query(consultasFechas.borrarFecha, [id], (err, results) => {

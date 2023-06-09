@@ -63,12 +63,12 @@ export const editarCategoriaFecha = async (req, res) => {
       consultasCategoriasFechas.obtenerCategoriaFecha,
       [id],
       (err, results) => {
-        if (err) throw new Error('No pudimos buscar la categoría de la fecha');
+        if (err) throw new Error('No pudimos buscar la categoría de la fecha.');
 
         const categoriaFechaNoEncontrada = !results.rows.length;
 
         if (categoriaFechaNoEncontrada) {
-          res.send('La categoría de la fecha no existe en la base de datos');
+          res.send('La categoría de la fecha no existe en la base de datos.');
         }
 
         pool.query(
@@ -95,12 +95,12 @@ export const borrarCategoriaFecha = async (req, res) => {
       consultasCategoriasFechas.obtenerCategoriaFecha,
       [id],
       (err, results) => {
-        if (err) throw new Error('No pudimos buscar la categoría de la fecha');
+        if (err) throw new Error('No pudimos buscar la categoría de la fecha.');
 
         const categoriaFechaNoEncontrada = !results.rows.length;
 
         if (categoriaFechaNoEncontrada) {
-          res.send('La categoría de la fecha no existe en la base de datos');
+          res.send('La categoría de la fecha no existe en la base de datos.');
         }
 
         pool.query(

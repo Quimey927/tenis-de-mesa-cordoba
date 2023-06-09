@@ -48,12 +48,12 @@ export const editarClub = async (req, res) => {
 
   try {
     pool.query(consultasClubes.obtenerClub, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el club');
+      if (err) throw new Error('No pudimos buscar el club.');
 
       const clubNoEncontrado = !results.rows.length;
 
       if (clubNoEncontrado) {
-        res.send('El club no existe en la base de datos');
+        res.send('El club no existe en la base de datos.');
       }
 
       pool.query(
@@ -81,12 +81,12 @@ export const borrarClub = async (req, res) => {
 
   try {
     pool.query(consultasClubes.obtenerClub, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el club');
+      if (err) throw new Error('No pudimos buscar el club.');
 
       const clubNoEncontrado = !results.rows.length;
 
       if (clubNoEncontrado) {
-        res.send('El club no existe en la base de datos');
+        res.send('El club no existe en la base de datos.');
       }
 
       pool.query(consultasClubes.borrarClub, [id], (err, results) => {

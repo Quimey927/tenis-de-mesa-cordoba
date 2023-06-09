@@ -81,12 +81,12 @@ export const editarJugador = async (req, res) => {
 
   try {
     pool.query(consultasJugadores.obtenerJugador, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el jugador');
+      if (err) throw new Error('No pudimos buscar el jugador.');
 
       const jugadorNoEncontrado = !results.rows.length;
 
       if (jugadorNoEncontrado) {
-        res.send('El jugador no existe en la base de datos');
+        res.send('El jugador no existe en la base de datos.');
       }
 
       pool.query(
@@ -120,12 +120,12 @@ export const borrarJugador = async (req, res) => {
 
   try {
     pool.query(consultasJugadores.obtenerJugador, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el jugador');
+      if (err) throw new Error('No pudimos buscar el jugador.');
 
       const jugadorNoEncontrado = !results.rows.length;
 
       if (jugadorNoEncontrado) {
-        res.send('El jugador no existe en la base de datos');
+        res.send('El jugador no existe en la base de datos.');
       }
 
       pool.query(consultasJugadores.borrarJugador, [id], (err, results) => {

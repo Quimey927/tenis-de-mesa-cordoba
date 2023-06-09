@@ -63,12 +63,12 @@ export const editarCategoriaTorneo = async (req, res) => {
       consultasCategoriasTorneos.obtenerCategoriaTorneo,
       [id],
       (err, results) => {
-        if (err) throw new Error('No pudimos buscar la categoría del torneo');
+        if (err) throw new Error('No pudimos buscar la categoría del torneo.');
 
         const categoriaTorneoNoEncontrada = !results.rows.length;
 
         if (categoriaTorneoNoEncontrada) {
-          res.send('La categoría del torneo no existe en la base de datos');
+          res.send('La categoría del torneo no existe en la base de datos.');
         }
 
         pool.query(
@@ -95,12 +95,12 @@ export const borrarCategoriaTorneo = async (req, res) => {
       consultasCategoriasTorneos.obtenerCategoriaTorneo,
       [id],
       (err, results) => {
-        if (err) throw new Error('No pudimos buscar la categoría del torneo');
+        if (err) throw new Error('No pudimos buscar la categoría del torneo.');
 
         const categoriaTorneoNoEncontrada = !results.rows.length;
 
         if (categoriaTorneoNoEncontrada) {
-          res.send('La categoría del torneo no existe en la base de datos');
+          res.send('La categoría del torneo no existe en la base de datos.');
         }
 
         pool.query(

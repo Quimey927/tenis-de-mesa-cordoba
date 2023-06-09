@@ -100,7 +100,7 @@ export const editarTorneo = async (req, res) => {
       const torneoNoEncontrado = !results.rows.length;
 
       if (torneoNoEncontrado) {
-        res.send('El torneo no existe en la base de datos');
+        res.send('El torneo no existe en la base de datos.');
       }
 
       pool.query(
@@ -131,12 +131,12 @@ export const borrarTorneo = async (req, res) => {
 
   try {
     pool.query(consultasTorneos.obtenerTorneo, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el equipo');
+      if (err) throw new Error('No pudimos buscar el equipo.');
 
       const torneoNoEncontrado = !results.rows.length;
 
       if (torneoNoEncontrado) {
-        res.send('El torneo no existe en la base de datos');
+        res.send('El torneo no existe en la base de datos.');
       }
 
       pool.query(consultasTorneos.borrarTorneo, [id], (err, results) => {
