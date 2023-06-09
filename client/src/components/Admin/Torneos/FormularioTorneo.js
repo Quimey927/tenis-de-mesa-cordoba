@@ -133,6 +133,7 @@ const FormularioTorneo = ({
         <ListaFechasTorneo
           fechasTorneo={fechasTorneo}
           navegarA={`/admin/torneos/${torneo[0].id}`}
+          state={torneo[0].id}
         />
       )}
     </>

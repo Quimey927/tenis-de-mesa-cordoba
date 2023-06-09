@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
@@ -7,12 +8,16 @@ import { crearFecha, editarFecha } from '../../../api';
 import { obtenerSlug } from '../../../utils/obtenerSlug';
 
 const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
+  const { state } = useLocation();
+
   const [slugTorneo, setSlugTorneo] = useState(fecha ? fecha.slug_torneo : '');
 
   const [numFecha, setNumFecha] = useState(fecha ? fecha[0].num_fecha : '');
 
   const fechasDelTorneo = slugTorneo
     ? fechas.filter((fecha) => fecha.slug_torneo === slugTorneo)
+    : state !== null
+    ? fechas.filter((fecha) => fecha.id_torneo === state)
     : [];
 
   useEffect(() => {
@@ -43,7 +48,9 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
       <Select
         label="Torneo al que pertenece*"
         id="id_torneo"
-        defaultValue={fecha ? fecha[0].id_torneo : 'elegir_torneo'}
+        defaultValue={
+          fecha ? fecha[0].id_torneo : state !== null ? state : 'elegir_torneo'
+        }
         onChange={controladorCambio}
         disabled={method !== 'POST'}
         options={[

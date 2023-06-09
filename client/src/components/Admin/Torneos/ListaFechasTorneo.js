@@ -4,7 +4,7 @@ import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import AdminTablaPagina from '../AdminTablaPagina/AdminTablaPagina';
 import { borrarFecha } from '../../../api';
 
-const ListaFechasTorneo = ({ fechasTorneo, navegarA }) => {
+const ListaFechasTorneo = ({ fechasTorneo, navegarA, state }) => {
   const navigate = useNavigate();
 
   const controladorBorrarFecha = (id) => {
@@ -24,6 +24,7 @@ const ListaFechasTorneo = ({ fechasTorneo, navegarA }) => {
         titulo="Fechas"
         to="../../fechas/nuevo"
         textoInterno="Agregar Fecha"
+        state={state}
       />
       <AdminTablaPagina
         array={fechasTorneo}
