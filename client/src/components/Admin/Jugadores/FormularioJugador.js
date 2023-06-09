@@ -16,7 +16,7 @@ const FormularioJugador = ({ method, jugador, clubes }) => {
     >
       <Input
         id="nombre"
-        required="true"
+        required={true}
         label="Nombre*"
         defaultValue={jugador ? jugador[0].nombre : ''}
       />
@@ -29,7 +29,7 @@ const FormularioJugador = ({ method, jugador, clubes }) => {
 
       <Input
         id="apellido"
-        required="true"
+        required={true}
         label="Apellido*"
         defaultValue={jugador ? jugador[0].apellido : ''}
       />

@@ -15,14 +15,14 @@ const FormularioCategoriaFecha = ({ method, categoriaFecha, idFecha }) => {
     >
       <Input
         id="categoria"
-        required="true"
+        required={true}
         label="Categoría*"
         defaultValue={categoriaFecha ? categoriaFecha[0].categoria : ''}
       />
 
       <Input
         id="orden"
-        required="true"
+        required={true}
         label="Orden*"
         defaultValue={categoriaFecha ? categoriaFecha[0].orden : ''}
       />

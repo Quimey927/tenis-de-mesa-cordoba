@@ -16,7 +16,7 @@ const FormularioTorneo = ({ method, torneo, torneos }) => {
     >
       <Input
         id="titulo"
-        required="true"
+        required={true}
         label="Título*"
         disabled={method !== 'POST'}
         defaultValue={torneo ? torneo[0].titulo : ''}
@@ -24,7 +24,7 @@ const FormularioTorneo = ({ method, torneo, torneos }) => {
 
       <Input
         id="temporada"
-        required="true"
+        required={true}
         label="Temporada*"
         disabled={method !== 'POST'}
         defaultValue={torneo ? torneo[0].temporada : ''}
@@ -32,7 +32,7 @@ const FormularioTorneo = ({ method, torneo, torneos }) => {
 
       <Input
         id="año"
-        required="true"
+        required={true}
         label="Año*"
         defaultValue={torneo ? torneo[0].año : ''}
       />

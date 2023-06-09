@@ -13,14 +13,14 @@ const FormularioClub = ({ method, club, ciudades }) => {
     >
       <Input
         id="nombre"
-        required="true"
+        required={true}
         label="Nombre*"
         defaultValue={club ? club[0].nombre : ''}
       />
 
       <Input
         id="direccion"
-        required="true"
+        required={true}
         label="Dirección*"
         defaultValue={club ? club[0].direccion : ''}
       />

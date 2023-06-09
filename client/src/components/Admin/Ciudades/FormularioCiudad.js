@@ -12,7 +12,7 @@ const FormularioCiudad = ({ method, ciudad }) => {
     >
       <Input
         id="nombre"
-        required="true"
+        required={true}
         label="Nombre*"
         defaultValue={ciudad ? ciudad[0].nombre : ''}
       />

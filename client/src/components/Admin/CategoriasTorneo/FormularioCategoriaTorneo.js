@@ -15,14 +15,14 @@ const FormularioCategoriaTorneo = ({ method, categoriaTorneo, idTorneo }) => {
     >
       <Input
         id="categoria"
-        required="true"
+        required={true}
         label="Categoría*"
         defaultValue={categoriaTorneo ? categoriaTorneo[0].categoria : ''}
       />
 
       <Input
         id="orden"
-        required="true"
+        required={true}
         label="Orden*"
         defaultValue={categoriaTorneo ? categoriaTorneo[0].orden : ''}
       />

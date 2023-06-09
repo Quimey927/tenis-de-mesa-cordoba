@@ -39,7 +39,7 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
     >
       <Input
         id="nombre"
-        required="true"
+        required={true}
         label="Nombre*"
         defaultValue={fecha ? fecha[0].nombre : ''}
         style={method === 'PUT' ? { cursor: 'not-allowed' } : {}}
