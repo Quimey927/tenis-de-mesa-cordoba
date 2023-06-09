@@ -18,8 +18,6 @@ const ListaCategoriasFecha = ({ categoriasFecha, navegarA }) => {
     }
   };
 
-  console.log(categoriasFecha);
-
   return (
     <>
       <AdminTituloPagina
