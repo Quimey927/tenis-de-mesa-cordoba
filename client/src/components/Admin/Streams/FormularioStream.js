@@ -1,5 +1,7 @@
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
+import Select from '../../UI/Select/Select';
+import Textarea from '../../UI/Textarea/Textarea';
 import { crearStream, editarStream } from '../../../api';
 
 const FormularioStream = ({ method, stream, idFecha }) => {
@@ -15,16 +17,27 @@ const FormularioStream = ({ method, stream, idFecha }) => {
     >
       <Input
         id="orden"
-        required="true"
+        required={true}
         label="Orden*"
         defaultValue={stream ? stream[0].orden : ''}
       />
 
-      <Input
-        id="url"
-        required="true"
-        label="URL*"
-        defaultValue={stream ? stream[0].url : ''}
+      <Textarea
+        id="codigo_embebido"
+        label="Código Embebido*"
+        rows="4"
+        defaultValue={stream ? stream[0].codigo_embebido : ''}
+        required={true}
+      />
+
+      <Select
+        label="Estado"
+        id="estado"
+        defaultValue={stream ? stream[0].estado : 'na'}
+        options={[
+          { value: 'na', key: 'na', texto: 'No Activo' },
+          { value: 'a', key: 'a', texto: 'Activo' },
+        ]}
       />
     </AdminFormulario>
   );
@@ -37,9 +50,10 @@ export async function action({ request, params }) {
   const data = await request.formData();
 
   const datosStream = {
-    url: data.get('url'),
+    codigo_embebido: data.get('codigo_embebido'),
     id_fecha: params.idFecha,
     orden: data.get('orden'),
+    estado: data.get('estado'),
   };
 
   if (method === 'POST') {

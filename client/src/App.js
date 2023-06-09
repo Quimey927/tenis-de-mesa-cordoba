@@ -4,8 +4,10 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-import Raiz from './pages/Usuario/Raiz';
+import Raiz, { loader as loaderStreamActivo } from './pages/Usuario/Raiz';
 import PaginaError from './pages/Usuario/Error';
+
+import PaginaVivo from './pages/Usuario/Vivo';
 
 import PaginaTorneos, {
   loader as loaderTorneos,
@@ -90,11 +92,18 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Raiz />,
+    loader: loaderStreamActivo,
     errorElement: <PaginaError />,
     children: [
       {
         index: true,
         element: <Navigate to="/fechas" />,
+      },
+
+      {
+        path: 'vivo',
+        element: <PaginaVivo />,
+        loader: loaderStreamActivo,
       },
 
       {

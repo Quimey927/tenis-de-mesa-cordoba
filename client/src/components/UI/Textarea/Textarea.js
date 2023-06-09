@@ -1,6 +1,6 @@
 import classes from './Textarea.module.css';
 
-const Textarea = ({ id, label, rows, defaultValue }) => {
+const Textarea = ({ id, label, rows, defaultValue, required }) => {
   return (
     <div className={classes.textarea}>
       <label htmlFor={id}>{label}</label>
@@ -10,6 +10,7 @@ const Textarea = ({ id, label, rows, defaultValue }) => {
         label={label}
         rows={rows}
         defaultValue={defaultValue}
+        required={required}
       ></textarea>
     </div>
   );

@@ -15,17 +15,28 @@ export const obtenerStreams = async (req, res) => {
 };
 
 export const crearStream = async (req, res) => {
-  const { url, id_fecha, orden } = req.body;
+  const { codigo_embebido, id_fecha, orden, estado } = req.body;
 
   try {
     pool.query(
       consultasStreams.crearStream,
-      [url, id_fecha, orden],
+      [codigo_embebido, id_fecha, orden, estado],
       (err, results) => {
         if (err) throw new Error('No pudimos crear el stream.');
         res.status(201).send('Stream creado exitosamente.');
       }
     );
+  } catch (err) {
+    res.send(err);
+  }
+};
+
+export const obtenerStreamActivo = async (req, res) => {
+  try {
+    pool.query(consultasStreams.obtenerStreamActivo, (err, results) => {
+      if (err) throw new Error('No pudimos encontrar el stream activo.');
+      res.status(200).json(results.rows);
+    });
   } catch (err) {
     res.send(err);
   }
@@ -46,7 +57,7 @@ export const obtenerStream = async (req, res) => {
 
 export const editarStream = async (req, res) => {
   const id = parseInt(req.params.idStream);
-  const { url, id_fecha, orden } = req.body;
+  const { codigo_embebido, id_fecha, orden, estado } = req.body;
 
   try {
     pool.query(consultasStreams.obtenerStream, [id], (err, results) => {
@@ -60,7 +71,7 @@ export const editarStream = async (req, res) => {
 
       pool.query(
         consultasStreams.editarStream,
-        [url, id_fecha, orden, id],
+        [codigo_embebido, id_fecha, orden, estado, id],
         (err, results) => {
           if (err) throw new Error('No pudimos editar el stream.');
           res.status(200).send('Stream editado correctamente.');

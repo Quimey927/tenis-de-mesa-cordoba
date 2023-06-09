@@ -1,12 +1,15 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLoaderData } from 'react-router-dom';
 
 import Header from '../../components/Usuario/Layout/Header/Header';
 import Footer from '../../components/Usuario/Layout/Footer/Footer';
+import { obtenerStreamActivo } from '../../api';
 
 const RootLayout = () => {
+  const streamActivo = useLoaderData();
+
   return (
     <>
-      <Header />
+      <Header streamActivo={streamActivo} />
       <main className="main-usuario">
         <Outlet />
       </main>
@@ -16,3 +19,7 @@ const RootLayout = () => {
 };
 
 export default RootLayout;
+
+export function loader() {
+  return obtenerStreamActivo();
+}

@@ -22,6 +22,7 @@
 .nav-links {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
   list-style: none;
   padding: 0;
@@ -58,6 +59,20 @@
 .header__buscar input:focus::placeholder {
   color: var(--color-white);
   opacity: 1;
+}
+
+.vivo {
+  background-color: var(--color-primary);
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+}
+
+.vivo a {
+  color: white;
+}
+
+.vivo a:hover {
+  color: var(--color-black);
 }
 
 @media (min-width: 550px) {

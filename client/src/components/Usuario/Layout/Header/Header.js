@@ -5,7 +5,7 @@ import Logo from './Logo/Logo';
 import NavLinkItem from './NavLinkItem/NavLinkItem';
 import classes from './Header.module.css';
 
-const Header = () => {
+const Header = ({ streamActivo }) => {
   return (
     <header className={classes.header}>
       <nav>
@@ -17,6 +17,13 @@ const Header = () => {
           <NavLinkItem to="/fechas" textoInterno="Fechas" />
           <NavLinkItem to="/torneos" textoInterno="Torneos" />
           <NavLinkItem to="/jugadores" textoInterno="Jugadores" />
+          {streamActivo.length > 0 && (
+            <NavLinkItem
+              className={classes.vivo}
+              to="/vivo"
+              textoInterno="Vivo"
+            />
+          )}
         </ul>
 
         <div className={classes['header__buscar']}>

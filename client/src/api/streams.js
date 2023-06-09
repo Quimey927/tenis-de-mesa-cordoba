@@ -26,6 +26,17 @@ export const crearStream = async (idFecha, datosStream) => {
   return redirect(`/admin/fechas/${idFecha}`);
 };
 
+export const obtenerStreamActivo = async () => {
+  const response = await fetch(`${baseUrl}/activo`);
+  if (!response.ok) {
+    throw json(
+      { mesage: 'No pudimos cargar el stream activo.' },
+      { status: 500 }
+    );
+  }
+  return response.json();
+};
+
 export const obtenerStream = async (id) => {
   const response = await fetch(`${baseUrl}/${id}`);
   if (!response.ok) {

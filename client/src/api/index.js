@@ -61,6 +61,7 @@ export {
 export {
   obtenerStreams,
   crearStream,
+  obtenerStreamActivo,
   obtenerStream,
   editarStream,
   borrarStream,
