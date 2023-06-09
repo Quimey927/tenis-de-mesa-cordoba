@@ -94,7 +94,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/torneos" />,
+        element: <Navigate to="/fechas" />,
       },
 
       {
