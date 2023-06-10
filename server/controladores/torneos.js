@@ -4,11 +4,12 @@ import consultasTorneos from '../db/consultas/torneos.js';
 export const obtenerTorneos = async (req, res) => {
   try {
     pool.query(consultasTorneos.obtenerTorneos, (err, results) => {
-      if (err) throw new Error('No pudimos cargar los torneos.');
+      if (err) throw new Error(err);
       res.status(200).json(results.rows);
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos cargar los torneos.');
   }
 };
 
@@ -42,12 +43,13 @@ export const crearTorneo = async (req, res) => {
         slug,
       ],
       (err, results) => {
-        if (err) throw new Error('No pudimos crear el torneo.');
+        if (err) throw new Error(err);
         res.status(201).send('Torneo creado exitosamente.');
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos crear el torneo.');
   }
 };
 
@@ -56,11 +58,12 @@ export const obtenerTorneo = async (req, res) => {
 
   try {
     pool.query(consultasTorneos.obtenerTorneo, [id], (err, results) => {
-      if (err) throw new Error('No pudimos encontrar el torneo.');
+      if (err) throw new Error(err);
       res.status(200).json(results.rows);
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos encontrar el torneo.');
   }
 };
 
@@ -72,12 +75,13 @@ export const obtenerTorneoPorSlug = async (req, res) => {
       consultasTorneos.obtenerTorneoPorSlug,
       [slugTorneo],
       (err, results) => {
-        if (err) throw new Error('No pudimos encontrar el torneo.');
+        if (err) throw new Error(err);
         res.status(200).json(results.rows);
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos encontrar el torneo.');
   }
 };
 
@@ -95,12 +99,12 @@ export const editarTorneo = async (req, res) => {
 
   try {
     pool.query(consultasTorneos.obtenerTorneo, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el torneo');
+      if (err) throw new Error(err);
 
       const torneoNoEncontrado = !results.rows.length;
 
       if (torneoNoEncontrado) {
-        res.send('El torneo no existe en la base de datos.');
+        res.status(200).send('El torneo no existe en la base de datos.');
       }
 
       pool.query(
@@ -116,13 +120,14 @@ export const editarTorneo = async (req, res) => {
           id,
         ],
         (err, results) => {
-          if (err) throw new Error('No pudimos editar el torneo.');
+          if (err) throw new Error(err);
           res.status(200).send('Torneo editado correctamente.');
         }
       );
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos editar el torneo.');
   }
 };
 
@@ -131,20 +136,21 @@ export const borrarTorneo = async (req, res) => {
 
   try {
     pool.query(consultasTorneos.obtenerTorneo, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el equipo.');
+      if (err) throw new Error(err);
 
       const torneoNoEncontrado = !results.rows.length;
 
       if (torneoNoEncontrado) {
-        res.send('El torneo no existe en la base de datos.');
+        res.status(200).send('El torneo no existe en la base de datos.');
       }
 
       pool.query(consultasTorneos.borrarTorneo, [id], (err, results) => {
-        if (err) throw new Error('No pudimos eliminar el torneo.');
+        if (err) throw new Error(err);
         res.status(200).send('Torneo eliminado correctamente.');
       });
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos eliminar el torneo.');
   }
 };

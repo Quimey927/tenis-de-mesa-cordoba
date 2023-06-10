@@ -4,11 +4,12 @@ import consultasFechas from '../db/consultas/fechas.js';
 export const obtenerFechas = async (req, res) => {
   try {
     pool.query(consultasFechas.obtenerFechas, (err, results) => {
-      if (err) throw new Error('No pudimos cargar las fechas.');
+      if (err) throw new Error(err);
       res.status(200).json(results.rows);
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos cargar las fechas.');
   }
 };
 
@@ -17,11 +18,12 @@ export const obtenerFechasTorneo = async (req, res) => {
 
   try {
     pool.query(consultasFechas.obtenerFechasTorneo, [id], (err, results) => {
-      if (err) throw new Error('No pudimos cargar las fechas del torneo.');
+      if (err) throw new Error(err);
       res.status(200).json(results.rows);
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos cargar las fechas del torneo.');
   }
 };
 
@@ -40,12 +42,13 @@ export const obtenerFechasDelMes = async (req, res) => {
       consultasFechas.obtenerFechasDelMes,
       [fecha_limite_inicial, fecha_limite_final],
       (err, results) => {
-        if (err) throw new Error('No pudimos encontrar las fechas del mes.');
+        if (err) throw new Error(err);
         res.status(200).json(results.rows);
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos encontrar las fechas del mes.');
   }
 };
 
@@ -73,12 +76,13 @@ export const crearFecha = async (req, res) => {
         slug,
       ],
       (err, results) => {
-        if (err) throw new Error('No pudimos crear la fecha.');
+        if (err) throw new Error(err);
         res.status(201).send('Fecha creada exitosamente.');
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos crear la fecha.');
   }
 };
 
@@ -87,11 +91,12 @@ export const obtenerFecha = async (req, res) => {
 
   try {
     pool.query(consultasFechas.obtenerFecha, [id], (err, results) => {
-      if (err) throw new Error('No pudimos encontrar la fecha.');
+      if (err) throw new Error(err);
       res.status(200).json(results.rows);
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos encontrar la fecha.');
   }
 };
 
@@ -103,12 +108,13 @@ export const obtenerFechaPorSlug = async (req, res) => {
       consultasFechas.obtenerFechaPorSlug,
       [slugFecha],
       (err, results) => {
-        if (err) throw new Error('No pudimos encontrar la fecha.');
+        if (err) throw new Error(err);
         res.status(200).json(results.rows);
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos encontrar la fecha.');
   }
 };
 
@@ -118,12 +124,12 @@ export const editarFecha = async (req, res) => {
 
   try {
     pool.query(consultasFechas.obtenerFecha, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar la fecha.');
+      if (err) throw new Error(err);
 
       const fechaNoEncontrada = !results.rows.length;
 
       if (fechaNoEncontrada) {
-        res.send('La fecha no existe en la base de datos.');
+        res.status(200).send('La fecha no existe en la base de datos.');
       }
 
       pool.query(
@@ -137,13 +143,14 @@ export const editarFecha = async (req, res) => {
           id,
         ],
         (err, results) => {
-          if (err) throw new Error('No pudimos editar la fecha.');
+          if (err) throw new Error(err);
           res.status(200).send('Fecha editada correctamente.');
         }
       );
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos editar la fecha.');
   }
 };
 
@@ -152,20 +159,21 @@ export const borrarFecha = async (req, res) => {
 
   try {
     pool.query(consultasFechas.obtenerFecha, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar la fecha.');
+      if (err) throw new Error(err);
 
       const fechaNoEncontrada = !results.rows.length;
 
       if (fechaNoEncontrada) {
-        res.send('La fecha no existe en la base de datos.');
+        res.status(200).send('La fecha no existe en la base de datos.');
       }
 
       pool.query(consultasFechas.borrarFecha, [id], (err, results) => {
-        if (err) throw new Error('No pudimos eliminar la fecha.');
+        if (err) throw new Error(err);
         res.status(200).send('Fecha eliminada correctamente.');
       });
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos eliminar la fecha.');
   }
 };

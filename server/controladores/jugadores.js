@@ -4,11 +4,12 @@ import consultasJugadores from '../db/consultas/jugadores.js';
 export const obtenerJugadores = async (req, res) => {
   try {
     pool.query(consultasJugadores.obtenerJugadores, (err, results) => {
-      if (err) throw new Error('No pudimos cargar los jugadores.');
+      if (err) throw new Error(err);
       res.status(200).json(results.rows);
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos cargar los jugadores.');
   }
 };
 
@@ -42,12 +43,13 @@ export const crearJugador = async (req, res) => {
         slug,
       ],
       (err, results) => {
-        if (err) throw new Error('No pudimos crear el jugador.');
+        if (err) throw new Error(err);
         res.status(201).send('Jugador creado exitosamente.');
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos crear el jugador.');
   }
 };
 
@@ -56,11 +58,12 @@ export const obtenerJugador = async (req, res) => {
 
   try {
     pool.query(consultasJugadores.obtenerJugador, [id], (err, results) => {
-      if (err) throw new Error('No pudimos encontrar el jugador.');
+      if (err) throw new Error(err);
       res.status(200).json(results.rows);
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos encontrar el jugador.');
   }
 };
 
@@ -81,12 +84,12 @@ export const editarJugador = async (req, res) => {
 
   try {
     pool.query(consultasJugadores.obtenerJugador, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el jugador.');
+      if (err) throw new Error(err);
 
       const jugadorNoEncontrado = !results.rows.length;
 
       if (jugadorNoEncontrado) {
-        res.send('El jugador no existe en la base de datos.');
+        res.status(200).send('El jugador no existe en la base de datos.');
       }
 
       pool.query(
@@ -105,13 +108,14 @@ export const editarJugador = async (req, res) => {
           id,
         ],
         (err, results) => {
-          if (err) throw new Error('No pudimos editar el jugador.');
+          if (err) throw new Error(err);
           res.status(200).send('Jugador editado correctamente.');
         }
       );
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos editar el jugador.');
   }
 };
 
@@ -120,20 +124,21 @@ export const borrarJugador = async (req, res) => {
 
   try {
     pool.query(consultasJugadores.obtenerJugador, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el jugador.');
+      if (err) throw new Error(err);
 
       const jugadorNoEncontrado = !results.rows.length;
 
       if (jugadorNoEncontrado) {
-        res.send('El jugador no existe en la base de datos.');
+        res.status(200).send('El jugador no existe en la base de datos.');
       }
 
       pool.query(consultasJugadores.borrarJugador, [id], (err, results) => {
-        if (err) throw new Error('No pudimos eliminar el jugador.');
+        if (err) throw new Error(err);
         res.status(200).send('Jugador eliminado correctamente.');
       });
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos eliminar el jugador.');
   }
 };

@@ -9,13 +9,13 @@ export const obtenerCategoriasFecha = async (req, res) => {
       consultasCategoriasFechas.obtenerCategoriasFecha,
       [idFecha],
       (err, results) => {
-        if (err)
-          throw new Error('No pudimos cargar las categorías de la fecha.');
+        if (err) throw new Error(err);
         res.status(200).json(results.rows);
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos cargar las categorías de la fecha.');
   }
 };
 
@@ -27,12 +27,13 @@ export const crearCategoriaFecha = async (req, res) => {
       consultasCategoriasFechas.crearCategoriaFecha,
       [categoria, id_fecha, orden],
       (err, results) => {
-        if (err) throw new Error('No pudimos crear la categoría de la fecha.');
+        if (err) throw new Error(err);
         res.status(201).send('Categoría de la fecha creada exitosamente.');
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos crear la categoría de la fecha.');
   }
 };
 
@@ -44,13 +45,13 @@ export const obtenerCategoriaFecha = async (req, res) => {
       consultasCategoriasFechas.obtenerCategoriaFecha,
       [id],
       (err, results) => {
-        if (err)
-          throw new Error('No pudimos encontrar la categoría de la fecha.');
+        if (err) throw new Error(err);
         res.status(200).json(results.rows);
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos encontrar la categoría de la fecha.');
   }
 };
 
@@ -63,27 +64,31 @@ export const editarCategoriaFecha = async (req, res) => {
       consultasCategoriasFechas.obtenerCategoriaFecha,
       [id],
       (err, results) => {
-        if (err) throw new Error('No pudimos buscar la categoría de la fecha.');
+        if (err) throw new Error(err);
 
         const categoriaFechaNoEncontrada = !results.rows.length;
 
         if (categoriaFechaNoEncontrada) {
-          res.send('La categoría de la fecha no existe en la base de datos.');
+          res
+            .status(200)
+            .send('La categoría de la fecha no existe en la base de datos.');
         }
 
         pool.query(
           consultasCategoriasFechas.editarCategoriaFecha,
           [categoria, id_fecha, orden, id],
           (err, results) => {
-            if (err)
-              throw new Error('No pudimos editar la categoría del fecha.');
-            res.status(200).send('Categoría del fecha editada correctamente.');
+            if (err) throw new Error(err);
+            res
+              .status(200)
+              .send('Categoría de la fecha editada correctamente.');
           }
         );
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos editar la categoría de la fecha.');
   }
 };
 
@@ -95,20 +100,21 @@ export const borrarCategoriaFecha = async (req, res) => {
       consultasCategoriasFechas.obtenerCategoriaFecha,
       [id],
       (err, results) => {
-        if (err) throw new Error('No pudimos buscar la categoría de la fecha.');
+        if (err) throw new Error(err);
 
         const categoriaFechaNoEncontrada = !results.rows.length;
 
         if (categoriaFechaNoEncontrada) {
-          res.send('La categoría de la fecha no existe en la base de datos.');
+          res
+            .status(200)
+            .send('La categoría de la fecha no existe en la base de datos.');
         }
 
         pool.query(
           consultasCategoriasFechas.borrarCategoriaFecha,
           [id],
           (err, results) => {
-            if (err)
-              throw new Error('No pudimos eliminar la categoría de la fecha.');
+            if (err) throw new Error(err);
             res
               .status(200)
               .send('Categoría de la fecha eliminada correctamente.');
@@ -117,6 +123,7 @@ export const borrarCategoriaFecha = async (req, res) => {
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos eliminar la categoría de la fecha.');
   }
 };

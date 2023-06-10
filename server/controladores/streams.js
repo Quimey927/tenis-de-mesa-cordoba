@@ -6,11 +6,12 @@ export const obtenerStreams = async (req, res) => {
 
   try {
     pool.query(consultasStreams.obtenerStreams, [idFecha], (err, results) => {
-      if (err) throw new Error('No pudimos cargar los streams.');
+      if (err) throw new Error(err);
       res.status(200).json(results.rows);
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos cargar los streams.');
   }
 };
 
@@ -22,23 +23,25 @@ export const crearStream = async (req, res) => {
       consultasStreams.crearStream,
       [codigo_embebido, id_fecha, orden, estado],
       (err, results) => {
-        if (err) throw new Error('No pudimos crear el stream.');
+        if (err) throw new Error(err);
         res.status(201).send('Stream creado exitosamente.');
       }
     );
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos crear el stream.');
   }
 };
 
 export const obtenerStreamActivo = async (req, res) => {
   try {
     pool.query(consultasStreams.obtenerStreamActivo, (err, results) => {
-      if (err) throw new Error('No pudimos encontrar el stream activo.');
+      if (err) throw new Error(err);
       res.status(200).json(results.rows);
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos encontrar el stream activo.');
   }
 };
 
@@ -47,11 +50,12 @@ export const obtenerStream = async (req, res) => {
 
   try {
     pool.query(consultasStreams.obtenerStream, [id], (err, results) => {
-      if (err) throw new Error('No pudimos encontrar el stream.');
+      if (err) throw new Error(err);
       res.status(200).json(results.rows);
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos encontrar el stream.');
   }
 };
 
@@ -61,25 +65,26 @@ export const editarStream = async (req, res) => {
 
   try {
     pool.query(consultasStreams.obtenerStream, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el stream.');
+      if (err) throw new Error(err);
 
       const streamNoEncontrado = !results.rows.length;
 
       if (streamNoEncontrado) {
-        res.send('El stream no existe en la base de datos.');
+        res.status(200).send('El stream no existe en la base de datos.');
       }
 
       pool.query(
         consultasStreams.editarStream,
         [codigo_embebido, id_fecha, orden, estado, id],
         (err, results) => {
-          if (err) throw new Error('No pudimos editar el stream.');
+          if (err) throw new Error(err);
           res.status(200).send('Stream editado correctamente.');
         }
       );
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos editar el stream.');
   }
 };
 
@@ -88,20 +93,21 @@ export const borrarStream = async (req, res) => {
 
   try {
     pool.query(consultasStreams.obtenerStream, [id], (err, results) => {
-      if (err) throw new Error('No pudimos buscar el stream.');
+      if (err) throw new Error(err);
 
       const streamNoEncontrado = !results.rows.length;
 
       if (streamNoEncontrado) {
-        res.send('El stream no existe en la base de datos.');
+        res.status(200).send('El stream no existe en la base de datos.');
       }
 
       pool.query(consultasStreams.borrarStream, [id], (err, results) => {
-        if (err) throw new Error('No pudimos eliminar el stream.');
+        if (err) throw new Error(err);
         res.status(200).send('Stream eliminado correctamente.');
       });
     });
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.status(500).send('No pudimos eliminar el stream.');
   }
 };
