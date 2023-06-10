@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import { filtrarArrayTabla } from '../../../utils/filtrarArrayTabla';
 import { capitalizar } from '../../../utils/capitalizar';
 import classes from './AdminTablaPagina.module.css';
 
@@ -13,27 +14,11 @@ const AdminTablaPagina = ({
   mostrarCantidadEntradasYFiltro,
   prefijoLinkEditar = '',
 }) => {
-  const [arrayFiltrado, setArrayFiltrado] = useState(array);
   const [filtro, setFiltro] = useState('');
 
   const controladorCambiarFiltro = (evt) => setFiltro(evt.target.value);
 
-  useEffect(() => {
-    if (filtro.trim() === '') setArrayFiltrado(array);
-
-    const nuevoArray = array.filter((elem) => {
-      let elemEsFiltrado = false;
-      for (let columna of encabezadosColumnas) {
-        if (
-          elem[columna].toString().toLowerCase().includes(filtro.toLowerCase())
-        )
-          elemEsFiltrado = true;
-      }
-      return elemEsFiltrado;
-    });
-
-    setArrayFiltrado(nuevoArray);
-  }, [filtro, array, encabezadosColumnas]);
+  const arrayFiltrado = filtrarArrayTabla(filtro, array, encabezadosColumnas);
 
   return (
     <div className={classes['admin-tabla-pagina']}>
@@ -41,7 +26,11 @@ const AdminTablaPagina = ({
         <div className={classes.entradas}>
           <span>Total de entradas: {array.length}</span>
           <div className={classes.buscar}>
-            <input id="search" onChange={controladorCambiarFiltro} />
+            <input
+              id="search"
+              onChange={controladorCambiarFiltro}
+              value={filtro}
+            />
             <label htmlFor="search">Buscar</label>
           </div>
         </div>
