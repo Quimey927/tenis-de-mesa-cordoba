@@ -30,12 +30,12 @@ const PaginaEditarFecha = () => {
 
       <ListaStreams
         streams={streams}
-        navegarA={`/admin/fechas/${fecha[0].id}`}
+        navegarA={`/admin/fechas/${fecha[0].id}/editar`}
       />
 
       <ListaCategoriasFecha
         categoriasFecha={categoriasFecha}
-        navegarA={`/admin/fechas/${fecha[0].id}`}
+        navegarA={`/admin/fechas/${fecha[0].id}/editar`}
       />
     </>
   );

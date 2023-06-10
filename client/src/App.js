@@ -184,7 +184,7 @@ const router = createBrowserRouter([
             action: actionManipularTorneo,
           },
           {
-            path: ':idTorneo',
+            path: ':idTorneo/editar',
             children: [
               {
                 index: true,
@@ -202,7 +202,7 @@ const router = createBrowserRouter([
                     action: actionManipularCategoriaTorneo,
                   },
                   {
-                    path: ':idCategoriaTorneo',
+                    path: ':idCategoriaTorneo/editar',
                     element: <PaginaEditarCategoriaTorneo />,
                     loader: loaderCategoriaTorneoAdmin,
                     action: actionManipularCategoriaTorneo,
@@ -229,7 +229,7 @@ const router = createBrowserRouter([
             action: actionManipularFecha,
           },
           {
-            path: ':idFecha',
+            path: ':idFecha/editar',
             children: [
               {
                 index: true,
@@ -247,7 +247,7 @@ const router = createBrowserRouter([
                     action: actionManipularStream,
                   },
                   {
-                    path: ':idStream',
+                    path: ':idStream/editar',
                     element: <PaginaEditarStream />,
                     loader: loaderStreamAdmin,
                     action: actionManipularStream,
@@ -264,7 +264,7 @@ const router = createBrowserRouter([
                     action: actionManipularCategoriaFecha,
                   },
                   {
-                    path: ':idCategoriaFecha',
+                    path: ':idCategoriaFecha/editar',
                     element: <PaginaEditarCategoriaFecha />,
                     loader: loaderCategoriaFechaAdmin,
                     action: actionManipularCategoriaFecha,
@@ -291,7 +291,7 @@ const router = createBrowserRouter([
             action: actionManipularJugador,
           },
           {
-            path: ':idJugador',
+            path: ':idJugador/editar',
             element: <PaginaEditarJugador />,
             loader: loaderJugadorAdmin,
             action: actionManipularJugador,
@@ -314,7 +314,7 @@ const router = createBrowserRouter([
             action: actionManipularClub,
           },
           {
-            path: ':idClub',
+            path: ':idClub/editar',
             element: <PaginaEditarClub />,
             loader: loaderClubAdmin,
             action: actionManipularClub,
@@ -337,7 +337,7 @@ const router = createBrowserRouter([
             action: actionManipularCiudad,
           },
           {
-            path: ':idCiudad',
+            path: ':idCiudad/editar',
             element: <PaginaEditarCiudad />,
             loader: loaderCiudadAdmin,
             action: actionManipularCiudad,

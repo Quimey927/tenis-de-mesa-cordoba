@@ -29,7 +29,7 @@ export const crearCategoriaFecha = async (idFecha, datosCategoriaFecha) => {
     );
   }
 
-  return redirect(`/admin/fechas/${idFecha}`);
+  return redirect(`/admin/fechas/${idFecha}/editar`);
 };
 
 export const obtenerCategoriaFecha = async (id) => {
@@ -63,7 +63,7 @@ export const editarCategoriaFecha = async (
     );
   }
 
-  return redirect(`/admin/fechas/${idFecha}`);
+  return redirect(`/admin/fechas/${idFecha}/editar`);
 };
 
 export const borrarCategoriaFecha = async (id) => {

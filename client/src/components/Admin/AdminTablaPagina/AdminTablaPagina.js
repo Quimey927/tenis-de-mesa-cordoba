@@ -57,7 +57,7 @@ const AdminTablaPagina = ({
               ))}
               <td role="cell" data-cell="editar">
                 <Link
-                  to={`${prefijoLinkEditar}${elem.id.toString()}`}
+                  to={`${prefijoLinkEditar}${elem.id.toString()}/editar`}
                   className={classes['btn-editar']}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} />

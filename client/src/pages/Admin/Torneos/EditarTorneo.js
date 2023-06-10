@@ -25,12 +25,12 @@ const PaginaEditarTorneo = () => {
 
       <ListaCategoriasTorneo
         categoriasTorneo={categoriasTorneo ? categoriasTorneo : []}
-        navegarA={`/admin/torneos/${torneo[0].id}`}
+        navegarA={`/admin/torneos/${torneo[0].id}/editar`}
       />
 
       <ListaFechasTorneo
         fechasTorneo={fechasTorneo ? fechasTorneo : []}
-        navegarA={`/admin/torneos/${torneo[0].id}`}
+        navegarA={`/admin/torneos/${torneo[0].id}/editar`}
         state={torneo[0].id}
       />
     </>

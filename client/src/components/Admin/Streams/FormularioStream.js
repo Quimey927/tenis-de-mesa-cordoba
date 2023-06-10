@@ -13,7 +13,7 @@ const FormularioStream = ({ method, stream, idFecha }) => {
           ? ' Agregar categoría fecha'
           : `Editar ${stream[0].orden}`
       }
-      navegarAlCancelar={`/admin/fechas/${idFecha}`}
+      navegarAlCancelar={`/admin/fechas/${idFecha}/editar`}
     >
       <Input
         id="orden"
