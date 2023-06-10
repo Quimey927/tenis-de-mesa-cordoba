@@ -29,7 +29,6 @@ const ListaTorneos = ({ torneos }) => {
         array={torneos}
         controladorBorrarElemento={controladorBorrarTorneo}
         encabezadosColumnas={['titulo', 'temporada']}
-        mostrarCantidadEntradasYFiltro={true}
       />
     </>
   );

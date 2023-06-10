@@ -11,7 +11,7 @@ const AdminTablaPagina = ({
   array,
   controladorBorrarElemento,
   encabezadosColumnas,
-  mostrarCantidadEntradasYFiltro,
+  mostrarCantidadEntradasYFiltro = true,
   prefijoLinkEditar = '',
 }) => {
   const [filtro, setFiltro] = useState('');

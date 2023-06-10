@@ -29,7 +29,6 @@ const ListaJugadores = ({ jugadores }) => {
         array={jugadores}
         controladorBorrarElemento={controladorBorrarJugador}
         encabezadosColumnas={['nombre', 'apellido']}
-        mostrarCantidadEntradasYFiltro={true}
       />
     </>
   );
