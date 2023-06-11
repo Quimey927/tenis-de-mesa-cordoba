@@ -1,0 +1,64 @@
+.info {
+  margin: 2rem auto;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.info small {
+  font-weight: 400;
+  line-height: 1;
+  color: #777;
+}
+
+.acciones {
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-cancelar,
+.btn-editar {
+  display: inline-block;
+  border: none;
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 300ms ease;
+}
+
+.btn-cancelar {
+  background-color: #eee;
+  border: 1px solid #aaa;
+  color: #333;
+}
+
+.btn-cancelar:hover {
+  background-color: #ccc;
+}
+
+.btn-editar {
+  background-color: #337ab7;
+  border: 1px solid #2e6da4;
+  color: white;
+}
+
+.btn-editar:hover {
+  background-color: #2e6da4;
+}
+
+@media (min-width: 768px) {
+  .columnas {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

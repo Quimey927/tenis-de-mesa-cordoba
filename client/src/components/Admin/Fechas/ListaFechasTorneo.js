@@ -32,6 +32,7 @@ const ListaFechasTorneo = ({ fechasTorneo, navegarA, state }) => {
         encabezadosColumnas={['nombre', 'num_fecha']}
         mostrarCantidadEntradasYFiltro={false}
         prefijoLinkEditar="../../fechas/"
+        tieneSufijoEditar={false}
       />
     </>
   );

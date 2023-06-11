@@ -31,6 +31,7 @@ const ListaCategoriasTorneo = ({ categoriasTorneo, navegarA }) => {
         encabezadosColumnas={['categoria', 'orden']}
         mostrarCantidadEntradasYFiltro={false}
         prefijoLinkEditar="categorias/"
+        tieneSufijoEditar={true}
       />
     </>
   );

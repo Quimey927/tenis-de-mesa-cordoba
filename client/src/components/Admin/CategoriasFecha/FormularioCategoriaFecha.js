@@ -11,7 +11,7 @@ const FormularioCategoriaFecha = ({ method, categoriaFecha, idFecha }) => {
           ? ' Agregar categoría fecha'
           : `Editar ${categoriaFecha[0].categoria}`
       }
-      navegarAlCancelar={`/admin/fechas/${idFecha}/editar`}
+      navegarAlCancelar={`/admin/fechas/${idFecha}`}
     >
       <Input
         id="categoria"

@@ -13,6 +13,7 @@ const AdminTablaPagina = ({
   encabezadosColumnas,
   mostrarCantidadEntradasYFiltro = true,
   prefijoLinkEditar = '',
+  tieneSufijoEditar = true,
 }) => {
   const [filtro, setFiltro] = useState('');
 
@@ -57,7 +58,9 @@ const AdminTablaPagina = ({
               ))}
               <td role="cell" data-cell="editar">
                 <Link
-                  to={`${prefijoLinkEditar}${elem.id.toString()}/editar`}
+                  to={`${prefijoLinkEditar}${elem.id.toString()}${
+                    tieneSufijoEditar ? '/editar' : ''
+                  }`}
                   className={classes['btn-editar']}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} />

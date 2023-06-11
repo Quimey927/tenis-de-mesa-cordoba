@@ -29,7 +29,7 @@ export const crearCategoriaTorneo = async (idTorneo, datosCategoriaTorneo) => {
     );
   }
 
-  return redirect(`/admin/torneos/${idTorneo}/editar`);
+  return redirect(`/admin/torneos/${idTorneo}`);
 };
 
 export const obtenerCategoriaTorneo = async (id) => {
@@ -63,7 +63,7 @@ export const editarCategoriaTorneo = async (
     );
   }
 
-  return redirect(`/admin/torneos/${idTorneo}/editar`);
+  return redirect(`/admin/torneos/${idTorneo}`);
 };
 
 export const borrarCategoriaTorneo = async (id) => {

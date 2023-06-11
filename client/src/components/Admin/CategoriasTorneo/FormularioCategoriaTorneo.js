@@ -11,7 +11,7 @@ const FormularioCategoriaTorneo = ({ method, categoriaTorneo, idTorneo }) => {
           ? ' Agregar categoría torneo'
           : `Editar ${categoriaTorneo[0].categoria}`
       }
-      navegarAlCancelar={`/admin/torneos/${idTorneo}/editar`}
+      navegarAlCancelar={`/admin/torneos/${idTorneo}`}
     >
       <Input
         id="categoria"

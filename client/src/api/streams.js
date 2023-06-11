@@ -23,7 +23,7 @@ export const crearStream = async (idFecha, datosStream) => {
     throw json({ message: 'No pudimos crear el stream.' }, { status: 500 });
   }
 
-  return redirect(`/admin/fechas/${idFecha}/editar`);
+  return redirect(`/admin/fechas/${idFecha}`);
 };
 
 export const obtenerStreamActivo = async () => {
@@ -58,7 +58,7 @@ export const editarStream = async (idStream, idFecha, datosStream) => {
     throw json({ message: 'No pudimos editar el stream.' }, { status: 500 });
   }
 
-  return redirect(`/admin/fechas/${idFecha}/editar`);
+  return redirect(`/admin/fechas/${idFecha}`);
 };
 
 export const borrarStream = async (id) => {

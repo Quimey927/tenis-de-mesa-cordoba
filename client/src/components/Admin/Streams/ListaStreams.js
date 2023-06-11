@@ -22,7 +22,7 @@ const ListaStreams = ({ streams, navegarA }) => {
     <>
       <AdminTituloPagina
         titulo="Streams"
-        to="streams/nuevo"
+        to="editar/streams/nuevo"
         textoInterno="Agregar Stream"
       />
       <AdminTablaPagina
@@ -30,7 +30,8 @@ const ListaStreams = ({ streams, navegarA }) => {
         controladorBorrarElemento={controladorBorrarStream}
         encabezadosColumnas={['orden']}
         mostrarCantidadEntradasYFiltro={false}
-        prefijoLinkEditar="streams/"
+        prefijoLinkEditar="editar/streams/"
+        tieneSufijoEditar={true}
       />
     </>
   );

@@ -50,7 +50,7 @@ export const crearFecha = async (datosFecha, idTorneo) => {
     throw json({ message: 'No pudimos crear la fecha.' }, { status: 500 });
   }
 
-  return redirect(`/admin/torneos/${idTorneo}/editar`);
+  return redirect(`/admin/torneos/${idTorneo}`);
 };
 
 export const obtenerFecha = async (id) => {
@@ -85,7 +85,7 @@ export const editarFecha = async (id, datosFecha, idTorneo) => {
     throw json({ message: 'No pudimos editar la fecha.' }, { status: 500 });
   }
 
-  return redirect(`/admin/torneos/${idTorneo}/editar`);
+  return redirect(`/admin/torneos/${idTorneo}`);
 };
 
 export const borrarFecha = async (id) => {

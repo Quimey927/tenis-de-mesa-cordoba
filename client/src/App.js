@@ -33,6 +33,9 @@ import PaginaEditarTorneo, {
 } from './pages/Admin/Torneos/EditarTorneo';
 import { action as actionManipularTorneo } from './components/Admin/Torneos/FormularioTorneo';
 import PaginaNuevoTorneo from './pages/Admin/Torneos/NuevoTorneo';
+import PaginaInfoTorneo, {
+  loader as loaderInfoTorneoAdmin,
+} from './pages/Admin/Torneos/InfoTorneo';
 
 import PaginaEditarCategoriaTorneo, {
   loader as loaderCategoriaTorneoAdmin,
@@ -60,6 +63,9 @@ import PaginaEditarFecha, {
 } from './pages/Admin/Fechas/EditarFecha';
 import { action as actionManipularFecha } from './components/Admin/Fechas/FormularioFecha';
 import PaginaNuevaFecha from './pages/Admin/Fechas/NuevaFecha';
+import PaginaInfoFecha, {
+  loader as loaderInfoFechaAdmin,
+} from './pages/Admin/Fechas/InfoFecha';
 
 import PaginaJugadoresAdmin, {
   loader as loaderJugadoresAdmin,
@@ -184,13 +190,12 @@ const router = createBrowserRouter([
             action: actionManipularTorneo,
           },
           {
-            path: ':idTorneo/editar',
+            path: ':idTorneo',
             children: [
               {
                 index: true,
-                element: <PaginaEditarTorneo />,
-                loader: loaderTorneoAdmin,
-                action: actionManipularTorneo,
+                element: <PaginaInfoTorneo />,
+                loader: loaderInfoTorneoAdmin,
               },
               {
                 path: 'categorias',
@@ -209,7 +214,21 @@ const router = createBrowserRouter([
                   },
                 ],
               },
+              {
+                path: 'editar',
+                children: [
+                  {
+                    index: true,
+                    element: <PaginaEditarTorneo />,
+                    loader: loaderTorneoAdmin,
+                    action: actionManipularTorneo,
+                  },
+                ],
+              },
             ],
+          },
+          {
+            path: ':idTorneo/editar',
           },
         ],
       },
@@ -229,45 +248,55 @@ const router = createBrowserRouter([
             action: actionManipularFecha,
           },
           {
-            path: ':idFecha/editar',
+            path: ':idFecha',
             children: [
               {
                 index: true,
-                element: <PaginaEditarFecha />,
-                loader: loaderFechaAdmin,
-                action: actionManipularFecha,
+                element: <PaginaInfoFecha />,
+                loader: loaderInfoFechaAdmin,
               },
               {
-                path: 'streams',
+                path: 'editar',
                 children: [
                   {
-                    path: 'nuevo',
-                    element: <PaginaNuevoStream />,
-                    loader: loaderStreamAdmin,
-                    action: actionManipularStream,
+                    index: true,
+                    element: <PaginaEditarFecha />,
+                    loader: loaderFechaAdmin,
+                    action: actionManipularFecha,
                   },
                   {
-                    path: ':idStream/editar',
-                    element: <PaginaEditarStream />,
-                    loader: loaderStreamAdmin,
-                    action: actionManipularStream,
+                    path: 'streams',
+                    children: [
+                      {
+                        path: 'nuevo',
+                        element: <PaginaNuevoStream />,
+                        loader: loaderStreamAdmin,
+                        action: actionManipularStream,
+                      },
+                      {
+                        path: ':idStream/editar',
+                        element: <PaginaEditarStream />,
+                        loader: loaderStreamAdmin,
+                        action: actionManipularStream,
+                      },
+                    ],
                   },
-                ],
-              },
-              {
-                path: 'categorias',
-                children: [
                   {
-                    path: 'nuevo',
-                    element: <PaginaNuevaCategoriaFecha />,
-                    loader: loaderCategoriaFechaAdmin,
-                    action: actionManipularCategoriaFecha,
-                  },
-                  {
-                    path: ':idCategoriaFecha/editar',
-                    element: <PaginaEditarCategoriaFecha />,
-                    loader: loaderCategoriaFechaAdmin,
-                    action: actionManipularCategoriaFecha,
+                    path: 'categorias',
+                    children: [
+                      {
+                        path: 'nuevo',
+                        element: <PaginaNuevaCategoriaFecha />,
+                        loader: loaderCategoriaFechaAdmin,
+                        action: actionManipularCategoriaFecha,
+                      },
+                      {
+                        path: ':idCategoriaFecha/editar',
+                        element: <PaginaEditarCategoriaFecha />,
+                        loader: loaderCategoriaFechaAdmin,
+                        action: actionManipularCategoriaFecha,
+                      },
+                    ],
                   },
                 ],
               },

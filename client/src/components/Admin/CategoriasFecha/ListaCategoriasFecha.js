@@ -22,7 +22,7 @@ const ListaCategoriasFecha = ({ categoriasFecha, navegarA }) => {
     <>
       <AdminTituloPagina
         titulo="Categorías de la fecha"
-        to="categorias/nuevo"
+        to="editar/categorias/nuevo"
         textoInterno="Agregar Categoría"
       />
       <AdminTablaPagina
@@ -30,7 +30,7 @@ const ListaCategoriasFecha = ({ categoriasFecha, navegarA }) => {
         controladorBorrarElemento={controladorBorrarCategoriaFecha}
         encabezadosColumnas={['categoria', 'orden']}
         mostrarCantidadEntradasYFiltro={false}
-        prefijoLinkEditar="categorias/"
+        prefijoLinkEditar="editar/categorias/"
       />
     </>
   );

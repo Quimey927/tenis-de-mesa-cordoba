@@ -61,7 +61,7 @@ export const editarTorneo = async (id, datosTorneo) => {
     throw json({ message: 'No pudimos editar el torneo.' }, { status: 500 });
   }
 
-  return redirect('/admin/torneos');
+  return redirect(`/admin/torneos/${id}`);
 };
 
 export const borrarTorneo = async (id) => {
