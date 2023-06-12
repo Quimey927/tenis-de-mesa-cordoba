@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
-import { meses } from '../../../../../utils/meses';
+import { meses } from '../../../../../utils/funcionesSobreFechas';
 import classes from './Fecha.module.css';
 
 const Fecha = ({ fecha }) => {

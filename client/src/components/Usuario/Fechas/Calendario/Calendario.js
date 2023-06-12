@@ -2,7 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { obtenerArrayConDiasDelMes } from '../../../../utils/obtenerArrayConDiasDelMes';
-import { meses } from '../../../../utils/meses';
+import { meses } from '../../../../utils/funcionesSobreFechas';
+import { capitalizar } from '../../../../utils/capitalizar';
 import classes from './Calendario.module.css';
 
 const Calendario = ({ año, mes, setAño, setMes, diasDeTorneo }) => {
@@ -77,7 +78,7 @@ const Calendario = ({ año, mes, setAño, setMes, diasDeTorneo }) => {
           <FontAwesomeIcon icon={faAngleLeft} size="xl" />
         </button>
         <div className={classes['mes-año']}>
-          <span className={classes.mes}>{meses[mes]}</span>
+          <span className={classes.mes}>{capitalizar(meses[mes])}</span>
           <span className={classes.año}>{año}</span>
         </div>
         <button className={classes.btn} onClick={controladorMesSiguiente}>
