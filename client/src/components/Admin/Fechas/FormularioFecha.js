@@ -82,8 +82,9 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
       />
 
       <Input
+        type="date"
         id="fecha_inicio"
-        label="Fecha de inicio (yyyy-mm-dd)"
+        label="Fecha de inicio"
         defaultValue={
           fecha && fecha[0].fecha_inicio !== null
             ? fecha[0].fecha_inicio.substring(0, 10)
@@ -92,8 +93,9 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
       />
 
       <Input
+        type="date"
         id="fecha_finalizacion"
-        label="Fecha de finalización (yyyy-mm-dd)"
+        label="Fecha de finalización"
         defaultValue={
           fecha && fecha[0].fecha_finalizacion !== null
             ? fecha[0].fecha_finalizacion.substring(0, 10)
