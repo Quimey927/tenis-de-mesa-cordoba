@@ -31,6 +31,7 @@ const ListaCategoriasFecha = ({ categoriasFecha, navegarA }) => {
         encabezadosColumnas={['categoria', 'orden']}
         mostrarCantidadEntradasYFiltro={false}
         prefijoLinkEditar="editar/categorias/"
+        tieneSufijoEditar={false}
       />
     </>
   );

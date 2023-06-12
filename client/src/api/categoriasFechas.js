@@ -63,7 +63,9 @@ export const editarCategoriaFecha = async (
     );
   }
 
-  return redirect(`/admin/fechas/${idFecha}`);
+  return redirect(
+    `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}`
+  );
 };
 
 export const borrarCategoriaFecha = async (id) => {

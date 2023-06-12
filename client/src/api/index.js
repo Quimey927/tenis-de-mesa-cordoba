@@ -66,3 +66,5 @@ export {
   editarStream,
   borrarStream,
 } from './streams';
+
+export { obtenerFases, borrarFase } from './fases';

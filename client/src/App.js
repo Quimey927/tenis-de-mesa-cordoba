@@ -48,6 +48,9 @@ import PaginaEditarCategoriaFecha, {
 } from './pages/Admin/CategoriasFecha/EditarCategoriaFecha';
 import { action as actionManipularCategoriaFecha } from './components/Admin/CategoriasFecha/FormularioCategoriaFecha';
 import PaginaNuevaCategoriaFecha from './pages/Admin/CategoriasFecha/NuevaCategoriaFecha';
+import PaginaInfoCategoriaFecha, {
+  loader as loaderInfoCategoriaFechaAdmin,
+} from './pages/Admin/CategoriasFecha/InfoCategoriaFecha';
 
 import PaginaEditarStream, {
   loader as loaderStreamAdmin,
@@ -291,10 +294,20 @@ const router = createBrowserRouter([
                         action: actionManipularCategoriaFecha,
                       },
                       {
-                        path: ':idCategoriaFecha/editar',
-                        element: <PaginaEditarCategoriaFecha />,
-                        loader: loaderCategoriaFechaAdmin,
-                        action: actionManipularCategoriaFecha,
+                        path: ':idCategoriaFecha',
+                        children: [
+                          {
+                            index: true,
+                            element: <PaginaInfoCategoriaFecha />,
+                            loader: loaderInfoCategoriaFechaAdmin,
+                          },
+                          {
+                            path: 'editar',
+                            element: <PaginaEditarCategoriaFecha />,
+                            loader: loaderCategoriaFechaAdmin,
+                            action: actionManipularCategoriaFecha,
+                          },
+                        ],
                       },
                     ],
                   },
