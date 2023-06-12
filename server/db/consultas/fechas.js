@@ -11,7 +11,7 @@ const crearFecha =
   'INSERT INTO fechas (nombre, num_fecha, id_torneo, id_club, fecha_inicio, fecha_finalizacion, slug) VALUES ($1, $2, $3, $4, $5, $6, $7)';
 
 const obtenerFecha =
-  'SELECT f.*, t.titulo AS torneo, t.imagen_torneo AS imagen, c.nombre AS lugar FROM fechas AS f INNER JOIN torneos AS t ON f.id_torneo = t.id INNER JOIN clubes AS c ON c.id = f.id_club WHERE f.id = $1';
+  'SELECT f.*, t.titulo AS torneo, t.temporada AS temporada, t.imagen_torneo AS imagen, c.nombre AS lugar FROM fechas AS f INNER JOIN torneos AS t ON f.id_torneo = t.id INNER JOIN clubes AS c ON c.id = f.id_club WHERE f.id = $1';
 
 const obtenerFechaPorSlug =
   'SELECT f.id AS id_fecha, f.nombre AS nombre, t.titulo AS torneo, t.temporada AS temporada, t.imagen_torneo AS imagen_torneo, f.fecha_inicio AS fecha_inicio, f.fecha_finalizacion AS fecha_finalizacion, c.nombre AS lugar FROM fechas AS f INNER JOIN torneos AS t ON t.id = f.id_torneo LEFT JOIN clubes AS c ON c.id = f.id_club WHERE f.slug = $1';

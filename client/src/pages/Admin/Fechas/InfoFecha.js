@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import AdminInfo from '../../../components/Admin/AdminInfo/AdminInfo';
 import ListaStreams from '../../../components/Admin/Streams/ListaStreams';
 import ListaCategoriasFecha from '../../../components/Admin/CategoriasFecha/ListaCategoriasFecha';
+import { obtenerFechaEnEspañol } from '../../../utils/funcionesSobreFechas';
 import {
   obtenerFecha,
   obtenerCategoriasFecha,
@@ -19,7 +20,7 @@ const PaginaInfoFecha = () => {
     },
     {
       nombre: 'Torneo al que pertenece',
-      valor: fecha[0].torneo,
+      valor: `${fecha[0].torneo} ${fecha[0].temporada}`,
     },
     {
       nombre: 'Lugar',
@@ -27,17 +28,15 @@ const PaginaInfoFecha = () => {
     },
     {
       nombre: 'Fecha de inicio',
-      valor:
-        fecha[0].fecha_inicio !== null
-          ? fecha[0].fecha_inicio.substring(0, 10)
-          : '',
+      valor: fecha[0].fecha_inicio
+        ? obtenerFechaEnEspañol(fecha[0].fecha_inicio.substring(0, 10))
+        : '',
     },
     {
       nombre: 'Fecha de finalizacion',
-      valor:
-        fecha[0].fecha_finalizacion !== null
-          ? fecha[0].fecha_finalizacion.substring(0, 10)
-          : '',
+      valor: fecha[0].fecha_finalizacion
+        ? obtenerFechaEnEspañol(fecha[0].fecha_finalizacion.substring(0, 10))
+        : '',
     },
   ];
 
