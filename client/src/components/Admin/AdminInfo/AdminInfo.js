@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import classes from './AdminInfo.module.css';
 
-const AdminInfo = ({ titulo, campos, imagen }) => {
+const AdminInfo = ({ titulo, campos, imagen, to = '..' }) => {
   return (
     <>
       <AdminTituloPagina titulo={titulo} />
@@ -20,14 +20,11 @@ const AdminInfo = ({ titulo, campos, imagen }) => {
           {imagen && <img src={`/${imagen}`} alt={'Imagen del evento'} />}
         </div>
         <div className={classes.acciones}>
-          <Link
-            to={'..'}
-            className={`${classes.btn} ${classes['btn-cancelar']}`}
-          >
+          <Link to={to} className={`${classes.btn} ${classes['btn-cancelar']}`}>
             <span>Atrás</span>
           </Link>
           <Link
-            to={'editar'}
+            to="editar"
             className={`${classes.btn} ${classes['btn-editar']}`}
           >
             <span>Editar Información</span>

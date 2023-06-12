@@ -144,5 +144,5 @@ export async function action({ request, params }) {
     return crearFecha(datosFecha, idTorneo);
   }
 
-  return editarFecha(params.idFecha, datosFecha, idTorneo);
+  return editarFecha(params.idFecha, datosFecha);
 }

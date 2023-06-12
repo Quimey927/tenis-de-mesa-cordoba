@@ -9,9 +9,7 @@ const FormularioStream = ({ method, stream, idFecha }) => {
     <AdminFormulario
       method={method}
       textoTitulo={
-        method === 'POST'
-          ? ' Agregar categoría fecha'
-          : `Editar ${stream[0].orden}`
+        method === 'POST' ? ' Agregar stream' : `Editar ${stream[0].orden}`
       }
       navegarAlCancelar={`/admin/fechas/${idFecha}`}
     >

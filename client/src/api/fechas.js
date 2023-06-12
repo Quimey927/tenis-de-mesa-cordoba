@@ -72,7 +72,7 @@ export const obtenerFechaPorSlug = async (slugFecha) => {
   return response.json();
 };
 
-export const editarFecha = async (id, datosFecha, idTorneo) => {
+export const editarFecha = async (id, datosFecha) => {
   const response = await fetch(`${baseUrl}/${id}`, {
     method: 'PUT',
     headers: {
@@ -85,7 +85,7 @@ export const editarFecha = async (id, datosFecha, idTorneo) => {
     throw json({ message: 'No pudimos editar la fecha.' }, { status: 500 });
   }
 
-  return redirect(`/admin/torneos/${idTorneo}`);
+  return redirect(`/admin/fechas/${id}`);
 };
 
 export const borrarFecha = async (id) => {
