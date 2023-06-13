@@ -9,7 +9,7 @@ const AdminInfo = ({ titulo, campos, imagen, to = '..' }) => {
       <AdminTituloPagina titulo={titulo} />
       <div className={classes.info}>
         <div className={classes.columnas}>
-          <div>
+          <div className={classes.campos}>
             {campos.map((campo) => (
               <p key={campo.nombre}>
                 <small>{campo.nombre}: </small>
