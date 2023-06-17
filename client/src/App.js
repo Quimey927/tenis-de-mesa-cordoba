@@ -70,6 +70,21 @@ import PaginaInfoFecha, {
   loader as loaderInfoFechaAdmin,
 } from './pages/Admin/Fechas/InfoFecha';
 
+import PaginaEditarFase, {
+  loader as loaderFaseAdmin,
+} from './pages/Admin/Fases/EditarFase';
+import { action as actionManipularFase } from './components/Admin/Fases/FormularioFase';
+import PaginaNuevaFase from './pages/Admin/Fases/NuevaFase';
+import PaginaInfoFase, {
+  loader as loaderInfoFaseAdmin,
+} from './pages/Admin/Fases/InfoFase';
+
+import PaginaEditarGrupo, {
+  loader as loaderGrupoAdmin,
+} from './pages/Admin/Grupos/EditarGrupo';
+import { action as actionManipularGrupo } from './components/Admin/Grupos/FormularioGrupo';
+import PaginaNuevoGrupo from './pages/Admin/Grupos/NuevoGrupo';
+
 import PaginaJugadoresAdmin, {
   loader as loaderJugadoresAdmin,
 } from './pages/Admin/Jugadores/Jugadores';
@@ -306,6 +321,50 @@ const router = createBrowserRouter([
                             element: <PaginaEditarCategoriaFecha />,
                             loader: loaderCategoriaFechaAdmin,
                             action: actionManipularCategoriaFecha,
+                          },
+                          {
+                            path: 'fases',
+                            children: [
+                              {
+                                path: 'nuevo',
+                                element: <PaginaNuevaFase />,
+                                loader: loaderFaseAdmin,
+                                action: actionManipularFase,
+                              },
+                              {
+                                path: ':idFase',
+                                children: [
+                                  {
+                                    index: true,
+                                    element: <PaginaInfoFase />,
+                                    loader: loaderInfoFaseAdmin,
+                                  },
+                                  {
+                                    path: 'editar',
+                                    element: <PaginaEditarFase />,
+                                    loader: loaderFaseAdmin,
+                                    action: actionManipularFase,
+                                  },
+                                  {
+                                    path: 'grupos',
+                                    children: [
+                                      {
+                                        path: 'nuevo',
+                                        element: <PaginaNuevoGrupo />,
+                                        loader: loaderGrupoAdmin,
+                                        action: actionManipularGrupo,
+                                      },
+                                      {
+                                        path: ':idGrupo/editar',
+                                        element: <PaginaEditarGrupo />,
+                                        loader: loaderGrupoAdmin,
+                                        action: actionManipularGrupo,
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            ],
                           },
                         ],
                       },

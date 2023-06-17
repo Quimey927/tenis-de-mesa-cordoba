@@ -1,0 +1,69 @@
+.form {
+  color: #333;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.tabla {
+  text-align: center;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.tabla,
+.tabla th,
+.tabla td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.celda-ancha {
+  text-align: start;
+}
+
+.tabla input {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0 0.2rem;
+  margin-block: -5px;
+}
+
+.input-tabla-numero {
+  text-align: center;
+  margin: 0;
+  width: 4ch;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  color: #fff;
+  background-color: #5cb85c;
+  border: 1px solid #4cae4c;
+}
+
+.btn:hover {
+  background-color: #4cae4c;
+}
+
+.color {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.9rem;
+  padding-block: 0.2rem;
+}
+
+.box {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 2px;
+}

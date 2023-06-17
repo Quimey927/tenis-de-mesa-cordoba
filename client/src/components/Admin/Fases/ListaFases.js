@@ -4,7 +4,7 @@ import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import AdminTablaPagina from '../AdminTablaPagina/AdminTablaPagina';
 import { borrarFase } from '../../../api';
 
-const ListaFases = ({ fases, navegarA }) => {
+const ListaFases = ({ fases, idFecha, idCategoriaFecha }) => {
   const navigate = useNavigate();
 
   const controladorBorrarFase = (id) => {
@@ -14,7 +14,9 @@ const ListaFases = ({ fases, navegarA }) => {
 
     if (continuar) {
       borrarFase(id);
-      navigate(navegarA);
+      navigate(
+        `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}`
+      );
     }
   };
 
@@ -22,15 +24,16 @@ const ListaFases = ({ fases, navegarA }) => {
     <>
       <AdminTituloPagina
         titulo="Fases"
-        to="editar/fases/nuevo"
+        to="fases/nuevo"
         textoInterno="Agregar Fase"
       />
       <AdminTablaPagina
-        array={fases ? fases : []}
+        array={fases}
         controladorBorrarElemento={controladorBorrarFase}
-        encabezadosColumnas={['nombre']}
+        encabezadosColumnas={['nombre', 'orden', 'tipo']}
         mostrarCantidadEntradasYFiltro={false}
-        prefijoLinkEditar="editar/fases/"
+        tieneSufijoEditar={false}
+        prefijoLinkEditar="fases/"
       />
     </>
   );

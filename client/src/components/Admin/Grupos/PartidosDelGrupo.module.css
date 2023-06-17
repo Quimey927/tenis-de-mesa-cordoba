@@ -1,0 +1,73 @@
+.partidos {
+  margin-block: 3rem;
+  color: #333;
+}
+
+.partidos h3 {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.partidos h3 small {
+  font-weight: 400;
+  line-height: 1;
+  color: #777;
+  font-size: 1rem;
+}
+
+.table {
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table tr th,
+.table tr td {
+  text-align: center;
+  padding: 0.5rem;
+  line-height: 1.4;
+  border-top: 1px solid #ddd;
+}
+
+.table tr th {
+  border-bottom: 2px solid #ddd;
+  border-top: none;
+}
+
+.table tbody tr {
+  background-color: #dff0d8;
+}
+
+.table tbody tr:hover {
+  background-color: #d0e9c6;
+}
+
+.table tr th:nth-child(1),
+.table tr td:nth-child(1) {
+  text-align: end;
+}
+
+.table tr th:nth-child(3),
+.table tr td:nth-child(3) {
+  text-align: start;
+}
+
+.table a {
+  text-decoration: none;
+  color: #337ab7;
+}
+
+.table a:hover {
+  text-decoration: underline;
+  color: #23527c;
+}
+
+.icono-editar {
+  margin-right: 0.2rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+  }
+}

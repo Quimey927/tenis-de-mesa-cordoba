@@ -67,4 +67,26 @@ export {
   borrarStream,
 } from './streams';
 
-export { obtenerFases, borrarFase } from './fases';
+export {
+  obtenerFases,
+  crearFase,
+  obtenerFase,
+  editarFase,
+  borrarFase,
+} from './fases';
+
+export {
+  obtenerGrupos,
+  crearGrupo,
+  obtenerGrupo,
+  editarGrupo,
+  borrarGrupo,
+} from './grupos';
+
+export { obtenerFilasTabla } from './filasTabla';
+
+export { obtenerColoresTabla } from './coloresTabla';
+
+export { obtenerEliminatorias, borrarEliminatoria } from './eliminatorias';
+
+export { obtenerPartidosDelGrupo } from './partidos';

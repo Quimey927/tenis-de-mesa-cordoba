@@ -6,7 +6,7 @@ import ListaFases from '../../../components/Admin/Fases/ListaFases';
 import { obtenerCategoriaFecha, obtenerFases } from '../../../api';
 
 const PaginaInfoCategoriaFecha = () => {
-  const { categoriaFecha, fases } = useLoaderData();
+  const { categoriaFecha, fases, idFecha, idCategoriaFecha } = useLoaderData();
 
   const campos = [
     {
@@ -28,7 +28,11 @@ const PaginaInfoCategoriaFecha = () => {
         to="../../.."
       />
 
-      <ListaFases fases={fases} navegarA=".." />
+      <ListaFases
+        fases={fases}
+        idFecha={idFecha}
+        idCategoriaFecha={idCategoriaFecha}
+      />
     </>
   );
 };
@@ -36,12 +40,14 @@ const PaginaInfoCategoriaFecha = () => {
 export default PaginaInfoCategoriaFecha;
 
 export async function loader({ params }) {
-  const { idCategoriaFecha } = params;
+  const { idCategoriaFecha, idFecha } = params;
 
   return {
     categoriaFecha: idCategoriaFecha
       ? await obtenerCategoriaFecha(idCategoriaFecha)
       : null,
     fases: await obtenerFases(idCategoriaFecha),
+    idFecha,
+    idCategoriaFecha,
   };
 }
