@@ -13,6 +13,7 @@ const FormularioTorneo = ({ method, torneo, torneos }) => {
       textoTitulo={
         method === 'POST' ? ' Agregar torneo' : `Editar ${torneo[0].titulo}`
       }
+      subtitulo={method !== 'POST' && torneo[0].temporada}
       navegarAlCancelar=".."
     >
       <Input

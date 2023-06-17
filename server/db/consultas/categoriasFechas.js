@@ -4,7 +4,12 @@ const obtenerCategoriasFecha =
 const crearCategoriaFecha =
   'INSERT INTO categorias_fechas (categoria, id_fecha, orden) VALUES ($1, $2, $3)';
 
-const obtenerCategoriaFecha = 'SELECT * FROM categorias_fechas WHERE id = $1';
+const obtenerCategoriaFecha = `SELECT
+    cf.*,
+    f.nombre AS fecha
+  FROM categorias_fechas AS cf
+  INNER JOIN fechas AS f ON f.id = cf.id_fecha
+  WHERE cf.id = $1`;
 
 const editarCategoriaFecha =
   'UPDATE categorias_fechas SET categoria = $1, id_fecha = $2, orden = $3 WHERE id = $4';

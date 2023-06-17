@@ -8,6 +8,7 @@ const AdminFormulario = ({
   children,
   method,
   textoTitulo,
+  subtitulo = '',
   navegarAlCancelar = '..',
 }) => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const AdminFormulario = ({
 
   return (
     <>
-      <AdminTituloPagina titulo={textoTitulo} />
+      <AdminTituloPagina titulo={textoTitulo} subtitulo={subtitulo} />
 
       <Form method={method} className={classes.form}>
         {children}

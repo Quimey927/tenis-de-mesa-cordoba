@@ -13,6 +13,13 @@
   color: #333;
 }
 
+.titulo-pagina h2 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #777;
+  margin-top: 0.5rem;
+}
+
 .btn {
   color: #fff;
   background-color: #5cb85c;

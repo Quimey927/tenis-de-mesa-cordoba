@@ -2,7 +2,7 @@ import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
 import { crearCategoriaFecha, editarCategoriaFecha } from '../../../api';
 
-const FormularioCategoriaFecha = ({ method, categoriaFecha, idFecha }) => {
+const FormularioCategoriaFecha = ({ method, categoriaFecha }) => {
   return (
     <AdminFormulario
       method={method}
@@ -11,6 +11,7 @@ const FormularioCategoriaFecha = ({ method, categoriaFecha, idFecha }) => {
           ? ' Agregar categoría fecha'
           : `Editar ${categoriaFecha[0].categoria}`
       }
+      subtitulo={categoriaFecha[0].fecha}
       navegarAlCancelar=".."
     >
       <Input

@@ -35,6 +35,9 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
       textoTitulo={
         method === 'POST' ? ' Agregar fecha' : `Editar ${fecha[0].nombre}`
       }
+      subtitulo={
+        method !== 'POST' && `${fecha[0].torneo} ${fecha[0].temporada}`
+      }
       navegarAlCancelar={-1}
     >
       <Input

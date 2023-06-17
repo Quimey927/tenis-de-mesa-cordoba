@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import classes from './AdminInfo.module.css';
 
-const AdminInfo = ({ titulo, campos, imagen, to = '..' }) => {
+const AdminInfo = ({ titulo, subtitulo = '', campos, imagen, to = '..' }) => {
   return (
     <>
-      <AdminTituloPagina titulo={titulo} />
+      <AdminTituloPagina titulo={titulo} subtitulo={subtitulo} />
       <div className={classes.info}>
         <div className={classes.columnas}>
           <div className={classes.campos}>

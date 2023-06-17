@@ -44,6 +44,7 @@ const PaginaInfoTorneo = () => {
     <>
       <AdminInfo
         titulo={torneo[0].titulo}
+        subtitulo={torneo[0].temporada}
         campos={campos}
         imagen={torneo[0].imagen_torneo}
       />
