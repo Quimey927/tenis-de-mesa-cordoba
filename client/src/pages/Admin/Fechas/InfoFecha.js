@@ -46,15 +46,16 @@ const PaginaInfoFecha = () => {
         titulo={fecha[0].nombre}
         campos={campos}
         imagen={fecha[0].imagen}
-      />
-
-      <ListaStreams
-        streams={streams}
-        navegarA={`/admin/fechas/${fecha[0].id}`}
+        to={-1}
       />
 
       <ListaCategoriasFecha
         categoriasFecha={categoriasFecha}
+        navegarA={`/admin/fechas/${fecha[0].id}`}
+      />
+
+      <ListaStreams
+        streams={streams}
         navegarA={`/admin/fechas/${fecha[0].id}`}
       />
     </>
