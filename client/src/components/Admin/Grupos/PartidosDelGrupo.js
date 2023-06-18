@@ -7,7 +7,6 @@ import classes from './PartidosDelGrupo.module.css';
 const PartidosDelGrupo = ({ partidosDelGrupo, nombre_grupo }) => {
   return (
     <div className={classes.partidos}>
-      <h3>{nombre_grupo}</h3>
       <table className={classes.table} style={{ width: '100%' }}>
         <thead>
           <tr>
