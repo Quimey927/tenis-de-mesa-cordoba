@@ -143,8 +143,9 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
           <Button
             onClick={controladorAlternarEditarTabla}
             className={classes.btn}
-            textoInterno={!tablaEditandose ? 'Editar' : 'Guardar'}
-          />
+          >
+            {!tablaEditandose ? 'Editar' : 'Guardar'}
+          </Button>
         </div>
       </form>
     </>
