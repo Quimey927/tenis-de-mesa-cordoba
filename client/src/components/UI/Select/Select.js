@@ -4,6 +4,7 @@ const Select = ({
   label,
   id,
   defaultValue,
+  required = false,
   options,
   onChange = () => {},
   disabled = false,
@@ -16,6 +17,7 @@ const Select = ({
         id={id}
         name={id}
         defaultValue={defaultValue}
+        required={required}
         onChange={onChange}
         disabled={disabled}
         style={style}

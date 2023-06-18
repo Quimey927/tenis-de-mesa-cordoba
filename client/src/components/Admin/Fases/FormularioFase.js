@@ -10,7 +10,7 @@ const FormularioFase = ({ method, fase }) => {
       textoTitulo={
         method === 'POST' ? 'Agregar fase' : `Editar ${fase[0].nombre}`
       }
-      navegarA={'..'}
+      navegarAlCancelar="../.."
     >
       <Input
         id="nombre"
@@ -30,8 +30,10 @@ const FormularioFase = ({ method, fase }) => {
         <Select
           label="Tipo"
           id="tipo"
-          defaultValue={fase ? fase[0].tipo : 'L'}
+          required="true"
+          defaultValue={fase ? fase[0].tipo : ''}
           options={[
+            { value: '', texto: 'Elegir tipo de fase*' },
             { value: 'G', texto: 'Grupos' },
             { value: 'E', texto: 'Eliminatoria' },
           ]}
