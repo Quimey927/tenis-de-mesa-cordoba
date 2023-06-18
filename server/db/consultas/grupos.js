@@ -11,7 +11,7 @@ const obtenerGrupo = 'SELECT * FROM grupos WHERE id = $1';
 
 const editarGrupo = `UPDATE grupos
   SET
-    nombre = $1,
+    nombre = $1
   WHERE id = $2`;
 
 const borrarGrupo = 'DELETE FROM grupos WHERE id = $1';

@@ -1,10 +1,10 @@
 const obtenerFilasTabla = `SELECT
-    t.*,
-    p.nombre AS jugador
-  FROM filas_posicion_grupos AS t
-  INNER JOIN grupos AS g ON g.id = t.liga_id
-  INNER JOIN jugadores AS p ON t.id_jugador = p.id
-  WHERE l.id = $1
-  ORDER BY t.posicion`;
+    p.*,
+    j.nombre AS jugador
+  FROM filas_posicion_grupos AS p
+  INNER JOIN grupos AS g ON g.id = p.id_grupo
+  INNER JOIN jugadores AS j ON p.id_jugador = j.id
+  WHERE p.id = $1
+  ORDER BY p.posicion`;
 
 export default { obtenerFilasTabla };

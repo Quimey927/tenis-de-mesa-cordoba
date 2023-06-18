@@ -1,5 +1,5 @@
 const obtenerColoresTabla = `SELECT
-    cf.acotacion,
+    cf.nota,
     cf.color,
     cf.id, 
     cf.posiciones
