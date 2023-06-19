@@ -33,8 +33,6 @@ const PaginaInfoFase = () => {
     },
   ];
 
-  console.log(grupos);
-
   return (
     <>
       <AdminInfo titulo={nombre} campos={campos} to="../.." />
