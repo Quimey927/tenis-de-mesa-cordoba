@@ -105,8 +105,6 @@ const ListaGrupos = ({
             <AgregarJugadores
               idGrupo={idElementoActivo}
               jugadores={jugadores}
-              idElementoActivo={idElementoActivo}
-              setIdElementoActivo={setIdElementoActivo}
             />
           ) : (
             <>
