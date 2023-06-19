@@ -13,3 +13,20 @@ export const obtenerFilasTabla = async (id, guardarEnEstado) => {
   const filasTabla = await response.json();
   guardarEnEstado(filasTabla);
 };
+
+export const agregarJugadores = async (idGrupo, jugadoresGrupo) => {
+  const response = await fetch(`${baseUrl}/grupo/${idGrupo}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(jugadoresGrupo),
+  });
+
+  if (!response.ok) {
+    throw json(
+      { message: 'No pudimos crear los jugadores del grupo.' },
+      { status: 500 }
+    );
+  }
+};

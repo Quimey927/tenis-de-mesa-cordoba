@@ -102,7 +102,12 @@ const ListaGrupos = ({
           />
 
           {filasTabla.length === 0 ? (
-            <AgregarJugadores idGrupo={idElementoActivo} />
+            <AgregarJugadores
+              idGrupo={idElementoActivo}
+              jugadores={jugadores}
+              idElementoActivo={idElementoActivo}
+              setIdElementoActivo={setIdElementoActivo}
+            />
           ) : (
             <>
               <TablaPosiciones

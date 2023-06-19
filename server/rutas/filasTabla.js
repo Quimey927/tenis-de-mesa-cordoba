@@ -1,8 +1,13 @@
 import express from 'express';
 
-import { obtenerFilasTabla } from '../controladores/filasTabla.js';
+import {
+  obtenerFilasTabla,
+  agregarJugadores,
+} from '../controladores/filasTabla.js';
 
 const router = express.Router();
+
+router.route('/grupo/:idGrupo').post(agregarJugadores);
 
 router.route('/:idGrupo').get(obtenerFilasTabla);
 

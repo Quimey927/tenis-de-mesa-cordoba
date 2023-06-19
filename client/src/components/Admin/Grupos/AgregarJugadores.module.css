@@ -1,0 +1,39 @@
+.form {
+  margin-bottom: 4rem;
+}
+
+.titulo > div {
+  margin-bottom: 2rem;
+}
+
+.btn {
+  transition: background-color 300ms ease;
+  display: inline-block;
+  border: none;
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn-agregar {
+  background-color: #5cb85c;
+  border: 1px solid #4cae4c;
+  margin-left: 0.2rem;
+}
+
+.btn-crear {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.btn-agregar:hover {
+  background-color: #4cae4c;
+}
+
+.btn-crear:hover {
+  background-color: #2e6da4;
+}
