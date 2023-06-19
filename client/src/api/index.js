@@ -78,6 +78,7 @@ export {
 export {
   obtenerGrupos,
   crearGrupo,
+  crearGrupos,
   obtenerGrupo,
   editarGrupo,
   borrarGrupo,
@@ -85,7 +86,7 @@ export {
 
 export { obtenerFilasTabla } from './filasTabla';
 
-export { obtenerColoresTabla } from './coloresTabla';
+export { obtenerColoresTabla, crearColoresTabla } from './coloresTabla';
 
 export { obtenerEliminatorias, borrarEliminatoria } from './eliminatorias';
 

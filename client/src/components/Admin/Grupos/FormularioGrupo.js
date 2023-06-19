@@ -17,17 +17,6 @@ const FormularioGrupo = ({ method, grupo }) => {
         label="Nombre*"
         defaultValue={grupo ? grupo[0].nombre : ''}
       />
-
-      {method === 'POST' && (
-        <>
-          <Input
-            type="number"
-            id="cant_jugadores"
-            required="true"
-            label="Cantidad de jugadores*"
-          />
-        </>
-      )}
     </AdminFormulario>
   );
 };

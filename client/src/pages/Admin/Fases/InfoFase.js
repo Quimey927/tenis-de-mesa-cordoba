@@ -3,7 +3,12 @@ import { useLoaderData } from 'react-router-dom';
 import AdminInfo from '../../../components/Admin/AdminInfo/AdminInfo';
 import ListaGrupos from '../../../components/Admin/Grupos/ListaGrupos';
 import ListaEliminatorias from '../../../components/Admin/Eliminatorias/ListaEliminatorias';
-import { obtenerFase, obtenerGrupos, obtenerEliminatorias } from '../../../api';
+import {
+  obtenerFase,
+  obtenerGrupos,
+  obtenerEliminatorias,
+  obtenerJugadores,
+} from '../../../api';
 
 const PaginaInfoFase = () => {
   const {
@@ -14,6 +19,7 @@ const PaginaInfoFase = () => {
     idFecha,
     idTorneo,
     idFase,
+    jugadores,
   } = useLoaderData();
 
   const { nombre, orden, tipo } = fase[0];
@@ -44,6 +50,7 @@ const PaginaInfoFase = () => {
           idTorneo={idTorneo}
           idFase={idFase}
           idFecha={idFecha}
+          jugadores={jugadores}
         />
       ) : (
         <ListaEliminatorias
@@ -71,5 +78,6 @@ export async function loader({ params }) {
     idCategoriaFecha,
     idFecha,
     idTorneo,
+    jugadores: await obtenerJugadores(),
   };
 }

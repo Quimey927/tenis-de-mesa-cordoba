@@ -3,6 +3,7 @@ import express from 'express';
 import {
   obtenerGrupos,
   crearGrupo,
+  crearGrupos,
   obtenerGrupo,
   editarGrupo,
   borrarGrupo,
@@ -13,6 +14,8 @@ const router = express.Router();
 router.route('/fase/:idFase').get(obtenerGrupos);
 
 router.route('/').post(crearGrupo);
+
+router.route('/crear-grupos').post(crearGrupos);
 
 router
   .route('/:idGrupo')

@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
+import CrearGrupos from './CrearGrupos.js';
+import CrearColoresTabla from './CrearColoresTabla.js';
+import AgregarJugadores from './AgregarJugadores.js';
 import AccionesGrupo from './AccionesGrupo';
 import TablaPosiciones from './TablaPosiciones';
 import PartidosDelGrupo from './PartidosDelGrupo';
@@ -13,7 +16,14 @@ import {
   obtenerPartidosDelGrupo,
 } from '../../../api';
 
-const ListaGrupos = ({ grupos, idCategoriaFecha, idFecha, idFase, e }) => {
+const ListaGrupos = ({
+  grupos,
+  idCategoriaFecha,
+  idFecha,
+  idFase,
+  jugadores,
+}) => {
+  const [coloresElegidos, setColoresElegidos] = useState(true);
   const [idElementoActivo, setIdElementoActivo] = useState(
     grupos.length > 0 ? grupos[0].id : null
   );
@@ -24,12 +34,12 @@ const ListaGrupos = ({ grupos, idCategoriaFecha, idFecha, idFase, e }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (idElementoActivo) {
+    if (idElementoActivo && coloresElegidos) {
       obtenerFilasTabla(idElementoActivo, setFilasTabla);
       obtenerColoresTabla(idElementoActivo, setColoresTabla);
       obtenerPartidosDelGrupo(idElementoActivo, setPartidosDelGrupo);
     }
-  }, [idElementoActivo]);
+  }, [idElementoActivo, coloresElegidos]);
 
   const controladorBorrarGrupo = (id) => {
     const continuar = window.confirm(
@@ -46,6 +56,27 @@ const ListaGrupos = ({ grupos, idCategoriaFecha, idFecha, idFase, e }) => {
       );
     }
   };
+
+  if (grupos.length === 0) {
+    return (
+      <CrearGrupos
+        idFecha={idFecha}
+        idCategoriaFecha={idCategoriaFecha}
+        idFase={idFase}
+        setColoresElegidos={setColoresElegidos}
+      />
+    );
+  }
+
+  if (!coloresElegidos) {
+    return (
+      <CrearColoresTabla
+        setColoresElegidos={setColoresElegidos}
+        grupos={grupos}
+        setIdElementoActivo={setIdElementoActivo}
+      />
+    );
+  }
 
   const grupo = grupos.find((grupo) => grupo.id === idElementoActivo);
 
@@ -70,15 +101,20 @@ const ListaGrupos = ({ grupos, idCategoriaFecha, idFecha, idFase, e }) => {
             controladorBorrarElemento={controladorBorrarGrupo}
           />
 
-          <TablaPosiciones
-            filasTabla={filasTabla}
-            coloresTabla={coloresTabla}
-          />
-
-          <PartidosDelGrupo
-            partidosDelGrupo={partidosDelGrupo}
-            nombre_grupo={grupo.nombre}
-          />
+          {filasTabla.length === 0 ? (
+            <AgregarJugadores idGrupo={idElementoActivo} />
+          ) : (
+            <>
+              <TablaPosiciones
+                filasTabla={filasTabla}
+                coloresTabla={coloresTabla}
+              />
+              <PartidosDelGrupo
+                partidosDelGrupo={partidosDelGrupo}
+                nombre_grupo={grupo.nombre}
+              />
+            </>
+          )}
         </>
       )}
     </>

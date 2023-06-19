@@ -14,6 +14,7 @@
   border: 1px solid #ccc;
   background-color: white;
   color: #444;
+  height: 37.8px;
 }
 
 .select select {
@@ -29,4 +30,9 @@
 
 .select select:disabled {
   cursor: not-allowed;
+}
+
+.select label {
+  margin-bottom: 0.5rem;
+  display: block;
 }

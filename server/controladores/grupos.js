@@ -33,6 +33,29 @@ export const crearGrupo = async (req, res) => {
   }
 };
 
+export const crearGrupos = async (req, res) => {
+  const { cant_grupos, id_fase } = req.body;
+
+  const nombreGruposDefault = ['Grupo A'];
+  for (let i = 1; i < cant_grupos; i++) {
+    nombreGruposDefault.push(`Grupo ${String.fromCharCode(65 + i)}`);
+  }
+
+  try {
+    pool.query(
+      consultasGrupos.crearGrupos(cant_grupos),
+      [id_fase, ...nombreGruposDefault],
+      (err, results) => {
+        if (err) throw new Error(err);
+        res.status(201).send({ message: 'Grupos creados exitosamente.' });
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: 'No pudimos crear los grupos.' });
+  }
+};
+
 export const obtenerGrupo = async (req, res) => {
   const id = parseInt(req.params.idGrupo);
 

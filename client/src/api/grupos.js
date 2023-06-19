@@ -33,6 +33,20 @@ export const crearGrupo = async (
   );
 };
 
+export const crearGrupos = async (datosGrupo) => {
+  const response = await fetch(`${baseUrl}/crear-grupos`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(datosGrupo),
+  });
+
+  if (!response.ok) {
+    throw json({ message: 'No pudimos crear los grupos.' }, { status: 500 });
+  }
+};
+
 export const obtenerGrupo = async (id) => {
   const response = await fetch(`${baseUrl}/${id}`);
   if (!response.ok) {

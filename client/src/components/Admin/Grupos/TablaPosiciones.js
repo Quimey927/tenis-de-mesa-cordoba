@@ -65,9 +65,9 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
           <thead>
             <tr className={classes.row}>
               <th style={{ width: '50px' }}>Pos.</th>
-              <th className={classes['celda-ancha']}>Equipo</th>
+              <th className={classes['celda-ancha']}>Jugador</th>
               {datosTabla.map((dato) => (
-                <th key={dato.orden} style={{ width: '50px' }}>
+                <th key={dato.codigo} style={{ width: '50px' }}>
                   {dato.codigo.toUpperCase()}
                 </th>
               ))}
@@ -86,7 +86,6 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
                             fila.posicion
                           )}`
                         : 'none',
-                    fontWeight: fila.equipo === 'Argentina' ? '600' : '400',
                   }}
                   key={fila.id}
                 >
@@ -102,12 +101,9 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
                   </td>
                   <td key={fila.id} className={classes['celda-ancha']}>
                     {!tablaEditandose ? (
-                      fila.equipo
+                      fila.jugador
                     ) : (
-                      <input
-                        defaultValue={fila.equipo}
-                        className={classes['input-tabla-equipo']}
-                      />
+                      <input defaultValue={fila.jugador} />
                     )}
                   </td>
                   {datosTabla.map((dato) => (
@@ -136,7 +132,7 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
                     backgroundColor: `var(--color-${color.color})` || 'red',
                   }}
                 ></div>
-                <div>{color.acotacion}</div>
+                <div>{color.nota}</div>
               </div>
             ))}
           </div>

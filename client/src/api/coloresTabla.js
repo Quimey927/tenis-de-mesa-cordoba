@@ -13,3 +13,20 @@ export const obtenerColoresTabla = async (id, guardarEnEstado) => {
   const coloresTabla = await response.json();
   guardarEnEstado(coloresTabla);
 };
+
+export const crearColoresTabla = async (coloresYGrupos) => {
+  const response = await fetch(`${baseUrl}/crear-colores`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(coloresYGrupos),
+  });
+
+  if (!response.ok) {
+    throw json(
+      { message: 'No pudimos crear los colores de los grupos.' },
+      { status: 500 }
+    );
+  }
+};
