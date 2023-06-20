@@ -18,10 +18,6 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
 
   const datosTabla = [
     {
-      dato: 'Puntos',
-      codigo: 'pts',
-    },
-    {
       dato: 'Partidos Jugados',
       codigo: 'pj',
     },
@@ -42,20 +38,12 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
       codigo: 'sc',
     },
     {
-      dato: 'Cociente de Sets',
-      codigo: 'cs',
-    },
-    {
       dato: 'Puntos a Favor',
       codigo: 'pf',
     },
     {
       dato: 'Puntos en Contra',
       codigo: 'pc',
-    },
-    {
-      dato: 'Cociente de Puntos',
-      codigo: 'cp',
     },
   ];
 
