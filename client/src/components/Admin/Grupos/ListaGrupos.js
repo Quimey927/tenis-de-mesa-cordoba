@@ -88,36 +88,29 @@ const ListaGrupos = ({
         textoInterno="Agregar Grupo"
       />
 
-      {grupos.length > 0 && (
+      <Solapas
+        lista={grupos}
+        controladorCambiarElementoActivo={setIdElementoActivo}
+        idElementoActivo={idElementoActivo}
+      />
+
+      <AccionesGrupo
+        grupo_id={grupo.id}
+        controladorBorrarElemento={controladorBorrarGrupo}
+      />
+
+      {filasTabla.length === 0 ? (
+        <AgregarJugadores idGrupo={idElementoActivo} jugadores={jugadores} />
+      ) : (
         <>
-          <Solapas
-            lista={grupos}
-            controladorCambiarElementoActivo={setIdElementoActivo}
-            idElementoActivo={idElementoActivo}
+          <TablaPosiciones
+            filasTabla={filasTabla}
+            coloresTabla={coloresTabla}
           />
-
-          <AccionesGrupo
-            grupo_id={grupo.id}
-            controladorBorrarElemento={controladorBorrarGrupo}
+          <PartidosDelGrupo
+            partidosDelGrupo={partidosDelGrupo}
+            nombre_grupo={grupo.nombre}
           />
-
-          {filasTabla.length === 0 ? (
-            <AgregarJugadores
-              idGrupo={idElementoActivo}
-              jugadores={jugadores}
-            />
-          ) : (
-            <>
-              <TablaPosiciones
-                filasTabla={filasTabla}
-                coloresTabla={coloresTabla}
-              />
-              <PartidosDelGrupo
-                partidosDelGrupo={partidosDelGrupo}
-                nombre_grupo={grupo.nombre}
-              />
-            </>
-          )}
         </>
       )}
     </>
