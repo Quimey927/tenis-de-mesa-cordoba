@@ -10,7 +10,7 @@ const FormularioFase = ({ method, fase }) => {
       textoTitulo={
         method === 'POST' ? 'Agregar fase' : `Editar ${fase[0].nombre}`
       }
-      navegarAlCancelar="../.."
+      navegarAlCancelar={method === 'POST' ? '../..' : '..'}
     >
       <Input
         id="nombre"
