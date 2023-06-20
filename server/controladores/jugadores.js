@@ -32,9 +32,9 @@ export const crearJugador = async (req, res) => {
       consultasJugadores.crearJugador,
       [
         nombre,
-        segundo_nombre !== '' ? segundo_nombre : null,
+        segundo_nombre,
         apellido,
-        segundo_apellido !== '' ? segundo_apellido : null,
+        segundo_apellido,
         fecha_nacimiento !== '' ? fecha_nacimiento : null,
         email !== '' ? email : null,
         foto_perfil !== '' ? foto_perfil : null,
@@ -96,9 +96,9 @@ export const editarJugador = async (req, res) => {
         consultasJugadores.editarJugador,
         [
           nombre,
-          segundo_nombre !== '' ? segundo_nombre : null,
+          segundo_nombre,
           apellido,
-          segundo_apellido !== '' ? segundo_apellido : null,
+          segundo_apellido,
           fecha_nacimiento !== '' ? fecha_nacimiento : null,
           email !== '' ? email : null,
           foto_perfil !== '' ? foto_perfil : null,

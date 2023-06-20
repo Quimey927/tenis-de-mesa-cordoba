@@ -5,8 +5,8 @@ export const obtenerNombreCompleto = (
   segundo_apellido
 ) => {
   return `${
-    segundo_apellido
+    segundo_apellido !== ''
       ? `${apellido.toUpperCase()} ${segundo_apellido.toUpperCase()},`
       : `${apellido.toUpperCase()},`
-  } ${segundo_nombre ? `${nombre} ${segundo_nombre}` : nombre}`;
+  } ${segundo_nombre !== '' ? `${nombre} ${segundo_nombre}` : nombre}`;
 };

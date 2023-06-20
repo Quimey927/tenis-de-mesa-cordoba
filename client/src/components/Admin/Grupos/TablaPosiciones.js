@@ -5,6 +5,7 @@ import {
   obtenerColoresFila,
   encontrarColorFila,
 } from '../../../utils/funcionesColorFila';
+import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import classes from './TablaPosiciones.module.css';
 
 const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
@@ -77,6 +78,7 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
             {filasTabla.length > 0 &&
               filasTabla.map((fila) => (
                 <tr
+                  key={fila.id}
                   className={classes.row}
                   style={{
                     backgroundColor:
@@ -87,7 +89,6 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
                           )}`
                         : 'none',
                   }}
-                  key={fila.id}
                 >
                   <td style={{ width: '50px' }}>
                     {!tablaEditandose ? (
@@ -100,14 +101,15 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
                     )}
                   </td>
                   <td key={fila.id} className={classes['celda-ancha']}>
-                    {!tablaEditandose ? (
-                      fila.jugador
-                    ) : (
-                      <input defaultValue={fila.jugador} />
+                    {obtenerNombreCompleto(
+                      fila.nombre,
+                      fila.segundo_nombre,
+                      fila.apellido,
+                      fila.segundo_apellido
                     )}
                   </td>
-                  {datosTabla.map((dato) => (
-                    <td key={dato.orden} style={{ width: '50px' }}>
+                  {datosTabla.map((dato, i) => (
+                    <td key={i} style={{ width: '50px' }}>
                       {!tablaEditandose ? (
                         fila[dato.codigo]
                       ) : (

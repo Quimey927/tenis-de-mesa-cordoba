@@ -6,12 +6,7 @@ import { agregarJugadores } from '../../../api';
 import classes from './AgregarJugadores.module.css';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 
-const AgregarJugadores = ({
-  idGrupo,
-  jugadores,
-  idElementoActivo,
-  setIdElementoActivo,
-}) => {
+const AgregarJugadores = ({ idGrupo, jugadores }) => {
   const [jugadoresGrupo, setJugadoresGrupo] = useState(['']);
 
   const controladorCambioInput = (evt) => {
@@ -22,8 +17,6 @@ const AgregarJugadores = ({
   const controladorAgregarJugadores = (evt) => {
     evt.preventDefault();
     agregarJugadores(idGrupo, jugadoresGrupo);
-
-    setIdElementoActivo(idElementoActivo);
   };
 
   const inputsJugadores = [];
@@ -49,9 +42,9 @@ const AgregarJugadores = ({
               value: jugador.id,
               texto: obtenerNombreCompleto(
                 jugador.nombre,
+                jugador.segundo_nombre,
                 jugador.apellido,
-                jugador.segundo_nombre ? jugador.segundo_nombre : null,
-                jugador.segundo_apellido ? jugador.segundo_apellido : null
+                jugador.segundo_apellido
               ),
             };
           }),
