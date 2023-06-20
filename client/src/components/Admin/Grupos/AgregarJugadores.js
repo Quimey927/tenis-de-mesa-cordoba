@@ -56,7 +56,7 @@ const AgregarJugadores = ({ idGrupo, jugadores }) => {
   return (
     <form className={classes.form} onSubmit={controladorAgregarJugadores}>
       <div className={classes.titulo}>
-        <h3>Agregar Jugadores al Grupo</h3>
+        <h3>Elegir los Jugadores del Grupo</h3>
         <div>
           <Button
             onClick={() =>
