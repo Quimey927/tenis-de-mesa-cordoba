@@ -24,8 +24,6 @@ const agregarJugadores = (cant_jugadores) => {
 
   let consulta = `INSERT INTO filas_tabla (id_grupo, id_jugador) VALUES ${valoresConsultaAjustado};`;
 
-  console.log(consulta);
-
   return consulta;
 };
 
