@@ -3,9 +3,15 @@ import { useLoaderData } from 'react-router-dom';
 import FormularioCategoriaFecha from '../../../components/Admin/CategoriasFecha/FormularioCategoriaFecha';
 
 const PaginaNuevaCategoriaFecha = () => {
-  const { idFecha } = useLoaderData();
+  const { fecha } = useLoaderData();
 
-  return <FormularioCategoriaFecha method="POST" idFecha={idFecha} />;
+  return (
+    <FormularioCategoriaFecha
+      method="POST"
+      fecha_inicio={fecha[0].fecha_inicio.substring(0, 10)}
+      fecha_finalizacion={fecha[0].fecha_finalizacion.substring(0, 10)}
+    />
+  );
 };
 
 export default PaginaNuevaCategoriaFecha;

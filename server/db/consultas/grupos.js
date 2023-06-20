@@ -1,4 +1,11 @@
-const obtenerGrupos = 'SELECT * FROM grupos WHERE id_fase = $1 ORDER BY nombre';
+const obtenerGrupos = `SELECT 
+    g.*,
+    cf.dia AS dia
+  FROM grupos AS g
+  INNER JOIN fases AS f ON f.id = g.id_fase
+  INNER JOIN categorias_fechas AS cf ON cf.id = f.id_categoria_fecha
+  WHERE g.id_fase = $1
+  ORDER BY g.nombre`;
 
 const crearGrupo = `INSERT INTO grupos
   (

@@ -2,7 +2,7 @@ import { useLoaderData } from 'react-router-dom';
 
 import AdminInfo from '../../../components/Admin/AdminInfo/AdminInfo';
 import ListaFases from '../../../components/Admin/Fases/ListaFases';
-
+import { obtenerFechaEnEspañol } from '../../../utils/funcionesSobreFechas';
 import { obtenerCategoriaFecha, obtenerFases } from '../../../api';
 
 const PaginaInfoCategoriaFecha = () => {
@@ -16,6 +16,10 @@ const PaginaInfoCategoriaFecha = () => {
     {
       nombre: 'Orden',
       valor: categoriaFecha[0].orden,
+    },
+    {
+      nombre: 'Día',
+      valor: obtenerFechaEnEspañol(categoriaFecha[0].dia.substring(0, 10)),
     },
   ];
 
