@@ -47,7 +47,6 @@ const PaginaInfoFecha = () => {
         subtitulo={`${fecha[0].torneo} ${fecha[0].temporada}`}
         campos={campos}
         imagen={fecha[0].imagen}
-        to={-1}
       />
 
       <ListaCategoriasFecha
