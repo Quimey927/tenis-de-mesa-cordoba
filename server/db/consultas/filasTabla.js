@@ -14,7 +14,7 @@ const agregarJugadores = (cant_jugadores) => {
   let valoresConsulta = '';
 
   for (let i = 0; i < cant_jugadores; i++) {
-    valoresConsulta += `($1, $${i + 2}), `;
+    valoresConsulta += `($1, $${i + 2}, ${i + 1}, ${i + 1}), `;
   }
 
   const valoresConsultaAjustado = valoresConsulta.substring(
@@ -22,7 +22,7 @@ const agregarJugadores = (cant_jugadores) => {
     valoresConsulta.length - 2
   );
 
-  let consulta = `INSERT INTO filas_tabla (id_grupo, id_jugador) VALUES ${valoresConsultaAjustado};`;
+  let consulta = `INSERT INTO filas_tabla (id_grupo, id_jugador, posicion, preclasificado) VALUES ${valoresConsultaAjustado};`;
 
   return consulta;
 };
