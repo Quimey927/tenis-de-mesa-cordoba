@@ -6,7 +6,7 @@ import { agregarJugadores } from '../../../api';
 import classes from './AgregarJugadores.module.css';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 
-const AgregarJugadores = ({ idGrupo, jugadores }) => {
+const AgregarJugadores = ({ idGrupo, jugadores, setDummyEstado }) => {
   const [jugadoresGrupo, setJugadoresGrupo] = useState(['']);
 
   const controladorCambioInput = (evt) => {
@@ -17,6 +17,7 @@ const AgregarJugadores = ({ idGrupo, jugadores }) => {
   const controladorAgregarJugadores = (evt) => {
     evt.preventDefault();
     agregarJugadores(idGrupo, jugadoresGrupo);
+    setDummyEstado((estadoPrevio) => !estadoPrevio);
   };
 
   const inputsJugadores = [];

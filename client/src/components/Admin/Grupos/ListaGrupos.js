@@ -30,6 +30,8 @@ const ListaGrupos = ({
   const [filasTabla, setFilasTabla] = useState([]);
   const [coloresTabla, setColoresTabla] = useState([]);
   const [partidosDelGrupo, setPartidosDelGrupo] = useState([]);
+  // este dummyEstado es para disparar el useEffect cuando agregamos jugadores o cambiamos colores tabla
+  const [dummyEstado, setDummyEstado] = useState(true);
 
   const navigate = useNavigate();
 
@@ -39,7 +41,7 @@ const ListaGrupos = ({
       obtenerColoresTabla(idElementoActivo, setColoresTabla);
       obtenerPartidosDelGrupo(idElementoActivo, setPartidosDelGrupo);
     }
-  }, [idElementoActivo, coloresElegidos]);
+  }, [idElementoActivo, coloresElegidos, dummyEstado]);
 
   const controladorBorrarGrupo = (id) => {
     const continuar = window.confirm(
@@ -100,7 +102,11 @@ const ListaGrupos = ({
       />
 
       {filasTabla.length === 0 ? (
-        <AgregarJugadores idGrupo={idElementoActivo} jugadores={jugadores} />
+        <AgregarJugadores
+          idGrupo={idElementoActivo}
+          jugadores={jugadores}
+          setDummyEstado={setDummyEstado}
+        />
       ) : (
         <>
           <TablaPosiciones
