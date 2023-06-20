@@ -19,13 +19,13 @@ export const obtenerFilasTabla = async (req, res) => {
   }
 };
 
-export const agregarJugadores = async (req, res) => {
+export const crearFilasTabla = async (req, res) => {
   const idGrupo = parseInt(req.params.idGrupo);
   const idJugadores = req.body;
 
   try {
     pool.query(
-      consultasFilasTabla.agregarJugadores(idJugadores.length),
+      consultasFilasTabla.crearFilasTabla(idJugadores.length),
       [idGrupo, ...idJugadores],
       (err, results) => {
         if (err) throw new Error(err);
@@ -35,5 +35,24 @@ export const agregarJugadores = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('No pudimos cargar las filas de la tabla.');
+  }
+};
+
+export const editarFilaTabla = async (req, res) => {
+  const idFila = parseInt(req.params.idFila);
+  const { posicion, pj, pg, pp, sf, sc, pf, pc } = req.body;
+
+  try {
+    pool.query(
+      consultasFilasTabla.editarFilaTabla,
+      [+posicion, +pj, +pg, +pp, +sf, +sc, +pf, +pc, idFila],
+      (err, results) => {
+        if (err) throw new Error();
+        res.status(200).send('Fila de tabla editada correctamente.');
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('No pudimos editar la fila de la tabla.');
   }
 };

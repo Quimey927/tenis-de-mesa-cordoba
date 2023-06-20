@@ -112,6 +112,7 @@ const ListaGrupos = ({
           <TablaPosiciones
             filasTabla={filasTabla}
             coloresTabla={coloresTabla}
+            setDummyEstado={setDummyEstado}
           />
           <PartidosDelGrupo
             partidosDelGrupo={partidosDelGrupo}

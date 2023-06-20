@@ -38,20 +38,10 @@
   width: 4ch;
 }
 
-.flex-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .btn {
-  color: #fff;
-  background-color: #5cb85c;
-  border: 1px solid #4cae4c;
-}
-
-.btn:hover {
-  background-color: #4cae4c;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
 }
 
 .color {

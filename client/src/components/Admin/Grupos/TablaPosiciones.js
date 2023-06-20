@@ -1,18 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faSave } from '@fortawesome/free-solid-svg-icons';
 
-import Button from '../../UI/Button/Button';
 import {
   obtenerColoresFila,
   encontrarColorFila,
 } from '../../../utils/funcionesColorFila';
+import { editarFilaTabla } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import classes from './TablaPosiciones.module.css';
 
-const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
-  const [tablaEditandose, setTablaEditandose] = useState(false);
+const TablaPosiciones = ({ filasTabla, coloresTabla, setDummyEstado }) => {
+  const [idFilaEditandose, setIdFilaEditandose] = useState(null);
+  const [filaEditandose, setFilaEditandose] = useState(null);
 
-  const controladorAlternarEditarTabla = () =>
-    setTablaEditandose((estadoAnterior) => !estadoAnterior);
+  const controladorEditarFilaTabla = (id) => {
+    if (id === idFilaEditandose) {
+      editarFilaTabla(filaEditandose);
+      setIdFilaEditandose(null);
+      setDummyEstado((estadoPrevio) => !estadoPrevio);
+    } else {
+      setIdFilaEditandose(id);
+    }
+  };
+
+  const controladorCambiarValor = (evt) => {
+    setFilaEditandose((estadoPrevio) => {
+      let nuevoEstado = {
+        ...estadoPrevio,
+        [evt.target.name]: evt.target.value,
+      };
+      return nuevoEstado;
+    });
+  };
+
+  useEffect(() => {
+    const filaEncontrada = filasTabla.find(
+      (fila) => fila.id === idFilaEditandose
+    );
+
+    setFilaEditandose(filaEncontrada);
+  }, [idFilaEditandose, filasTabla]);
 
   const coloresFila = obtenerColoresFila(coloresTabla);
 
@@ -60,6 +88,7 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
                   {dato.codigo.toUpperCase()}
                 </th>
               ))}
+              <th style={{ width: '50px' }}></th>
             </tr>
           </thead>
           <tbody>
@@ -79,13 +108,15 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
                   }}
                 >
                   <td style={{ width: '50px' }}>
-                    {!tablaEditandose ? (
-                      fila.posicion
-                    ) : (
+                    {fila.id === idFilaEditandose ? (
                       <input
+                        name="posicion"
                         defaultValue={fila.posicion}
                         className={classes['input-tabla-numero']}
+                        onChange={controladorCambiarValor}
                       />
+                    ) : (
+                      fila.posicion
                     )}
                   </td>
                   <td key={fila.id} className={classes['celda-ancha']}>
@@ -98,40 +129,48 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
                   </td>
                   {datosTabla.map((dato, i) => (
                     <td key={i} style={{ width: '50px' }}>
-                      {!tablaEditandose ? (
-                        fila[dato.codigo]
-                      ) : (
+                      {fila.id === idFilaEditandose ? (
                         <input
+                          name={dato.codigo}
                           defaultValue={fila[dato.codigo]}
                           className={classes['input-tabla-numero']}
+                          onChange={controladorCambiarValor}
                         />
+                      ) : (
+                        fila[dato.codigo]
                       )}
                     </td>
                   ))}
+                  <td style={{ width: '50px' }}>
+                    <button
+                      type="button"
+                      className={classes['btn']}
+                      onClick={controladorEditarFilaTabla.bind(null, fila.id)}
+                    >
+                      {fila.id === idFilaEditandose ? (
+                        <FontAwesomeIcon icon={faSave} />
+                      ) : (
+                        <FontAwesomeIcon icon={faPenToSquare} />
+                      )}
+                    </button>
+                  </td>
                 </tr>
               ))}
           </tbody>
         </table>
-        <div className={classes['flex-container']}>
-          <div>
-            {coloresTabla.map((color) => (
-              <div className={classes.color} key={color.id}>
-                <div
-                  className={classes.box}
-                  style={{
-                    backgroundColor: `var(--color-${color.color})` || 'red',
-                  }}
-                ></div>
-                <div>{color.nota}</div>
-              </div>
-            ))}
-          </div>
-          <Button
-            onClick={controladorAlternarEditarTabla}
-            className={classes.btn}
-          >
-            {!tablaEditandose ? 'Editar' : 'Guardar'}
-          </Button>
+
+        <div>
+          {coloresTabla.map((color) => (
+            <div className={classes.color} key={color.id}>
+              <div
+                className={classes.box}
+                style={{
+                  backgroundColor: `var(--color-${color.color})` || 'red',
+                }}
+              ></div>
+              <div>{color.nota}</div>
+            </div>
+          ))}
         </div>
       </form>
     </>

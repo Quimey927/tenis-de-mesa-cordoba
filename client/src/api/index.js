@@ -84,7 +84,11 @@ export {
   borrarGrupo,
 } from './grupos';
 
-export { obtenerFilasTabla, agregarJugadores } from './filasTabla';
+export {
+  obtenerFilasTabla,
+  crearFilasTabla,
+  editarFilaTabla,
+} from './filasTabla';
 
 export { obtenerColoresTabla, crearColoresTabla } from './coloresTabla';
 

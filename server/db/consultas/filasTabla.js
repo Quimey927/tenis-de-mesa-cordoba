@@ -10,7 +10,7 @@ const obtenerFilasTabla = `SELECT
   WHERE ft.id_grupo = $1
   ORDER BY ft.posicion`;
 
-const agregarJugadores = (cant_jugadores) => {
+const crearFilasTabla = (cant_jugadores) => {
   let valoresConsulta = '';
 
   for (let i = 0; i < cant_jugadores; i++) {
@@ -27,4 +27,16 @@ const agregarJugadores = (cant_jugadores) => {
   return consulta;
 };
 
-export default { obtenerFilasTabla, agregarJugadores };
+const editarFilaTabla = `UPDATE filas_tabla
+  SET
+    posicion = $1,
+    pj = $2,
+    pg = $3,
+    pp = $4,
+    sf = $5,
+    sc = $6,
+    pf = $7,
+    pc = $8
+  WHERE id = $9`;
+
+export default { obtenerFilasTabla, crearFilasTabla, editarFilaTabla };

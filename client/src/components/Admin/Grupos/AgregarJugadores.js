@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import Button from '../../UI/Button/Button';
 import Select from '../../UI/Select/Select';
-import { agregarJugadores } from '../../../api';
+import { crearFilasTabla } from '../../../api';
 import classes from './AgregarJugadores.module.css';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 
@@ -16,7 +16,7 @@ const AgregarJugadores = ({ idGrupo, jugadores, setDummyEstado }) => {
 
   const controladorAgregarJugadores = (evt) => {
     evt.preventDefault();
-    agregarJugadores(idGrupo, jugadoresGrupo);
+    crearFilasTabla(idGrupo, jugadoresGrupo);
     setDummyEstado((estadoPrevio) => !estadoPrevio);
   };
 
