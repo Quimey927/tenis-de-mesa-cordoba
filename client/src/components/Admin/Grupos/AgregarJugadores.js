@@ -29,7 +29,7 @@ const AgregarJugadores = ({ idGrupo, jugadores }) => {
         id={`jugador-${i}`}
         onChange={controladorCambioInput}
         required={true}
-        value={jugadores[i].id}
+        defaultValue={jugadoresGrupo[i]}
         options={[
           {
             value: '',
