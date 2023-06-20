@@ -10,13 +10,16 @@ const crearGrupo = `INSERT INTO grupos
 const crearGrupos = (cant_grupos) => {
   let valoresConsulta = '';
 
-  for (let i = 0; i < cant_grupos - 1; i++) {
+  for (let i = 0; i < cant_grupos; i++) {
     valoresConsulta += `($${i + 2}, $1), `;
   }
 
-  valoresConsulta += `($${+cant_grupos + 1}, $1)`;
+  const valoresConsultaAjustado = valoresConsulta.substring(
+    0,
+    valoresConsulta.length - 2
+  );
 
-  let consulta = `INSERT INTO grupos (nombre, id_fase) VALUES ${valoresConsulta};`;
+  let consulta = `INSERT INTO grupos (nombre, id_fase) VALUES ${valoresConsultaAjustado};`;
 
   return consulta;
 };
