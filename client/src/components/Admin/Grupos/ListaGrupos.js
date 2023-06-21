@@ -37,8 +37,8 @@ const ListaGrupos = ({
 
   useEffect(() => {
     if (idElementoActivo && coloresElegidos) {
-      obtenerFilasTabla(idElementoActivo, setFilasTabla);
       obtenerColoresTabla(idElementoActivo, setColoresTabla);
+      obtenerFilasTabla(idElementoActivo, setFilasTabla);
       obtenerPartidosDelGrupo(idElementoActivo, setPartidosDelGrupo);
     }
   }, [idElementoActivo, coloresElegidos, dummyEstado]);
