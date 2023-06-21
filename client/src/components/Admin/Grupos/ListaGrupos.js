@@ -106,6 +106,7 @@ const ListaGrupos = ({
           idGrupo={idElementoActivo}
           jugadores={jugadores}
           setDummyEstado={setDummyEstado}
+          nombreGrupo={grupo.nombre}
         />
       ) : (
         <>
@@ -114,9 +115,13 @@ const ListaGrupos = ({
             coloresTabla={coloresTabla}
             setDummyEstado={setDummyEstado}
           />
+
           <PartidosDelGrupo
             partidosDelGrupo={partidosDelGrupo}
-            nombre_grupo={grupo.nombre}
+            setDummyEstado={setDummyEstado}
+            idGrupo={idElementoActivo}
+            filasTabla={filasTabla}
+            dia={grupos[0].dia.substring(0, 10)}
           />
         </>
       )}

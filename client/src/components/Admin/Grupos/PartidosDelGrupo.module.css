@@ -41,16 +41,6 @@
   background-color: #d0e9c6;
 }
 
-.table tr th:nth-child(1),
-.table tr td:nth-child(1) {
-  text-align: end;
-}
-
-.table tr th:nth-child(3),
-.table tr td:nth-child(3) {
-  text-align: start;
-}
-
 .table a {
   text-decoration: none;
   color: #337ab7;
@@ -63,6 +53,37 @@
 
 .icono-editar {
   margin-right: 0.2rem;
+}
+
+.btn {
+  color: #fff;
+  background-color: #5cb85c;
+  border: 1px solid #4cae4c;
+  border: none;
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  margin: 2rem auto;
+}
+
+.btn:hover {
+  background-color: #4cae4c;
+}
+
+.btn-editar-guardar {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.input-tabla-numero {
+  text-align: center;
+  margin: 0;
+  width: 4ch;
 }
 
 @media (min-width: 768px) {

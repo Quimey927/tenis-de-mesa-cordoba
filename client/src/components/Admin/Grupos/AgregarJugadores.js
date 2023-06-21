@@ -6,12 +6,35 @@ import { crearFilasTabla } from '../../../api';
 import classes from './AgregarJugadores.module.css';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 
-const AgregarJugadores = ({ idGrupo, jugadores, setDummyEstado }) => {
-  const [jugadoresGrupo, setJugadoresGrupo] = useState(['']);
+const AgregarJugadores = ({
+  idGrupo,
+  jugadores,
+  setDummyEstado,
+  nombreGrupo,
+}) => {
+  const [jugadoresGrupo, setJugadoresGrupo] = useState(['', '', '']);
 
   const controladorCambioInput = (evt) => {
     const index = +evt.target.id.split('-')[1];
     jugadoresGrupo[index] = evt.target.value;
+  };
+
+  const controladorAgregarJugador = () =>
+    setJugadoresGrupo((estadoPrevio) => {
+      let nuevoEstado = [...estadoPrevio, ''];
+      return nuevoEstado;
+    });
+
+  const controladorQuitarJugador = () => {
+    if (jugadoresGrupo.length <= 3) {
+      alert('El mínimo es de 3 jugadores');
+      return;
+    }
+
+    setJugadoresGrupo((estadoPrevio) => {
+      const nuevoEstado = [...estadoPrevio].slice(0, -1);
+      return nuevoEstado;
+    });
   };
 
   const controladorAgregarJugadores = (evt) => {
@@ -57,26 +80,16 @@ const AgregarJugadores = ({ idGrupo, jugadores, setDummyEstado }) => {
   return (
     <form className={classes.form} onSubmit={controladorAgregarJugadores}>
       <div className={classes.titulo}>
-        <h3>Elegir los Jugadores del Grupo</h3>
+        <h3>Elegir los Jugadores de: {nombreGrupo}</h3>
         <div>
           <Button
-            onClick={() =>
-              setJugadoresGrupo((estadoPrevio) => {
-                let nuevoEstado = [...estadoPrevio, ''];
-                return nuevoEstado;
-              })
-            }
+            onClick={controladorAgregarJugador}
             className={`${classes.btn} ${classes['btn-agregar']}`}
           >
             Agregar Jugador
           </Button>
           <Button
-            onClick={() =>
-              setJugadoresGrupo((estadoPrevio) => {
-                const nuevoEstado = [...estadoPrevio].slice(0, -1);
-                return nuevoEstado;
-              })
-            }
+            onClick={controladorQuitarJugador}
             className={`${classes.btn} ${classes['btn-agregar']}`}
           >
             Quitar Jugador

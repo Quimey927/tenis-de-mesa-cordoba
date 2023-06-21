@@ -94,4 +94,9 @@ export { obtenerColoresTabla, crearColoresTabla } from './coloresTabla';
 
 export { obtenerEliminatorias, borrarEliminatoria } from './eliminatorias';
 
-export { obtenerPartidosDelGrupo } from './partidos';
+export {
+  obtenerPartidosDelGrupo,
+  crearPartidosDelGrupo,
+  intercambiarJugadoresPartido,
+  editarOrdenPartido,
+} from './partidos';
