@@ -25,12 +25,13 @@ const PartidosDelGrupo = ({
   const [idPartidoEditandose, setIdPartidoEditandose] = useState(null);
   const [orden, setOrden] = useState(null);
 
-  const controladorEditarOrdenPartido = (id) => {
+  const controladorEditarOrdenPartido = (id, ordenActual) => {
     if (id === idPartidoEditandose) {
       editarOrdenPartido(idPartidoEditandose, orden);
       setIdPartidoEditandose(null);
       setDummyEstado((estadoPrevio) => !estadoPrevio);
     } else {
+      setOrden(ordenActual);
       setIdPartidoEditandose(id);
     }
   };
@@ -95,7 +96,11 @@ const PartidosDelGrupo = ({
                 <button
                   type="button"
                   className={classes['btn-editar-guardar']}
-                  onClick={controladorEditarOrdenPartido.bind(null, partido.id)}
+                  onClick={controladorEditarOrdenPartido.bind(
+                    null,
+                    partido.id,
+                    partido.orden
+                  )}
                 >
                   {partido.id === idPartidoEditandose ? (
                     <FontAwesomeIcon icon={faSave} />

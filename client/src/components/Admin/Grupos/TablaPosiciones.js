@@ -1,19 +1,43 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faSave } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPenToSquare,
+  faPlus,
+  faSave,
+  faTrash,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 
 import {
   obtenerColoresFila,
   encontrarColorFila,
 } from '../../../utils/funcionesColorFila';
-import { editarFilaTabla } from '../../../api';
+import {
+  editarFilaTabla,
+  editarColorTabla,
+  borrarColorTabla,
+  crearColorTabla,
+} from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import { datosTabla } from '../../../constants/datosTabla';
 import classes from './TablaPosiciones.module.css';
 
-const TablaPosiciones = ({ filasTabla, coloresTabla, setDummyEstado }) => {
+const TablaPosiciones = ({
+  filasTabla,
+  coloresTabla,
+  setDummyEstado,
+  idGrupo,
+}) => {
   const [idFilaEditandose, setIdFilaEditandose] = useState(null);
+  const [idColorEditandose, setIdColorEditandose] = useState(null);
   const [filaEditandose, setFilaEditandose] = useState(null);
+  const [colorEditandose, setColorEditandose] = useState(null);
+  const [agregandoNuevoColor, setAgregandoNuevoColor] = useState(false);
+  const [nuevoColor, setNuevoColor] = useState({
+    posiciones: '',
+    color: '',
+    nota: '',
+  });
 
   const controladorEditarFilaTabla = (id) => {
     if (id === idFilaEditandose) {
@@ -25,7 +49,17 @@ const TablaPosiciones = ({ filasTabla, coloresTabla, setDummyEstado }) => {
     }
   };
 
-  const controladorCambiarValor = (evt) => {
+  const controladorEditarColorTabla = (id) => {
+    if (id === idColorEditandose) {
+      editarColorTabla(colorEditandose);
+      setIdColorEditandose(null);
+      setDummyEstado((estadoPrevio) => !estadoPrevio);
+    } else {
+      setIdColorEditandose(id);
+    }
+  };
+
+  const controladorCambiarValorFila = (evt) => {
     setFilaEditandose((estadoPrevio) => {
       let nuevoEstado = {
         ...estadoPrevio,
@@ -35,6 +69,52 @@ const TablaPosiciones = ({ filasTabla, coloresTabla, setDummyEstado }) => {
     });
   };
 
+  const controladorCambiarValorColor = (evt) => {
+    setColorEditandose((estadoPrevio) => {
+      let nuevoEstado = {
+        ...estadoPrevio,
+        [evt.target.name]: evt.target.value,
+      };
+      return nuevoEstado;
+    });
+  };
+
+  const controladorCambiarValorNuevoColor = (evt) => {
+    setNuevoColor((estadoPrevio) => {
+      let nuevoEstado = {
+        ...estadoPrevio,
+        [evt.target.name]: evt.target.value,
+      };
+      return nuevoEstado;
+    });
+  };
+
+  const controladorBorrarColorTabla = (id) => {
+    const continuar = window.confirm(
+      '¿Estás seguro de que querés eliminar el color?'
+    );
+
+    if (continuar) {
+      borrarColorTabla(id);
+      setDummyEstado((estadoPrevio) => !estadoPrevio);
+    }
+  };
+
+  const controladorCerrarAgregarColor = () => {
+    setNuevoColor({ posiciones: '', color: '', nota: '' });
+    setAgregandoNuevoColor(false);
+  };
+
+  const controladorAgregarNuevoColor = () => {
+    if (!agregandoNuevoColor) {
+      setAgregandoNuevoColor(true);
+    } else {
+      crearColorTabla(nuevoColor, idGrupo);
+      setNuevoColor({ posiciones: '', color: '', nota: '' });
+      setAgregandoNuevoColor(false);
+    }
+  };
+
   useEffect(() => {
     const filaEncontrada = filasTabla.find(
       (fila) => fila.id === idFilaEditandose
@@ -42,6 +122,14 @@ const TablaPosiciones = ({ filasTabla, coloresTabla, setDummyEstado }) => {
 
     setFilaEditandose(filaEncontrada);
   }, [idFilaEditandose, filasTabla]);
+
+  useEffect(() => {
+    const colorEncontrado = coloresTabla.find(
+      (color) => color.id === idColorEditandose
+    );
+
+    setColorEditandose(colorEncontrado);
+  }, [idColorEditandose, coloresTabla]);
 
   const coloresFila = obtenerColoresFila(coloresTabla);
 
@@ -83,7 +171,7 @@ const TablaPosiciones = ({ filasTabla, coloresTabla, setDummyEstado }) => {
                         name="posicion"
                         defaultValue={fila.posicion}
                         className={classes['input-tabla-numero']}
-                        onChange={controladorCambiarValor}
+                        onChange={controladorCambiarValorFila}
                       />
                     ) : (
                       fila.posicion
@@ -104,7 +192,7 @@ const TablaPosiciones = ({ filasTabla, coloresTabla, setDummyEstado }) => {
                           name={dato.codigo}
                           defaultValue={fila[dato.codigo]}
                           className={classes['input-tabla-numero']}
-                          onChange={controladorCambiarValor}
+                          onChange={controladorCambiarValorFila}
                         />
                       ) : (
                         fila[dato.codigo]
@@ -132,15 +220,125 @@ const TablaPosiciones = ({ filasTabla, coloresTabla, setDummyEstado }) => {
         <div>
           {coloresTabla.map((color) => (
             <div className={classes.color} key={color.id}>
-              <div
-                className={classes.box}
-                style={{
-                  backgroundColor: `var(--color-${color.color})`,
-                }}
-              ></div>
-              <div>{color.nota}</div>
+              <button
+                type="button"
+                className={classes['btn']}
+                onClick={controladorEditarColorTabla.bind(null, color.id)}
+              >
+                {color.id === idColorEditandose ? (
+                  <FontAwesomeIcon icon={faSave} />
+                ) : (
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                )}
+              </button>
+              {color.id === idColorEditandose ? (
+                <>
+                  <input
+                    name="posiciones"
+                    required={true}
+                    onChange={controladorCambiarValorColor}
+                    defaultValue={color.posiciones}
+                    placeholder="Posiciones..."
+                  />
+                  <select
+                    name="color"
+                    onChange={controladorCambiarValorColor}
+                    defaultValue={color.color}
+                  >
+                    <option value="">Elegir color</option>
+                    <option value="verde">Verde</option>
+                    <option value="verde2">Verde 2</option>
+                    <option value="dorado">Dorado</option>
+                    <option value="bronce">Bronce</option>
+                    <option value="rojo2">Rojo</option>
+                    <option value="celeste">Celeste</option>
+                    <option value="celeste2">Celeste 2</option>
+                    <option value="amarillo">Amarillo</option>
+                    <option value="plateado">Plateado</option>
+                  </select>
+                  <input
+                    name="nota"
+                    onChange={controladorCambiarValorColor}
+                    required={true}
+                    defaultValue={color.nota}
+                    placeholder="Nota..."
+                  />
+                </>
+              ) : (
+                <>
+                  <div
+                    className={classes.box}
+                    style={{
+                      backgroundColor: `var(--color-${color.color})`,
+                    }}
+                  ></div>
+                  <div>{color.nota}</div>
+                  <button
+                    type="button"
+                    className={classes['btn']}
+                    onClick={controladorBorrarColorTabla.bind(null, color.id)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </>
+              )}
             </div>
           ))}
+
+          <div>
+            <button
+              type="button"
+              className={classes['btn']}
+              onClick={controladorAgregarNuevoColor}
+            >
+              {!agregandoNuevoColor ? (
+                <FontAwesomeIcon icon={faPlus} />
+              ) : (
+                <FontAwesomeIcon icon={faSave} />
+              )}
+            </button>
+            {agregandoNuevoColor && (
+              <>
+                <input
+                  name="posiciones"
+                  required={true}
+                  onChange={controladorCambiarValorNuevoColor}
+                  value={nuevoColor.posiciones}
+                  placeholder="Posiciones..."
+                />
+                <select
+                  name="color"
+                  onChange={controladorCambiarValorNuevoColor}
+                  value={nuevoColor.color}
+                >
+                  <option value="">Elegir color</option>
+                  <option value="verde">Verde</option>
+                  <option value="verde2">Verde 2</option>
+                  <option value="dorado">Dorado</option>
+                  <option value="bronce">Bronce</option>
+                  <option value="rojo2">Rojo</option>
+                  <option value="celeste">Celeste</option>
+                  <option value="celeste2">Celeste 2</option>
+                  <option value="amarillo">Amarillo</option>
+                  <option value="plateado">Plateado</option>
+                </select>
+                <input
+                  name="nota"
+                  onChange={controladorCambiarValorNuevoColor}
+                  required={true}
+                  value={nuevoColor.nota}
+                  placeholder="Nota..."
+                />
+                <button
+                  type="button"
+                  className={classes['btn']}
+                  onClick={controladorCerrarAgregarColor}
+                >
+                  <FontAwesomeIcon icon={faXmark} />
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </form>
     </>

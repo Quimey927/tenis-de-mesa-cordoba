@@ -90,7 +90,13 @@ export {
   editarFilaTabla,
 } from './filasTabla';
 
-export { obtenerColoresTabla, crearColoresTabla } from './coloresTabla';
+export {
+  obtenerColoresTabla,
+  crearColoresTabla,
+  editarColorTabla,
+  borrarColorTabla,
+  crearColorTabla,
+} from './coloresTabla';
 
 export { obtenerEliminatorias, borrarEliminatoria } from './eliminatorias';
 

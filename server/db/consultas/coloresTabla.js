@@ -28,4 +28,22 @@ const crearColoresTabla = (cant_colores, cant_grupos) => {
   return consulta;
 };
 
-export default { obtenerColoresTabla, crearColoresTabla };
+const editarColorTabla = `UPDATE colores_filas
+  SET
+    posiciones = $1,
+    color = $2,
+    nota = $3
+  WHERE id = $4`;
+
+const borrarColorTabla = 'DELETE FROM colores_filas WHERE id = $1';
+
+const crearColorTabla =
+  'INSERT INTO colores_filas (id_grupo, posiciones, color, nota) VALUES ($1, $2, $3, $4)';
+
+export default {
+  obtenerColoresTabla,
+  crearColoresTabla,
+  editarColorTabla,
+  borrarColorTabla,
+  crearColorTabla,
+};

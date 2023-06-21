@@ -113,6 +113,7 @@ const ListaGrupos = ({
           <TablaPosiciones
             filasTabla={filasTabla}
             coloresTabla={coloresTabla}
+            idGrupo={grupo.id}
             setDummyEstado={setDummyEstado}
           />
 
