@@ -135,7 +135,7 @@ const TablaPosiciones = ({ filasTabla, coloresTabla, setDummyEstado }) => {
               <div
                 className={classes.box}
                 style={{
-                  backgroundColor: `var(--color-${color.color})` || 'red',
+                  backgroundColor: `var(--color-${color.color})`,
                 }}
               ></div>
               <div>{color.nota}</div>
