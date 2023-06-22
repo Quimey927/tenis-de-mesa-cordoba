@@ -57,3 +57,7 @@
   height: 0.8rem;
   border-radius: 2px;
 }
+
+.input-posiciones {
+  width: 15ch;
+}

@@ -15,6 +15,7 @@ import {
   obtenerColoresTabla,
   obtenerPartidosDelGrupo,
 } from '../../../api';
+import { obtenerColoresFila } from '../../../utils/funcionesColorFila';
 
 const ListaGrupos = ({
   grupos,
@@ -30,6 +31,7 @@ const ListaGrupos = ({
   const [filasTabla, setFilasTabla] = useState([]);
   const [coloresTabla, setColoresTabla] = useState([]);
   const [partidosDelGrupo, setPartidosDelGrupo] = useState([]);
+  const [coloresFila, setColoresFila] = useState([]);
   // este dummyEstado es para disparar el useEffect cuando agregamos jugadores o cambiamos colores tabla
   const [dummyEstado, setDummyEstado] = useState(true);
 
@@ -42,6 +44,10 @@ const ListaGrupos = ({
       obtenerPartidosDelGrupo(idElementoActivo, setPartidosDelGrupo);
     }
   }, [idElementoActivo, coloresElegidos, dummyEstado]);
+
+  useEffect(() => {
+    setColoresFila(obtenerColoresFila(coloresTabla));
+  }, [coloresTabla]);
 
   const controladorBorrarGrupo = (id) => {
     const continuar = window.confirm(
@@ -115,6 +121,7 @@ const ListaGrupos = ({
             coloresTabla={coloresTabla}
             idGrupo={grupo.id}
             setDummyEstado={setDummyEstado}
+            coloresFila={coloresFila}
           />
 
           <PartidosDelGrupo

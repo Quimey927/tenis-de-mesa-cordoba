@@ -8,10 +8,7 @@ import {
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 
-import {
-  obtenerColoresFila,
-  encontrarColorFila,
-} from '../../../utils/funcionesColorFila';
+import { encontrarColorFila } from '../../../utils/funcionesColorFila';
 import {
   editarFilaTabla,
   editarColorTabla,
@@ -27,6 +24,7 @@ const TablaPosiciones = ({
   coloresTabla,
   setDummyEstado,
   idGrupo,
+  coloresFila,
 }) => {
   const [idFilaEditandose, setIdFilaEditandose] = useState(null);
   const [idColorEditandose, setIdColorEditandose] = useState(null);
@@ -100,6 +98,10 @@ const TablaPosiciones = ({
     }
   };
 
+  const controladorCerrarEditarColor = () => {
+    setIdColorEditandose(null);
+  };
+
   const controladorCerrarAgregarColor = () => {
     setNuevoColor({ posiciones: '', color: '', nota: '' });
     setAgregandoNuevoColor(false);
@@ -112,6 +114,7 @@ const TablaPosiciones = ({
       crearColorTabla(nuevoColor, idGrupo);
       setNuevoColor({ posiciones: '', color: '', nota: '' });
       setAgregandoNuevoColor(false);
+      setDummyEstado((estadoPrevio) => !estadoPrevio);
     }
   };
 
@@ -130,8 +133,6 @@ const TablaPosiciones = ({
 
     setColorEditandose(colorEncontrado);
   }, [idColorEditandose, coloresTabla]);
-
-  const coloresFila = obtenerColoresFila(coloresTabla);
 
   return (
     <>
@@ -234,6 +235,7 @@ const TablaPosiciones = ({
               {color.id === idColorEditandose ? (
                 <>
                   <input
+                    className={classes['input-posiciones']}
                     name="posiciones"
                     required={true}
                     onChange={controladorCambiarValorColor}
@@ -244,6 +246,7 @@ const TablaPosiciones = ({
                     name="color"
                     onChange={controladorCambiarValorColor}
                     defaultValue={color.color}
+                    required={true}
                   >
                     <option value="">Elegir color</option>
                     <option value="verde">Verde</option>
@@ -263,6 +266,13 @@ const TablaPosiciones = ({
                     defaultValue={color.nota}
                     placeholder="Nota..."
                   />
+                  <button
+                    type="button"
+                    className={classes['btn']}
+                    onClick={controladorCerrarEditarColor}
+                  >
+                    <FontAwesomeIcon icon={faXmark} />
+                  </button>
                 </>
               ) : (
                 <>
@@ -301,15 +311,15 @@ const TablaPosiciones = ({
               <>
                 <input
                   name="posiciones"
+                  className={classes['input-posiciones']}
                   required={true}
                   onChange={controladorCambiarValorNuevoColor}
-                  value={nuevoColor.posiciones}
                   placeholder="Posiciones..."
                 />
                 <select
                   name="color"
                   onChange={controladorCambiarValorNuevoColor}
-                  value={nuevoColor.color}
+                  required={true}
                 >
                   <option value="">Elegir color</option>
                   <option value="verde">Verde</option>
@@ -326,7 +336,6 @@ const TablaPosiciones = ({
                   name="nota"
                   onChange={controladorCambiarValorNuevoColor}
                   required={true}
-                  value={nuevoColor.nota}
                   placeholder="Nota..."
                 />
                 <button
