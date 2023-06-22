@@ -18,6 +18,7 @@ import rutasFilasTabla from './rutas/filasTabla.js';
 import rutasColoresTabla from './rutas/coloresTabla.js';
 import rutasEliminatorias from './rutas/eliminatorias.js';
 import rutasPartidos from './rutas/partidos.js';
+import rutasSets from './rutas/sets.js';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,6 +38,7 @@ app.use('/api/filas-tabla', rutasFilasTabla);
 app.use('/api/colores-tabla', rutasColoresTabla);
 app.use('/api/eliminatorias', rutasEliminatorias);
 app.use('/api/partidos', rutasPartidos);
+app.use('/api/sets', rutasSets);
 
 const puerto = process.env.PUERTO || 8080;
 

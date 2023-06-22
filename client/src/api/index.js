@@ -106,3 +106,5 @@ export {
   intercambiarJugadoresPartido,
   editarPartido,
 } from './partidos';
+
+export { obtenerSets, editarSet, borrarSet, crearSet } from './sets';
