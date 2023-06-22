@@ -5,7 +5,8 @@ const obtenerColoresTabla = `SELECT
     cf.posiciones
   FROM colores_filas AS cf
   INNER JOIN grupos AS g ON cf.id_grupo = g.id
-  WHERE g.id = $1`;
+  WHERE g.id = $1
+  ORDER BY cf.posiciones`;
 
 const crearColoresTabla = (cant_colores, cant_grupos) => {
   let valoresConsulta = '';
