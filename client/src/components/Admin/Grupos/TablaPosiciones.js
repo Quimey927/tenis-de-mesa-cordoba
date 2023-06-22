@@ -49,6 +49,14 @@ const TablaPosiciones = ({
 
   const controladorEditarColorTabla = (id) => {
     if (id === idColorEditandose) {
+      if (
+        colorEditandose.posiciones.trim() === '' ||
+        colorEditandose.color.trim() === '' ||
+        colorEditandose.nota.trim() === ''
+      ) {
+        alert('No dejes campos vacíos');
+        return;
+      }
       editarColorTabla(colorEditandose);
       setIdColorEditandose(null);
       setDummyEstado((estadoPrevio) => !estadoPrevio);
@@ -111,6 +119,14 @@ const TablaPosiciones = ({
     if (!agregandoNuevoColor) {
       setAgregandoNuevoColor(true);
     } else {
+      if (
+        nuevoColor.posiciones.trim() === '' ||
+        nuevoColor.color.trim() === '' ||
+        nuevoColor.nota.trim() === ''
+      ) {
+        alert('No dejes campos vacíos');
+        return;
+      }
       crearColorTabla(nuevoColor, idGrupo);
       setNuevoColor({ posiciones: '', color: '', nota: '' });
       setAgregandoNuevoColor(false);
