@@ -40,14 +40,20 @@ const crearPartidosDelGrupo = (jugadores) => {
 
 const intercambiarJugadoresPartido = `UPDATE partidos
   SET
-    (id_jugador_1, id_jugador_2) = (id_jugador_2, id_jugador_1)
+    (id_jugador_1, id_jugador_2) = (id_jugador_2, id_jugador_1),
+    (sets_jugador_1, sets_jugador_2) = (sets_jugador_2, sets_jugador_1)
   WHERE id = $1`;
 
-const editarOrdenPartido = 'UPDATE partidos SET orden = $1 WHERE id = $2';
+const editarPartido = `UPDATE partidos
+  SET
+    orden = $1,
+    sets_jugador_1 = $2,
+    sets_jugador_2 = $3
+  WHERE id = $4`;
 
 export default {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
   intercambiarJugadoresPartido,
-  editarOrdenPartido,
+  editarPartido,
 };

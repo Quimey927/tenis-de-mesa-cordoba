@@ -4,7 +4,7 @@ import {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
   intercambiarJugadoresPartido,
-  editarOrdenPartido,
+  editarPartido,
 } from '../controladores/partidos.js';
 
 const router = express.Router();
@@ -16,6 +16,6 @@ router
 
 router.route('/intercambio/:idPartido').put(intercambiarJugadoresPartido);
 
-router.route('/orden/:idPartido').put(editarOrdenPartido);
+router.route('/:idPartido').put(editarPartido);
 
 export default router;

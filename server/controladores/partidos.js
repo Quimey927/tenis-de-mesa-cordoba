@@ -57,15 +57,15 @@ export const intercambiarJugadoresPartido = async (req, res) => {
   }
 };
 
-export const editarOrdenPartido = async (req, res) => {
+export const editarPartido = async (req, res) => {
   const idPartido = parseInt(req.params.idPartido);
 
-  const { orden } = req.body;
+  const { orden, sets_jugador_1, sets_jugador_2 } = req.body;
 
   try {
     pool.query(
-      consultasPartidos.editarOrdenPartido,
-      [orden, idPartido],
+      consultasPartidos.editarPartido,
+      [orden, sets_jugador_1, sets_jugador_2, idPartido],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(200).json(results.rows);

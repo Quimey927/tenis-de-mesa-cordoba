@@ -47,13 +47,13 @@ export const intercambiarJugadoresPartido = async (idPartido) => {
   }
 };
 
-export const editarOrdenPartido = async (idPartido, orden) => {
-  const response = await fetch(`${baseUrl}/orden/${idPartido}`, {
+export const editarPartido = async (partidoEditandose) => {
+  const response = await fetch(`${baseUrl}/${partidoEditandose.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ orden }),
+    body: JSON.stringify(partidoEditandose),
   });
 
   if (!response.ok) {

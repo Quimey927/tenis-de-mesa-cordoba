@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,7 +10,7 @@ import {
 import {
   crearPartidosDelGrupo,
   intercambiarJugadoresPartido,
-  editarOrdenPartido,
+  editarPartido,
 } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import classes from './PartidosDelGrupo.module.css';
@@ -23,18 +23,35 @@ const PartidosDelGrupo = ({
   setDummyEstado,
 }) => {
   const [idPartidoEditandose, setIdPartidoEditandose] = useState(null);
-  const [orden, setOrden] = useState(null);
+  const [partidoEditandose, setPartidoEditandose] = useState(null);
 
-  const controladorEditarOrdenPartido = (id, ordenActual) => {
+  const controladorEditarPartido = (id) => {
     if (id === idPartidoEditandose) {
-      editarOrdenPartido(idPartidoEditandose, orden);
+      editarPartido(partidoEditandose);
       setIdPartidoEditandose(null);
       setDummyEstado((estadoPrevio) => !estadoPrevio);
     } else {
-      setOrden(ordenActual);
       setIdPartidoEditandose(id);
     }
   };
+
+  const controladorCambiarValorPartido = (evt) => {
+    setPartidoEditandose((estadoPrevio) => {
+      let nuevoEstado = {
+        ...estadoPrevio,
+        [evt.target.name]: evt.target.value,
+      };
+      return nuevoEstado;
+    });
+  };
+
+  useEffect(() => {
+    const partidoEncontrado = partidosDelGrupo.find(
+      (partido) => partido.id === idPartidoEditandose
+    );
+
+    setPartidoEditandose(partidoEncontrado);
+  }, [idPartidoEditandose, partidosDelGrupo]);
 
   const jugadores = [];
 
@@ -71,11 +88,11 @@ const PartidosDelGrupo = ({
         <thead>
           <tr>
             <th>Orden</th>
-            <th>Editar</th>
             <th>Jugador 1</th>
             <th style={{ width: '110px' }}>vs.</th>
             <th>Jugador 2</th>
             <th style={{ width: '80px' }}>Intercambiar</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -84,30 +101,14 @@ const PartidosDelGrupo = ({
               <td>
                 {partido.id === idPartidoEditandose ? (
                   <input
+                    name="orden"
                     defaultValue={partido.orden}
                     className={classes['input-tabla-numero']}
-                    onChange={(evt) => setOrden(evt.target.value)}
+                    onChange={controladorCambiarValorPartido}
                   />
                 ) : (
                   partido.orden
                 )}
-              </td>
-              <td>
-                <button
-                  type="button"
-                  className={classes['btn-editar-guardar']}
-                  onClick={controladorEditarOrdenPartido.bind(
-                    null,
-                    partido.id,
-                    partido.orden
-                  )}
-                >
-                  {partido.id === idPartidoEditandose ? (
-                    <FontAwesomeIcon icon={faSave} />
-                  ) : (
-                    <FontAwesomeIcon icon={faPenToSquare} />
-                  )}
-                </button>
               </td>
               <td>
                 {obtenerNombreCompleto(
@@ -118,7 +119,27 @@ const PartidosDelGrupo = ({
                 )}
               </td>
               <td>
-                <Link to={`resultado/${partido.id}`}>...</Link>
+                {partido.id === idPartidoEditandose ? (
+                  <>
+                    <input
+                      name="sets_jugador_1"
+                      defaultValue={partido.sets_jugador_1}
+                      className={classes['input-tabla-numero']}
+                      onChange={controladorCambiarValorPartido}
+                    />
+                    <span>-</span>
+                    <input
+                      name="sets_jugador_2"
+                      defaultValue={partido.sets_jugador_2}
+                      className={classes['input-tabla-numero']}
+                      onChange={controladorCambiarValorPartido}
+                    />
+                  </>
+                ) : (
+                  <Link to={`resultado/${partido.id}`}>
+                    {partido.sets_jugador_1} - {partido.sets_jugador_2}
+                  </Link>
+                )}
               </td>
               <td>
                 {obtenerNombreCompleto(
@@ -138,6 +159,19 @@ const PartidosDelGrupo = ({
                   )}
                 >
                   <FontAwesomeIcon icon={faRightLeft} />
+                </button>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  className={classes['btn-editar-guardar']}
+                  onClick={controladorEditarPartido.bind(null, partido.id)}
+                >
+                  {partido.id === idPartidoEditandose ? (
+                    <FontAwesomeIcon icon={faSave} />
+                  ) : (
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  )}
                 </button>
               </td>
             </tr>

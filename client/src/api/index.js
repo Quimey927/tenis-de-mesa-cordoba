@@ -104,5 +104,5 @@ export {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
   intercambiarJugadoresPartido,
-  editarOrdenPartido,
+  editarPartido,
 } from './partidos';
