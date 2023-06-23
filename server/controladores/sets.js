@@ -50,12 +50,12 @@ export const borrarSet = async (req, res) => {
 
 export const crearSet = async (req, res) => {
   const idPartido = parseInt(req.params.idPartido);
-  const { num_set, puntos_jugador_1, puntos_jugador_2 } = req.body;
+  const { cantSets } = req.body;
 
   try {
     pool.query(
-      consultasSets.crearSet,
-      [idPartido, num_set, puntos_jugador_1, puntos_jugador_2],
+      consultasSets.crearSet(cantSets),
+      [idPartido],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(200).send('Color creado correctamente.');

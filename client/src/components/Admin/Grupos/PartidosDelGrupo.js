@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faRightLeft,
   faPenToSquare,
   faSave,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
   crearPartidosDelGrupo,
   intercambiarJugadoresPartido,
   editarPartido,
+  obtenerSets,
+  editarSet,
+  crearSet,
+  borrarSet,
 } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import classes from './PartidosDelGrupo.module.css';
@@ -24,6 +28,18 @@ const PartidosDelGrupo = ({
 }) => {
   const [idPartidoEditandose, setIdPartidoEditandose] = useState(null);
   const [partidoEditandose, setPartidoEditandose] = useState(null);
+  const [idPartidoSetsEditandose, setIdPartidoSetsEditandose] = useState(null);
+  const [idSetEditandose, setIdSetEditandose] = useState(null);
+  const [setEditandose, setSetEditandose] = useState(null);
+  const [setsPartido, setSetsPartido] = useState([]);
+  const [jugador1, setJugador1] = useState('');
+  const [jugador2, setJugador2] = useState('');
+
+  useEffect(() => {
+    if (idPartidoSetsEditandose) {
+      obtenerSets(idPartidoSetsEditandose, setSetsPartido);
+    }
+  }, [idPartidoSetsEditandose]);
 
   const controladorEditarPartido = (id) => {
     if (id === idPartidoEditandose) {
@@ -43,6 +59,33 @@ const PartidosDelGrupo = ({
       };
       return nuevoEstado;
     });
+  };
+
+  const controladorCambiarValorSet = (evt) => {
+    setSetEditandose((estadoPrevio) => {
+      let nuevoEstado = {
+        ...estadoPrevio,
+        [evt.target.name]: evt.target.value,
+      };
+      return nuevoEstado;
+    });
+  };
+
+  const controladorSetearSetsEditandose = (idPartido, jugador_1, jugador_2) => {
+    setIdPartidoSetsEditandose(idPartido);
+    setJugador1(jugador_1);
+    setJugador2(jugador_2);
+  };
+
+  const controladorBorrarSet = (id) => {
+    const continuar = window.confirm(
+      '¿Estás seguro de que querés eliminar el set?'
+    );
+
+    if (continuar) {
+      borrarSet(id);
+      obtenerSets(idPartidoSetsEditandose, setSetsPartido);
+    }
   };
 
   useEffect(() => {
@@ -74,11 +117,140 @@ const PartidosDelGrupo = ({
     setDummyEstado((estadoPrevio) => !estadoPrevio);
   };
 
+  const controladorEditarSet = (id) => {
+    if (id === idSetEditandose) {
+      editarSet(setEditandose);
+      setIdSetEditandose(null);
+      obtenerSets(idPartidoSetsEditandose, setSetsPartido);
+    } else {
+      setIdSetEditandose(id);
+    }
+  };
+
+  const controladorTerminarEdicionSets = () => {
+    setIdPartidoSetsEditandose(null);
+    setJugador1(null);
+    setJugador2(null);
+  };
+
+  useEffect(() => {
+    const setEncontrado = setsPartido.find((set) => set.id === idSetEditandose);
+
+    setSetEditandose(setEncontrado);
+  }, [idSetEditandose, setsPartido]);
+
+  const controladorCrearSet = () => {
+    crearSet(idPartidoSetsEditandose, setsPartido.length);
+    obtenerSets(idPartidoSetsEditandose, setSetsPartido);
+  };
+
   if (partidosDelGrupo.length === 0) {
     return (
       <button className={classes.btn} onClick={controladorCrearPartidos}>
         Crear Partidos
       </button>
+    );
+  }
+
+  if (idPartidoSetsEditandose) {
+    return (
+      <>
+        <form className={classes.partidos}>
+          <table className={classes.table} style={{ width: '100%' }}>
+            <thead>
+              <tr>
+                <th>N° Set</th>
+                <th>{jugador1}</th>
+                <th>vs.</th>
+                <th>{jugador2}</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {setsPartido.map((set) => (
+                <tr key={set.id}>
+                  <td>
+                    {set.id === idSetEditandose ? (
+                      <input
+                        name="num_set"
+                        defaultValue={set.num_set}
+                        className={classes['input-tabla-numero']}
+                        onChange={controladorCambiarValorSet}
+                      />
+                    ) : (
+                      set.num_set
+                    )}
+                  </td>
+                  <td>
+                    {set.id === idSetEditandose ? (
+                      <input
+                        name="puntos_jugador_1"
+                        defaultValue={set.puntos_jugador_1}
+                        className={classes['input-tabla-numero']}
+                        onChange={controladorCambiarValorSet}
+                      />
+                    ) : (
+                      set.puntos_jugador_1
+                    )}
+                  </td>
+                  <td>-</td>
+                  <td>
+                    {set.id === idSetEditandose ? (
+                      <input
+                        name="puntos_jugador_2"
+                        defaultValue={set.puntos_jugador_2}
+                        className={classes['input-tabla-numero']}
+                        onChange={controladorCambiarValorSet}
+                      />
+                    ) : (
+                      set.puntos_jugador_2
+                    )}
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      className={classes['btn-editar-guardar']}
+                      onClick={controladorEditarSet.bind(null, set.id)}
+                    >
+                      {set.id === idSetEditandose ? (
+                        <FontAwesomeIcon icon={faSave} />
+                      ) : (
+                        <FontAwesomeIcon icon={faPenToSquare} />
+                      )}
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      className={classes['btn-editar-guardar']}
+                      onClick={controladorBorrarSet.bind(null, set.id)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </form>
+        <div className={classes.acciones}>
+          <button
+            type="button"
+            className={classes['btn']}
+            onClick={controladorCrearSet}
+          >
+            Agregar Set
+          </button>
+          <button
+            type="button"
+            className={classes['btn']}
+            onClick={controladorTerminarEdicionSets}
+          >
+            Listo
+          </button>
+        </div>
+      </>
     );
   }
 
@@ -136,9 +308,27 @@ const PartidosDelGrupo = ({
                     />
                   </>
                 ) : (
-                  <Link to={`resultado/${partido.id}`}>
+                  <button
+                    type="button"
+                    onClick={controladorSetearSetsEditandose.bind(
+                      null,
+                      partido.id,
+                      obtenerNombreCompleto(
+                        partido.jugador_1_nombre,
+                        partido.jugador_1_segundo_nombre,
+                        partido.jugador_1_apellido,
+                        partido.jugador_1_segundo_apellido
+                      ),
+                      obtenerNombreCompleto(
+                        partido.jugador_2_nombre,
+                        partido.jugador_2_segundo_nombre,
+                        partido.jugador_2_apellido,
+                        partido.jugador_2_segundo_apellido
+                      )
+                    )}
+                  >
                     {partido.sets_jugador_1} - {partido.sets_jugador_2}
-                  </Link>
+                  </button>
                 )}
               </td>
               <td>

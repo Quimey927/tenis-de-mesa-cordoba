@@ -38,13 +38,13 @@ export const borrarSet = async (id) => {
   }
 };
 
-export const crearSet = async (nuevoSet, idPartido) => {
+export const crearSet = async (idPartido, cantSets) => {
   const response = await fetch(`${baseUrl}/partido/${idPartido}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(nuevoSet),
+    body: JSON.stringify({ cantSets }),
   });
 
   if (!response.ok) {
