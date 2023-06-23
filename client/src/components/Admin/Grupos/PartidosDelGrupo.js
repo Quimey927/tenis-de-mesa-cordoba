@@ -73,6 +73,7 @@ const PartidosDelGrupo = ({
 
   const controladorSetearSetsEditandose = (idPartido, jugador_1, jugador_2) => {
     setIdPartidoSetsEditandose(idPartido);
+    setIdPartidoEditandose(idPartido);
     setJugador1(jugador_1);
     setJugador2(jugador_2);
   };
@@ -128,12 +129,29 @@ const PartidosDelGrupo = ({
   };
 
   const controladorTerminarEdicionSets = () => {
-    /* setIdPartidoSetsEditandose(null);
+    // console.log(idPartidoSetsEditandose);
+    console.log(partidosDelGrupo);
+    let sets_jugador_1 = 0;
+    let sets_jugador_2 = 0;
+    for (let set of setsPartido) {
+      set.puntos_jugador_1 > set.puntos_jugador_2
+        ? sets_jugador_1++
+        : sets_jugador_2++;
+    }
+
+    const { orden, id } = partidoEditandose;
+
+    editarPartido({ orden, sets_jugador_1, sets_jugador_2, id });
+    setDummyEstado((estadoPrevio) => !estadoPrevio);
+
+    const nuevasFilasTabla = [...filasTabla];
+
+    // operar con nuevas filas tabla
+
+    setIdPartidoSetsEditandose(null);
+    setIdPartidoEditandose(null);
     setJugador1(null);
-    setJugador2(null); */
-    console.log(idPartidoSetsEditandose);
-    console.log(filasTabla);
-    console.log(setsPartido);
+    setJugador2(null);
   };
 
   useEffect(() => {
@@ -263,11 +281,11 @@ const PartidosDelGrupo = ({
         <thead>
           <tr>
             <th>Orden</th>
+            <th>Editar</th>
             <th>Jugador 1</th>
             <th style={{ width: '110px' }}>vs.</th>
             <th>Jugador 2</th>
             <th style={{ width: '80px' }}>Intercambiar</th>
-            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -284,6 +302,19 @@ const PartidosDelGrupo = ({
                 ) : (
                   partido.orden
                 )}
+              </td>
+              <td>
+                <button
+                  type="button"
+                  className={classes['btn-editar-guardar']}
+                  onClick={controladorEditarPartido.bind(null, partido.id)}
+                >
+                  {partido.id === idPartidoEditandose ? (
+                    <FontAwesomeIcon icon={faSave} />
+                  ) : (
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  )}
+                </button>
               </td>
               <td>
                 {obtenerNombreCompleto(
@@ -352,19 +383,6 @@ const PartidosDelGrupo = ({
                   )}
                 >
                   <FontAwesomeIcon icon={faRightLeft} />
-                </button>
-              </td>
-              <td>
-                <button
-                  type="button"
-                  className={classes['btn-editar-guardar']}
-                  onClick={controladorEditarPartido.bind(null, partido.id)}
-                >
-                  {partido.id === idPartidoEditandose ? (
-                    <FontAwesomeIcon icon={faSave} />
-                  ) : (
-                    <FontAwesomeIcon icon={faPenToSquare} />
-                  )}
                 </button>
               </td>
             </tr>
