@@ -128,9 +128,12 @@ const PartidosDelGrupo = ({
   };
 
   const controladorTerminarEdicionSets = () => {
-    setIdPartidoSetsEditandose(null);
+    /* setIdPartidoSetsEditandose(null);
     setJugador1(null);
-    setJugador2(null);
+    setJugador2(null); */
+    console.log(idPartidoSetsEditandose);
+    console.log(filasTabla);
+    console.log(setsPartido);
   };
 
   useEffect(() => {
@@ -160,10 +163,10 @@ const PartidosDelGrupo = ({
             <thead>
               <tr>
                 <th>N° Set</th>
+                <th>Editar</th>
                 <th>{jugador1}</th>
                 <th>vs.</th>
                 <th>{jugador2}</th>
-                <th>Editar</th>
                 <th>Eliminar</th>
               </tr>
             </thead>
@@ -181,6 +184,19 @@ const PartidosDelGrupo = ({
                     ) : (
                       set.num_set
                     )}
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      className={classes['btn-editar-guardar']}
+                      onClick={controladorEditarSet.bind(null, set.id)}
+                    >
+                      {set.id === idSetEditandose ? (
+                        <FontAwesomeIcon icon={faSave} />
+                      ) : (
+                        <FontAwesomeIcon icon={faPenToSquare} />
+                      )}
+                    </button>
                   </td>
                   <td>
                     {set.id === idSetEditandose ? (
@@ -206,19 +222,6 @@ const PartidosDelGrupo = ({
                     ) : (
                       set.puntos_jugador_2
                     )}
-                  </td>
-                  <td>
-                    <button
-                      type="button"
-                      className={classes['btn-editar-guardar']}
-                      onClick={controladorEditarSet.bind(null, set.id)}
-                    >
-                      {set.id === idSetEditandose ? (
-                        <FontAwesomeIcon icon={faSave} />
-                      ) : (
-                        <FontAwesomeIcon icon={faPenToSquare} />
-                      )}
-                    </button>
                   </td>
                   <td>
                     <button
