@@ -81,6 +81,7 @@
 
 .btn {
   color: #fff;
+  display: block;
   background-color: #5cb85c;
   border: 1px solid #4cae4c;
   border: none;
@@ -90,7 +91,7 @@
   font-size: 0.9rem;
   cursor: pointer;
   text-decoration: none;
-  margin: 0;
+  margin: 2rem auto;
 }
 
 .btn:hover {
