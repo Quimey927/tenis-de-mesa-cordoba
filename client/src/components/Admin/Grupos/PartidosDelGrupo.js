@@ -133,9 +133,8 @@ const PartidosDelGrupo = ({
     let sets_jugador_1 = 0;
     let sets_jugador_2 = 0;
     for (let set of setsPartido) {
-      set.puntos_jugador_1 > set.puntos_jugador_2
-        ? sets_jugador_1++
-        : sets_jugador_2++;
+      set.puntos_jugador_1 > set.puntos_jugador_2 && sets_jugador_1++;
+      set.puntos_jugador_1 < set.puntos_jugador_2 && sets_jugador_2++;
     }
 
     const { orden, id } = partidoEditandose;
@@ -155,26 +154,28 @@ const PartidosDelGrupo = ({
       fila.pc = 0;
 
       for (let partido of partidosDelGrupo) {
-        if (fila.id_jugador === partido.id_jugador_1) {
-          fila.pj++;
-          fila.sf += partido.sets_jugador_1;
-          fila.sc += partido.sets_jugador_2;
-          partido.sets_jugador_1 > partido.sets_jugador_2
-            ? fila.pg++
-            : fila.pp++;
-          fila.pf += +partido.puntos_jugador_1;
-          fila.pc += +partido.puntos_jugador_2;
-        }
+        if (partido.sets_jugador_1 !== 0 && partido.sets_jugador_2 !== 0) {
+          if (fila.id_jugador === partido.id_jugador_1) {
+            fila.pj++;
+            fila.sf += partido.sets_jugador_1;
+            fila.sc += partido.sets_jugador_2;
+            partido.sets_jugador_1 > partido.sets_jugador_2
+              ? fila.pg++
+              : fila.pp++;
+            fila.pf += +partido.puntos_jugador_1;
+            fila.pc += +partido.puntos_jugador_2;
+          }
 
-        if (fila.id_jugador === partido.id_jugador_2) {
-          fila.pj++;
-          fila.sf += partido.sets_jugador_2;
-          fila.sc += partido.sets_jugador_1;
-          partido.sets_jugador_2 > partido.sets_jugador_1
-            ? fila.pg++
-            : fila.pp++;
-          fila.pf += +partido.puntos_jugador_2;
-          fila.pc += +partido.puntos_jugador_1;
+          if (fila.id_jugador === partido.id_jugador_2) {
+            fila.pj++;
+            fila.sf += partido.sets_jugador_2;
+            fila.sc += partido.sets_jugador_1;
+            partido.sets_jugador_2 > partido.sets_jugador_1
+              ? fila.pg++
+              : fila.pp++;
+            fila.pf += +partido.puntos_jugador_2;
+            fila.pc += +partido.puntos_jugador_1;
+          }
         }
       }
     }
