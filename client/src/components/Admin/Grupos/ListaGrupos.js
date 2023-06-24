@@ -25,7 +25,7 @@ const ListaGrupos = ({
   jugadores,
 }) => {
   const [coloresElegidos, setColoresElegidos] = useState(true);
-  const [idElementoActivo, setIdElementoActivo] = useState(
+  const [idGrupoActivo, setIdGrupoActivo] = useState(
     grupos.length > 0 ? grupos[0].id : null
   );
   const [filasTabla, setFilasTabla] = useState([]);
@@ -38,12 +38,12 @@ const ListaGrupos = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (idElementoActivo && coloresElegidos) {
-      obtenerColoresTabla(idElementoActivo, setColoresTabla);
-      obtenerFilasTabla(idElementoActivo, setFilasTabla);
-      obtenerPartidosDelGrupo(idElementoActivo, setPartidosDelGrupo);
+    if (idGrupoActivo && coloresElegidos) {
+      obtenerColoresTabla(idGrupoActivo, setColoresTabla);
+      obtenerFilasTabla(idGrupoActivo, setFilasTabla);
+      obtenerPartidosDelGrupo(idGrupoActivo, setPartidosDelGrupo);
     }
-  }, [idElementoActivo, coloresElegidos, dummyEstado]);
+  }, [idGrupoActivo, coloresElegidos, dummyEstado]);
 
   useEffect(() => {
     setColoresFila(obtenerColoresFila(coloresTabla));
@@ -55,8 +55,8 @@ const ListaGrupos = ({
     );
 
     if (continuar) {
-      setIdElementoActivo(
-        idElementoActivo !== grupos[0].id ? grupos[0].id : grupos[1].id
+      setIdGrupoActivo(
+        idGrupoActivo !== grupos[0].id ? grupos[0].id : grupos[1].id
       );
       borrarGrupo(id);
       navigate(
@@ -81,12 +81,12 @@ const ListaGrupos = ({
       <CrearColoresTabla
         setColoresElegidos={setColoresElegidos}
         grupos={grupos}
-        setIdElementoActivo={setIdElementoActivo}
+        setIdGrupoActivo={setIdGrupoActivo}
       />
     );
   }
 
-  const grupo = grupos.find((grupo) => grupo.id === idElementoActivo);
+  const grupo = grupos.find((grupo) => grupo.id === idGrupoActivo);
 
   return (
     <>
@@ -98,8 +98,8 @@ const ListaGrupos = ({
 
       <Solapas
         lista={grupos}
-        controladorCambiarElementoActivo={setIdElementoActivo}
-        idElementoActivo={idElementoActivo}
+        controladorCambiarElementoActivo={setIdGrupoActivo}
+        idGrupoActivo={idGrupoActivo}
       />
 
       <AccionesGrupo
@@ -109,7 +109,7 @@ const ListaGrupos = ({
 
       {filasTabla.length === 0 ? (
         <AgregarJugadores
-          idGrupo={idElementoActivo}
+          idGrupo={idGrupoActivo}
           jugadores={jugadores}
           setDummyEstado={setDummyEstado}
           nombreGrupo={grupo.nombre}
@@ -127,7 +127,7 @@ const ListaGrupos = ({
           <PartidosDelGrupo
             partidosDelGrupo={partidosDelGrupo}
             setDummyEstado={setDummyEstado}
-            idGrupo={idElementoActivo}
+            idGrupo={idGrupoActivo}
             filasTabla={filasTabla}
             dia={grupos[0].dia.substring(0, 10)}
           />

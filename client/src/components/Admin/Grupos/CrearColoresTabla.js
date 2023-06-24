@@ -9,7 +9,7 @@ import classes from './CrearColoresTabla.module.css';
 const CrearColoresTabla = ({
   grupos,
   setColoresElegidos,
-  setIdElementoActivo,
+  setIdGrupoActivo,
 }) => {
   const [coloresTabla, setColoresTabla] = useState([]);
 
@@ -33,7 +33,7 @@ const CrearColoresTabla = ({
       crearColoresTabla([coloresTabla, idGrupos]);
     }
 
-    setIdElementoActivo(grupos[0].id);
+    setIdGrupoActivo(grupos[0].id);
     setColoresElegidos(true);
   };
 

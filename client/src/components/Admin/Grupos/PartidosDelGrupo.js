@@ -154,7 +154,7 @@ const PartidosDelGrupo = ({
       fila.pc = 0;
 
       for (let partido of partidosDelGrupo) {
-        if (partido.sets_jugador_1 !== 0 && partido.sets_jugador_2 !== 0) {
+        if (partido.sets_jugador_1 !== 0 || partido.sets_jugador_2 !== 0) {
           if (fila.id_jugador === partido.id_jugador_1) {
             fila.pj++;
             fila.sf += partido.sets_jugador_1;
