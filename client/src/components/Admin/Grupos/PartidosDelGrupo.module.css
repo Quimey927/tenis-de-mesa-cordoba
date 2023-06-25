@@ -68,10 +68,6 @@
   color: #23527c;
 }
 
-.icono-editar {
-  margin-right: 0.2rem;
-}
-
 .acciones {
   display: flex;
   gap: 1rem;
@@ -108,11 +104,4 @@
   text-align: center;
   margin: 0;
   width: 4ch;
-}
-
-@media (min-width: 768px) {
-  .container {
-    grid-template-columns: 1fr 3fr;
-    gap: 2rem;
-  }
 }
