@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
@@ -9,9 +10,12 @@ import classes from './CrearColoresTabla.module.css';
 const CrearColoresTabla = ({
   grupos,
   setColoresElegidos,
-  setIdGrupoActivo,
+  idCategoriaFecha,
+  idFase,
+  idFecha,
 }) => {
   const [coloresTabla, setColoresTabla] = useState([]);
+  const navigate = useNavigate();
 
   const idGrupos = [];
 
@@ -33,8 +37,11 @@ const CrearColoresTabla = ({
       crearColoresTabla([coloresTabla, idGrupos]);
     }
 
-    setIdGrupoActivo(grupos[0].id);
     setColoresElegidos(true);
+
+    navigate(
+      `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}`
+    );
   };
 
   const inputsColores = [];

@@ -6,12 +6,7 @@ import { crearFilasTabla } from '../../../api';
 import classes from './AgregarJugadores.module.css';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 
-const AgregarJugadores = ({
-  idGrupo,
-  jugadores,
-  setDummyEstado,
-  nombreGrupo,
-}) => {
+const AgregarJugadores = ({ idGrupo, jugadores, nombreGrupo }) => {
   const [jugadoresGrupo, setJugadoresGrupo] = useState(['', '', '']);
 
   const controladorCambioInput = (evt) => {
@@ -40,7 +35,6 @@ const AgregarJugadores = ({
   const controladorAgregarJugadores = (evt) => {
     evt.preventDefault();
     crearFilasTabla(idGrupo, jugadoresGrupo);
-    setDummyEstado((estadoPrevio) => !estadoPrevio);
   };
 
   const inputsJugadores = [];

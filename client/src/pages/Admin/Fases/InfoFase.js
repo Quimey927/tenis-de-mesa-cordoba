@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 
 import AdminInfo from '../../../components/Admin/AdminInfo/AdminInfo';
-import ListaGrupos from '../../../components/Admin/Grupos/ListaGrupos';
+import Grupos from '../../../components/Admin/Grupos/Grupos';
 import ListaEliminatorias from '../../../components/Admin/Eliminatorias/ListaEliminatorias';
 import {
   obtenerFase,
@@ -44,7 +44,7 @@ const PaginaInfoFase = () => {
       <AdminInfo titulo={nombre} campos={campos} to="../.." />
 
       {tipo === 'G' ? (
-        <ListaGrupos
+        <Grupos
           grupos={grupos}
           idCategoriaFecha={idCategoriaFecha}
           idTorneo={idTorneo}

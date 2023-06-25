@@ -1,21 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
-import CrearGrupos from './CrearGrupos.js';
-import CrearColoresTabla from './CrearColoresTabla.js';
 import AgregarJugadores from './AgregarJugadores.js';
 import AccionesGrupo from './AccionesGrupo';
 import TablaPosiciones from './TablaPosiciones';
 import PartidosDelGrupo from './PartidosDelGrupo';
 import Solapas from '../../UI/Solapas/Solapas';
+import ListaColoresTabla from './ListaColoresTabla.js';
 import {
   borrarGrupo,
   obtenerFilasTabla,
   obtenerColoresTabla,
   obtenerPartidosDelGrupo,
 } from '../../../api';
-import { obtenerColoresFila } from '../../../utils/funcionesColorFila';
 
 const ListaGrupos = ({
   grupos,
@@ -24,30 +21,18 @@ const ListaGrupos = ({
   idFase,
   jugadores,
 }) => {
-  const [coloresElegidos, setColoresElegidos] = useState(true);
-  const [idGrupoActivo, setIdGrupoActivo] = useState(
-    grupos.length > 0 ? grupos[0].id : null
-  );
+  const [idGrupoActivo, setIdGrupoActivo] = useState(grupos[0].id);
   const [filasTabla, setFilasTabla] = useState([]);
   const [coloresTabla, setColoresTabla] = useState([]);
   const [partidosDelGrupo, setPartidosDelGrupo] = useState([]);
-  const [coloresFila, setColoresFila] = useState([]);
-  // este dummyEstado es para disparar el useEffect cuando agregamos jugadores o cambiamos colores tabla
-  const [dummyEstado, setDummyEstado] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (idGrupoActivo && coloresElegidos) {
-      obtenerColoresTabla(idGrupoActivo, setColoresTabla);
-      obtenerFilasTabla(idGrupoActivo, setFilasTabla);
-      obtenerPartidosDelGrupo(idGrupoActivo, setPartidosDelGrupo);
-    }
-  }, [idGrupoActivo, coloresElegidos, dummyEstado]);
-
-  useEffect(() => {
-    setColoresFila(obtenerColoresFila(coloresTabla));
-  }, [coloresTabla]);
+    obtenerColoresTabla(idGrupoActivo, setColoresTabla);
+    obtenerFilasTabla(idGrupoActivo, setFilasTabla);
+    obtenerPartidosDelGrupo(idGrupoActivo, setPartidosDelGrupo);
+  }, [idGrupoActivo]);
 
   const controladorBorrarGrupo = (id) => {
     const continuar = window.confirm(
@@ -65,37 +50,10 @@ const ListaGrupos = ({
     }
   };
 
-  if (grupos.length === 0) {
-    return (
-      <CrearGrupos
-        idFecha={idFecha}
-        idCategoriaFecha={idCategoriaFecha}
-        idFase={idFase}
-        setColoresElegidos={setColoresElegidos}
-      />
-    );
-  }
-
-  if (!coloresElegidos) {
-    return (
-      <CrearColoresTabla
-        setColoresElegidos={setColoresElegidos}
-        grupos={grupos}
-        setIdGrupoActivo={setIdGrupoActivo}
-      />
-    );
-  }
-
   const grupo = grupos.find((grupo) => grupo.id === idGrupoActivo);
 
   return (
     <>
-      <AdminTituloPagina
-        titulo="Grupos"
-        to="grupos/nuevo"
-        textoInterno="Agregar Grupo"
-      />
-
       <Solapas
         lista={grupos}
         controladorCambiarElementoActivo={setIdGrupoActivo}
@@ -111,7 +69,6 @@ const ListaGrupos = ({
         <AgregarJugadores
           idGrupo={idGrupoActivo}
           jugadores={jugadores}
-          setDummyEstado={setDummyEstado}
           nombreGrupo={grupo.nombre}
         />
       ) : (
@@ -119,14 +76,12 @@ const ListaGrupos = ({
           <TablaPosiciones
             filasTabla={filasTabla}
             coloresTabla={coloresTabla}
-            idGrupo={grupo.id}
-            setDummyEstado={setDummyEstado}
-            coloresFila={coloresFila}
           />
+
+          <ListaColoresTabla coloresTabla={coloresTabla} idGrupo={grupo.id} />
 
           <PartidosDelGrupo
             partidosDelGrupo={partidosDelGrupo}
-            setDummyEstado={setDummyEstado}
             idGrupo={idGrupoActivo}
             filasTabla={filasTabla}
             dia={grupos[0].dia.substring(0, 10)}

@@ -1,0 +1,23 @@
+.btn {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.color {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.9rem;
+  padding-block: 0.2rem;
+}
+
+.box {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 2px;
+}
+
+.input-posiciones {
+  width: 15ch;
+}
