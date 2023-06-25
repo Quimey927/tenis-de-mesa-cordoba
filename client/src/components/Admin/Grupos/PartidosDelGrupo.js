@@ -20,13 +20,7 @@ import {
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import classes from './PartidosDelGrupo.module.css';
 
-const PartidosDelGrupo = ({
-  partidosDelGrupo,
-  idGrupo,
-  filasTabla,
-  dia,
-  setDummyEstado,
-}) => {
+const PartidosDelGrupo = ({ partidosDelGrupo, idGrupo, filasTabla, dia }) => {
   const [idPartidoEditandose, setIdPartidoEditandose] = useState(null);
   const [partidoEditandose, setPartidoEditandose] = useState(null);
   const [idPartidoSetsEditandose, setIdPartidoSetsEditandose] = useState(null);
@@ -46,7 +40,6 @@ const PartidosDelGrupo = ({
     if (id === idPartidoEditandose) {
       editarPartido(partidoEditandose);
       setIdPartidoEditandose(null);
-      setDummyEstado((estadoPrevio) => !estadoPrevio);
     } else {
       setIdPartidoEditandose(id);
     }
@@ -111,12 +104,10 @@ const PartidosDelGrupo = ({
     };
 
     crearPartidosDelGrupo(idGrupo, datosPartidos);
-    setDummyEstado((estadoPrevio) => !estadoPrevio);
   };
 
   const controladorIntercambiarJugadores = (idPartido) => {
     intercambiarJugadoresPartido(idPartido);
-    setDummyEstado((estadoPrevio) => !estadoPrevio);
   };
 
   const controladorEditarSet = (id) => {
@@ -140,7 +131,6 @@ const PartidosDelGrupo = ({
     const { orden, id } = partidoEditandose;
 
     editarPartido({ orden, sets_jugador_1, sets_jugador_2, id });
-    setDummyEstado((estadoPrevio) => !estadoPrevio);
 
     const nuevasFilasTabla = [...filasTabla];
 
@@ -154,7 +144,7 @@ const PartidosDelGrupo = ({
       fila.pc = 0;
 
       for (let partido of partidosDelGrupo) {
-        if (partido.sets_jugador_1 !== 0 && partido.sets_jugador_2 !== 0) {
+        if (partido.sets_jugador_1 !== 0 || partido.sets_jugador_2 !== 0) {
           if (fila.id_jugador === partido.id_jugador_1) {
             fila.pj++;
             fila.sf += partido.sets_jugador_1;
