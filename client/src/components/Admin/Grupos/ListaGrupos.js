@@ -4,14 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import AgregarJugadores from './AgregarJugadores.js';
 import AccionesGrupo from './AccionesGrupo';
 import TablaPosiciones from './TablaPosiciones';
-import PartidosDelGrupo from './PartidosDelGrupo';
+import CrearPartidos from './CrearPartidos';
+import ListaPartidos from './ListaPartidos.js';
+import ListaSets from './ListaSets.js';
 import Solapas from '../../UI/Solapas/Solapas';
 import ListaColoresTabla from './ListaColoresTabla.js';
+import { obtenerColoresFila } from '../../../utils/funcionesColorFila.js';
 import {
   borrarGrupo,
   obtenerFilasTabla,
   obtenerColoresTabla,
   obtenerPartidosDelGrupo,
+  obtenerSets,
 } from '../../../api';
 
 const ListaGrupos = ({
@@ -24,7 +28,13 @@ const ListaGrupos = ({
   const [idGrupoActivo, setIdGrupoActivo] = useState(grupos[0].id);
   const [filasTabla, setFilasTabla] = useState([]);
   const [coloresTabla, setColoresTabla] = useState([]);
+  const [coloresFila, setColoresFila] = useState();
   const [partidosDelGrupo, setPartidosDelGrupo] = useState([]);
+  const [setsPartido, setSetsPartido] = useState([]);
+  const [idPartidoSetsEditandose, setIdPartidoSetsEditandose] = useState(null);
+  const [jugador1, setJugador1] = useState('');
+  const [jugador2, setJugador2] = useState('');
+  const [ordenPartido, setOrdenPartido] = useState(null);
 
   const navigate = useNavigate();
 
@@ -32,7 +42,14 @@ const ListaGrupos = ({
     obtenerColoresTabla(idGrupoActivo, setColoresTabla);
     obtenerFilasTabla(idGrupoActivo, setFilasTabla);
     obtenerPartidosDelGrupo(idGrupoActivo, setPartidosDelGrupo);
-  }, [idGrupoActivo]);
+    setColoresFila(obtenerColoresFila(coloresTabla));
+  }, [idGrupoActivo, coloresTabla]);
+
+  useEffect(() => {
+    if (idPartidoSetsEditandose) {
+      obtenerSets(idPartidoSetsEditandose, setSetsPartido);
+    }
+  }, [idPartidoSetsEditandose]);
 
   const controladorBorrarGrupo = (id) => {
     const continuar = window.confirm(
@@ -50,14 +67,20 @@ const ListaGrupos = ({
     }
   };
 
+  const controladorCambiarElementoActivo = (id) => {
+    setIdGrupoActivo(id);
+    setIdPartidoSetsEditandose(null);
+  };
+
   const grupo = grupos.find((grupo) => grupo.id === idGrupoActivo);
 
   return (
     <>
       <Solapas
         lista={grupos}
-        controladorCambiarElementoActivo={setIdGrupoActivo}
+        controladorCambiarElementoActivo={controladorCambiarElementoActivo}
         idGrupoActivo={idGrupoActivo}
+        setIdPartidoSetsEditandose={setIdPartidoSetsEditandose}
       />
 
       <AccionesGrupo
@@ -76,16 +99,50 @@ const ListaGrupos = ({
           <TablaPosiciones
             filasTabla={filasTabla}
             coloresTabla={coloresTabla}
+            idGrupoActivo={idGrupoActivo}
+            setFilasTabla={setFilasTabla}
+            coloresFila={coloresFila}
           />
 
-          <ListaColoresTabla coloresTabla={coloresTabla} idGrupo={grupo.id} />
-
-          <PartidosDelGrupo
-            partidosDelGrupo={partidosDelGrupo}
-            idGrupo={idGrupoActivo}
-            filasTabla={filasTabla}
-            dia={grupos[0].dia.substring(0, 10)}
+          <ListaColoresTabla
+            coloresTabla={coloresTabla}
+            idGrupoActivo={idGrupoActivo}
+            setColoresTabla={setColoresTabla}
+            setColoresFila={setColoresFila}
           />
+
+          {partidosDelGrupo.length === 0 ? (
+            <CrearPartidos
+              dia={grupos[0].dia.substring(0, 10)}
+              filasTabla={filasTabla}
+              idGrupo={idGrupoActivo}
+              idCategoriaFecha={idCategoriaFecha}
+              idFecha={idFecha}
+              idFase={idFase}
+            />
+          ) : idPartidoSetsEditandose === null ? (
+            <ListaPartidos
+              partidosDelGrupo={partidosDelGrupo}
+              setIdPartidoSetsEditandose={setIdPartidoSetsEditandose}
+              setJugador1={setJugador1}
+              setJugador2={setJugador2}
+              setOrdenPartido={setOrdenPartido}
+            />
+          ) : (
+            <ListaSets
+              setsPartido={setsPartido}
+              jugador1={jugador1}
+              jugador2={jugador2}
+              setJugador1={setJugador1}
+              setJugador2={setJugador2}
+              idPartidoSetsEditandose={idPartidoSetsEditandose}
+              setIdPartidoSetsEditandose={setIdPartidoSetsEditandose}
+              filasTabla={filasTabla}
+              partidosDelGrupo={partidosDelGrupo}
+              ordenPartido={ordenPartido}
+              setOrdenPartido={setOrdenPartido}
+            />
+          )}
         </>
       )}
     </>

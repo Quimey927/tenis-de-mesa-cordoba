@@ -3,6 +3,18 @@
   color: #333;
 }
 
+.partidos h3 {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.partidos h3 small {
+  font-weight: 400;
+  line-height: 1;
+  color: #777;
+  font-size: 1rem;
+}
+
 .table {
   border-collapse: collapse;
   font-size: 0.9rem;
