@@ -14,15 +14,9 @@ import {
   crearColorTabla,
 } from '../../../api';
 import { listaColores } from '../../../constants/coloresTabla';
-import { obtenerColoresFila } from '../../../utils/funcionesColorFila';
 import classes from './ListaColoresTabla.module.css';
 
-const ListaColoresTabla = ({
-  coloresTabla,
-  idGrupoActivo,
-  setColoresTabla,
-  setColoresFila,
-}) => {
+const ListaColoresTabla = ({ coloresTabla, idGrupoActivo }) => {
   const [idColorEditandose, setIdColorEditandose] = useState(null);
   const [colorEditandose, setColorEditandose] = useState(null);
   const [agregandoNuevoColor, setAgregandoNuevoColor] = useState(false);
@@ -52,7 +46,6 @@ const ListaColoresTabla = ({
       }
       editarColorTabla(colorEditandose);
       setIdColorEditandose(null);
-      setColoresFila(obtenerColoresFila(coloresTabla));
     } else {
       setIdColorEditandose(id);
     }
@@ -85,7 +78,6 @@ const ListaColoresTabla = ({
 
     if (continuar) {
       borrarColorTabla(id);
-      setColoresFila(obtenerColoresFila(coloresTabla));
     }
   };
 
@@ -113,7 +105,6 @@ const ListaColoresTabla = ({
       crearColorTabla(nuevoColor, idGrupoActivo);
       setNuevoColor({ posiciones: '', color: '', nota: '' });
       setAgregandoNuevoColor(false);
-      setColoresFila(obtenerColoresFila(coloresTabla));
     }
   };
 
