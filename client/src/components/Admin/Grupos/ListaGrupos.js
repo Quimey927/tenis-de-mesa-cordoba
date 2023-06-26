@@ -31,6 +31,11 @@ const ListaGrupos = ({
   const navigate = useNavigate();
 
   const controladorBorrarGrupo = (id) => {
+    if (grupos.length === 1) {
+      alert('No podés dejar a la fase sin grupos.');
+      return;
+    }
+
     const continuar = window.confirm(
       '¿Estás seguro de que querés eliminar el grupo?'
     );
@@ -39,7 +44,7 @@ const ListaGrupos = ({
       borrarGrupo(id);
       navigate(
         `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}/grupo/${
-          idGrupo !== grupos[0].id ? grupos[0].id : grupos[1].id
+          +idGrupo !== grupos[0].id ? grupos[0].id : grupos[1].id
         }`
       );
     }
@@ -63,7 +68,7 @@ const ListaGrupos = ({
     <>
       <AdminTituloPagina
         titulo="Grupos"
-        to="grupos/nuevo"
+        to="nuevo"
         textoInterno="Agregar Grupo"
       />
       <Solapas

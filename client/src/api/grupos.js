@@ -11,6 +11,7 @@ export const obtenerGrupos = async (idFase) => {
 };
 
 export const crearGrupo = async (
+  idGrupo,
   datosGrupo,
   idFecha,
   idCategoriaFecha,
@@ -29,7 +30,7 @@ export const crearGrupo = async (
   }
 
   return redirect(
-    `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}`
+    `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}/grupo/${idGrupo}`
   );
 };
 
@@ -56,13 +57,13 @@ export const obtenerGrupo = async (id) => {
 };
 
 export const editarGrupo = async (
-  id,
+  idGrupo,
   datosGrupo,
   idFecha,
   idCategoriaFecha,
   idFase
 ) => {
-  const response = await fetch(`${baseUrl}/${id}`, {
+  const response = await fetch(`${baseUrl}/${idGrupo}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -75,7 +76,7 @@ export const editarGrupo = async (
   }
 
   return redirect(
-    `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}`
+    `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}/grupo/${idGrupo}`
   );
 };
 

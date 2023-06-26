@@ -6,10 +6,7 @@ const AccionesGrupo = ({ idGrupo, controladorBorrarElemento }) => {
   return (
     <>
       <div className={classes.acciones}>
-        <Link
-          to={`grupos/${idGrupo}/editar`}
-          className={`${classes.btn} ${classes['btn-editar']}`}
-        >
+        <Link to="editar" className={`${classes.btn} ${classes['btn-editar']}`}>
           <span>Editar Nombre del Grupo</span>
         </Link>
         <button

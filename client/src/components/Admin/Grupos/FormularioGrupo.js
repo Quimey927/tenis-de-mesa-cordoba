@@ -9,7 +9,7 @@ const FormularioGrupo = ({ method, grupo }) => {
       textoTitulo={
         method === 'POST' ? 'Agregar grupo' : `Editar ${grupo[0].nombre}`
       }
-      navegarAlCancelar={'../..'}
+      navegarAlCancelar=".."
     >
       <Input
         id="nombre"
@@ -35,7 +35,7 @@ export async function action({ request, params }) {
   };
 
   if (method === 'POST') {
-    return crearGrupo(datosGrupo, idFecha, idCategoriaFecha, idFase);
+    return crearGrupo(idGrupo, datosGrupo, idFecha, idCategoriaFecha, idFase);
   }
 
   return editarGrupo(idGrupo, datosGrupo, idFecha, idCategoriaFecha, idFase);

@@ -34,6 +34,10 @@ const PaginaInfoFase = () => {
     jugadores,
   } = useLoaderData();
 
+  // tendria más sentido que sea falso de inicio, la idea de
+  // ponerlo inicialmente como true es que se elijan primero la cantidad
+  // de grupos, y ahí se setea a false coloresElegidos para que se
+  // abra el formulario correspondiente
   const [coloresElegidos, setColoresElegidos] = useState(true);
 
   const { nombre, orden, tipo } = fase[0];

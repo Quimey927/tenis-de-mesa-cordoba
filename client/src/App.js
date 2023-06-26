@@ -340,6 +340,12 @@ const router = createBrowserRouter([
                                     loader: loaderInfoFaseAdmin,
                                   },
                                   {
+                                    path: 'editar',
+                                    element: <PaginaEditarFase />,
+                                    loader: loaderFaseAdmin,
+                                    action: actionManipularFase,
+                                  },
+                                  {
                                     path: 'grupo/:idGrupo',
                                     children: [
                                       {
@@ -352,26 +358,15 @@ const router = createBrowserRouter([
                                         element: <PaginaInfoFase />,
                                         loader: loaderInfoFaseAdmin,
                                       },
-                                    ],
-                                  },
-                                  {
-                                    path: 'editar',
-                                    element: <PaginaEditarFase />,
-                                    loader: loaderFaseAdmin,
-                                    action: actionManipularFase,
-                                  },
-                                  {
-                                    path: 'grupos',
-                                    children: [
                                       {
-                                        path: 'nuevo',
-                                        element: <PaginaNuevoGrupo />,
+                                        path: 'editar',
+                                        element: <PaginaEditarGrupo />,
                                         loader: loaderGrupoAdmin,
                                         action: actionManipularGrupo,
                                       },
                                       {
-                                        path: ':idGrupo/editar',
-                                        element: <PaginaEditarGrupo />,
+                                        path: 'nuevo',
+                                        element: <PaginaNuevoGrupo />,
                                         loader: loaderGrupoAdmin,
                                         action: actionManipularGrupo,
                                       },
