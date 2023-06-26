@@ -9,7 +9,6 @@ import ListaPartidos from './ListaPartidos.js';
 import ListaSets from './ListaSets.js';
 import Solapas from '../../UI/Solapas/Solapas';
 import ListaColoresTabla from './ListaColoresTabla.js';
-import { obtenerColoresFila } from '../../../utils/funcionesColorFila.js';
 import {
   borrarGrupo,
   obtenerFilasTabla,
@@ -28,7 +27,6 @@ const ListaGrupos = ({
   const [idGrupoActivo, setIdGrupoActivo] = useState(grupos[0].id);
   const [filasTabla, setFilasTabla] = useState([]);
   const [coloresTabla, setColoresTabla] = useState([]);
-  const [coloresFila, setColoresFila] = useState();
   const [partidosDelGrupo, setPartidosDelGrupo] = useState([]);
   const [setsPartido, setSetsPartido] = useState([]);
   const [idPartidoSetsEditandose, setIdPartidoSetsEditandose] = useState(null);
@@ -42,8 +40,7 @@ const ListaGrupos = ({
     obtenerColoresTabla(idGrupoActivo, setColoresTabla);
     obtenerFilasTabla(idGrupoActivo, setFilasTabla);
     obtenerPartidosDelGrupo(idGrupoActivo, setPartidosDelGrupo);
-    setColoresFila(obtenerColoresFila(coloresTabla));
-  }, [idGrupoActivo, coloresTabla]);
+  }, [idGrupoActivo]);
 
   useEffect(() => {
     if (idPartidoSetsEditandose) {
@@ -99,16 +96,11 @@ const ListaGrupos = ({
           <TablaPosiciones
             filasTabla={filasTabla}
             coloresTabla={coloresTabla}
-            idGrupoActivo={idGrupoActivo}
-            setFilasTabla={setFilasTabla}
-            coloresFila={coloresFila}
           />
 
           <ListaColoresTabla
             coloresTabla={coloresTabla}
             idGrupoActivo={idGrupoActivo}
-            setColoresTabla={setColoresTabla}
-            setColoresFila={setColoresFila}
           />
 
           {partidosDelGrupo.length === 0 ? (
