@@ -2,27 +2,31 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faSave } from '@fortawesome/free-solid-svg-icons';
 
-import { encontrarColorFila } from '../../../utils/funcionesColorFila';
-import { editarFilaTabla, obtenerFilasTabla } from '../../../api';
+import {
+  encontrarColorFila,
+  obtenerColoresFila,
+} from '../../../utils/funcionesColorFila';
+import { editarFilaTabla } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import { datosTabla } from '../../../constants/datosTabla';
 import classes from './TablaPosiciones.module.css';
 
-const TablaPosiciones = ({
-  filasTabla,
-  coloresTabla,
-  idGrupoActivo,
-  setFilasTabla,
-  coloresFila,
-}) => {
+const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
   const [idFilaEditandose, setIdFilaEditandose] = useState(null);
   const [filaEditandose, setFilaEditandose] = useState(null);
+
+  useEffect(() => {
+    const filaEncontrada = filasTabla.find(
+      (fila) => fila.id === idFilaEditandose
+    );
+
+    setFilaEditandose(filaEncontrada);
+  }, [idFilaEditandose, filasTabla]);
 
   const controladorEditarFilaTabla = (id) => {
     if (id === idFilaEditandose) {
       editarFilaTabla(filaEditandose);
       setIdFilaEditandose(null);
-      obtenerFilasTabla(idGrupoActivo, setFilasTabla);
     } else {
       setIdFilaEditandose(id);
     }
@@ -38,13 +42,7 @@ const TablaPosiciones = ({
     });
   };
 
-  useEffect(() => {
-    const filaEncontrada = filasTabla.find(
-      (fila) => fila.id === idFilaEditandose
-    );
-
-    setFilaEditandose(filaEncontrada);
-  }, [idFilaEditandose, filasTabla]);
+  const coloresFila = obtenerColoresFila(coloresTabla);
 
   return (
     <form className={classes.form}>
