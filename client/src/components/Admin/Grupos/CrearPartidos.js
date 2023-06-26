@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import { crearPartidosDelGrupo } from '../../../api';
 import classes from './CrearPartidos.module.css';
 
@@ -7,12 +5,8 @@ const CrearPartidos = ({
   filasTabla,
   dia,
   idGrupo,
-  idFecha,
-  idCategoriaFecha,
-  idFase,
+  controladorRedireccionar,
 }) => {
-  const navigate = useNavigate();
-
   const jugadores = [];
 
   for (let fila of filasTabla) {
@@ -26,10 +20,7 @@ const CrearPartidos = ({
     };
 
     crearPartidosDelGrupo(idGrupo, datosPartidos);
-
-    navigate(
-      `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}`
-    );
+    controladorRedireccionar();
   };
 
   return (

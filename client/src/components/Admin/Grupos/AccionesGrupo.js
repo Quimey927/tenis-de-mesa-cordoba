@@ -2,19 +2,19 @@ import { Link } from 'react-router-dom';
 
 import classes from './AccionesGrupo.module.css';
 
-const AccionesGrupo = ({ grupo_id, controladorBorrarElemento }) => {
+const AccionesGrupo = ({ idGrupo, controladorBorrarElemento }) => {
   return (
     <>
       <div className={classes.acciones}>
         <Link
-          to={`grupos/${grupo_id}/editar`}
+          to={`grupos/${idGrupo}/editar`}
           className={`${classes.btn} ${classes['btn-editar']}`}
         >
           <span>Editar Nombre del Grupo</span>
         </Link>
         <button
           className={`${classes.btn} ${classes['btn-editar']}`}
-          onClick={controladorBorrarElemento.bind(null, grupo_id)}
+          onClick={controladorBorrarElemento.bind(null, idGrupo)}
         >
           Borrar Grupo
         </button>

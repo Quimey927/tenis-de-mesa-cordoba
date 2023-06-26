@@ -1,13 +1,19 @@
+import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 import AdminInfo from '../../../components/Admin/AdminInfo/AdminInfo';
-import Grupos from '../../../components/Admin/Grupos/Grupos';
+import ConfiguracionGrupos from '../../../components/Admin/Grupos/ConfiguracionGrupos';
+import ListaGrupos from '../../../components/Admin/Grupos/ListaGrupos';
 import ListaEliminatorias from '../../../components/Admin/Eliminatorias/ListaEliminatorias';
 import {
   obtenerFase,
   obtenerGrupos,
   obtenerEliminatorias,
   obtenerJugadores,
+  obtenerFilasTabla,
+  obtenerColoresTabla,
+  obtenerPartidosDelGrupo,
+  obtenerSets,
 } from '../../../api';
 
 const PaginaInfoFase = () => {
@@ -19,8 +25,16 @@ const PaginaInfoFase = () => {
     idFecha,
     idTorneo,
     idFase,
+    idGrupo,
+    idPartido,
+    filasTabla,
+    coloresTabla,
+    partidosDelGrupo,
+    setsDelPartido,
     jugadores,
   } = useLoaderData();
+
+  const [coloresElegidos, setColoresElegidos] = useState(true);
 
   const { nombre, orden, tipo } = fase[0];
 
@@ -43,13 +57,27 @@ const PaginaInfoFase = () => {
     <>
       <AdminInfo titulo={nombre} campos={campos} to="../.." />
 
-      {tipo === 'G' ? (
-        <Grupos
+      {tipo === 'G' && (grupos.length === 0 || !coloresElegidos) ? (
+        <ConfiguracionGrupos
           grupos={grupos}
           idCategoriaFecha={idCategoriaFecha}
-          idTorneo={idTorneo}
           idFase={idFase}
           idFecha={idFecha}
+          coloresElegidos={coloresElegidos}
+          setColoresElegidos={setColoresElegidos}
+        />
+      ) : tipo === 'G' ? (
+        <ListaGrupos
+          grupos={grupos}
+          idCategoriaFecha={idCategoriaFecha}
+          idFase={idFase}
+          idFecha={idFecha}
+          idGrupo={idGrupo}
+          idPartido={idPartido}
+          filasTabla={filasTabla}
+          coloresTabla={coloresTabla}
+          partidosDelGrupo={partidosDelGrupo}
+          setsDelPartido={setsDelPartido}
           jugadores={jugadores}
         />
       ) : (
@@ -68,7 +96,8 @@ const PaginaInfoFase = () => {
 export default PaginaInfoFase;
 
 export async function loader({ params }) {
-  const { idFase, idCategoriaFecha, idFecha, idTorneo } = params;
+  const { idFase, idCategoriaFecha, idFecha, idTorneo, idGrupo, idPartido } =
+    params;
 
   return {
     fase: await obtenerFase(idFase),
@@ -79,5 +108,13 @@ export async function loader({ params }) {
     idFecha,
     idTorneo,
     jugadores: await obtenerJugadores(),
+    idGrupo,
+    idPartido,
+    filasTabla: idGrupo ? await obtenerFilasTabla(idGrupo) : undefined,
+    coloresTabla: idGrupo ? await obtenerColoresTabla(idGrupo) : undefined,
+    partidosDelGrupo: idGrupo
+      ? await obtenerPartidosDelGrupo(idGrupo)
+      : undefined,
+    setsDelPartido: idPartido ? await obtenerSets(idPartido) : undefined,
   };
 }

@@ -11,7 +11,11 @@ import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import { datosTabla } from '../../../constants/datosTabla';
 import classes from './TablaPosiciones.module.css';
 
-const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
+const TablaPosiciones = ({
+  filasTabla,
+  coloresTabla,
+  controladorRedireccionar,
+}) => {
   const [idFilaEditandose, setIdFilaEditandose] = useState(null);
   const [filaEditandose, setFilaEditandose] = useState(null);
 
@@ -27,6 +31,7 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
     if (id === idFilaEditandose) {
       editarFilaTabla(filaEditandose);
       setIdFilaEditandose(null);
+      controladorRedireccionar();
     } else {
       setIdFilaEditandose(id);
     }
@@ -72,7 +77,7 @@ const TablaPosiciones = ({ filasTabla, coloresTabla }) => {
                           coloresFila,
                           fila.posicion
                         )}`
-                      : 'none',
+                      : 'transparent',
                 }}
               >
                 <td style={{ width: '50px' }}>

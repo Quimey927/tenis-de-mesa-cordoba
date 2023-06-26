@@ -11,11 +11,11 @@ import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import classes from './ListaPartidosYSets.module.css';
 
 const ListaPartidos = ({
+  idGrupo,
   partidosDelGrupo,
-  setIdPartidoSetsEditandose,
   setJugador1,
   setJugador2,
-  setOrdenPartido,
+  controladorRedireccionar,
 }) => {
   const [idPartidoEditandose, setIdPartidoEditandose] = useState(null);
   const [partidoEditandose, setPartidoEditandose] = useState(null);
@@ -32,6 +32,7 @@ const ListaPartidos = ({
     if (id === idPartidoEditandose) {
       editarPartido(partidoEditandose);
       setIdPartidoEditandose(null);
+      controladorRedireccionar();
     } else {
       setIdPartidoEditandose(id);
     }
@@ -47,20 +48,15 @@ const ListaPartidos = ({
     });
   };
 
-  const controladorSetearSetsEditandose = (
-    idPartido,
-    jugador_1,
-    jugador_2,
-    orden
-  ) => {
-    setIdPartidoSetsEditandose(idPartido);
+  const controladorSetearSetsEditandose = (idPartido, jugador_1, jugador_2) => {
     setJugador1(jugador_1);
     setJugador2(jugador_2);
-    setOrdenPartido(orden);
+    controladorRedireccionar(idGrupo, idPartido);
   };
 
   const controladorIntercambiarJugadores = (idPartido) => {
     intercambiarJugadoresPartido(idPartido);
+    controladorRedireccionar();
   };
 
   return (

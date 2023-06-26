@@ -2,7 +2,7 @@ import { json } from 'react-router-dom';
 
 const baseUrl = 'http://localhost:8080/api/partidos';
 
-export const obtenerPartidosDelGrupo = async (idGrupo, guardarEnEstado) => {
+export const obtenerPartidosDelGrupo = async (idGrupo) => {
   const response = await fetch(`${baseUrl}/grupo/${idGrupo}`);
   if (!response.ok) {
     throw json(
@@ -10,8 +10,7 @@ export const obtenerPartidosDelGrupo = async (idGrupo, guardarEnEstado) => {
       { status: 500 }
     );
   }
-  const partidosDelGrupo = await response.json();
-  guardarEnEstado(partidosDelGrupo);
+  return response.json();
 };
 
 export const crearPartidosDelGrupo = async (idGrupo, datosPartidos) => {
@@ -54,6 +53,23 @@ export const editarPartido = async (partidoEditandose) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(partidoEditandose),
+  });
+
+  if (!response.ok) {
+    throw json(
+      { message: 'No pudimos cambiar el orden del partido.' },
+      { status: 500 }
+    );
+  }
+};
+
+export const editarSetsPartido = async (partido) => {
+  const response = await fetch(`${baseUrl}/sets/${partido.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(partido),
   });
 
   if (!response.ok) {

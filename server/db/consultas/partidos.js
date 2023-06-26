@@ -53,9 +53,16 @@ const editarPartido = `UPDATE partidos
     sets_jugador_2 = $3
   WHERE id = $4`;
 
+const editarSetsPartido = `UPDATE partidos
+  SET
+    sets_jugador_1 = $1,
+    sets_jugador_2 = $2
+  WHERE id = $3`;
+
 export default {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
   intercambiarJugadoresPartido,
   editarPartido,
+  editarSetsPartido,
 };

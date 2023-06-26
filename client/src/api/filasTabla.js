@@ -2,7 +2,7 @@ import { json } from 'react-router-dom';
 
 const baseUrl = 'http://localhost:8080/api/filas-tabla';
 
-export const obtenerFilasTabla = async (idGrupo, guardarEnEstado) => {
+export const obtenerFilasTabla = async (idGrupo) => {
   const response = await fetch(`${baseUrl}/grupo/${idGrupo}`);
   if (!response.ok) {
     throw json(
@@ -10,8 +10,7 @@ export const obtenerFilasTabla = async (idGrupo, guardarEnEstado) => {
       { status: 500 }
     );
   }
-  const filasTabla = await response.json();
-  guardarEnEstado(filasTabla);
+  return response.json();
 };
 
 export const crearFilasTabla = async (idGrupo, jugadoresGrupo) => {

@@ -340,6 +340,21 @@ const router = createBrowserRouter([
                                     loader: loaderInfoFaseAdmin,
                                   },
                                   {
+                                    path: 'grupo/:idGrupo',
+                                    children: [
+                                      {
+                                        index: true,
+                                        element: <PaginaInfoFase />,
+                                        loader: loaderInfoFaseAdmin,
+                                      },
+                                      {
+                                        path: 'partido/:idPartido',
+                                        element: <PaginaInfoFase />,
+                                        loader: loaderInfoFaseAdmin,
+                                      },
+                                    ],
+                                  },
+                                  {
                                     path: 'editar',
                                     element: <PaginaEditarFase />,
                                     loader: loaderFaseAdmin,

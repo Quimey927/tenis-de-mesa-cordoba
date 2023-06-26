@@ -40,7 +40,7 @@ const CrearColoresTabla = ({
     setColoresElegidos(true);
 
     navigate(
-      `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}`
+      `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}/grupo/${grupos[0].id}`
     );
   };
 

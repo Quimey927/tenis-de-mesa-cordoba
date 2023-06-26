@@ -2,7 +2,7 @@ import { json } from 'react-router-dom';
 
 const baseUrl = 'http://localhost:8080/api/sets';
 
-export const obtenerSets = async (idPartido, guardarEnEstado) => {
+export const obtenerSets = async (idPartido) => {
   const response = await fetch(`${baseUrl}/partido/${idPartido}`);
   if (!response.ok) {
     throw json(
@@ -10,8 +10,7 @@ export const obtenerSets = async (idPartido, guardarEnEstado) => {
       { status: 500 }
     );
   }
-  const setsDelPartido = await response.json();
-  guardarEnEstado(setsDelPartido);
+  return response.json();
 };
 
 export const editarSet = async (set) => {

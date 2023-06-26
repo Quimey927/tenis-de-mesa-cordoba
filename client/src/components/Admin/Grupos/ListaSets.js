@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
-  editarPartido,
+  editarSetsPartido,
   editarSet,
   crearSet,
   borrarSet,
@@ -17,29 +17,31 @@ import classes from './ListaPartidosYSets.module.css';
 import { calcularNuevasFilas } from '../../../utils/calcularNuevasFilas';
 
 const ListaSets = ({
-  setsPartido,
+  idGrupo,
+  idPartido,
+  setsDelPartido,
   jugador1,
   jugador2,
   setJugador1,
   setJugador2,
-  idPartidoSetsEditandose,
-  setIdPartidoSetsEditandose,
   filasTabla,
   partidosDelGrupo,
-  ordenPartido,
-  setOrdenPartido,
+  controladorRedireccionar,
 }) => {
   const [idSetEditandose, setIdSetEditandose] = useState(null);
   const [setEditandose, setSetEditandose] = useState(null);
 
   useEffect(() => {
-    const setEncontrado = setsPartido.find((set) => set.id === idSetEditandose);
+    const setEncontrado = setsDelPartido.find(
+      (set) => set.id === idSetEditandose
+    );
 
     setSetEditandose(setEncontrado);
-  }, [idSetEditandose, setsPartido]);
+  }, [idSetEditandose, setsDelPartido]);
 
   const controladorCrearSet = () => {
-    crearSet(idPartidoSetsEditandose, setsPartido.length);
+    crearSet(idPartido, setsDelPartido.length);
+    controladorRedireccionar(idGrupo, idPartido);
   };
 
   const controladorCambiarValorSet = (evt) => {
@@ -59,6 +61,7 @@ const ListaSets = ({
 
     if (continuar) {
       borrarSet(id);
+      controladorRedireccionar(idGrupo, idPartido);
     }
   };
 
@@ -66,6 +69,7 @@ const ListaSets = ({
     if (id === idSetEditandose) {
       editarSet(setEditandose);
       setIdSetEditandose(null);
+      controladorRedireccionar(idGrupo, idPartido);
     } else {
       setIdSetEditandose(id);
     }
@@ -74,19 +78,39 @@ const ListaSets = ({
   const controladorTerminarEdicionSets = () => {
     let sets_jugador_1 = 0;
     let sets_jugador_2 = 0;
-    for (let set of setsPartido) {
+    let puntos_jugador_1 = 0;
+    let puntos_jugador_2 = 0;
+
+    for (let set of setsDelPartido) {
       set.puntos_jugador_1 > set.puntos_jugador_2 && sets_jugador_1++;
       set.puntos_jugador_1 < set.puntos_jugador_2 && sets_jugador_2++;
+      puntos_jugador_1 += set.puntos_jugador_1;
+      puntos_jugador_2 += set.puntos_jugador_2;
     }
 
-    editarPartido({
-      orden: ordenPartido,
+    editarSetsPartido({
       sets_jugador_1,
       sets_jugador_2,
-      id: idPartidoSetsEditandose,
+      id: +idPartido,
     });
 
-    const nuevasFilasTabla = calcularNuevasFilas(filasTabla, partidosDelGrupo);
+    const partidoEditandose = partidosDelGrupo.find(
+      (partido) => partido.id === +idPartido
+    );
+
+    partidoEditandose.sets_jugador_1 = sets_jugador_1;
+    partidoEditandose.sets_jugador_2 = sets_jugador_2;
+    partidoEditandose.puntos_jugador_1 = puntos_jugador_1;
+    partidoEditandose.puntos_jugador_2 = puntos_jugador_2;
+
+    const nuevosPartidosDelGrupo = partidosDelGrupo.map((partido) =>
+      partido.id === +idPartido ? partidoEditandose : partido
+    );
+
+    const nuevasFilasTabla = calcularNuevasFilas(
+      filasTabla,
+      nuevosPartidosDelGrupo
+    );
 
     // el .entries() retorna un nuevo array con los pares [index, valorDelArray], y con ES6 destructuramos
     for (let [i, fila] of nuevasFilasTabla.entries()) {
@@ -94,10 +118,9 @@ const ListaSets = ({
       editarFilaTabla(fila);
     }
 
-    setIdPartidoSetsEditandose(null);
     setJugador1(null);
     setJugador2(null);
-    setOrdenPartido(null);
+    controladorRedireccionar();
   };
 
   return (
@@ -115,7 +138,7 @@ const ListaSets = ({
             </tr>
           </thead>
           <tbody>
-            {setsPartido.map((set) => (
+            {setsDelPartido.map((set) => (
               <tr key={set.id}>
                 <td>
                   {set.id === idSetEditandose ? (

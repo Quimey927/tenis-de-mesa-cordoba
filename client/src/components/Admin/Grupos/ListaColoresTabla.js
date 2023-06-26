@@ -16,7 +16,11 @@ import {
 import { listaColores } from '../../../constants/coloresTabla';
 import classes from './ListaColoresTabla.module.css';
 
-const ListaColoresTabla = ({ coloresTabla, idGrupoActivo }) => {
+const ListaColoresTabla = ({
+  coloresTabla,
+  idGrupo,
+  controladorRedireccionar,
+}) => {
   const [idColorEditandose, setIdColorEditandose] = useState(null);
   const [colorEditandose, setColorEditandose] = useState(null);
   const [agregandoNuevoColor, setAgregandoNuevoColor] = useState(false);
@@ -46,6 +50,7 @@ const ListaColoresTabla = ({ coloresTabla, idGrupoActivo }) => {
       }
       editarColorTabla(colorEditandose);
       setIdColorEditandose(null);
+      controladorRedireccionar();
     } else {
       setIdColorEditandose(id);
     }
@@ -78,6 +83,7 @@ const ListaColoresTabla = ({ coloresTabla, idGrupoActivo }) => {
 
     if (continuar) {
       borrarColorTabla(id);
+      controladorRedireccionar();
     }
   };
 
@@ -102,9 +108,10 @@ const ListaColoresTabla = ({ coloresTabla, idGrupoActivo }) => {
         alert('No dejes campos vacíos');
         return;
       }
-      crearColorTabla(nuevoColor, idGrupoActivo);
+      crearColorTabla(nuevoColor, idGrupo);
       setNuevoColor({ posiciones: '', color: '', nota: '' });
       setAgregandoNuevoColor(false);
+      controladorRedireccionar();
     }
   };
 

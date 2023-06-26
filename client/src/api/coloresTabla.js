@@ -2,7 +2,7 @@ import { json } from 'react-router-dom';
 
 const baseUrl = 'http://localhost:8080/api/colores-tabla';
 
-export const obtenerColoresTabla = async (idGrupo, guardarEnEstado) => {
+export const obtenerColoresTabla = async (idGrupo) => {
   const response = await fetch(`${baseUrl}/grupo/${idGrupo}`);
   if (!response.ok) {
     throw json(
@@ -10,8 +10,7 @@ export const obtenerColoresTabla = async (idGrupo, guardarEnEstado) => {
       { status: 500 }
     );
   }
-  const coloresTabla = await response.json();
-  guardarEnEstado(coloresTabla);
+  return response.json();
 };
 
 export const crearColoresTabla = async (coloresYGrupos) => {

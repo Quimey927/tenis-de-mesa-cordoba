@@ -76,3 +76,23 @@ export const editarPartido = async (req, res) => {
     res.status(500).send('No pudimos editar el orden del partido.');
   }
 };
+
+export const editarSetsPartido = async (req, res) => {
+  const idPartido = parseInt(req.params.idPartido);
+
+  const { sets_jugador_1, sets_jugador_2 } = req.body;
+
+  try {
+    pool.query(
+      consultasPartidos.editarSetsPartido,
+      [sets_jugador_1, sets_jugador_2, idPartido],
+      (err, results) => {
+        if (err) throw new Error(err);
+        res.status(200).json(results.rows);
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('No pudimos editar el orden del partido.');
+  }
+};
