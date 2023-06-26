@@ -42,7 +42,7 @@ const AgregarJugadores = ({ idGrupo, jugadores, nombreGrupo }) => {
   for (let i = 0; i < jugadoresGrupo.length; i++) {
     inputsJugadores.push(
       <Select
-        key={Math.random()}
+        key={i}
         label={`Jugador ${i + 1}`}
         id={`jugador-${i}`}
         onChange={controladorCambioInput}
