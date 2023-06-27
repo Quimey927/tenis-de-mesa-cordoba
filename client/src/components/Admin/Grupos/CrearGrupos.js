@@ -24,10 +24,10 @@ const CrearGrupos = ({
     };
 
     crearGrupos(datosGrupo);
-    setColoresElegidos(false);
 
     navigate(
-      `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}`
+      `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}`,
+      { state: { elegirColores: true } }
     );
   };
 

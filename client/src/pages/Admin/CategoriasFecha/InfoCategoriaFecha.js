@@ -29,7 +29,6 @@ const PaginaInfoCategoriaFecha = () => {
         titulo={categoriaFecha[0].categoria}
         subtitulo={categoriaFecha[0].fecha}
         campos={campos}
-        to="../../.."
       />
 
       <ListaFases

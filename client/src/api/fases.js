@@ -58,7 +58,7 @@ export const editarFase = async (
   }
 
   return redirect(
-    `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}`
+    `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}`
   );
 };
 

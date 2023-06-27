@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useLocation } from 'react-router-dom';
 
 import AdminInfo from '../../../components/Admin/AdminInfo/AdminInfo';
-import ConfiguracionGrupos from '../../../components/Admin/Grupos/ConfiguracionGrupos';
+import CrearGrupos from '../../../components/Admin/Grupos/CrearGrupos';
+import CrearColoresTabla from '../../../components/Admin/Grupos/CrearColoresTabla';
 import ListaGrupos from '../../../components/Admin/Grupos/ListaGrupos';
 import ListaEliminatorias from '../../../components/Admin/Eliminatorias/ListaEliminatorias';
 import {
@@ -17,7 +17,7 @@ import {
 } from '../../../api';
 
 const PaginaInfoFase = () => {
-  const {
+  let {
     fase,
     grupos,
     eliminatorias,
@@ -34,11 +34,7 @@ const PaginaInfoFase = () => {
     jugadores,
   } = useLoaderData();
 
-  // tendria más sentido que sea falso de inicio, la idea de
-  // ponerlo inicialmente como true es que se elijan primero la cantidad
-  // de grupos, y ahí se setea a false coloresElegidos para que se
-  // abra el formulario correspondiente
-  const [coloresElegidos, setColoresElegidos] = useState(true);
+  const { state } = useLocation();
 
   const { nombre, orden, tipo } = fase[0];
 
@@ -59,16 +55,28 @@ const PaginaInfoFase = () => {
 
   return (
     <>
-      <AdminInfo titulo={nombre} campos={campos} to="../.." />
+      <AdminInfo
+        titulo={nombre}
+        campos={campos}
+        idCategoriaFecha={idCategoriaFecha}
+        idFase={idFase}
+        idFecha={idFecha}
+        to={`/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}`}
+        editarTo={`/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}/editar`}
+      />
 
-      {tipo === 'G' && (grupos.length === 0 || !coloresElegidos) ? (
-        <ConfiguracionGrupos
-          grupos={grupos}
+      {tipo === 'G' && grupos.length === 0 ? (
+        <CrearGrupos
+          idFecha={idFecha}
           idCategoriaFecha={idCategoriaFecha}
           idFase={idFase}
+        />
+      ) : tipo === 'G' && state?.elegirColores ? (
+        <CrearColoresTabla
+          grupos={grupos}
           idFecha={idFecha}
-          coloresElegidos={coloresElegidos}
-          setColoresElegidos={setColoresElegidos}
+          idCategoriaFecha={idCategoriaFecha}
+          idFase={idFase}
         />
       ) : tipo === 'G' ? (
         <ListaGrupos

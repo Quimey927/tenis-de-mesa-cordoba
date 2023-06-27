@@ -7,13 +7,7 @@ import Select from '../../UI/Select/Select';
 import { crearColoresTabla } from '../../../api';
 import classes from './CrearColoresTabla.module.css';
 
-const CrearColoresTabla = ({
-  grupos,
-  setColoresElegidos,
-  idCategoriaFecha,
-  idFase,
-  idFecha,
-}) => {
+const CrearColoresTabla = ({ grupos, idCategoriaFecha, idFase, idFecha }) => {
   const [coloresTabla, setColoresTabla] = useState([]);
   const navigate = useNavigate();
 
@@ -36,8 +30,6 @@ const CrearColoresTabla = ({
     if (coloresTabla.length > 0) {
       crearColoresTabla([coloresTabla, idGrupos]);
     }
-
-    setColoresElegidos(true);
 
     navigate(
       `/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}/grupo/${grupos[0].id}`

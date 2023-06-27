@@ -1,4 +1,10 @@
-const obtenerFases = 'SELECT * FROM fases WHERE id_categoria_fecha = $1';
+const obtenerFases = `SELECT
+    f.*,
+    MIN(g.id) AS id_grupo
+  FROM fases AS f
+  LEFT JOIN grupos AS g ON g.id_fase = f.id
+  WHERE f.id_categoria_fecha = $1
+  GROUP BY f.id`;
 
 const crearFase = `INSERT INTO fases
   (

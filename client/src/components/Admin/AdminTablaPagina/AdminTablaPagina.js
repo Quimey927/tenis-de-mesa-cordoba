@@ -13,7 +13,8 @@ const AdminTablaPagina = ({
   encabezadosColumnas,
   mostrarCantidadEntradasYFiltro = true,
   prefijoLinkEditar = '',
-  tieneSufijoEditar = true,
+  sufijoLinkEditar = '',
+  esListaFases = false,
 }) => {
   const [filtro, setFiltro] = useState('');
 
@@ -59,7 +60,11 @@ const AdminTablaPagina = ({
               <td role="cell" data-cell="editar">
                 <Link
                   to={`${prefijoLinkEditar}${elem.id.toString()}${
-                    tieneSufijoEditar ? '/editar' : ''
+                    !esListaFases
+                      ? sufijoLinkEditar
+                      : elem.id_grupo !== null
+                      ? `/grupo/${elem.id_grupo}`
+                      : ''
                   }`}
                   className={classes['btn-editar']}
                 >

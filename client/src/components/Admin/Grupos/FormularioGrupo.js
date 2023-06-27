@@ -9,7 +9,7 @@ const FormularioGrupo = ({ method, grupo }) => {
       textoTitulo={
         method === 'POST' ? 'Agregar grupo' : `Editar ${grupo[0].nombre}`
       }
-      navegarAlCancelar=".."
+      navegarAlCancelar={-1}
     >
       <Input
         id="nombre"

@@ -31,7 +31,7 @@ const ListaStreams = ({ streams, navegarA }) => {
         encabezadosColumnas={['orden']}
         mostrarCantidadEntradasYFiltro={false}
         prefijoLinkEditar="editar/streams/"
-        tieneSufijoEditar={true}
+        sufijoLinkEditar="/editar"
       />
     </>
   );

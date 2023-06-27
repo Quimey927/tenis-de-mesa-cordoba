@@ -32,8 +32,9 @@ const ListaFases = ({ fases, idFecha, idCategoriaFecha }) => {
         controladorBorrarElemento={controladorBorrarFase}
         encabezadosColumnas={['nombre', 'orden', 'tipo']}
         mostrarCantidadEntradasYFiltro={false}
-        tieneSufijoEditar={false}
         prefijoLinkEditar="fases/"
+        sufijoLinkEditar={fases}
+        esListaFases={true}
       />
     </>
   );

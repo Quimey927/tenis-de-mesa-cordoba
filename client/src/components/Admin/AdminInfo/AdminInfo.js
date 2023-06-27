@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import classes from './AdminInfo.module.css';
 
-const AdminInfo = ({ titulo, subtitulo = '', campos, imagen, to = '..' }) => {
+const AdminInfo = ({
+  titulo,
+  subtitulo = '',
+  campos,
+  imagen,
+  to = '..',
+  editarTo = 'editar',
+}) => {
   return (
     <>
       <AdminTituloPagina titulo={titulo} subtitulo={subtitulo} />
@@ -24,7 +31,7 @@ const AdminInfo = ({ titulo, subtitulo = '', campos, imagen, to = '..' }) => {
             <span>Atrás</span>
           </Link>
           <Link
-            to="editar"
+            to={editarTo}
             className={`${classes.btn} ${classes['btn-editar']}`}
           >
             <span>Editar Información</span>

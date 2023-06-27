@@ -29,7 +29,6 @@ const ListaFechas = ({ fechas }) => {
         array={fechas}
         controladorBorrarElemento={controladorBorrarFecha}
         encabezadosColumnas={['nombre', 'torneo', 'temporada']}
-        tieneSufijoEditar={false}
       />
     </>
   );
