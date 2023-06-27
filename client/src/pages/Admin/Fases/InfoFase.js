@@ -23,7 +23,6 @@ const PaginaInfoFase = () => {
     eliminatorias,
     idCategoriaFecha,
     idFecha,
-    idTorneo,
     idFase,
     idGrupo,
     idPartido,
@@ -58,9 +57,6 @@ const PaginaInfoFase = () => {
       <AdminInfo
         titulo={nombre}
         campos={campos}
-        idCategoriaFecha={idCategoriaFecha}
-        idFase={idFase}
-        idFecha={idFecha}
         to={`/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}`}
         editarTo={`/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}/fases/${idFase}/editar`}
       />
@@ -96,7 +92,6 @@ const PaginaInfoFase = () => {
         <ListaEliminatorias
           eliminatorias={eliminatorias}
           idCategoriaFecha={idCategoriaFecha}
-          idTorneo={idTorneo}
           idFase={idFase}
           idFecha={idFecha}
         />
@@ -108,8 +103,7 @@ const PaginaInfoFase = () => {
 export default PaginaInfoFase;
 
 export async function loader({ params }) {
-  const { idFase, idCategoriaFecha, idFecha, idTorneo, idGrupo, idPartido } =
-    params;
+  const { idFase, idCategoriaFecha, idFecha, idGrupo, idPartido } = params;
 
   return {
     fase: await obtenerFase(idFase),
@@ -118,7 +112,6 @@ export async function loader({ params }) {
     idFase,
     idCategoriaFecha,
     idFecha,
-    idTorneo,
     jugadores: await obtenerJugadores(),
     idGrupo,
     idPartido,

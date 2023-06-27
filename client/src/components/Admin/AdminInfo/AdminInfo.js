@@ -24,7 +24,12 @@ const AdminInfo = ({
               </p>
             ))}
           </div>
-          {imagen && <img src={`/${imagen}`} alt={'Imagen del evento'} />}
+          {imagen && (
+            <div>
+              <small>Logo: </small>
+              <img src={`/${imagen}`} alt={'Imagen del evento'} />
+            </div>
+          )}
         </div>
         <div className={classes.acciones}>
           <Link to={to} className={`${classes.btn} ${classes['btn-cancelar']}`}>

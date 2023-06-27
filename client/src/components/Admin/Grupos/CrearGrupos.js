@@ -6,12 +6,7 @@ import Input from '../../UI/Input/Input';
 import { crearGrupos } from '../../../api';
 import classes from './CrearGrupos.module.css';
 
-const CrearGrupos = ({
-  idCategoriaFecha,
-  idFecha,
-  idFase,
-  setColoresElegidos,
-}) => {
+const CrearGrupos = ({ idCategoriaFecha, idFecha, idFase }) => {
   const [cantidadGrupos, setCantidadGrupos] = useState(1);
   const navigate = useNavigate();
 

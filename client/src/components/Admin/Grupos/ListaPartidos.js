@@ -142,8 +142,7 @@ const ListaPartidos = ({
                         partido.jugador_2_segundo_nombre,
                         partido.jugador_2_apellido,
                         partido.jugador_2_segundo_apellido
-                      ),
-                      partido.orden
+                      )
                     )}
                   >
                     {partido.sets_jugador_1} - {partido.sets_jugador_2}
