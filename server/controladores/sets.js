@@ -58,7 +58,7 @@ export const crearSet = async (req, res) => {
       [idPartido],
       (err, results) => {
         if (err) throw new Error(err);
-        res.status(200).send('Color creado correctamente.');
+        res.status(200).send('Set creado correctamente.');
       }
     );
   } catch (err) {
