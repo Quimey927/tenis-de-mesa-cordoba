@@ -5,7 +5,7 @@ const obtenerGrupos = `SELECT
   INNER JOIN fases AS f ON f.id = g.id_fase
   INNER JOIN categorias_fechas AS cf ON cf.id = f.id_categoria_fecha
   WHERE g.id_fase = $1
-  ORDER BY g.nombre`;
+  ORDER BY g.id`;
 
 const crearGrupo = `INSERT INTO grupos
   (

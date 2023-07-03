@@ -1,6 +1,14 @@
 import classes from './Textarea.module.css';
 
-const Textarea = ({ id, label, rows, defaultValue, required }) => {
+const Textarea = ({
+  id,
+  label,
+  rows,
+  defaultValue,
+  required,
+  onChange,
+  placeholder,
+}) => {
   return (
     <div className={classes.textarea}>
       <label htmlFor={id}>{label}</label>
@@ -11,6 +19,8 @@ const Textarea = ({ id, label, rows, defaultValue, required }) => {
         rows={rows}
         defaultValue={defaultValue}
         required={required}
+        onChange={onChange ? onChange : () => {}}
+        placeholder={placeholder ? placeholder : ''}
       ></textarea>
     </div>
   );

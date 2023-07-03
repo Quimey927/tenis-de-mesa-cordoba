@@ -74,7 +74,7 @@ const ListaGrupos = ({
       <Solapas
         lista={grupos}
         controladorCambiarElementoActivo={controladorRedireccionar}
-        idGrupo={+idGrupo}
+        idElementoActivo={+idGrupo}
       />
 
       <AccionesGrupo

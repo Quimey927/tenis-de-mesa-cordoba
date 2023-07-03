@@ -79,3 +79,36 @@ export const editarSetsPartido = async (partido) => {
     );
   }
 };
+
+export const obtenerPartidosDeLaEliminatoria = async (idEliminatoria) => {
+  const response = await fetch(`${baseUrl}/eliminatoria/${idEliminatoria}`);
+  if (!response.ok) {
+    throw json(
+      { message: 'No pudimos cargar los partidos de la eliminatoria.' },
+      { status: 500 }
+    );
+  }
+  return response.json();
+};
+
+export const crearPartidosDeLaEliminatoria = async (
+  datosPartidosEliminatoria
+) => {
+  const response = await fetch(
+    `${baseUrl}/eliminatoria/${datosPartidosEliminatoria.idEliminatoria}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datosPartidosEliminatoria),
+    }
+  );
+
+  if (!response.ok) {
+    throw json(
+      { message: 'No pudimos crear los partidos de la eliminatoria.' },
+      { status: 500 }
+    );
+  }
+};

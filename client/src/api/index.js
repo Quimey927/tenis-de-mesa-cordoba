@@ -98,7 +98,12 @@ export {
   crearColorTabla,
 } from './coloresTabla';
 
-export { obtenerEliminatorias, borrarEliminatoria } from './eliminatorias';
+export {
+  obtenerEliminatorias,
+  crearEliminatoria,
+  editarEliminatoria,
+  obtenerEliminatoria,
+} from './eliminatorias';
 
 export {
   obtenerPartidosDelGrupo,
@@ -106,6 +111,8 @@ export {
   intercambiarJugadoresPartido,
   editarPartido,
   editarSetsPartido,
+  obtenerPartidosDeLaEliminatoria,
+  crearPartidosDeLaEliminatoria,
 } from './partidos';
 
 export { obtenerSets, editarSet, borrarSet, crearSet } from './sets';

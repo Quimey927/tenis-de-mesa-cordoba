@@ -52,8 +52,12 @@ const AdminTablaPagina = ({
         <tbody>
           {arrayFiltrado.map((elem) => (
             <tr key={elem.id} role="row">
-              {encabezadosColumnas.map((encabezado) => (
-                <td key={elem[encabezado]} role="cell" data-cell={encabezado}>
+              {encabezadosColumnas.map((encabezado, i) => (
+                <td
+                  key={`${elem[encabezado]} ${i}`}
+                  role="cell"
+                  data-cell={encabezado}
+                >
                   {elem[encabezado]}
                 </td>
               ))}
@@ -64,6 +68,8 @@ const AdminTablaPagina = ({
                       ? sufijoLinkEditar
                       : elem.id_grupo !== null
                       ? `/grupo/${elem.id_grupo}`
+                      : elem.id_eliminatoria !== null
+                      ? `/eliminatoria/${elem.id_eliminatoria}`
                       : ''
                   }`}
                   className={classes['btn-editar']}

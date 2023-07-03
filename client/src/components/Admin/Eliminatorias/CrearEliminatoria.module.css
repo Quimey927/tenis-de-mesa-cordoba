@@ -1,0 +1,11 @@
+.btn {
+  color: #fff;
+  display: block;
+  background-color: #5cb85c;
+  margin-inline: auto;
+  font: inherit;
+}
+
+.btn:hover {
+  background-color: #4cae4c;
+}

@@ -60,12 +60,20 @@ export const intercambiarJugadoresPartido = async (req, res) => {
 export const editarPartido = async (req, res) => {
   const idPartido = parseInt(req.params.idPartido);
 
-  const { orden, sets_jugador_1, sets_jugador_2 } = req.body;
+  const { orden, sets_jugador_1, sets_jugador_2, id_jugador_1, id_jugador_2 } =
+    req.body;
 
   try {
     pool.query(
       consultasPartidos.editarPartido,
-      [orden, sets_jugador_1, sets_jugador_2, idPartido],
+      [
+        orden,
+        sets_jugador_1,
+        sets_jugador_2,
+        id_jugador_1 ? +id_jugador_1 : null,
+        id_jugador_2 ? +id_jugador_2 : null,
+        idPartido,
+      ],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(200).json(results.rows);
@@ -94,5 +102,49 @@ export const editarSetsPartido = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('No pudimos editar el orden del partido.');
+  }
+};
+
+export const obtenerPartidosDeLaEliminatoria = async (req, res) => {
+  const idEliminatoria = parseInt(req.params.idEliminatoria);
+
+  try {
+    pool.query(
+      consultasPartidos.obtenerPartidosDeLaEliminatoria,
+      [idEliminatoria],
+      (err, results) => {
+        if (err) throw new Error(err);
+        res.status(200).json(results.rows);
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('No pudimos cargar los partidos de la eliminatoria.');
+  }
+};
+
+export const crearPartidosDeLaEliminatoria = async (req, res) => {
+  const { dondeEmpieza, tercerPuesto, idEliminatoria, dia } = req.body;
+
+  const cant_partidos = 2 ** dondeEmpieza - 1;
+  const hay_tercer_puesto = tercerPuesto === 'N' ? false : true;
+
+  try {
+    pool.query(
+      consultasPartidos.crearPartidosDeLaEliminatoria(
+        cant_partidos,
+        hay_tercer_puesto
+      ),
+      [idEliminatoria, dia],
+      (err, results) => {
+        if (err) throw new Error(err);
+        res
+          .status(200)
+          .send('Partidos de la eliminatoria creados correctamente');
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('No pudimos crear los partidos de la eliminatoria.');
   }
 };

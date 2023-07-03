@@ -85,6 +85,12 @@ import PaginaEditarGrupo, {
 import { action as actionManipularGrupo } from './components/Admin/Grupos/FormularioGrupo';
 import PaginaNuevoGrupo from './pages/Admin/Grupos/NuevoGrupo';
 
+import PaginaEditarEliminatoria, {
+  loader as loaderEliminatoriaAdmin,
+} from './pages/Admin/Eliminatorias/EditarEliminatoria';
+import { action as actionManipularEliminatoria } from './components/Admin/Eliminatorias/FormularioEliminatoria';
+import PaginaNuevaEliminatoria from './pages/Admin/Eliminatorias/NuevaEliminatoria';
+
 import PaginaJugadoresAdmin, {
   loader as loaderJugadoresAdmin,
 } from './pages/Admin/Jugadores/Jugadores';
@@ -369,6 +375,33 @@ const router = createBrowserRouter([
                                         element: <PaginaNuevoGrupo />,
                                         loader: loaderGrupoAdmin,
                                         action: actionManipularGrupo,
+                                      },
+                                    ],
+                                  },
+                                  {
+                                    path: 'eliminatoria/:idEliminatoria',
+                                    children: [
+                                      {
+                                        index: true,
+                                        element: <PaginaInfoFase />,
+                                        loader: loaderInfoFaseAdmin,
+                                      },
+                                      {
+                                        path: 'partido/:idPartido',
+                                        element: <PaginaInfoFase />,
+                                        loader: loaderInfoFaseAdmin,
+                                      },
+                                      {
+                                        path: 'editar',
+                                        element: <PaginaEditarEliminatoria />,
+                                        loader: loaderEliminatoriaAdmin,
+                                        action: actionManipularEliminatoria,
+                                      },
+                                      {
+                                        path: 'nuevo',
+                                        element: <PaginaNuevaEliminatoria />,
+                                        loader: loaderEliminatoriaAdmin,
+                                        action: actionManipularEliminatoria,
                                       },
                                     ],
                                   },

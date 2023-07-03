@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faRightLeft,
-  faPenToSquare,
-  faSave,
-} from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faSave } from '@fortawesome/free-solid-svg-icons';
 
-import { intercambiarJugadoresPartido, editarPartido } from '../../../api';
+import { editarPartido } from '../../../api';
+import { obtenerEtapaEliminatoria } from '../../../utils/obtenerEtapaEliminatoria';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import classes from './ListaPartidosYSets.module.css';
 
 const ListaPartidos = ({
-  idEliminatoria,
+  idGrupo,
   partidosDeLaEliminatoria,
   setJugador1,
   setJugador2,
   controladorRedireccionar,
+  jugadores,
 }) => {
   const [idPartidoEditandose, setIdPartidoEditandose] = useState(null);
   const [partidoEditandose, setPartidoEditandose] = useState(null);
@@ -51,12 +49,7 @@ const ListaPartidos = ({
   const controladorSetearSetsEditandose = (idPartido, jugador_1, jugador_2) => {
     setJugador1(jugador_1);
     setJugador2(jugador_2);
-    controladorRedireccionar(idEliminatoria, idPartido);
-  };
-
-  const controladorIntercambiarJugadores = (idPartido) => {
-    intercambiarJugadoresPartido(idPartido);
-    controladorRedireccionar();
+    controladorRedireccionar(idGrupo, idPartido);
   };
 
   return (
@@ -64,28 +57,18 @@ const ListaPartidos = ({
       <table className={classes.table} style={{ width: '100%' }}>
         <thead>
           <tr>
-            <th>Orden</th>
+            <th>Etapa</th>
             <th>Editar</th>
             <th>Jugador 1</th>
             <th style={{ width: '110px' }}>vs.</th>
             <th>Jugador 2</th>
-            <th style={{ width: '80px' }}>Intercambiar</th>
           </tr>
         </thead>
         <tbody>
           {partidosDeLaEliminatoria.map((partido) => (
             <tr key={partido.id}>
               <td>
-                {partido.id === idPartidoEditandose ? (
-                  <input
-                    name="orden"
-                    defaultValue={partido.orden}
-                    className={classes['input-tabla-numero']}
-                    onChange={controladorCambiarValorPartido}
-                  />
-                ) : (
-                  partido.orden
-                )}
+                {obtenerEtapaEliminatoria(partido.orden)} ({partido.orden})
               </td>
               <td>
                 <button
@@ -101,11 +84,35 @@ const ListaPartidos = ({
                 </button>
               </td>
               <td>
-                {obtenerNombreCompleto(
-                  partido.jugador_1_nombre,
-                  partido.jugador_1_segundo_nombre,
-                  partido.jugador_1_apellido,
-                  partido.jugador_1_segundo_apellido
+                {partido.id === idPartidoEditandose ? (
+                  <select
+                    name="id_jugador_1"
+                    defaultValue={
+                      partido.id_jugador_1 ? partido.id_jugador_1 : ''
+                    }
+                    onChange={controladorCambiarValorPartido}
+                  >
+                    <option value="">Elegir jugador</option>
+                    {jugadores.map((jugador) => (
+                      <option key={jugador.id} value={+jugador.id}>
+                        {obtenerNombreCompleto(
+                          jugador.nombre,
+                          jugador.segundo_nombre,
+                          jugador.apellido,
+                          jugador.segundo_apellido
+                        )}
+                      </option>
+                    ))}
+                  </select>
+                ) : partido.jugador_1_nombre ? (
+                  obtenerNombreCompleto(
+                    partido.jugador_1_nombre,
+                    partido.jugador_1_segundo_nombre,
+                    partido.jugador_1_apellido,
+                    partido.jugador_1_segundo_apellido
+                  )
+                ) : (
+                  'No Definido'
                 )}
               </td>
               <td>
@@ -131,18 +138,22 @@ const ListaPartidos = ({
                     onClick={controladorSetearSetsEditandose.bind(
                       null,
                       partido.id,
-                      obtenerNombreCompleto(
-                        partido.jugador_1_nombre,
-                        partido.jugador_1_segundo_nombre,
-                        partido.jugador_1_apellido,
-                        partido.jugador_1_segundo_apellido
-                      ),
-                      obtenerNombreCompleto(
-                        partido.jugador_2_nombre,
-                        partido.jugador_2_segundo_nombre,
-                        partido.jugador_2_apellido,
-                        partido.jugador_2_segundo_apellido
-                      )
+                      partido.jugador_1_nombre
+                        ? obtenerNombreCompleto(
+                            partido.jugador_1_nombre,
+                            partido.jugador_1_segundo_nombre,
+                            partido.jugador_1_apellido,
+                            partido.jugador_1_segundo_apellido
+                          )
+                        : 'No Definido',
+                      partido.jugador_2_nombre
+                        ? obtenerNombreCompleto(
+                            partido.jugador_2_nombre,
+                            partido.jugador_2_segundo_nombre,
+                            partido.jugador_2_apellido,
+                            partido.jugador_2_segundo_apellido
+                          )
+                        : 'No Definido'
                     )}
                   >
                     {partido.sets_jugador_1} - {partido.sets_jugador_2}
@@ -150,24 +161,36 @@ const ListaPartidos = ({
                 )}
               </td>
               <td>
-                {obtenerNombreCompleto(
-                  partido.jugador_2_nombre,
-                  partido.jugador_2_segundo_nombre,
-                  partido.jugador_2_apellido,
-                  partido.jugador_2_segundo_apellido
+                {partido.id === idPartidoEditandose ? (
+                  <select
+                    name="id_jugador_2"
+                    defaultValue={
+                      partido.id_jugador_2 ? partido.id_jugador_2 : ''
+                    }
+                    onChange={controladorCambiarValorPartido}
+                  >
+                    <option value="">Elegir jugador</option>
+                    {jugadores.map((jugador) => (
+                      <option key={jugador.id} value={+jugador.id}>
+                        {obtenerNombreCompleto(
+                          jugador.nombre,
+                          jugador.segundo_nombre,
+                          jugador.apellido,
+                          jugador.segundo_apellido
+                        )}
+                      </option>
+                    ))}
+                  </select>
+                ) : partido.jugador_2_nombre ? (
+                  obtenerNombreCompleto(
+                    partido.jugador_2_nombre,
+                    partido.jugador_2_segundo_nombre,
+                    partido.jugador_2_apellido,
+                    partido.jugador_2_segundo_apellido
+                  )
+                ) : (
+                  'No Definido'
                 )}
-              </td>
-              <td>
-                <button
-                  type="button"
-                  style={{ cursor: 'pointer' }}
-                  onClick={controladorIntercambiarJugadores.bind(
-                    null,
-                    partido.id
-                  )}
-                >
-                  <FontAwesomeIcon icon={faRightLeft} />
-                </button>
               </td>
             </tr>
           ))}

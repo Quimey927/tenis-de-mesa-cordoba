@@ -1,6 +1,10 @@
 import classes from './Solapas.module.css';
 
-const Solapas = ({ lista, controladorCambiarElementoActivo, idGrupo }) => {
+const Solapas = ({
+  lista,
+  controladorCambiarElementoActivo,
+  idElementoActivo,
+}) => {
   return (
     <div className={classes.solapas}>
       {lista.map((elem) => (
@@ -8,7 +12,7 @@ const Solapas = ({ lista, controladorCambiarElementoActivo, idGrupo }) => {
           key={elem.id}
           onClick={controladorCambiarElementoActivo.bind(null, elem.id, null)}
           className={
-            idGrupo === elem.id
+            idElementoActivo === elem.id
               ? `${classes.item} ${classes.activo}`
               : classes.item
           }

@@ -9,10 +9,12 @@ import {
   obtenerFase,
   obtenerGrupos,
   obtenerEliminatorias,
+  obtenerEliminatoria,
   obtenerJugadores,
   obtenerFilasTabla,
   obtenerColoresTabla,
   obtenerPartidosDelGrupo,
+  obtenerPartidosDeLaEliminatoria,
   obtenerSets,
 } from '../../../api';
 
@@ -21,14 +23,17 @@ const PaginaInfoFase = () => {
     fase,
     grupos,
     eliminatorias,
+    eliminatoria,
     idCategoriaFecha,
     idFecha,
     idFase,
     idGrupo,
+    idEliminatoria,
     idPartido,
     filasTabla,
     coloresTabla,
     partidosDelGrupo,
+    partidosDeLaEliminatoria,
     setsDelPartido,
     jugadores,
   } = useLoaderData();
@@ -91,9 +96,15 @@ const PaginaInfoFase = () => {
       ) : (
         <ListaEliminatorias
           eliminatorias={eliminatorias}
+          eliminatoria={eliminatoria}
           idCategoriaFecha={idCategoriaFecha}
           idFase={idFase}
           idFecha={idFecha}
+          idEliminatoria={idEliminatoria}
+          idPartido={idPartido}
+          partidosDeLaEliminatoria={partidosDeLaEliminatoria}
+          setsDelPartido={setsDelPartido}
+          jugadores={jugadores}
         />
       )}
     </>
@@ -103,23 +114,37 @@ const PaginaInfoFase = () => {
 export default PaginaInfoFase;
 
 export async function loader({ params }) {
-  const { idFase, idCategoriaFecha, idFecha, idGrupo, idPartido } = params;
+  const {
+    idFase,
+    idCategoriaFecha,
+    idFecha,
+    idGrupo,
+    idEliminatoria,
+    idPartido,
+  } = params;
 
   return {
     fase: await obtenerFase(idFase),
     grupos: await obtenerGrupos(idFase),
     eliminatorias: await obtenerEliminatorias(idFase),
+    eliminatoria: idEliminatoria
+      ? await obtenerEliminatoria(idEliminatoria)
+      : undefined,
     idFase,
     idCategoriaFecha,
     idFecha,
     jugadores: await obtenerJugadores(),
     idGrupo,
+    idEliminatoria,
     idPartido,
     filasTabla: idGrupo ? await obtenerFilasTabla(idGrupo) : undefined,
     coloresTabla: idGrupo ? await obtenerColoresTabla(idGrupo) : undefined,
     partidosDelGrupo: idGrupo
       ? await obtenerPartidosDelGrupo(idGrupo)
       : undefined,
+    partidosDeLaEliminatoria: idEliminatoria
+      ? await obtenerPartidosDeLaEliminatoria(idEliminatoria)
+      : [],
     setsDelPartido: idPartido ? await obtenerSets(idPartido) : undefined,
   };
 }

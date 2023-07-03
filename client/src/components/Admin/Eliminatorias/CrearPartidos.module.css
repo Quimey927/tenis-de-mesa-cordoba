@@ -1,0 +1,24 @@
+.form {
+  margin-block: 4rem;
+  font-size: 0.9rem;
+}
+
+.form .inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.9rem;
+}
+
+.btn {
+  color: #fff;
+  display: block;
+  background-color: #5cb85c;
+  margin-inline: auto;
+  font: inherit;
+}
+
+.btn:hover {
+  background-color: #4cae4c;
+}

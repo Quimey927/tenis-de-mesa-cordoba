@@ -1,8 +1,10 @@
 const obtenerFases = `SELECT
     f.*,
-    MIN(g.id) AS id_grupo
+    MIN(g.id) AS id_grupo,
+    MIN(e.id) AS id_eliminatoria
   FROM fases AS f
   LEFT JOIN grupos AS g ON g.id_fase = f.id
+  LEFT JOIN eliminatorias AS e ON e.id_fase = f.id
   WHERE f.id_categoria_fecha = $1
   GROUP BY f.id`;
 
