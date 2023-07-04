@@ -12,7 +12,7 @@ import classes from './ListaPartidosYSets.module.css';
 
 const ListaPartidos = ({
   idEliminatoria,
-  partidosDeLaEliminatoria,
+  partidosDelGrupo,
   setJugador1,
   setJugador2,
   controladorRedireccionar,
@@ -21,12 +21,12 @@ const ListaPartidos = ({
   const [partidoEditandose, setPartidoEditandose] = useState(null);
 
   useEffect(() => {
-    const partidoEncontrado = partidosDeLaEliminatoria.find(
+    const partidoEncontrado = partidosDelGrupo.find(
       (partido) => partido.id === idPartidoEditandose
     );
 
     setPartidoEditandose(partidoEncontrado);
-  }, [idPartidoEditandose, partidosDeLaEliminatoria]);
+  }, [idPartidoEditandose, partidosDelGrupo]);
 
   const controladorEditarPartido = (id) => {
     if (id === idPartidoEditandose) {
@@ -73,7 +73,7 @@ const ListaPartidos = ({
           </tr>
         </thead>
         <tbody>
-          {partidosDeLaEliminatoria.map((partido) => (
+          {partidosDelGrupo.map((partido) => (
             <tr key={partido.id}>
               <td>
                 {partido.id === idPartidoEditandose ? (

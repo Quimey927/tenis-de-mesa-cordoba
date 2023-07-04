@@ -67,10 +67,10 @@ const ListaPartidos = ({
         <tbody>
           {partidosDeLaEliminatoria.map((partido) => (
             <tr key={partido.id}>
-              <td>
+              <td style={{ width: '150px' }}>
                 {obtenerEtapaEliminatoria(partido.orden)} ({partido.orden})
               </td>
-              <td>
+              <td style={{ width: '50px' }}>
                 <button
                   type="button"
                   className={classes['btn-editar-guardar']}
