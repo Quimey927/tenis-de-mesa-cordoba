@@ -16,12 +16,12 @@ export const obtenerStreams = async (req, res) => {
 };
 
 export const crearStream = async (req, res) => {
-  const { codigo_embebido, id_fecha, orden, estado } = req.body;
+  const { codigo_youtube, id_fecha, orden, estado } = req.body;
 
   try {
     pool.query(
       consultasStreams.crearStream,
-      [codigo_embebido, id_fecha, orden, estado],
+      [codigo_youtube, id_fecha, orden, estado],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(201).send('Stream creado exitosamente.');
@@ -61,7 +61,7 @@ export const obtenerStream = async (req, res) => {
 
 export const editarStream = async (req, res) => {
   const id = parseInt(req.params.idStream);
-  const { codigo_embebido, id_fecha, orden, estado } = req.body;
+  const { codigo_youtube, id_fecha, orden, estado } = req.body;
 
   try {
     pool.query(consultasStreams.obtenerStream, [id], (err, results) => {
@@ -75,7 +75,7 @@ export const editarStream = async (req, res) => {
 
       pool.query(
         consultasStreams.editarStream,
-        [codigo_embebido, id_fecha, orden, estado, id],
+        [codigo_youtube, id_fecha, orden, estado, id],
         (err, results) => {
           if (err) throw new Error(err);
           res.status(200).send('Stream editado correctamente.');

@@ -21,10 +21,10 @@ const FormularioStream = ({ method, stream, idFecha }) => {
       />
 
       <Textarea
-        id="codigo_embebido"
-        label="Código Embebido*"
+        id="codigo_youtube"
+        label="Código Youtube*"
         rows="4"
-        defaultValue={stream ? stream[0].codigo_embebido : ''}
+        defaultValue={stream ? stream[0].codigo_youtube : ''}
         required={true}
       />
 
@@ -48,7 +48,7 @@ export async function action({ request, params }) {
   const data = await request.formData();
 
   const datosStream = {
-    codigo_embebido: data.get('codigo_embebido'),
+    codigo_youtube: data.get('codigo_youtube'),
     id_fecha: params.idFecha,
     orden: data.get('orden'),
     estado: data.get('estado'),
