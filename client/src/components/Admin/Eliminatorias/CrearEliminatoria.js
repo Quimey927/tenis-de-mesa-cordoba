@@ -30,7 +30,7 @@ const CrearEliminatoria = ({ idFase, controladorRedireccionar }) => {
       />
 
       <Button type="submit" className={classes.btn}>
-        Crear Eliminatoria
+        Siguiente
       </Button>
     </form>
   );
