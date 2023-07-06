@@ -59,6 +59,14 @@ export {
 } from './categoriasFechas';
 
 export {
+  agregarJugadoresACategoriaFecha,
+  obtenerJugadoresDeLaCategoriaFecha,
+  editarPosicionYPuntaje,
+  borrarJugadorDeCategoriaFecha,
+  crearNuevoJugador,
+} from './categoriasFechasJugadores';
+
+export {
   obtenerStreams,
   crearStream,
   obtenerStreamActivo,

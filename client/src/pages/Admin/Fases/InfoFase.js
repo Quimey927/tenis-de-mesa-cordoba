@@ -16,6 +16,7 @@ import {
   obtenerPartidosDelGrupo,
   obtenerPartidosDeLaEliminatoria,
   obtenerSets,
+  obtenerJugadoresDeLaCategoriaFecha,
 } from '../../../api';
 
 const PaginaInfoFase = () => {
@@ -36,7 +37,12 @@ const PaginaInfoFase = () => {
     partidosDeLaEliminatoria,
     setsDelPartido,
     jugadores,
+    jugadoresDeLaCategoriaFecha,
   } = useLoaderData();
+
+  for (let i = 0; i < jugadoresDeLaCategoriaFecha.length; i++) {
+    jugadoresDeLaCategoriaFecha[i] = jugadoresDeLaCategoriaFecha[i].id_jugador;
+  }
 
   const { state } = useLocation();
 
@@ -92,6 +98,7 @@ const PaginaInfoFase = () => {
           partidosDelGrupo={partidosDelGrupo}
           setsDelPartido={setsDelPartido}
           jugadores={jugadores}
+          jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
         />
       ) : (
         <ListaEliminatorias
@@ -105,6 +112,7 @@ const PaginaInfoFase = () => {
           partidosDeLaEliminatoria={partidosDeLaEliminatoria}
           setsDelPartido={setsDelPartido}
           jugadores={jugadores}
+          jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
         />
       )}
     </>
@@ -146,5 +154,8 @@ export async function loader({ params }) {
       ? await obtenerPartidosDeLaEliminatoria(idEliminatoria)
       : [],
     setsDelPartido: idPartido ? await obtenerSets(idPartido) : undefined,
+    jugadoresDeLaCategoriaFecha: await obtenerJugadoresDeLaCategoriaFecha(
+      idCategoriaFecha
+    ),
   };
 }

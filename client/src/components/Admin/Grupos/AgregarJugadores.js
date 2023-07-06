@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import Button from '../../UI/Button/Button';
 import Select from '../../UI/Select/Select';
-import { crearFilasTabla } from '../../../api';
+import { crearFilasTabla, agregarJugadoresACategoriaFecha } from '../../../api';
 import classes from './AgregarJugadores.module.css';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 
@@ -10,13 +10,15 @@ const AgregarJugadores = ({
   idGrupo,
   jugadores,
   nombreGrupo,
+  idCategoriaFecha,
+  jugadoresDeLaCategoriaFecha,
   controladorRedireccionar,
 }) => {
   const [jugadoresGrupo, setJugadoresGrupo] = useState(['', '', '']);
 
   const controladorCambioInput = (evt) => {
     const index = +evt.target.id.split('-')[1];
-    jugadoresGrupo[index] = evt.target.value;
+    jugadoresGrupo[index] = +evt.target.value;
   };
 
   const controladorAgregarJugador = () =>
@@ -39,6 +41,16 @@ const AgregarJugadores = ({
 
   const controladorAgregarJugadores = (evt) => {
     evt.preventDefault();
+
+    const nuevosJugadoresCategoriaFecha = jugadoresGrupo.filter(
+      (jugador) => !jugadoresDeLaCategoriaFecha.includes(jugador)
+    );
+
+    agregarJugadoresACategoriaFecha(
+      nuevosJugadoresCategoriaFecha,
+      idCategoriaFecha
+    );
+
     crearFilasTabla(idGrupo, jugadoresGrupo);
     controladorRedireccionar();
   };

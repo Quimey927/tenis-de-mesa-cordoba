@@ -197,7 +197,10 @@ const ListaColoresTabla = ({
             onClick={controladorAgregarNuevoColor}
           >
             {!agregandoNuevoColor ? (
-              <FontAwesomeIcon icon={faPlus} />
+              <>
+                <FontAwesomeIcon icon={faPlus} />
+                <span> Agregar Color</span>
+              </>
             ) : (
               <FontAwesomeIcon icon={faSave} />
             )}

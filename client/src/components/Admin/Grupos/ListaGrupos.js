@@ -24,6 +24,7 @@ const ListaGrupos = ({
   partidosDelGrupo,
   setsDelPartido,
   jugadores,
+  jugadoresDeLaCategoriaFecha,
 }) => {
   const [jugador1, setJugador1] = useState('');
   const [jugador2, setJugador2] = useState('');
@@ -86,7 +87,9 @@ const ListaGrupos = ({
         <AgregarJugadores
           idGrupo={+idGrupo}
           jugadores={jugadores}
+          idCategoriaFecha={idCategoriaFecha}
           nombreGrupo={nombreGrupo}
+          jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
           controladorRedireccionar={controladorRedireccionar}
         />
       ) : (

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faSave } from '@fortawesome/free-solid-svg-icons';
 
-import { editarPartido } from '../../../api';
+import { editarPartido, agregarJugadoresACategoriaFecha } from '../../../api';
 import { obtenerEtapaEliminatoria } from '../../../utils/obtenerEtapaEliminatoria';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import classes from './ListaPartidosYSets.module.css';
@@ -14,6 +14,8 @@ const ListaPartidos = ({
   setJugador2,
   controladorRedireccionar,
   jugadores,
+  jugadoresDeLaCategoriaFecha,
+  idCategoriaFecha,
 }) => {
   const [idPartidoEditandose, setIdPartidoEditandose] = useState(null);
   const [partidoEditandose, setPartidoEditandose] = useState(null);
@@ -28,6 +30,17 @@ const ListaPartidos = ({
 
   const controladorEditarPartido = (id) => {
     if (id === idPartidoEditandose) {
+      const jugadoresPartido = [
+        +partidoEditandose.id_jugador_1,
+        +partidoEditandose.id_jugador_2,
+      ];
+
+      const nuevosJugadores = jugadoresPartido.filter(
+        (jugador) =>
+          jugador > 0 && !jugadoresDeLaCategoriaFecha.includes(jugador)
+      );
+
+      agregarJugadoresACategoriaFecha(nuevosJugadores, idCategoriaFecha);
       editarPartido(partidoEditandose);
       setIdPartidoEditandose(null);
       controladorRedireccionar();

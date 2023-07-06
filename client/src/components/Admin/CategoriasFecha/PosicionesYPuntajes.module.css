@@ -1,0 +1,97 @@
+.posiciones {
+  margin-block: 1rem 3rem;
+  color: #333;
+}
+
+.table {
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table tr th,
+.table tr td {
+  text-align: center;
+  padding: 0.5rem;
+  line-height: 1.4;
+  border-top: 1px solid #ddd;
+}
+
+.table tr th:nth-child(2),
+.table tr td:nth-child(2) {
+  text-align: start;
+}
+
+.table tr th {
+  border-bottom: 2px solid #ddd;
+  border-top: none;
+}
+
+.table tbody tr {
+  background-color: #dff0d8;
+}
+
+.table tbody tr:hover {
+  background-color: #d0e9c6;
+}
+
+.table button {
+  color: #337ab7;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.table button:hover {
+  text-decoration: underline;
+  color: #23527c;
+}
+
+.acciones {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  color: #fff;
+  display: block;
+  background-color: #5cb85c;
+  border: 1px solid #4cae4c;
+  border: none;
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 2rem auto;
+}
+
+.btn:hover {
+  background-color: #4cae4c;
+}
+
+.btn-editar-guardar {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.input-tabla-numero {
+  text-align: center;
+  margin: 0;
+  width: 7ch;
+}
+
+.crear-jugador {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.crear-jugador button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}

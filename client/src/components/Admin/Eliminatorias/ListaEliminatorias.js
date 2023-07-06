@@ -18,6 +18,7 @@ const ListaEliminatorias = ({
   eliminatorias,
   eliminatoria,
   jugadores,
+  jugadoresDeLaCategoriaFecha,
 }) => {
   const [jugador1, setJugador1] = useState('');
   const [jugador2, setJugador2] = useState('');
@@ -62,6 +63,8 @@ const ListaEliminatorias = ({
             setJugador2={setJugador2}
             controladorRedireccionar={controladorRedireccionar}
             jugadores={jugadores}
+            jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
+            idCategoriaFecha={idCategoriaFecha}
           />
         </>
       ) : (

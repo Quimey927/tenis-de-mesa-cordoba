@@ -1,12 +1,27 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 import AdminInfo from '../../../components/Admin/AdminInfo/AdminInfo';
 import ListaFases from '../../../components/Admin/Fases/ListaFases';
+import PosicionesYPuntajes from '../../../components/Admin/CategoriasFecha/PosicionesYPuntajes';
 import { obtenerFechaEnEspañol } from '../../../utils/funcionesSobreFechas';
-import { obtenerCategoriaFecha, obtenerFases } from '../../../api';
+import {
+  obtenerCategoriaFecha,
+  obtenerFases,
+  obtenerJugadoresDeLaCategoriaFecha,
+  obtenerJugadores,
+} from '../../../api';
 
 const PaginaInfoCategoriaFecha = () => {
-  const { categoriaFecha, fases, idFecha, idCategoriaFecha } = useLoaderData();
+  const {
+    categoriaFecha,
+    fases,
+    idFecha,
+    idCategoriaFecha,
+    jugadoresDeLaCategoriaFecha,
+    jugadores,
+  } = useLoaderData();
+
+  const navigate = useNavigate();
 
   const campos = [
     {
@@ -23,18 +38,30 @@ const PaginaInfoCategoriaFecha = () => {
     },
   ];
 
+  const controladorRedireccionar = () => {
+    navigate(`/admin/fechas/${idFecha}/editar/categorias/${idCategoriaFecha}`);
+  };
+
   return (
     <>
       <AdminInfo
         titulo={categoriaFecha[0].categoria}
         subtitulo={categoriaFecha[0].fecha}
         campos={campos}
+        to="../../.."
       />
 
       <ListaFases
         fases={fases}
         idFecha={idFecha}
         idCategoriaFecha={idCategoriaFecha}
+      />
+
+      <PosicionesYPuntajes
+        jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
+        idCategoriaFecha={idCategoriaFecha}
+        controladorRedireccionar={controladorRedireccionar}
+        jugadores={jugadores}
       />
     </>
   );
@@ -52,5 +79,9 @@ export async function loader({ params }) {
     fases: await obtenerFases(idCategoriaFecha),
     idFecha,
     idCategoriaFecha,
+    jugadoresDeLaCategoriaFecha: await obtenerJugadoresDeLaCategoriaFecha(
+      idCategoriaFecha
+    ),
+    jugadores: await obtenerJugadores(),
   };
 }
