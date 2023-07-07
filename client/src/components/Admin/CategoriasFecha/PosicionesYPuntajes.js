@@ -20,6 +20,7 @@ import classes from './PosicionesYPuntajes.module.css';
 const PosicionesYPuntajes = ({
   jugadoresDeLaCategoriaFecha,
   controladorRedireccionar,
+  categoriaFecha,
   idCategoriaFecha,
   jugadores,
   categoriasTorneoPosibles,
@@ -81,7 +82,11 @@ const PosicionesYPuntajes = ({
     if (!agregandoNuevoJugador) {
       setAgregandoNuevoJugador(true);
     } else {
-      crearNuevoJugador(nuevoJugador, idCategoriaFecha);
+      crearNuevoJugador(
+        nuevoJugador,
+        idCategoriaFecha,
+        categoriaFecha[0].id_categoria_torneo_default
+      );
       setNuevoJugador(null);
       setAgregandoNuevoJugador(false);
       controladorRedireccionar();
@@ -149,9 +154,14 @@ const PosicionesYPuntajes = ({
                   {jugador.id === idJugadorEditandose ? (
                     <select
                       name="id_categoria_torneo"
-                      defaultValue={jugador.id_categoria_torneo}
+                      defaultValue={
+                        jugador.id_categoria_torneo
+                          ? jugador.id_categoria_torneo
+                          : ''
+                      }
                       onChange={controladorCambiarValorJugador}
                     >
+                      <option value="">Sin Categoría Asignada</option>
                       {categoriasTorneoPosibles.map((categoria) => (
                         <option key={categoria.id} value={categoria.id}>
                           {categoria.categoria}

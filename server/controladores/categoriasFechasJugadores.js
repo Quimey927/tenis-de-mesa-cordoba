@@ -95,12 +95,12 @@ export const borrarJugadorDeCategoriaFecha = async (req, res) => {
 
 export const crearNuevoJugador = async (req, res) => {
   const idCategoriaFecha = parseInt(req.params.idCategoriaFecha);
-  const { nuevoJugador } = req.body;
+  const { nuevoJugador, idCategoriaTorneo } = req.body;
 
   try {
     pool.query(
       consultasCategoriasFechasJugadores.crearNuevoJugador,
-      [idCategoriaFecha, nuevoJugador],
+      [idCategoriaFecha, nuevoJugador, idCategoriaTorneo],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(200).send('Jugador creado correctamente.');

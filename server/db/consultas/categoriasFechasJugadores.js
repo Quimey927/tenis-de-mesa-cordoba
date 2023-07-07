@@ -31,7 +31,7 @@ const obtenerJugadoresDeLaCategoriaFecha = `SELECT
   FROM jugadores AS j
   INNER JOIN categorias_fechas_jugadores AS cfj ON cfj.id_jugador = j.id
   INNER JOIN categorias_fechas AS cf ON cfj.id_categoria_fecha = cf.id
-  INNER JOIN categorias_torneos AS ct ON ct.id = cfj.id_categoria_torneo
+  LEFT JOIN categorias_torneos AS ct ON ct.id = cfj.id_categoria_torneo
   WHERE cf.id = $1
   ORDER BY cfj.posicion`;
 
@@ -46,8 +46,8 @@ const borrarJugadorDeCategoriaFecha =
   'DELETE FROM categorias_fechas_jugadores WHERE id = $1';
 
 const crearNuevoJugador = `INSERT INTO categorias_fechas_jugadores
-(id_categoria_fecha, id_jugador)
-VALUES ($1, $2)`;
+(id_categoria_fecha, id_jugador, id_categoria_torneo)
+VALUES ($1, $2, $3)`;
 
 export default {
   agregarJugadoresACategoriaFecha,

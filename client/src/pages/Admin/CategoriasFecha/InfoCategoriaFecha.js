@@ -61,6 +61,7 @@ const PaginaInfoCategoriaFecha = () => {
 
       <PosicionesYPuntajes
         jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
+        categoriaFecha={categoriaFecha}
         idCategoriaFecha={idCategoriaFecha}
         controladorRedireccionar={controladorRedireccionar}
         jugadores={jugadores}
@@ -76,9 +77,7 @@ export async function loader({ params }) {
   const { idCategoriaFecha, idFecha } = params;
 
   return {
-    categoriaFecha: idCategoriaFecha
-      ? await obtenerCategoriaFecha(idCategoriaFecha)
-      : null,
+    categoriaFecha: await obtenerCategoriaFecha(idCategoriaFecha),
     fases: await obtenerFases(idCategoriaFecha),
     idFecha,
     idCategoriaFecha,

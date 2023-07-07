@@ -72,7 +72,11 @@ export const borrarJugadorDeCategoriaFecha = async (id) => {
   }
 };
 
-export const crearNuevoJugador = async (nuevoJugador, idCategoriaFecha) => {
+export const crearNuevoJugador = async (
+  nuevoJugador,
+  idCategoriaFecha,
+  idCategoriaTorneo
+) => {
   const response = await fetch(
     `${baseUrl}/categoria-fecha/${idCategoriaFecha}`,
     {
@@ -80,7 +84,7 @@ export const crearNuevoJugador = async (nuevoJugador, idCategoriaFecha) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ nuevoJugador }),
+      body: JSON.stringify({ nuevoJugador, idCategoriaTorneo }),
     }
   );
 
