@@ -22,6 +22,7 @@ const PosicionesYPuntajes = ({
   controladorRedireccionar,
   idCategoriaFecha,
   jugadores,
+  categoriasTorneoPosibles,
 }) => {
   const [idJugadorEditandose, setIdJugadorEditandose] = useState(null);
   const [jugadorEditandose, setJugadorEditandose] = useState(null);
@@ -98,6 +99,7 @@ const PosicionesYPuntajes = ({
               <th>Posición</th>
               <th>Jugador</th>
               <th>Puntaje</th>
+              <th>Cat. Torn. donde suma</th>
               <th>Editar</th>
               <th>Eliminar</th>
             </tr>
@@ -141,6 +143,23 @@ const PosicionesYPuntajes = ({
                     jugador.puntaje
                   ) : (
                     '-'
+                  )}
+                </td>
+                <td>
+                  {jugador.id === idJugadorEditandose ? (
+                    <select
+                      name="id_categoria_torneo"
+                      defaultValue={jugador.id_categoria_torneo}
+                      onChange={controladorCambiarValorJugador}
+                    >
+                      {categoriasTorneoPosibles.map((categoria) => (
+                        <option key={categoria.id} value={categoria.id}>
+                          {categoria.categoria}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    jugador.categoria
                   )}
                 </td>
                 <td>

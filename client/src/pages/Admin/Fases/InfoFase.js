@@ -17,6 +17,7 @@ import {
   obtenerPartidosDeLaEliminatoria,
   obtenerSets,
   obtenerJugadoresDeLaCategoriaFecha,
+  obtenerCategoriaFecha,
 } from '../../../api';
 
 const PaginaInfoFase = () => {
@@ -25,6 +26,7 @@ const PaginaInfoFase = () => {
     grupos,
     eliminatorias,
     eliminatoria,
+    categoriaFecha,
     idCategoriaFecha,
     idFecha,
     idFase,
@@ -88,6 +90,7 @@ const PaginaInfoFase = () => {
       ) : tipo === 'G' ? (
         <ListaGrupos
           grupos={grupos}
+          categoriaFecha={categoriaFecha}
           idCategoriaFecha={idCategoriaFecha}
           idFase={idFase}
           idFecha={idFecha}
@@ -104,6 +107,7 @@ const PaginaInfoFase = () => {
         <ListaEliminatorias
           eliminatorias={eliminatorias}
           eliminatoria={eliminatoria}
+          categoriaFecha={categoriaFecha}
           idCategoriaFecha={idCategoriaFecha}
           idFase={idFase}
           idFecha={idFecha}
@@ -139,6 +143,7 @@ export async function loader({ params }) {
       ? await obtenerEliminatoria(idEliminatoria)
       : undefined,
     idFase,
+    categoriaFecha: await obtenerCategoriaFecha(idCategoriaFecha),
     idCategoriaFecha,
     idFecha,
     jugadores: await obtenerJugadores(),

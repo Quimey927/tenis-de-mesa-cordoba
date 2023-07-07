@@ -15,7 +15,8 @@ const crearFase = `INSERT INTO fases
     tipo,
     id_categoria_fecha
   )
-  VALUES ($1, $2, $3, $4)`;
+  VALUES ($1, $2, $3, $4)
+  RETURNING id`;
 
 const obtenerFase = 'SELECT * FROM fases WHERE id = $1';
 

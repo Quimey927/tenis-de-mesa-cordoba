@@ -3,7 +3,7 @@ import consultasCategoriasFechasJugadores from '../db/consultas/categoriasFechas
 
 export const agregarJugadoresACategoriaFecha = async (req, res) => {
   const idCategoriaFecha = parseInt(req.params.idCategoriaFecha);
-  const jugadores = req.body;
+  const { jugadores, idCategoriaTorneo } = req.body;
 
   const cant_jugadores = jugadores.length;
 
@@ -15,7 +15,7 @@ export const agregarJugadoresACategoriaFecha = async (req, res) => {
         consultasCategoriasFechasJugadores.agregarJugadoresACategoriaFecha(
           cant_jugadores
         ),
-        [idCategoriaFecha, ...jugadores],
+        [idCategoriaFecha, idCategoriaTorneo, ...jugadores],
         (err, results) => {
           if (err) throw new Error(err);
           res.status(200).send('Jugadores agregados correctamente.');
@@ -52,12 +52,14 @@ export const obtenerJugadoresDeLaCategoriaFecha = async (req, res) => {
 
 export const editarPosicionYPuntaje = async (req, res) => {
   const idFila = parseInt(req.params.idFila);
-  const { posicion, puntaje } = req.body;
+  const { posicion, puntaje, id_categoria_torneo } = req.body;
+
+  console.log(req.body);
 
   try {
     pool.query(
       consultasCategoriasFechasJugadores.editarPosicionYPuntaje,
-      [posicion, puntaje, idFila],
+      [posicion, puntaje, id_categoria_torneo, idFila],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(200).send('Jugador editado correctamente');

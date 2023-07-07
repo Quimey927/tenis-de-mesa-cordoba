@@ -14,6 +14,7 @@ import { borrarGrupo } from '../../../api';
 
 const ListaGrupos = ({
   grupos,
+  categoriaFecha,
   idCategoriaFecha,
   idFecha,
   idFase,
@@ -87,6 +88,7 @@ const ListaGrupos = ({
         <AgregarJugadores
           idGrupo={+idGrupo}
           jugadores={jugadores}
+          categoriaFecha={categoriaFecha}
           idCategoriaFecha={idCategoriaFecha}
           nombreGrupo={nombreGrupo}
           jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}

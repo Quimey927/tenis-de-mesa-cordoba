@@ -9,6 +9,7 @@ import ListaSets from './ListaSets';
 
 const ListaEliminatorias = ({
   idFecha,
+  categoriaFecha,
   idCategoriaFecha,
   idFase,
   idEliminatoria,
@@ -64,6 +65,7 @@ const ListaEliminatorias = ({
             controladorRedireccionar={controladorRedireccionar}
             jugadores={jugadores}
             jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
+            categoriaFecha={categoriaFecha}
             idCategoriaFecha={idCategoriaFecha}
           />
         </>

@@ -15,6 +15,7 @@ const ListaPartidos = ({
   controladorRedireccionar,
   jugadores,
   jugadoresDeLaCategoriaFecha,
+  categoriaFecha,
   idCategoriaFecha,
 }) => {
   const [idPartidoEditandose, setIdPartidoEditandose] = useState(null);
@@ -40,7 +41,11 @@ const ListaPartidos = ({
           jugador > 0 && !jugadoresDeLaCategoriaFecha.includes(jugador)
       );
 
-      agregarJugadoresACategoriaFecha(nuevosJugadores, idCategoriaFecha);
+      agregarJugadoresACategoriaFecha(
+        nuevosJugadores,
+        idCategoriaFecha,
+        categoriaFecha[0].id_categoria_torneo_default
+      );
       editarPartido(partidoEditandose);
       setIdPartidoEditandose(null);
       controladorRedireccionar();

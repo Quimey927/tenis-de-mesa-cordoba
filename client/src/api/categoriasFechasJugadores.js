@@ -4,14 +4,15 @@ const baseUrl = 'http://localhost:8080/api/categoriasFechasJugadores';
 
 export const agregarJugadoresACategoriaFecha = async (
   jugadores,
-  idCategoriaFecha
+  idCategoriaFecha,
+  idCategoriaTorneo
 ) => {
   const response = await fetch(`${baseUrl}/jugadores/${idCategoriaFecha}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(jugadores),
+    body: JSON.stringify({ jugadores, idCategoriaTorneo }),
   });
 
   if (!response.ok) {

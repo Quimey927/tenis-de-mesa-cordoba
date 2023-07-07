@@ -28,7 +28,7 @@ export const crearFase = async (req, res) => {
       [nombre, orden, tipo, id_categoria_fecha],
       (err, results) => {
         if (err) throw new Error(err);
-        res.status(201).send({ message: 'Fase creada exitosamente.' });
+        res.status(201).json(results.rows);
       }
     );
   } catch (err) {

@@ -10,6 +10,7 @@ const AgregarJugadores = ({
   idGrupo,
   jugadores,
   nombreGrupo,
+  categoriaFecha,
   idCategoriaFecha,
   jugadoresDeLaCategoriaFecha,
   controladorRedireccionar,
@@ -48,7 +49,8 @@ const AgregarJugadores = ({
 
     agregarJugadoresACategoriaFecha(
       nuevosJugadoresCategoriaFecha,
-      idCategoriaFecha
+      idCategoriaFecha,
+      categoriaFecha[0].id_categoria_torneo_default
     );
 
     crearFilasTabla(idGrupo, jugadoresGrupo);
