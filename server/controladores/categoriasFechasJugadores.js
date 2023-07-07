@@ -54,8 +54,6 @@ export const editarPosicionYPuntaje = async (req, res) => {
   const idFila = parseInt(req.params.idFila);
   const { posicion, puntaje, id_categoria_torneo } = req.body;
 
-  console.log(req.body);
-
   try {
     pool.query(
       consultasCategoriasFechasJugadores.editarPosicionYPuntaje,
