@@ -42,6 +42,9 @@ import PaginaEditarCategoriaTorneo, {
 } from './pages/Admin/CategoriasTorneo/EditarCategoriaTorneo';
 import { action as actionManipularCategoriaTorneo } from './components/Admin/CategoriasTorneo/FormularioCategoriaTorneo';
 import PaginaNuevaCategoriaTorneo from './pages/Admin/CategoriasTorneo/NuevaCategoriaTorneo';
+import PaginaInfoCategoriaTorneo, {
+  loader as loaderInfoCategoriaTorneoAdmin,
+} from './pages/Admin/CategoriasTorneo/InfoCategoriaTorneo';
 
 import PaginaEditarCategoriaFecha, {
   loader as loaderCategoriaFechaAdmin,
@@ -231,10 +234,20 @@ const router = createBrowserRouter([
                     action: actionManipularCategoriaTorneo,
                   },
                   {
-                    path: ':idCategoriaTorneo/editar',
-                    element: <PaginaEditarCategoriaTorneo />,
-                    loader: loaderCategoriaTorneoAdmin,
-                    action: actionManipularCategoriaTorneo,
+                    path: ':idCategoriaTorneo',
+                    children: [
+                      {
+                        index: true,
+                        element: <PaginaInfoCategoriaTorneo />,
+                        loader: loaderInfoCategoriaTorneoAdmin,
+                      },
+                      {
+                        path: 'editar',
+                        element: <PaginaEditarCategoriaTorneo />,
+                        loader: loaderCategoriaTorneoAdmin,
+                        action: actionManipularCategoriaTorneo,
+                      },
+                    ],
                   },
                 ],
               },

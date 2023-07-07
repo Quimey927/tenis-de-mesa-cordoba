@@ -4,14 +4,10 @@ import FormularioCategoriaTorneo from '../../../components/Admin/CategoriasTorne
 import { obtenerCategoriaTorneo } from '../../../api';
 
 const PaginaEditarCategoriaTorneo = () => {
-  const { categoriaTorneo, idTorneo } = useLoaderData();
+  const { categoriaTorneo } = useLoaderData();
 
   return (
-    <FormularioCategoriaTorneo
-      method="PUT"
-      categoriaTorneo={categoriaTorneo}
-      idTorneo={idTorneo}
-    />
+    <FormularioCategoriaTorneo method="PUT" categoriaTorneo={categoriaTorneo} />
   );
 };
 

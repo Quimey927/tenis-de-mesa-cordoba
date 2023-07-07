@@ -10,22 +10,18 @@ import {
 
 import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import {
-  editarPosicionYPuntaje,
-  borrarJugadorDeCategoriaFecha,
-  crearNuevoJugador,
-  agregarJugadorACategoriaTorneo,
+  editarPosicionYPuntajeCategoriaTorneo,
+  borrarJugadorDeCategoriaTorneo,
+  crearNuevoJugadorCategoriaTorneo,
 } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import classes from './PosicionesYPuntajes.module.css';
 
 const PosicionesYPuntajes = ({
-  jugadoresDeLaCategoriaFecha,
+  jugadoresDeLaCategoriaTorneo,
+  idCategoriaTorneo,
   controladorRedireccionar,
-  categoriaFecha,
-  idCategoriaFecha,
   jugadores,
-  categoriasTorneoPosibles,
-  jugadoresDeLasCategoriasTorneos,
 }) => {
   const [idJugadorEditandose, setIdJugadorEditandose] = useState(null);
   const [jugadorEditandose, setJugadorEditandose] = useState(null);
@@ -33,34 +29,16 @@ const PosicionesYPuntajes = ({
   const [agregandoNuevoJugador, setAgregandoNuevoJugador] = useState(false);
 
   useEffect(() => {
-    const jugadorEncontrado = jugadoresDeLaCategoriaFecha.find(
+    const jugadorEncontrado = jugadoresDeLaCategoriaTorneo.find(
       (jugador) => jugador.id === idJugadorEditandose
     );
 
     setJugadorEditandose(jugadorEncontrado);
-  }, [idJugadorEditandose, jugadoresDeLaCategoriaFecha]);
+  }, [idJugadorEditandose, jugadoresDeLaCategoriaTorneo]);
 
   const controladorEditarJugador = (id) => {
     if (id === idJugadorEditandose) {
-      const jugadorYaEstaEnLaCategoriaTorneo =
-        jugadoresDeLasCategoriasTorneos.filter(
-          (jugador) =>
-            jugador.id_jugador === jugadorEditandose.id_jugador &&
-            jugador.id_categoria_torneo ===
-              jugadorEditandose.id_categoria_torneo
-        ).length > 0;
-
-      if (
-        jugadorEditandose.id_categoria_torneo &&
-        !jugadorYaEstaEnLaCategoriaTorneo
-      ) {
-        agregarJugadorACategoriaTorneo({
-          idCategoriaTorneo: jugadorEditandose.id_categoria_torneo,
-          idJugador: jugadorEditandose.id_jugador,
-        });
-      }
-
-      editarPosicionYPuntaje(jugadorEditandose);
+      editarPosicionYPuntajeCategoriaTorneo(jugadorEditandose);
       setIdJugadorEditandose(null);
       controladorRedireccionar();
     } else {
@@ -78,13 +56,13 @@ const PosicionesYPuntajes = ({
     });
   };
 
-  const controladorBorrarJugadorCategoriaFecha = (id) => {
+  const controladorBorrarJugadorCategoriaTorneo = (id) => {
     const continuar = window.confirm(
-      '¿Estás seguro de que querés eliminar el jugador de la categoria de la fecha?'
+      '¿Estás seguro de que querés eliminar el jugador de la categoria del torneo?'
     );
 
     if (continuar) {
-      borrarJugadorDeCategoriaFecha(id);
+      borrarJugadorDeCategoriaTorneo(id);
       controladorRedireccionar();
     }
   };
@@ -102,11 +80,7 @@ const PosicionesYPuntajes = ({
     if (!agregandoNuevoJugador) {
       setAgregandoNuevoJugador(true);
     } else {
-      crearNuevoJugador(
-        nuevoJugador,
-        idCategoriaFecha,
-        categoriaFecha[0].id_categoria_torneo_default
-      );
+      crearNuevoJugadorCategoriaTorneo(nuevoJugador, idCategoriaTorneo);
       setNuevoJugador(null);
       setAgregandoNuevoJugador(false);
       controladorRedireccionar();
@@ -115,7 +89,7 @@ const PosicionesYPuntajes = ({
 
   return (
     <>
-      <AdminTituloPagina titulo="Posiciones y puntajes" />
+      <AdminTituloPagina titulo="Tabla del Torneo" />
 
       <form className={classes.posiciones}>
         <table className={classes.table} style={{ width: '100%' }}>
@@ -123,14 +97,13 @@ const PosicionesYPuntajes = ({
             <tr>
               <th>Posición</th>
               <th>Jugador</th>
-              <th>Puntaje</th>
-              <th>Cat. Torn. donde suma</th>
+              <th>Puntaje Total</th>
               <th>Editar</th>
               <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
-            {jugadoresDeLaCategoriaFecha.map((jugador) => (
+            {jugadoresDeLaCategoriaTorneo.map((jugador) => (
               <tr key={jugador.id}>
                 <td>
                   {jugador.id === idJugadorEditandose ? (
@@ -159,37 +132,15 @@ const PosicionesYPuntajes = ({
                   {jugador.id === idJugadorEditandose ? (
                     <input
                       type="number"
-                      name="puntaje"
-                      defaultValue={jugador.puntaje}
+                      name="puntaje_total"
+                      defaultValue={jugador.puntaje_total}
                       className={classes['input-tabla-numero']}
                       onChange={controladorCambiarValorJugador}
                     />
-                  ) : jugador.puntaje ? (
-                    jugador.puntaje
+                  ) : jugador.puntaje_total ? (
+                    jugador.puntaje_total
                   ) : (
                     '-'
-                  )}
-                </td>
-                <td>
-                  {jugador.id === idJugadorEditandose ? (
-                    <select
-                      name="id_categoria_torneo"
-                      defaultValue={
-                        jugador.id_categoria_torneo
-                          ? jugador.id_categoria_torneo
-                          : ''
-                      }
-                      onChange={controladorCambiarValorJugador}
-                    >
-                      <option value="">Sin Categoría Asignada</option>
-                      {categoriasTorneoPosibles.map((categoria) => (
-                        <option key={categoria.id} value={categoria.id}>
-                          {categoria.categoria}
-                        </option>
-                      ))}
-                    </select>
-                  ) : (
-                    jugador.categoria
                   )}
                 </td>
                 <td>
@@ -209,7 +160,7 @@ const PosicionesYPuntajes = ({
                   <button
                     type="button"
                     className={classes['btn-eliminar']}
-                    onClick={controladorBorrarJugadorCategoriaFecha.bind(
+                    onClick={controladorBorrarJugadorCategoriaTorneo.bind(
                       null,
                       jugador.id
                     )}

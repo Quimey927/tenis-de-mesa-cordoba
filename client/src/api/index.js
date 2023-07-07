@@ -52,6 +52,15 @@ export {
 } from './categoriasTorneos';
 
 export {
+  obtenerJugadoresDeLaCategoriaTorneo,
+  agregarJugadorACategoriaTorneo,
+  obtenerJugadoresDeLasCategoriasTorneos,
+  editarPosicionYPuntajeCategoriaTorneo,
+  borrarJugadorDeCategoriaTorneo,
+  crearNuevoJugadorCategoriaTorneo,
+} from './/categoriasTorneosJugadores';
+
+export {
   obtenerCategoriasFecha,
   crearCategoriaFecha,
   obtenerCategoriaFecha,

@@ -1,11 +1,7 @@
-import { useLoaderData } from 'react-router-dom';
-
 import FormularioCategoriaTorneo from '../../../components/Admin/CategoriasTorneo/FormularioCategoriaTorneo';
 
 const PaginaNuevaCategoriaTorneo = () => {
-  const { idTorneo } = useLoaderData();
-
-  return <FormularioCategoriaTorneo method="POST" idTorneo={idTorneo} />;
+  return <FormularioCategoriaTorneo method="POST" />;
 };
 
 export default PaginaNuevaCategoriaTorneo;

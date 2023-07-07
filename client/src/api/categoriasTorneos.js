@@ -63,7 +63,7 @@ export const editarCategoriaTorneo = async (
     );
   }
 
-  return redirect(`/admin/torneos/${idTorneo}`);
+  return redirect(`/admin/torneos/${idTorneo}/categorias/${idCategoriaTorneo}`);
 };
 
 export const borrarCategoriaTorneo = async (id) => {

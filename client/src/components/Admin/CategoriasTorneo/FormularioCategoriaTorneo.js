@@ -2,7 +2,7 @@ import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
 import { crearCategoriaTorneo, editarCategoriaTorneo } from '../../../api';
 
-const FormularioCategoriaTorneo = ({ method, categoriaTorneo, idTorneo }) => {
+const FormularioCategoriaTorneo = ({ method, categoriaTorneo }) => {
   return (
     <AdminFormulario
       method={method}
@@ -11,7 +11,7 @@ const FormularioCategoriaTorneo = ({ method, categoriaTorneo, idTorneo }) => {
           ? ' Agregar categoría torneo'
           : `Editar ${categoriaTorneo[0].categoria}`
       }
-      navegarAlCancelar={`/admin/torneos/${idTorneo}`}
+      navegarAlCancelar={method === 'POST' ? '../..' : '..'}
     >
       <Input
         id="categoria"
