@@ -20,12 +20,13 @@ export const obtenerCategoriasFecha = async (req, res) => {
 };
 
 export const crearCategoriaFecha = async (req, res) => {
-  const { categoria, id_fecha, orden, dia } = req.body;
+  const { categoria, id_fecha, orden, dia, id_categoria_torneo_default } =
+    req.body;
 
   try {
     pool.query(
       consultasCategoriasFechas.crearCategoriaFecha,
-      [categoria, id_fecha, orden, dia],
+      [categoria, id_fecha, orden, dia, id_categoria_torneo_default],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(201).send('Categoría de la fecha creada exitosamente.');
@@ -57,7 +58,8 @@ export const obtenerCategoriaFecha = async (req, res) => {
 
 export const editarCategoriaFecha = async (req, res) => {
   const id = parseInt(req.params.idCategoriaFecha);
-  const { categoria, id_fecha, orden, dia } = req.body;
+  const { categoria, id_fecha, orden, dia, id_categoria_torneo_default } =
+    req.body;
 
   try {
     pool.query(
@@ -76,7 +78,7 @@ export const editarCategoriaFecha = async (req, res) => {
 
         pool.query(
           consultasCategoriasFechas.editarCategoriaFecha,
-          [categoria, id_fecha, orden, dia, id],
+          [categoria, id_fecha, orden, dia, id_categoria_torneo_default, id],
           (err, results) => {
             if (err) throw new Error(err);
             res

@@ -8,6 +8,7 @@ const FormularioCategoriaFecha = ({
   categoriaFecha,
   fecha_inicio,
   fecha_finalizacion,
+  categoriasTorneoPosibles,
 }) => {
   return (
     <AdminFormulario
@@ -60,6 +61,26 @@ const FormularioCategoriaFecha = ({
           style={{ display: 'none' }}
         />
       )}
+
+      <Select
+        label="Categoría Torneo para el que Suma Puntos"
+        id="id_categoria_torneo_default"
+        defaultValue={
+          categoriaFecha
+            ? categoriaFecha[0].id_categoria_torneo_default
+            : 'sin_categoria'
+        }
+        options={[
+          { value: 'sin_categoria', key: 0, texto: 'Sin categoría asignada' },
+          ...categoriasTorneoPosibles.map((categoria) => {
+            return {
+              key: categoria.id,
+              value: categoria.id,
+              texto: categoria.categoria,
+            };
+          }),
+        ]}
+      />
     </AdminFormulario>
   );
 };
@@ -75,6 +96,10 @@ export async function action({ request, params }) {
     id_fecha: params.idFecha,
     orden: data.get('orden'),
     dia: data.get('dia'),
+    id_categoria_torneo_default:
+      data.get('id_categoria_torneo_default') !== 'sin_categoria'
+        ? data.get('id_categoria_torneo_default')
+        : null,
   };
 
   if (method === 'POST') {

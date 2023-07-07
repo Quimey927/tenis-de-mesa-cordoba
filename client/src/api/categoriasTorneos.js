@@ -78,3 +78,14 @@ export const borrarCategoriaTorneo = async (id) => {
     );
   }
 };
+
+export const obtenerCategoriasTorneoPosibles = async (idFecha) => {
+  const response = await fetch(`${baseUrl}/fecha/${idFecha}`);
+  if (!response.ok) {
+    throw json(
+      { message: 'No pudimos cargar las categorías del torneo.' },
+      { status: 500 }
+    );
+  }
+  return response.json();
+};

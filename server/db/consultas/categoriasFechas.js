@@ -6,9 +6,10 @@ const crearCategoriaFecha = `INSERT INTO categorias_fechas
     categoria,
     id_fecha,
     orden,
-    dia
+    dia,
+    id_categoria_torneo_default
   ) 
-  VALUES ($1, $2, $3, $4)`;
+  VALUES ($1, $2, $3, $4, $5)`;
 
 const obtenerCategoriaFecha = `SELECT
     cf.*,
@@ -22,8 +23,9 @@ const editarCategoriaFecha = `UPDATE categorias_fechas
     categoria = $1,
     id_fecha = $2,
     orden = $3,
-    dia = $4
-  WHERE id = $5`;
+    dia = $4,
+    id_categoria_torneo_default = $5
+  WHERE id = $6`;
 
 const borrarCategoriaFecha = 'DELETE FROM categorias_fechas WHERE id = $1';
 

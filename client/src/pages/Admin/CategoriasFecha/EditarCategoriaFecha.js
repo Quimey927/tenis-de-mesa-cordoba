@@ -1,10 +1,14 @@
 import { useLoaderData } from 'react-router-dom';
 
 import FormularioCategoriaFecha from '../../../components/Admin/CategoriasFecha/FormularioCategoriaFecha';
-import { obtenerCategoriaFecha, obtenerFecha } from '../../../api';
+import {
+  obtenerCategoriaFecha,
+  obtenerFecha,
+  obtenerCategoriasTorneoPosibles,
+} from '../../../api';
 
 const PaginaEditarCategoriaFecha = () => {
-  const { categoriaFecha, fecha } = useLoaderData();
+  const { categoriaFecha, fecha, categoriasTorneoPosibles } = useLoaderData();
 
   return (
     <FormularioCategoriaFecha
@@ -12,6 +16,7 @@ const PaginaEditarCategoriaFecha = () => {
       categoriaFecha={categoriaFecha}
       fecha_inicio={fecha[0].fecha_inicio.substring(0, 10)}
       fecha_finalizacion={fecha[0].fecha_finalizacion.substring(0, 10)}
+      categoriasTorneoPosibles={categoriasTorneoPosibles}
     />
   );
 };
@@ -26,5 +31,6 @@ export async function loader({ params }) {
       ? await obtenerCategoriaFecha(idCategoriaFecha)
       : null,
     fecha: await obtenerFecha(idFecha),
+    categoriasTorneoPosibles: await obtenerCategoriasTorneoPosibles(idFecha),
   };
 }

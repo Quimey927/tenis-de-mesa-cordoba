@@ -48,6 +48,7 @@ export {
   obtenerCategoriaTorneo,
   editarCategoriaTorneo,
   borrarCategoriaTorneo,
+  obtenerCategoriasTorneoPosibles,
 } from './categoriasTorneos';
 
 export {

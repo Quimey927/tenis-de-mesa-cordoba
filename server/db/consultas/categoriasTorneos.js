@@ -11,10 +11,17 @@ const editarCategoriaTorneo =
 
 const borrarCategoriaTorneo = 'DELETE FROM categorias_torneos WHERE id = $1';
 
+const obtenerCategoriasTorneoPosibles = `SELECT ct.id, ct.categoria
+  FROM categorias_torneos AS ct
+  INNER JOIN torneos AS t ON t.id = ct.id_torneo
+  INNER JOIN fechas AS f ON f.id_torneo = t.id
+  WHERE f.id = $1`;
+
 export default {
   obtenerCategoriasTorneo,
   crearCategoriaTorneo,
   obtenerCategoriaTorneo,
   editarCategoriaTorneo,
   borrarCategoriaTorneo,
+  obtenerCategoriasTorneoPosibles,
 };
