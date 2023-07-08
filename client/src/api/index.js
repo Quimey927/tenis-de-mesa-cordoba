@@ -49,6 +49,7 @@ export {
   editarCategoriaTorneo,
   borrarCategoriaTorneo,
   obtenerCategoriasTorneoPosibles,
+  obtenerDatosTablaCategoriaTorneo,
 } from './categoriasTorneos';
 
 export {
@@ -58,7 +59,7 @@ export {
   editarPosicionYPuntajeCategoriaTorneo,
   borrarJugadorDeCategoriaTorneo,
   crearNuevoJugadorCategoriaTorneo,
-} from './/categoriasTorneosJugadores';
+} from './categoriasTorneosJugadores';
 
 export {
   obtenerCategoriasFecha,

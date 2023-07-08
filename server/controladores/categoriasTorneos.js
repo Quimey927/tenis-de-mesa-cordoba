@@ -145,3 +145,25 @@ export const obtenerCategoriasTorneoPosibles = async (req, res) => {
       .send('No pudimos cargar las categorías del torneo posibles.');
   }
 };
+
+export const obtenerDatosTablaCategoriaTorneo = async (req, res) => {
+  const idCategoriaTorneo = parseInt(req.params.idCategoriaTorneo);
+
+  try {
+    pool.query(
+      consultasCategoriasTorneos.obtenerDatosTablaCategoriaTorneo,
+      [idCategoriaTorneo],
+      (err, results) => {
+        if (err) throw new Error(err);
+        res.status(200).json(results.rows);
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send(
+        'No pudimos cargar los datos de la tabla de las categorías del torneo.'
+      );
+  }
+};

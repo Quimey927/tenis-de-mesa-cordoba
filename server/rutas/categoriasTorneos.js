@@ -7,6 +7,7 @@ import {
   editarCategoriaTorneo,
   borrarCategoriaTorneo,
   obtenerCategoriasTorneoPosibles,
+  obtenerDatosTablaCategoriaTorneo,
 } from '../controladores/categoriasTorneos.js';
 
 const router = express.Router();
@@ -14,6 +15,10 @@ const router = express.Router();
 router.route('/torneo/:idTorneo').get(obtenerCategoriasTorneo);
 
 router.route('/fecha/:idFecha').get(obtenerCategoriasTorneoPosibles);
+
+router
+  .route('/datos-tabla/:idCategoriaTorneo')
+  .get(obtenerDatosTablaCategoriaTorneo);
 
 router.route('/').post(crearCategoriaTorneo);
 

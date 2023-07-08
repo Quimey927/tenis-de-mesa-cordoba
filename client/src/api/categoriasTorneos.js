@@ -89,3 +89,17 @@ export const obtenerCategoriasTorneoPosibles = async (idFecha) => {
   }
   return response.json();
 };
+
+export const obtenerDatosTablaCategoriaTorneo = async (idCategoriaTorneo) => {
+  const response = await fetch(`${baseUrl}/datos-tabla/${idCategoriaTorneo}`);
+  if (!response.ok) {
+    throw json(
+      {
+        message:
+          'No pudimos cargar los datos tabla de la categoría del torneo.',
+      },
+      { status: 500 }
+    );
+  }
+  return response.json();
+};
