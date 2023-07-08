@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
 import AdminInfo from '../../../components/Admin/AdminInfo/AdminInfo';
-import PosicionesYPuntajes from '../../../components/Admin/CategoriasTorneo/PosicionesYPuntajes';
+import TablaDelTorneo from '../../../components/Admin/CategoriasTorneo/TablaDelTorneo';
 import {
   obtenerCategoriaTorneo,
   obtenerJugadores,
@@ -45,7 +45,7 @@ const PaginaInfoCategoriaTorneo = () => {
         to="../.."
       />
 
-      <PosicionesYPuntajes
+      <TablaDelTorneo
         jugadoresDeLaCategoriaTorneo={jugadoresDeLaCategoriaTorneo}
         idCategoriaTorneo={idCategoriaTorneo}
         controladorRedireccionar={controladorRedireccionar}

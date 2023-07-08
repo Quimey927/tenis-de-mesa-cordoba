@@ -98,9 +98,3 @@
   border: none;
   background-color: transparent;
 }
-
-@media (min-width: 768px) {
-  .posiciones {
-    width: calc(100vw - 297px);
-  }
-}

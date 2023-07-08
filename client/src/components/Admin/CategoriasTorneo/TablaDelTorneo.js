@@ -15,9 +15,9 @@ import {
   crearNuevoJugadorCategoriaTorneo,
 } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
-import classes from './PosicionesYPuntajes.module.css';
+import classes from './TablaDelTorneo.module.css';
 
-const PosicionesYPuntajes = ({
+const TablaDelTorneo = ({
   jugadoresDeLaCategoriaTorneo,
   idCategoriaTorneo,
   controladorRedireccionar,
@@ -368,4 +368,4 @@ const PosicionesYPuntajes = ({
   );
 };
 
-export default PosicionesYPuntajes;
+export default TablaDelTorneo;
