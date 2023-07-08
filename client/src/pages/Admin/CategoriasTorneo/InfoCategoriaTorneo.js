@@ -6,6 +6,7 @@ import {
   obtenerCategoriaTorneo,
   obtenerJugadores,
   obtenerJugadoresDeLaCategoriaTorneo,
+  obtenerDatosTablaCategoriaTorneo,
 } from '../../../api';
 
 const PaginaInfoCategoriaTorneo = () => {
@@ -15,6 +16,7 @@ const PaginaInfoCategoriaTorneo = () => {
     idCategoriaTorneo,
     jugadoresDeLaCategoriaTorneo,
     jugadores,
+    datosTablaCategoriaTorneo,
   } = useLoaderData();
 
   const navigate = useNavigate();
@@ -48,6 +50,7 @@ const PaginaInfoCategoriaTorneo = () => {
         idCategoriaTorneo={idCategoriaTorneo}
         controladorRedireccionar={controladorRedireccionar}
         jugadores={jugadores}
+        datosTablaCategoriaTorneo={datosTablaCategoriaTorneo}
       />
     </>
   );
@@ -66,5 +69,8 @@ export async function loader({ params }) {
       idCategoriaTorneo
     ),
     jugadores: await obtenerJugadores(),
+    datosTablaCategoriaTorneo: await obtenerDatosTablaCategoriaTorneo(
+      idCategoriaTorneo
+    ),
   };
 }

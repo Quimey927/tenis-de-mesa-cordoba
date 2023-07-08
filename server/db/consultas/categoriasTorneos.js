@@ -21,14 +21,9 @@ const obtenerDatosTablaCategoriaTorneo = `SELECT
     id_jugador,
     posicion,
     puntaje,
-    j.nombre AS nombre,
-    j.segundo_nombre AS segundo_nombre,
-    j.apellido AS apellido,
-    j.segundo_apellido AS segundo_apellido,
     f.nombre AS fecha,
     f.num_fecha AS num_fecha
   FROM categorias_fechas_jugadores AS cfj
-  INNER JOIN jugadores AS j ON j.id = cfj.id_jugador
   INNER JOIN categorias_fechas AS cf ON cf.id = cfj.id_categoria_fecha
   INNER JOIN fechas AS f ON f.id = cf.id_fecha
   WHERE id_categoria_torneo = $1

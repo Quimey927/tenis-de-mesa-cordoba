@@ -1,11 +1,14 @@
 .posiciones {
   margin-block: 1rem 3rem;
   color: #333;
+  overflow-x: scroll;
+  transform: rotateX(180deg);
 }
 
 .table {
   border-collapse: collapse;
   font-size: 0.9rem;
+  transform: rotateX(180deg);
 }
 
 .table tr th,
@@ -17,9 +20,7 @@
 }
 
 .table tr th:nth-child(2),
-.table tr td:nth-child(2),
-.table tr th:nth-child(4),
-.table tr td:nth-child(4) {
+.table tr td:nth-child(2) {
   text-align: start;
 }
 
@@ -96,4 +97,10 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .posiciones {
+    width: calc(100vw - 297px);
+  }
 }

@@ -22,6 +22,7 @@ const PosicionesYPuntajes = ({
   idCategoriaTorneo,
   controladorRedireccionar,
   jugadores,
+  datosTablaCategoriaTorneo,
 }) => {
   const [idJugadorEditandose, setIdJugadorEditandose] = useState(null);
   const [jugadorEditandose, setJugadorEditandose] = useState(null);
@@ -87,6 +88,66 @@ const PosicionesYPuntajes = ({
     }
   };
 
+  const fechas = [];
+
+  for (let dato of datosTablaCategoriaTorneo) {
+    if (!fechas.includes(dato.fecha)) {
+      fechas.push(dato.fecha);
+    }
+  }
+
+  const crearJugador = (
+    <div className={classes['crear-jugador']}>
+      <button type="button" onClick={controladorAgregarNuevoJugador}>
+        {!agregandoNuevoJugador ? (
+          <>
+            <FontAwesomeIcon icon={faPlus} />
+            <span> Agregar Jugador</span>
+          </>
+        ) : (
+          <FontAwesomeIcon icon={faSave} />
+        )}
+      </button>
+      {agregandoNuevoJugador && (
+        <>
+          <select
+            name="color"
+            onChange={controladorCambiarNuevoJugador}
+            required={true}
+          >
+            <option value="">Elegir jugador</option>
+            {jugadores.map((jugador) => (
+              <option key={jugador.id} value={jugador.id}>
+                {obtenerNombreCompleto(
+                  jugador.nombre,
+                  jugador.segundo_nombre,
+                  jugador.apellido,
+                  jugador.segundo_apellido
+                )}
+              </option>
+            ))}
+          </select>
+
+          <button type="button" onClick={controladorCerrarAgregarJugador}>
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
+        </>
+      )}
+    </div>
+  );
+
+  console.log(datosTablaCategoriaTorneo);
+
+  if (datosTablaCategoriaTorneo.length === 0) {
+    return (
+      <>
+        <AdminTituloPagina titulo="Tabla del Torneo" />
+        <p>No hay jugadores registrados aún en esta categoría</p>
+        {crearJugador}
+      </>
+    );
+  }
+
   return (
     <>
       <AdminTituloPagina titulo="Tabla del Torneo" />
@@ -95,11 +156,89 @@ const PosicionesYPuntajes = ({
         <table className={classes.table} style={{ width: '100%' }}>
           <thead>
             <tr>
-              <th>Posición</th>
-              <th>Jugador</th>
-              <th>Puntaje Total</th>
-              <th>Editar</th>
-              <th>Eliminar</th>
+              <th
+                rowSpan="2"
+                style={{
+                  borderBottom: '1px solid #333',
+                  verticalAlign: 'bottom',
+                }}
+              >
+                Posición
+              </th>
+              <th
+                rowSpan="2"
+                style={{
+                  borderBottom: '1px solid #333',
+                  verticalAlign: 'bottom',
+                }}
+              >
+                Jugador
+              </th>
+              <th
+                rowSpan="2"
+                style={{
+                  borderBottom: '1px solid #333',
+                  verticalAlign: 'bottom',
+                }}
+              >
+                Puntaje Total
+              </th>
+              {fechas.map((fecha) => (
+                <th
+                  key={fecha}
+                  style={{
+                    borderLeft: '1px solid #333',
+                    borderRight: '1px solid #333',
+                    borderBottom: '1px dashed #555',
+                  }}
+                  colSpan="2"
+                >
+                  {fecha}
+                </th>
+              ))}
+              <th
+                rowSpan="2"
+                style={{
+                  borderBottom: '1px solid #333',
+                  verticalAlign: 'bottom',
+                }}
+              >
+                Editar
+              </th>
+              <th
+                rowSpan="2"
+                style={{
+                  borderBottom: '1px solid #333',
+                  verticalAlign: 'bottom',
+                }}
+              >
+                Eliminar
+              </th>
+            </tr>
+            <tr>
+              {fechas.map((fecha, i) => (
+                <>
+                  <th
+                    key={i}
+                    style={{
+                      borderLeft: '1px solid #333',
+                      borderBottom: '1px solid #333',
+                      borderRight: '1px solid #ccc',
+                    }}
+                  >
+                    Pos
+                  </th>
+                  <th
+                    key={-i}
+                    style={{
+                      borderRight: '1px solid #333',
+                      borderBottom: '1px solid #333',
+                    }}
+                  >
+                    Pts
+                  </th>
+                </>
+              ))}
             </tr>
           </thead>
           <tbody>
@@ -143,6 +282,54 @@ const PosicionesYPuntajes = ({
                     '-'
                   )}
                 </td>
+                {fechas.map((fecha, i) =>
+                  datosTablaCategoriaTorneo.filter(
+                    (dato) =>
+                      dato.id_jugador === jugador.id_jugador &&
+                      dato.fecha === fecha
+                  ).length > 0 ? (
+                    <>
+                      <td
+                        key={i}
+                        style={{
+                          borderLeft: '1px solid #333',
+                          borderRight: '1px solid #ccc',
+                        }}
+                      >
+                        {
+                          datosTablaCategoriaTorneo.filter(
+                            (dato) =>
+                              dato.id_jugador === jugador.id_jugador &&
+                              dato.fecha === fecha
+                          )[0].posicion
+                        }
+                      </td>
+                      <td key={-i} style={{ borderRight: '1px solid #333' }}>
+                        {Math.abs(
+                          datosTablaCategoriaTorneo.filter(
+                            (dato) =>
+                              dato.id_jugador === jugador.id_jugador &&
+                              dato.fecha === fecha
+                          )[0].puntaje
+                        )}
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td
+                        key={i}
+                        style={{
+                          borderLeft: '1px solid #333',
+                          borderRight: '1px solid #ccc',
+                        }}
+                      ></td>
+                      <td
+                        key={-i}
+                        style={{ borderRight: '1px solid #333' }}
+                      ></td>
+                    </>
+                  )
+                )}
                 <td>
                   <button
                     type="button"
@@ -175,45 +362,8 @@ const PosicionesYPuntajes = ({
             ))}
           </tbody>
         </table>
-
-        <div className={classes['crear-jugador']}>
-          <button type="button" onClick={controladorAgregarNuevoJugador}>
-            {!agregandoNuevoJugador ? (
-              <>
-                <FontAwesomeIcon icon={faPlus} />
-                <span> Agregar Jugador</span>
-              </>
-            ) : (
-              <FontAwesomeIcon icon={faSave} />
-            )}
-          </button>
-          {agregandoNuevoJugador && (
-            <>
-              <select
-                name="color"
-                onChange={controladorCambiarNuevoJugador}
-                required={true}
-              >
-                <option value="">Elegir jugador</option>
-                {jugadores.map((jugador) => (
-                  <option key={jugador.id} value={jugador.id}>
-                    {obtenerNombreCompleto(
-                      jugador.nombre,
-                      jugador.segundo_nombre,
-                      jugador.apellido,
-                      jugador.segundo_apellido
-                    )}
-                  </option>
-                ))}
-              </select>
-
-              <button type="button" onClick={controladorCerrarAgregarJugador}>
-                <FontAwesomeIcon icon={faXmark} />
-              </button>
-            </>
-          )}
-        </div>
       </form>
+      {crearJugador}
     </>
   );
 };
