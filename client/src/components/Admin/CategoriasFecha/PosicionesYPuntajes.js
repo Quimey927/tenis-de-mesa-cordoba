@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPenToSquare,
   faSave,
   faTrash,
   faPlus,
@@ -16,6 +15,7 @@ import {
   agregarJugadorACategoriaTorneo,
 } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
+import useGestionarEstadoFilas from '../../../hooks/useGestionarEstadoFilas';
 import classes from './PosicionesYPuntajes.module.css';
 
 const PosicionesYPuntajes = ({
@@ -27,56 +27,43 @@ const PosicionesYPuntajes = ({
   categoriasTorneoPosibles,
   jugadoresDeLasCategoriasTorneos,
 }) => {
-  const [idJugadorEditandose, setIdJugadorEditandose] = useState(null);
-  const [jugadorEditandose, setJugadorEditandose] = useState(null);
+  const {
+    filasEditandose,
+    controladorEditarFilas,
+    controladorCambiarValorFila,
+  } = useGestionarEstadoFilas(
+    jugadoresDeLaCategoriaFecha,
+    editarPosicionYPuntaje,
+    controladorRedireccionar
+  );
+
   const [nuevoJugador, setNuevoJugador] = useState(null);
   const [agregandoNuevoJugador, setAgregandoNuevoJugador] = useState(false);
 
-  useEffect(() => {
-    const jugadorEncontrado = jugadoresDeLaCategoriaFecha.find(
-      (jugador) => jugador.id === idJugadorEditandose
-    );
-
-    setJugadorEditandose(jugadorEncontrado);
-  }, [idJugadorEditandose, jugadoresDeLaCategoriaFecha]);
-
-  const controladorEditarJugador = (id) => {
-    if (id === idJugadorEditandose) {
-      const jugadorYaEstaEnLaCategoriaTorneo =
-        jugadoresDeLasCategoriasTorneos.filter(
-          (jugador) =>
-            jugador.id_jugador === jugadorEditandose.id_jugador &&
-            jugador.id_categoria_torneo ===
-              jugadorEditandose.id_categoria_torneo
-        ).length > 0;
-
-      if (
-        jugadorEditandose.id_categoria_torneo &&
-        !jugadorYaEstaEnLaCategoriaTorneo
-      ) {
-        agregarJugadorACategoriaTorneo({
-          idCategoriaTorneo: jugadorEditandose.id_categoria_torneo,
-          idJugador: jugadorEditandose.id_jugador,
-        });
-      }
-
-      editarPosicionYPuntaje(jugadorEditandose);
-      setIdJugadorEditandose(null);
-      controladorRedireccionar();
-    } else {
-      setIdJugadorEditandose(id);
+  /* for (let fila of jugadoresDeLaCategoriaFecha) {
+    
+    const jugadorYaEstaEnLaCategoriaTorneo = (fila) => {
+      let { id_jugador, id_categoria_torneo } = fila;
+      
+      return jugadoresDeLasCategoriasTorneos.filter(
+            (jugador) =>
+              jugador.id_jugador === id_jugador &&
+              jugador.id_categoria_torneo ===
+                id_categoria_torneo
+          ).length > 0;
     }
-  };
 
-  const controladorCambiarValorJugador = (evt) => {
-    setJugadorEditandose((estadoPrevio) => {
-      let nuevoEstado = {
-        ...estadoPrevio,
-        [evt.target.name]: evt.target.value !== '' ? +evt.target.value : null,
-      };
-      return nuevoEstado;
-    });
-  };
+        if (
+          id_categoria_torneo &&
+          !jugadorYaEstaEnLaCategoriaTorneo
+        ) {
+          agregarJugadorACategoriaTorneo({
+            idCategoriaTorneo: id_categoria_torneo,
+            idJugador: id_jugador,
+          });
+        }
+  }
+ */
 
   const controladorBorrarJugadorCategoriaFecha = (id) => {
     const continuar = window.confirm(
@@ -125,7 +112,6 @@ const PosicionesYPuntajes = ({
               <th>Jugador</th>
               <th>Puntaje</th>
               <th>Cat. Torn. donde suma</th>
-              <th>Editar</th>
               <th>Eliminar</th>
             </tr>
           </thead>
@@ -133,13 +119,13 @@ const PosicionesYPuntajes = ({
             {jugadoresDeLaCategoriaFecha.map((jugador) => (
               <tr key={jugador.id}>
                 <td>
-                  {jugador.id === idJugadorEditandose ? (
+                  {filasEditandose ? (
                     <input
                       type="number"
-                      name="posicion"
+                      name={`posicion-${jugador.id}`}
                       defaultValue={jugador.posicion}
                       className={classes['input-tabla-numero']}
-                      onChange={controladorCambiarValorJugador}
+                      onChange={controladorCambiarValorFila}
                     />
                   ) : jugador.posicion ? (
                     jugador.posicion
@@ -156,13 +142,13 @@ const PosicionesYPuntajes = ({
                   )}
                 </td>
                 <td>
-                  {jugador.id === idJugadorEditandose ? (
+                  {filasEditandose ? (
                     <input
                       type="number"
-                      name="puntaje"
+                      name={`puntaje-${jugador.id}`}
                       defaultValue={jugador.puntaje}
                       className={classes['input-tabla-numero']}
-                      onChange={controladorCambiarValorJugador}
+                      onChange={controladorCambiarValorFila}
                     />
                   ) : jugador.puntaje ? (
                     jugador.puntaje
@@ -171,15 +157,15 @@ const PosicionesYPuntajes = ({
                   )}
                 </td>
                 <td>
-                  {jugador.id === idJugadorEditandose ? (
+                  {filasEditandose ? (
                     <select
-                      name="id_categoria_torneo"
+                      name={`id_categoria_torneo-${jugador.id}`}
                       defaultValue={
                         jugador.id_categoria_torneo
                           ? jugador.id_categoria_torneo
                           : ''
                       }
-                      onChange={controladorCambiarValorJugador}
+                      onChange={controladorCambiarValorFila}
                     >
                       <option value="">Sin Categoría Asignada</option>
                       {categoriasTorneoPosibles.map((categoria) => (
@@ -188,22 +174,11 @@ const PosicionesYPuntajes = ({
                         </option>
                       ))}
                     </select>
-                  ) : (
+                  ) : jugador.categoria ? (
                     jugador.categoria
+                  ) : (
+                    'Sin Categoría Asignada'
                   )}
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    className={classes['btn-editar-guardar']}
-                    onClick={controladorEditarJugador.bind(null, jugador.id)}
-                  >
-                    {jugador.id === idJugadorEditandose ? (
-                      <FontAwesomeIcon icon={faSave} />
-                    ) : (
-                      <FontAwesomeIcon icon={faPenToSquare} />
-                    )}
-                  </button>
                 </td>
                 <td role="cell" data-cell="eliminar">
                   <button
@@ -225,42 +200,56 @@ const PosicionesYPuntajes = ({
           </tbody>
         </table>
 
-        <div className={classes['crear-jugador']}>
-          <button type="button" onClick={controladorAgregarNuevoJugador}>
-            {!agregandoNuevoJugador ? (
+        <div className={classes.acciones}>
+          <div className={classes['crear-jugador']}>
+            <button type="button" onClick={controladorAgregarNuevoJugador}>
+              {!agregandoNuevoJugador ? (
+                <>
+                  <FontAwesomeIcon icon={faPlus} />
+                  <span> Agregar Jugador</span>
+                </>
+              ) : (
+                <FontAwesomeIcon icon={faSave} />
+              )}
+            </button>
+            {agregandoNuevoJugador && (
               <>
-                <FontAwesomeIcon icon={faPlus} />
-                <span> Agregar Jugador</span>
+                <select
+                  name="color"
+                  onChange={controladorCambiarNuevoJugador}
+                  required={true}
+                >
+                  <option value="">Elegir jugador</option>
+                  {jugadores.map((jugador) => (
+                    <option key={jugador.id} value={jugador.id}>
+                      {obtenerNombreCompleto(
+                        jugador.nombre,
+                        jugador.segundo_nombre,
+                        jugador.apellido,
+                        jugador.segundo_apellido
+                      )}
+                    </option>
+                  ))}
+                </select>
+
+                <button type="button" onClick={controladorCerrarAgregarJugador}>
+                  <FontAwesomeIcon icon={faXmark} />
+                </button>
               </>
+            )}
+          </div>
+
+          <button
+            type="button"
+            className={classes['btn-editar']}
+            onClick={controladorEditarFilas}
+          >
+            {filasEditandose ? (
+              <span>Guardar Cambios</span>
             ) : (
-              <FontAwesomeIcon icon={faSave} />
+              <span>Editar Tabla</span>
             )}
           </button>
-          {agregandoNuevoJugador && (
-            <>
-              <select
-                name="color"
-                onChange={controladorCambiarNuevoJugador}
-                required={true}
-              >
-                <option value="">Elegir jugador</option>
-                {jugadores.map((jugador) => (
-                  <option key={jugador.id} value={jugador.id}>
-                    {obtenerNombreCompleto(
-                      jugador.nombre,
-                      jugador.segundo_nombre,
-                      jugador.apellido,
-                      jugador.segundo_apellido
-                    )}
-                  </option>
-                ))}
-              </select>
-
-              <button type="button" onClick={controladorCerrarAgregarJugador}>
-                <FontAwesomeIcon icon={faXmark} />
-              </button>
-            </>
-          )}
         </div>
       </form>
     </>

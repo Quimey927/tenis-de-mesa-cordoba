@@ -198,7 +198,10 @@ const ListaColoresTabla = ({
           >
             {!agregandoNuevoColor ? (
               <>
-                <FontAwesomeIcon icon={faPlus} />
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className={classes['icono-sumar']}
+                />
                 <span> Agregar Color</span>
               </>
             ) : (

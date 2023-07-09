@@ -38,8 +38,21 @@
   width: 4ch;
 }
 
-.btn {
-  cursor: pointer;
+.btn-editar {
+  background-color: #5cb85c;
+  font: inherit;
+  font-size: 0.9rem;
+  color: #fff;
   border: none;
-  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  outline: inherit;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
+  margin-block: 1rem;
+  margin-inline: auto;
+}
+
+.btn-editar:hover {
+  background-color: #4cae4c;
 }

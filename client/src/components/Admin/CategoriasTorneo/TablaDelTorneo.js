@@ -136,8 +136,6 @@ const TablaDelTorneo = ({
     </div>
   );
 
-  console.log(datosTablaCategoriaTorneo);
-
   if (datosTablaCategoriaTorneo.length === 0) {
     return (
       <>
@@ -146,6 +144,17 @@ const TablaDelTorneo = ({
         {crearJugador}
       </>
     );
+  }
+
+  const puntajesTotales = [];
+
+  for (let dato of datosTablaCategoriaTorneo) {
+    const { id_jugador } = dato;
+    if (puntajesTotales[id_jugador] !== undefined) {
+      puntajesTotales[id_jugador] += dato.puntaje;
+    } else {
+      puntajesTotales[id_jugador] = dato.puntaje;
+    }
   }
 
   return (
@@ -163,7 +172,7 @@ const TablaDelTorneo = ({
                   verticalAlign: 'bottom',
                 }}
               >
-                Posición
+                Pos
               </th>
               <th
                 rowSpan="2"
@@ -267,21 +276,7 @@ const TablaDelTorneo = ({
                     jugador.segundo_apellido
                   )}
                 </td>
-                <td>
-                  {jugador.id === idJugadorEditandose ? (
-                    <input
-                      type="number"
-                      name="puntaje_total"
-                      defaultValue={jugador.puntaje_total}
-                      className={classes['input-tabla-numero']}
-                      onChange={controladorCambiarValorJugador}
-                    />
-                  ) : jugador.puntaje_total ? (
-                    jugador.puntaje_total
-                  ) : (
-                    '-'
-                  )}
-                </td>
+                <td>{puntajesTotales[jugador.id_jugador]}</td>
                 {fechas.map((fecha, i) =>
                   datosTablaCategoriaTorneo.filter(
                     (dato) =>

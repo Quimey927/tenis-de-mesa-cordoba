@@ -1,7 +1,3 @@
-import { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faSave } from '@fortawesome/free-solid-svg-icons';
-
 import {
   encontrarColorFila,
   obtenerColoresFila,
@@ -10,128 +6,108 @@ import { editarFilaTabla } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import { datosTabla } from '../../../constants/datosTabla';
 import classes from './TablaPosiciones.module.css';
+import useGestionarEstadoFilas from '../../../hooks/useGestionarEstadoFilas';
 
 const TablaPosiciones = ({
   filasTabla,
   coloresTabla,
   controladorRedireccionar,
 }) => {
-  const [idFilaEditandose, setIdFilaEditandose] = useState(null);
-  const [filaEditandose, setFilaEditandose] = useState(null);
-
-  useEffect(() => {
-    const filaEncontrada = filasTabla.find(
-      (fila) => fila.id === idFilaEditandose
-    );
-
-    setFilaEditandose(filaEncontrada);
-  }, [idFilaEditandose, filasTabla]);
-
-  const controladorEditarFilaTabla = (id) => {
-    if (id === idFilaEditandose) {
-      editarFilaTabla(filaEditandose);
-      setIdFilaEditandose(null);
-      controladorRedireccionar();
-    } else {
-      setIdFilaEditandose(id);
-    }
-  };
-
-  const controladorCambiarValorFila = (evt) => {
-    setFilaEditandose((estadoPrevio) => {
-      let nuevoEstado = {
-        ...estadoPrevio,
-        [evt.target.name]: evt.target.value,
-      };
-      return nuevoEstado;
-    });
-  };
+  const {
+    filasEditandose,
+    controladorEditarFilas,
+    controladorCambiarValorFila,
+  } = useGestionarEstadoFilas(
+    filasTabla,
+    editarFilaTabla,
+    controladorRedireccionar
+  );
 
   const coloresFila = obtenerColoresFila(coloresTabla);
 
   return (
-    <form className={classes.form}>
-      <table className={classes.tabla} style={{ width: '100%' }}>
-        <thead>
-          <tr className={classes.row}>
-            <th style={{ width: '50px' }}>Pos.</th>
-            <th className={classes['celda-ancha']}>Jugador</th>
-            {datosTabla.map((dato) => (
-              <th key={dato.codigo} style={{ width: '50px' }}>
-                {dato.codigo.toUpperCase()}
-              </th>
-            ))}
-            <th style={{ width: '50px' }}></th>
-          </tr>
-        </thead>
-        <tbody>
-          {filasTabla.length > 0 &&
-            filasTabla.map((fila) => (
-              <tr
-                key={fila.id}
-                className={classes.row}
-                style={{
-                  backgroundColor:
-                    encontrarColorFila(coloresFila, fila.posicion) !== 'none'
-                      ? `var(--color-${encontrarColorFila(
-                          coloresFila,
-                          fila.posicion
-                        )}`
-                      : 'transparent',
-                }}
-              >
-                <td style={{ width: '50px' }}>
-                  {fila.id === idFilaEditandose ? (
-                    <input
-                      name="posicion"
-                      defaultValue={fila.posicion}
-                      className={classes['input-tabla-numero']}
-                      onChange={controladorCambiarValorFila}
-                    />
-                  ) : (
-                    fila.posicion
-                  )}
-                </td>
-                <td key={fila.id} className={classes['celda-ancha']}>
-                  {obtenerNombreCompleto(
-                    fila.nombre,
-                    fila.segundo_nombre,
-                    fila.apellido,
-                    fila.segundo_apellido
-                  )}
-                </td>
-                {datosTabla.map((dato, i) => (
-                  <td key={i} style={{ width: '50px' }}>
-                    {fila.id === idFilaEditandose ? (
+    <>
+      <form className={classes.form}>
+        <table className={classes.tabla} style={{ width: '100%' }}>
+          <thead>
+            <tr className={classes.row}>
+              <th style={{ width: '50px' }}>Pos.</th>
+              <th className={classes['celda-ancha']}>Jugador</th>
+              {datosTabla.map((dato) => (
+                <th key={dato.codigo} style={{ width: '50px' }}>
+                  {dato.codigo.toUpperCase()}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {filasTabla.length > 0 &&
+              filasTabla.map((fila) => (
+                <tr
+                  key={fila.id}
+                  className={classes.row}
+                  style={{
+                    backgroundColor:
+                      encontrarColorFila(coloresFila, fila.posicion) !== 'none'
+                        ? `var(--color-${encontrarColorFila(
+                            coloresFila,
+                            fila.posicion
+                          )}`
+                        : 'transparent',
+                  }}
+                >
+                  <td style={{ width: '50px' }}>
+                    {filasEditandose ? (
                       <input
-                        name={dato.codigo}
-                        defaultValue={fila[dato.codigo]}
+                        name={`posicion-${fila.id}`}
+                        defaultValue={fila.posicion}
                         className={classes['input-tabla-numero']}
                         onChange={controladorCambiarValorFila}
                       />
                     ) : (
-                      fila[dato.codigo]
+                      fila.posicion
                     )}
                   </td>
-                ))}
-                <td style={{ width: '50px' }}>
-                  <button
-                    type="button"
-                    className={classes['btn']}
-                    onClick={controladorEditarFilaTabla.bind(null, fila.id)}
-                  >
-                    {fila.id === idFilaEditandose ? (
-                      <FontAwesomeIcon icon={faSave} />
-                    ) : (
-                      <FontAwesomeIcon icon={faPenToSquare} />
+                  <td key={fila.id} className={classes['celda-ancha']}>
+                    {obtenerNombreCompleto(
+                      fila.nombre,
+                      fila.segundo_nombre,
+                      fila.apellido,
+                      fila.segundo_apellido
                     )}
-                  </button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </form>
+                  </td>
+                  {datosTabla.map((dato, i) => (
+                    <td key={i} style={{ width: '50px' }}>
+                      {filasEditandose ? (
+                        <input
+                          name={`${dato.codigo}-${fila.id}`}
+                          defaultValue={fila[dato.codigo]}
+                          className={classes['input-tabla-numero']}
+                          onChange={controladorCambiarValorFila}
+                        />
+                      ) : (
+                        fila[dato.codigo]
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </form>
+
+      <button
+        type="button"
+        className={classes['btn-editar']}
+        onClick={controladorEditarFilas}
+      >
+        {filasEditandose ? (
+          <span>Guardar Cambios</span>
+        ) : (
+          <span>Editar Tabla</span>
+        )}
+      </button>
+    </>
   );
 };
 
