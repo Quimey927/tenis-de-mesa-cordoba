@@ -16,12 +16,12 @@ export const obtenerGrupos = async (req, res) => {
 };
 
 export const crearGrupo = async (req, res) => {
-  const { nombre, id_fase } = req.body;
+  const { nombre, id_fase, orden } = req.body;
 
   try {
     pool.query(
       consultasGrupos.crearGrupo,
-      [nombre, id_fase],
+      [nombre, id_fase, orden],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(201).send({ message: 'Grupo creado exitosamente.' });
@@ -72,7 +72,7 @@ export const obtenerGrupo = async (req, res) => {
 
 export const editarGrupo = async (req, res) => {
   const id = parseInt(req.params.idGrupo);
-  const { nombre } = req.body;
+  const { nombre, orden } = req.body;
 
   try {
     pool.query(consultasGrupos.obtenerGrupo, [id], (err, results) => {
@@ -84,10 +84,14 @@ export const editarGrupo = async (req, res) => {
         res.status(200).send('El grupo no existe en la base de datos.');
       }
 
-      pool.query(consultasGrupos.editarGrupo, [nombre, id], (err, results) => {
-        if (err) throw new Error();
-        res.status(200).send('Grupo editado correctamente.');
-      });
+      pool.query(
+        consultasGrupos.editarGrupo,
+        [nombre, orden, id],
+        (err, results) => {
+          if (err) throw new Error();
+          res.status(200).send('Grupo editado correctamente.');
+        }
+      );
     });
   } catch (err) {
     console.log(err);

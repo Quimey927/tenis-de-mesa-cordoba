@@ -13,9 +13,17 @@ const FormularioGrupo = ({ method, grupo }) => {
     >
       <Input
         id="nombre"
-        required="true"
+        required={true}
         label="Nombre*"
         defaultValue={grupo ? grupo[0].nombre : ''}
+      />
+
+      <Input
+        type="number"
+        id="orden"
+        required={true}
+        label="Orden*"
+        defaultValue={grupo ? grupo[0].orden : ''}
       />
     </AdminFormulario>
   );
@@ -31,6 +39,7 @@ export async function action({ request, params }) {
 
   const datosGrupo = {
     nombre: data.get('nombre'),
+    orden: data.get('orden'),
     id_fase: idFase,
   };
 

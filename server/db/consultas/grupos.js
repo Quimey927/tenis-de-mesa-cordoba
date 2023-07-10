@@ -5,20 +5,21 @@ const obtenerGrupos = `SELECT
   INNER JOIN fases AS f ON f.id = g.id_fase
   INNER JOIN categorias_fechas AS cf ON cf.id = f.id_categoria_fecha
   WHERE g.id_fase = $1
-  ORDER BY g.id`;
+  ORDER BY g.orden`;
 
 const crearGrupo = `INSERT INTO grupos
   (
     nombre,
-    id_fase
+    id_fase,
+    orden
   )
-  VALUES ($1, $2)`;
+  VALUES ($1, $2, $3)`;
 
 const crearGrupos = (cant_grupos) => {
   let valoresConsulta = '';
 
   for (let i = 0; i < cant_grupos; i++) {
-    valoresConsulta += `($${i + 2}, $1), `;
+    valoresConsulta += `($${i + 2}, $1, ${i + 1}), `;
   }
 
   const valoresConsultaAjustado = valoresConsulta.substring(
@@ -26,7 +27,7 @@ const crearGrupos = (cant_grupos) => {
     valoresConsulta.length - 2
   );
 
-  let consulta = `INSERT INTO grupos (nombre, id_fase) VALUES ${valoresConsultaAjustado};`;
+  let consulta = `INSERT INTO grupos (nombre, id_fase, orden) VALUES ${valoresConsultaAjustado};`;
 
   return consulta;
 };
@@ -35,8 +36,9 @@ const obtenerGrupo = 'SELECT * FROM grupos WHERE id = $1';
 
 const editarGrupo = `UPDATE grupos
   SET
-    nombre = $1
-  WHERE id = $2`;
+    nombre = $1,
+    orden = $2
+  WHERE id = $3`;
 
 const borrarGrupo = 'DELETE FROM grupos WHERE id = $1';
 
