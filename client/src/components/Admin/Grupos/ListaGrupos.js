@@ -116,6 +116,7 @@ const ListaGrupos = ({
               setJugador1={setJugador1}
               setJugador2={setJugador2}
               controladorRedireccionar={controladorRedireccionar}
+              jugadores={jugadores}
             />
           ) : (
             <ListaSets

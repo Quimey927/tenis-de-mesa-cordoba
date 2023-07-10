@@ -17,7 +17,8 @@
 }
 
 .table tr th:nth-child(3),
-.table tr td:nth-child(3) {
+.table tr td:nth-child(3),
+.table tr td:nth-child(3) select {
   text-align: end;
 }
 
@@ -27,7 +28,8 @@
 }
 
 .table tr th:nth-child(5),
-.table tr td:nth-child(5) {
+.table tr td:nth-child(5),
+.table tr td:nth-child(5) select {
   text-align: start;
 }
 

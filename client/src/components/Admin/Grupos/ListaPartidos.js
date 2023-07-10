@@ -12,12 +12,12 @@ const ListaPartidos = ({
   setJugador1,
   setJugador2,
   controladorRedireccionar,
+  jugadores,
 }) => {
   const {
     filasEditandose,
     controladorEditarFilas,
     controladorCambiarValorFila,
-    setNuevasFilas,
   } = useGestionarEstadoFilas(
     partidosDelGrupo,
     editarPartido,
@@ -32,20 +32,6 @@ const ListaPartidos = ({
 
   const controladorIntercambiarJugadores = (idPartido) => {
     intercambiarJugadoresPartido(idPartido);
-    if (filasEditandose) {
-      setNuevasFilas((filasPrevias) => {
-        const nuevasFilas = [...filasPrevias];
-        nuevasFilas.map((fila) => {
-          return fila.id !== idPartido
-            ? fila
-            : ([fila.id_jugador_1, fila.id_jugador_2] = [
-                fila.id_jugador_2,
-                fila.id_jugador_1,
-              ]);
-        });
-        return nuevasFilas;
-      });
-    }
     controladorRedireccionar();
   };
 
@@ -81,7 +67,10 @@ const ListaPartidos = ({
                 <td>
                   <button
                     type="button"
-                    style={{ cursor: 'pointer' }}
+                    style={{
+                      cursor: 'pointer',
+                      display: filasEditandose ? 'none' : 'inline',
+                    }}
                     onClick={controladorIntercambiarJugadores.bind(
                       null,
                       partido.id
@@ -92,11 +81,35 @@ const ListaPartidos = ({
                 </td>
 
                 <td>
-                  {obtenerNombreCompleto(
-                    partido.jugador_1_nombre,
-                    partido.jugador_1_segundo_nombre,
-                    partido.jugador_1_apellido,
-                    partido.jugador_1_segundo_apellido
+                  {filasEditandose ? (
+                    <select
+                      name={`id_jugador_1-${partido.id}`}
+                      defaultValue={
+                        partido.id_jugador_1 ? partido.id_jugador_1 : ''
+                      }
+                      onChange={controladorCambiarValorFila}
+                    >
+                      <option value="">Elegir jugador</option>
+                      {jugadores.map((jugador) => (
+                        <option key={jugador.id} value={+jugador.id}>
+                          {obtenerNombreCompleto(
+                            jugador.nombre,
+                            jugador.segundo_nombre,
+                            jugador.apellido,
+                            jugador.segundo_apellido
+                          )}
+                        </option>
+                      ))}
+                    </select>
+                  ) : partido.jugador_1_nombre ? (
+                    obtenerNombreCompleto(
+                      partido.jugador_1_nombre,
+                      partido.jugador_1_segundo_nombre,
+                      partido.jugador_1_apellido,
+                      partido.jugador_1_segundo_apellido
+                    )
+                  ) : (
+                    'No Definido'
                   )}
                 </td>
                 <td>
@@ -141,11 +154,35 @@ const ListaPartidos = ({
                   )}
                 </td>
                 <td>
-                  {obtenerNombreCompleto(
-                    partido.jugador_2_nombre,
-                    partido.jugador_2_segundo_nombre,
-                    partido.jugador_2_apellido,
-                    partido.jugador_2_segundo_apellido
+                  {filasEditandose ? (
+                    <select
+                      name={`id_jugador_2-${partido.id}`}
+                      defaultValue={
+                        partido.id_jugador_2 ? partido.id_jugador_2 : ''
+                      }
+                      onChange={controladorCambiarValorFila}
+                    >
+                      <option value="">Elegir jugador</option>
+                      {jugadores.map((jugador) => (
+                        <option key={jugador.id} value={+jugador.id}>
+                          {obtenerNombreCompleto(
+                            jugador.nombre,
+                            jugador.segundo_nombre,
+                            jugador.apellido,
+                            jugador.segundo_apellido
+                          )}
+                        </option>
+                      ))}
+                    </select>
+                  ) : partido.jugador_2_nombre ? (
+                    obtenerNombreCompleto(
+                      partido.jugador_2_nombre,
+                      partido.jugador_2_segundo_nombre,
+                      partido.jugador_2_apellido,
+                      partido.jugador_2_segundo_apellido
+                    )
+                  ) : (
+                    'No Definido'
                   )}
                 </td>
               </tr>
