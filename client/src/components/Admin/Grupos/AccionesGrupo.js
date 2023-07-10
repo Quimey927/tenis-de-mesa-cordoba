@@ -7,10 +7,13 @@ const AccionesGrupo = ({ idGrupo, controladorBorrarElemento }) => {
     <>
       <div className={classes.acciones}>
         <Link to="editar" className={`${classes.btn} ${classes['btn-editar']}`}>
-          <span>Editar Nombre del Grupo</span>
+          <span>Editar Grupo</span>
+        </Link>
+        <Link to="nuevo" className={`${classes.btn} ${classes['btn-agregar']}`}>
+          <span>Agregar Grupo</span>
         </Link>
         <button
-          className={`${classes.btn} ${classes['btn-editar']}`}
+          className={`${classes.btn} ${classes['btn-eliminar']}`}
           onClick={controladorBorrarElemento.bind(null, idGrupo)}
         >
           Borrar Grupo

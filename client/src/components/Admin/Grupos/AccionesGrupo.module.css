@@ -1,6 +1,8 @@
 .acciones {
   display: flex;
-  justify-content: space-between;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  margin-top: 1rem;
 }
 
 .btn {
@@ -23,4 +25,26 @@
 
 .btn-editar:hover {
   background-color: #2e6da4;
+}
+
+.btn-agregar {
+  color: #fff;
+  background-color: #5cb85c;
+}
+
+.btn-agregar:hover {
+  background-color: #4cae4c;
+}
+
+.btn-eliminar {
+  color: #fff;
+  background-color: #b85c5c;
+}
+
+.btn-eliminar:hover {
+  background-color: #ca1542;
+}
+
+.icono-sumar svg {
+  margin: 0;
 }

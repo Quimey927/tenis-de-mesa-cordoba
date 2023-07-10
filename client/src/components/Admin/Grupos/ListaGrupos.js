@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import AgregarJugadores from './AgregarJugadores.js';
 import AccionesGrupo from './AccionesGrupo';
 import TablaPosiciones from './TablaPosiciones';
@@ -68,11 +67,6 @@ const ListaGrupos = ({
 
   return (
     <>
-      <AdminTituloPagina
-        titulo="Grupos"
-        to="nuevo"
-        textoInterno="Agregar Grupo"
-      />
       <Solapas
         lista={grupos}
         controladorCambiarElementoActivo={controladorRedireccionar}
