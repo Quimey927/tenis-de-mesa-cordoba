@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../UI/Button/Button';
-import Select from '../../UI/Select/Select';
 import { crearFilasTabla, agregarJugadoresACategoriaFecha } from '../../../api';
-import classes from './AgregarJugadores.module.css';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
+import useElegirElementosDeArray from '../../../hooks/useElegirElementosDeArray';
+import classes from './AgregarJugadores.module.css';
 
 const AgregarJugadores = ({
   idGrupo,
@@ -15,35 +16,28 @@ const AgregarJugadores = ({
   jugadoresDeLaCategoriaFecha,
   controladorRedireccionar,
 }) => {
-  const [jugadoresGrupo, setJugadoresGrupo] = useState(['', '', '']);
-
-  const controladorCambioInput = (evt) => {
-    const index = +evt.target.id.split('-')[1];
-    jugadoresGrupo[index] = +evt.target.value;
-  };
-
-  const controladorAgregarJugador = () =>
-    setJugadoresGrupo((estadoPrevio) => {
-      let nuevoEstado = [...estadoPrevio, ''];
-      return nuevoEstado;
-    });
-
-  const controladorQuitarJugador = () => {
-    if (jugadoresGrupo.length <= 3) {
-      alert('El mínimo es de 3 jugadores');
-      return;
-    }
-
-    setJugadoresGrupo((estadoPrevio) => {
-      const nuevoEstado = [...estadoPrevio].slice(0, -1);
-      return nuevoEstado;
-    });
-  };
+  const {
+    elementosElegidos: jugadoresGrupo,
+    controladorAgregarElemento: controladorAgregarJugador,
+    elementosFiltrados: jugadoresFiltrados,
+    controladorEliminarElemento: controladorEliminarJugador,
+    seMuestranOpciones,
+    setSeMuestranOpciones,
+    filtro,
+    setFiltro,
+  } = useElegirElementosDeArray(jugadores, [
+    'nombre',
+    'apellido',
+    'segundo_nombre',
+    'segundo_apellido',
+  ]);
 
   const controladorAgregarJugadores = (evt) => {
     evt.preventDefault();
 
-    const nuevosJugadoresCategoriaFecha = jugadoresGrupo.filter(
+    const idsJugadoresGrupo = jugadoresGrupo.map((jugador) => jugador.id);
+
+    const nuevosJugadoresCategoriaFecha = idsJugadoresGrupo.filter(
       (jugador) => !jugadoresDeLaCategoriaFecha.includes(jugador)
     );
 
@@ -53,73 +47,78 @@ const AgregarJugadores = ({
       categoriaFecha[0].id_categoria_torneo_default
     );
 
-    crearFilasTabla(idGrupo, jugadoresGrupo);
+    crearFilasTabla(idGrupo, idsJugadoresGrupo);
     controladorRedireccionar();
   };
 
-  const inputsJugadores = [];
-
-  for (let i = 0; i < jugadoresGrupo.length; i++) {
-    inputsJugadores.push(
-      <Select
-        key={i}
-        label={`Jugador ${i + 1}`}
-        id={`jugador-${i}`}
-        onChange={controladorCambioInput}
-        required={true}
-        defaultValue={jugadoresGrupo[i]}
-        options={[
-          {
-            value: '',
-            key: 0,
-            texto: 'Elegir jugador',
-          },
-          ...jugadores.map((jugador) => {
-            return {
-              key: jugador.id,
-              value: jugador.id,
-              texto: obtenerNombreCompleto(
+  return (
+    <>
+      <h3 className={classes.titulo}>
+        <small>{nombreGrupo} - </small>
+        Elegir jugadores
+      </h3>
+      <ul className={classes['lista-jugadores-grupo']}>
+        {jugadoresGrupo.map((jugador) => (
+          <li key={jugador.id}>
+            <span>
+              {obtenerNombreCompleto(
                 jugador.nombre,
                 jugador.segundo_nombre,
                 jugador.apellido,
                 jugador.segundo_apellido
-              ),
-            };
-          }),
-        ]}
-      />
-    );
-  }
-
-  return (
-    <form className={classes.form} onSubmit={controladorAgregarJugadores}>
-      <div className={classes.titulo}>
-        <h3>Elegir los Jugadores de: {nombreGrupo}</h3>
-        <div>
-          <Button
-            onClick={controladorAgregarJugador}
-            className={`${classes.btn} ${classes['btn-agregar']}`}
+              )}
+            </span>
+            <button
+              className={`${classes.btn} ${classes['btn-eliminar']}`}
+              onClick={controladorEliminarJugador.bind(null, jugador.id)}
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          </li>
+        ))}
+        <input
+          className={classes['input-transparente']}
+          id="input-transparente"
+          value={filtro ? filtro : ''}
+          onChange={(evt) => setFiltro(evt.target.value)}
+          onFocus={() => setSeMuestranOpciones(true)}
+        />
+      </ul>
+      <ul
+        className={`${classes['lista-jugadores-posibles']} ${
+          seMuestranOpciones ? '' : classes['display-none']
+        }`}
+      >
+        {jugadoresFiltrados.map((jugador) => (
+          <button
+            key={jugador.id}
+            className={classes['jugador-elegible']}
+            onClick={controladorAgregarJugador.bind(null, jugador.id)}
+            onBlur={() => setSeMuestranOpciones(true)}
           >
-            Agregar Jugador
-          </Button>
-          <Button
-            onClick={controladorQuitarJugador}
-            className={`${classes.btn} ${classes['btn-agregar']}`}
-          >
-            Quitar Jugador
-          </Button>
-        </div>
-      </div>
-
-      {inputsJugadores}
-
+            {obtenerNombreCompleto(
+              jugador.nombre,
+              jugador.segundo_nombre,
+              jugador.apellido,
+              jugador.segundo_apellido
+            )}
+          </button>
+        ))}
+        <button
+          className={classes['cerrar-opciones']}
+          onClick={() => setSeMuestranOpciones(false)}
+        >
+          <FontAwesomeIcon icon={faXmark} />
+        </button>
+      </ul>
       <Button
         type="submit"
+        onClick={controladorAgregarJugadores}
         className={`${classes.btn} ${classes['btn-crear']}`}
       >
-        Agregar
+        Listo
       </Button>
-    </form>
+    </>
   );
 };
 

@@ -1,4 +1,134 @@
-.form {
+.titulo {
+  margin-block: 3rem 1rem;
+  color: #333;
+}
+
+.titulo small {
+  font-weight: 400;
+  color: #777;
+}
+
+.lista-jugadores-grupo {
+  display: flex;
+  column-gap: 0.5rem;
+  row-gap: 0.3rem;
+  flex-wrap: wrap;
+  margin-block: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 700px;
+  border: 1px solid #ccc;
+  padding: 0.2rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.lista-jugadores-grupo input {
+  flex-grow: 1;
+  width: 1px;
+  border: none;
+}
+
+.lista-jugadores-grupo input:focus {
+  outline-color: transparent;
+}
+
+.lista-jugadores-grupo li {
+  border: 1px solid #ccc;
+  padding: 0.2rem;
+  border-radius: 3px;
+  list-style: none;
+  background-image: -webkit-linear-gradient(top, white 0%, #eeeeee 100%);
+  background-image: -o-linear-gradient(top, white 0%, #eeeeee 100%);
+  background-image: linear-gradient(to bottom, white 0%, #eeeeee 100%);
+}
+
+.lista-jugadores-grupo button {
+  border: none;
+  background-color: transparent;
+  color: red;
+  padding: 0;
+  margin-left: 0.3rem;
+}
+
+.lista-jugadores-posibles {
+  padding: 0;
+  margin: 0;
+  max-height: 240px;
+  overflow-y: scroll;
+  max-width: 700px;
+  border: 1px solid #ccc;
+  position: relative;
+}
+
+.btn {
+  transition: background-color 300ms ease;
+  display: inline-block;
+  border: none;
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn-agregar {
+  background-color: #5cb85c;
+  border: 1px solid #4cae4c;
+  margin-left: 0.2rem;
+}
+
+.btn-crear {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  margin-block: 2rem 15rem;
+}
+
+.btn-agregar:hover {
+  background-color: #4cae4c;
+}
+
+.btn-crear:hover {
+  background-color: #2e6da4;
+}
+
+.jugador-elegible {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem;
+}
+
+.jugador-elegible:hover {
+  background-color: #ccc;
+}
+
+.jugador-elegible:focus {
+  background-color: #aaa;
+  outline-color: transparent;
+}
+
+.display-none {
+  display: none;
+}
+
+.cerrar-opciones {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.cerrar-opciones:hover {
+  color: #222;
+}
+
+/* .form {
   margin-bottom: 4rem;
 }
 
@@ -37,3 +167,4 @@
 .btn-crear:hover {
   background-color: #2e6da4;
 }
+ */
