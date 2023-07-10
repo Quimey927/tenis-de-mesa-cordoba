@@ -20,11 +20,7 @@ const ListaFechas = ({ fechas }) => {
 
   return (
     <>
-      <AdminTituloPagina
-        titulo="Fechas"
-        to="nuevo"
-        textoInterno="Agregar Fecha"
-      />
+      <AdminTituloPagina titulo="Fechas" />
       <AdminTablaPagina
         array={fechas}
         controladorBorrarElemento={controladorBorrarFecha}

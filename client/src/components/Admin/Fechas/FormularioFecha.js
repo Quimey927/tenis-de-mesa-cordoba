@@ -10,18 +10,23 @@ import { obtenerSlug } from '../../../utils/obtenerSlug';
 const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
   const { state } = useLocation();
 
-  const [slugTorneo, setSlugTorneo] = useState(fecha ? fecha.slug_torneo : '');
+  const slugTorneo = fecha
+    ? `${fecha[0].torneo} ${fecha[0].temporada}`
+    : state
+    ? torneos.find((torneo) => torneo.id === state).slug
+    : '';
 
-  const fechasDelTorneo = slugTorneo
-    ? fechas.filter((fecha) => fecha.slug_torneo === slugTorneo)
+  const [slug, setSlug] = useState(
+    fecha ? obtenerSlug(`${fecha[0].nombre} ${slugTorneo}`) : ''
+  );
+
+  const id_torneo = fecha ? fecha[0].id_torneo : state;
+
+  const fechasDelTorneo = slug
+    ? fechas.filter((fecha) => fecha.slug === slug)
     : state !== null
     ? fechas.filter((fecha) => fecha.id_torneo === state)
     : [];
-
-  const controladorCambio = (evt) => {
-    const { options, selectedIndex } = evt.target;
-    setSlugTorneo(obtenerSlug(options[selectedIndex].innerHTML));
-  };
 
   return (
     <AdminFormulario
@@ -38,8 +43,10 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
         id="nombre"
         required={true}
         label="Nombre*"
+        onChange={(evt) =>
+          setSlug(obtenerSlug(`${evt.target.value} ${slugTorneo}`))
+        }
         defaultValue={fecha ? fecha[0].nombre : ''}
-        style={method === 'PUT' ? { cursor: 'not-allowed' } : {}}
       />
 
       <Input
@@ -50,12 +57,12 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
       />
 
       <Select
-        label="Torneo al que pertenece*"
+        label="Torneo al que pertenece"
+        disabled
         id="id_torneo"
         defaultValue={
           fecha ? fecha[0].id_torneo : state !== null ? state : 'elegir_torneo'
         }
-        onChange={controladorCambio}
         options={[
           { value: 'elegir_torneo', key: 0, texto: 'Elegir Torneo' },
           ...torneos.map((torneo) => {
@@ -66,13 +73,12 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
             };
           }),
         ]}
-        style={method === 'PUT' ? { cursor: 'not-allowed' } : {}}
+        style={method === 'PUT' ? { disabled: true } : {}}
       />
 
       <Select
-        label="Lugar*"
+        label="Lugar"
         id="id_club"
-        required={true}
         defaultValue={fecha ? fecha[0].id_club : 'elegir_club'}
         options={[
           { value: 'elegir_club', key: 0, texto: 'Elegir Lugar' },
@@ -120,10 +126,18 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
         ]}
       />
 
-      {/* este input no se muestra, es para pasar el slug del torneo al action */}
+      {/* este input no se muestra, es para pasar el slug al action */}
       <input
-        name="slug_torneo"
-        value={slugTorneo}
+        name="slug"
+        value={slug}
+        required
+        readOnly
+        style={{ display: 'none' }}
+      />
+
+      <input
+        name="id_torneo"
+        value={id_torneo}
         required
         readOnly
         style={{ display: 'none' }}
@@ -138,22 +152,22 @@ export async function action({ request, params }) {
   const method = request.method;
   const data = await request.formData();
 
-  const idTorneo = data.get('id_torneo');
+  const id_torneo = data.get('id_torneo');
 
   const datosFecha = {
     nombre: data.get('nombre'),
     num_fecha: data.get('num_fecha'),
-    id_torneo: idTorneo,
+    id_torneo,
     id_club: data.get('id_club') !== 'elegir_club' ? data.get('id_club') : null,
     fecha_inicio: data.get('fecha_inicio'),
     fecha_finalizacion: data.get('fecha_finalizacion'),
-    slug: `${obtenerSlug(data.get('nombre'))}-${data.get('slug_torneo')}`,
+    slug: data.get('slug'),
     se_muestra_en_front:
       data.get('se_muestra_en_front') === 'si' ? true : false,
   };
 
   if (method === 'POST') {
-    return crearFecha(datosFecha, idTorneo);
+    return crearFecha(datosFecha, id_torneo);
   }
 
   return editarFecha(params.idFecha, datosFecha);

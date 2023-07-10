@@ -26,7 +26,14 @@ const obtenerFechasDelMes = `SELECT
   FROM fechas as f
   INNER JOIN torneos AS t ON t.id = f.id_torneo
   LEFT JOIN clubes AS c ON c.id = f.id_club
-  WHERE (f.fecha_inicio >= $1 AND f.fecha_inicio < $2 AND f.se_muestra_en_front IS TRUE) OR (f.fecha_finalizacion >= $1 AND f.fecha_finalizacion < $2 AND f.se_muestra_en_front IS TRUE)
+  WHERE
+    (
+      f.fecha_inicio >= $1 AND f.fecha_inicio < $2
+      AND f.se_muestra_en_front IS TRUE
+    ) OR (
+      f.fecha_finalizacion >= $1
+      AND f.fecha_finalizacion < $2 AND f.se_muestra_en_front IS TRUE
+    )
   ORDER BY f.fecha_inicio`;
 
 const crearFecha = `INSERT INTO fechas
@@ -49,7 +56,7 @@ const obtenerFecha = `SELECT
     c.nombre AS lugar
   FROM fechas AS f
   INNER JOIN torneos AS t ON f.id_torneo = t.id
-  INNER JOIN clubes AS c ON c.id = f.id_club
+  LEFT JOIN clubes AS c ON c.id = f.id_club
   WHERE f.id = $1`;
 
 const obtenerFechaPorSlug = `SELECT
