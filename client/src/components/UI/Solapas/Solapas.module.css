@@ -2,7 +2,6 @@
   display: flex;
   flex-wrap: wrap;
   border-bottom: 1px solid #ccc;
-  margin-block: 2rem;
 }
 
 .solapas .item {
