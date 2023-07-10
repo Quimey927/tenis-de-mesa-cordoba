@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPenToSquare,
   faSave,
   faTrash,
   faPlus,
@@ -15,6 +14,7 @@ import {
   crearNuevoJugadorCategoriaTorneo,
 } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
+import useGestionarEstadoFilas from '../../../hooks/useGestionarEstadoFilas';
 import classes from './TablaDelTorneo.module.css';
 
 const TablaDelTorneo = ({
@@ -24,38 +24,18 @@ const TablaDelTorneo = ({
   jugadores,
   datosTablaCategoriaTorneo,
 }) => {
-  const [idJugadorEditandose, setIdJugadorEditandose] = useState(null);
-  const [jugadorEditandose, setJugadorEditandose] = useState(null);
+  const {
+    filasEditandose,
+    controladorEditarFilas,
+    controladorCambiarValorFila,
+  } = useGestionarEstadoFilas(
+    jugadoresDeLaCategoriaTorneo,
+    editarPosicionYPuntajeCategoriaTorneo,
+    controladorRedireccionar
+  );
+
   const [nuevoJugador, setNuevoJugador] = useState(null);
   const [agregandoNuevoJugador, setAgregandoNuevoJugador] = useState(false);
-
-  useEffect(() => {
-    const jugadorEncontrado = jugadoresDeLaCategoriaTorneo.find(
-      (jugador) => jugador.id === idJugadorEditandose
-    );
-
-    setJugadorEditandose(jugadorEncontrado);
-  }, [idJugadorEditandose, jugadoresDeLaCategoriaTorneo]);
-
-  const controladorEditarJugador = (id) => {
-    if (id === idJugadorEditandose) {
-      editarPosicionYPuntajeCategoriaTorneo(jugadorEditandose);
-      setIdJugadorEditandose(null);
-      controladorRedireccionar();
-    } else {
-      setIdJugadorEditandose(id);
-    }
-  };
-
-  const controladorCambiarValorJugador = (evt) => {
-    setJugadorEditandose((estadoPrevio) => {
-      let nuevoEstado = {
-        ...estadoPrevio,
-        [evt.target.name]: evt.target.value !== '' ? +evt.target.value : null,
-      };
-      return nuevoEstado;
-    });
-  };
 
   const controladorBorrarJugadorCategoriaTorneo = (id) => {
     const continuar = window.confirm(
@@ -136,7 +116,7 @@ const TablaDelTorneo = ({
     </div>
   );
 
-  if (datosTablaCategoriaTorneo.length === 0) {
+  if (jugadoresDeLaCategoriaTorneo.length === 0) {
     return (
       <>
         <AdminTituloPagina titulo="Tabla del torneo" />
@@ -212,15 +192,6 @@ const TablaDelTorneo = ({
                   verticalAlign: 'bottom',
                 }}
               >
-                Editar
-              </th>
-              <th
-                rowSpan="2"
-                style={{
-                  borderBottom: '1px solid #333',
-                  verticalAlign: 'bottom',
-                }}
-              >
                 Eliminar
               </th>
             </tr>
@@ -254,13 +225,13 @@ const TablaDelTorneo = ({
             {jugadoresDeLaCategoriaTorneo.map((jugador) => (
               <tr key={jugador.id}>
                 <td>
-                  {jugador.id === idJugadorEditandose ? (
+                  {filasEditandose ? (
                     <input
                       type="number"
-                      name="posicion"
+                      name={`posicion-${jugador.id}`}
                       defaultValue={jugador.posicion}
                       className={classes['input-tabla-numero']}
-                      onChange={controladorCambiarValorJugador}
+                      onChange={controladorCambiarValorFila}
                     />
                   ) : jugador.posicion ? (
                     jugador.posicion
@@ -276,7 +247,22 @@ const TablaDelTorneo = ({
                     jugador.segundo_apellido
                   )}
                 </td>
-                <td>{puntajesTotales[jugador.id_jugador]}</td>
+
+                <td>
+                  {filasEditandose ? (
+                    <input
+                      type="number"
+                      name={`puntaje_total-${jugador.id}`}
+                      defaultValue={jugador.puntaje_total}
+                      className={classes['input-tabla-numero']}
+                      onChange={controladorCambiarValorFila}
+                    />
+                  ) : jugador.puntaje_total ? (
+                    jugador.puntaje_total
+                  ) : (
+                    '-'
+                  )}
+                </td>
                 {fechas.map((fecha, i) =>
                   datosTablaCategoriaTorneo.filter(
                     (dato) =>
@@ -325,19 +311,6 @@ const TablaDelTorneo = ({
                     </>
                   )
                 )}
-                <td>
-                  <button
-                    type="button"
-                    className={classes['btn-editar-guardar']}
-                    onClick={controladorEditarJugador.bind(null, jugador.id)}
-                  >
-                    {jugador.id === idJugadorEditandose ? (
-                      <FontAwesomeIcon icon={faSave} />
-                    ) : (
-                      <FontAwesomeIcon icon={faPenToSquare} />
-                    )}
-                  </button>
-                </td>
                 <td role="cell" data-cell="eliminar">
                   <button
                     type="button"
@@ -358,6 +331,17 @@ const TablaDelTorneo = ({
           </tbody>
         </table>
       </form>
+      <button
+        type="button"
+        className={classes['btn-editar']}
+        onClick={controladorEditarFilas}
+      >
+        {filasEditandose ? (
+          <span>Guardar Cambios</span>
+        ) : (
+          <span>Editar Tabla</span>
+        )}
+      </button>
       {crearJugador}
     </>
   );
