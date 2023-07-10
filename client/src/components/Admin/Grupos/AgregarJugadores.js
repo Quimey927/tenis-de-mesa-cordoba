@@ -35,6 +35,11 @@ const AgregarJugadores = ({
   const controladorAgregarJugadores = (evt) => {
     evt.preventDefault();
 
+    if (jugadoresGrupo.length < 2) {
+      alert('Agregar más jugadores');
+      return;
+    }
+
     const idsJugadoresGrupo = jugadoresGrupo.map((jugador) => jugador.id);
 
     const nuevosJugadoresCategoriaFecha = idsJugadoresGrupo.filter(

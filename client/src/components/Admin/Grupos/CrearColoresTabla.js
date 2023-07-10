@@ -82,7 +82,7 @@ const CrearColoresTabla = ({ grupos, idCategoriaFecha, idFase, idFecha }) => {
     <form className={classes.form} onSubmit={controladorCrearColoresTabla}>
       <div className={classes.titulo}>
         <h3>Agregar Colores Tabla</h3>
-        <div>
+        <div className={classes.acciones}>
           <Button
             onClick={() =>
               setColoresTabla((estadoPrevio) => {
@@ -93,7 +93,7 @@ const CrearColoresTabla = ({ grupos, idCategoriaFecha, idFase, idFecha }) => {
                 return nuevoEstado;
               })
             }
-            className={`${classes.btn} ${classes['btn-agregar']}`}
+            className={`${classes.btn} ${classes['btn-crear']}`}
           >
             Agregar Color
           </Button>
@@ -104,7 +104,7 @@ const CrearColoresTabla = ({ grupos, idCategoriaFecha, idFase, idFecha }) => {
                 return nuevoEstado;
               })
             }
-            className={`${classes.btn} ${classes['btn-agregar']}`}
+            className={`${classes.btn} ${classes['btn-eliminar']}`}
           >
             Quitar Color
           </Button>
@@ -119,7 +119,7 @@ const CrearColoresTabla = ({ grupos, idCategoriaFecha, idFase, idFecha }) => {
 
       <Button
         type="submit"
-        className={`${classes.btn} ${classes['btn-crear']}`}
+        className={`${classes.btn} ${classes['btn-agregar']}`}
       >
         Siguiente
       </Button>
