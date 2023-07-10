@@ -60,7 +60,7 @@ const obtenerFechaPorSlug = `SELECT
     f.fecha_finalizacion AS fecha_finalizacion,
     c.nombre AS lugar
   FROM fechas AS f 
-  NNER JOIN torneos AS t ON t.id = f.id_torneo
+  INNER JOIN torneos AS t ON t.id = f.id_torneo
   LEFT JOIN clubes AS c ON c.id = f.id_club
   WHERE f.slug = $1`;
 
