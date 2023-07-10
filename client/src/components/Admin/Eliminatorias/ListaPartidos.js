@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faSave } from '@fortawesome/free-solid-svg-icons';
-
 import { editarPartido, agregarJugadoresACategoriaFecha } from '../../../api';
 import { obtenerEtapaEliminatoria } from '../../../utils/obtenerEtapaEliminatoria';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
+import useGestionarEstadoFilas from '../../../hooks/useGestionarEstadoFilas';
 import classes from './ListaPartidosYSets.module.css';
 
 const ListaPartidos = ({
@@ -18,51 +15,31 @@ const ListaPartidos = ({
   categoriaFecha,
   idCategoriaFecha,
 }) => {
-  const [idPartidoEditandose, setIdPartidoEditandose] = useState(null);
-  const [partidoEditandose, setPartidoEditandose] = useState(null);
+  const {
+    filasEditandose,
+    controladorEditarFilas,
+    controladorCambiarValorFila,
+  } = useGestionarEstadoFilas(
+    partidosDeLaEliminatoria,
+    editarPartido,
+    controladorRedireccionar
+  );
 
-  useEffect(() => {
-    const partidoEncontrado = partidosDeLaEliminatoria.find(
-      (partido) => partido.id === idPartidoEditandose
-    );
+  // const jugadoresPartido = [
+  //   +partidoEditandose.id_jugador_1,
+  //   +partidoEditandose.id_jugador_2,
+  // ];
 
-    setPartidoEditandose(partidoEncontrado);
-  }, [idPartidoEditandose, partidosDeLaEliminatoria]);
+  // const nuevosJugadores = jugadoresPartido.filter(
+  //   (jugador) =>
+  //     jugador > 0 && !jugadoresDeLaCategoriaFecha.includes(jugador)
+  // );
 
-  const controladorEditarPartido = (id) => {
-    if (id === idPartidoEditandose) {
-      const jugadoresPartido = [
-        +partidoEditandose.id_jugador_1,
-        +partidoEditandose.id_jugador_2,
-      ];
-
-      const nuevosJugadores = jugadoresPartido.filter(
-        (jugador) =>
-          jugador > 0 && !jugadoresDeLaCategoriaFecha.includes(jugador)
-      );
-
-      agregarJugadoresACategoriaFecha(
-        nuevosJugadores,
-        idCategoriaFecha,
-        categoriaFecha[0].id_categoria_torneo_default
-      );
-      editarPartido(partidoEditandose);
-      setIdPartidoEditandose(null);
-      controladorRedireccionar();
-    } else {
-      setIdPartidoEditandose(id);
-    }
-  };
-
-  const controladorCambiarValorPartido = (evt) => {
-    setPartidoEditandose((estadoPrevio) => {
-      let nuevoEstado = {
-        ...estadoPrevio,
-        [evt.target.name]: evt.target.value,
-      };
-      return nuevoEstado;
-    });
-  };
+  // agregarJugadoresACategoriaFecha(
+  //   nuevosJugadores,
+  //   idCategoriaFecha,
+  //   categoriaFecha[0].id_categoria_torneo_default
+  // );
 
   const controladorSetearSetsEditandose = (idPartido, jugador_1, jugador_2) => {
     setJugador1(jugador_1);
@@ -71,150 +48,163 @@ const ListaPartidos = ({
   };
 
   return (
-    <form className={classes.partidos}>
-      <table className={classes.table} style={{ width: '100%' }}>
-        <thead>
-          <tr>
-            <th>Etapa</th>
-            <th>Editar</th>
-            <th>Jugador 1</th>
-            <th style={{ width: '110px' }}>vs.</th>
-            <th>Jugador 2</th>
-          </tr>
-        </thead>
-        <tbody>
-          {partidosDeLaEliminatoria.map((partido) => (
-            <tr key={partido.id}>
-              <td style={{ width: '150px' }}>
-                {obtenerEtapaEliminatoria(partido.orden)} ({partido.orden})
-              </td>
-              <td style={{ width: '50px' }}>
-                <button
-                  type="button"
-                  className={classes['btn-editar-guardar']}
-                  onClick={controladorEditarPartido.bind(null, partido.id)}
-                >
-                  {partido.id === idPartidoEditandose ? (
-                    <FontAwesomeIcon icon={faSave} />
-                  ) : (
-                    <FontAwesomeIcon icon={faPenToSquare} />
-                  )}
-                </button>
-              </td>
-              <td>
-                {partido.id === idPartidoEditandose ? (
-                  <select
-                    name="id_jugador_1"
-                    defaultValue={
-                      partido.id_jugador_1 ? partido.id_jugador_1 : ''
-                    }
-                    onChange={controladorCambiarValorPartido}
-                  >
-                    <option value="">Elegir jugador</option>
-                    {jugadores.map((jugador) => (
-                      <option key={jugador.id} value={+jugador.id}>
-                        {obtenerNombreCompleto(
-                          jugador.nombre,
-                          jugador.segundo_nombre,
-                          jugador.apellido,
-                          jugador.segundo_apellido
-                        )}
-                      </option>
-                    ))}
-                  </select>
-                ) : partido.jugador_1_nombre ? (
-                  obtenerNombreCompleto(
-                    partido.jugador_1_nombre,
-                    partido.jugador_1_segundo_nombre,
-                    partido.jugador_1_apellido,
-                    partido.jugador_1_segundo_apellido
-                  )
-                ) : (
-                  'No Definido'
-                )}
-              </td>
-              <td>
-                {partido.id === idPartidoEditandose ? (
-                  <>
-                    <input
-                      name="sets_jugador_1"
-                      defaultValue={partido.sets_jugador_1}
-                      className={classes['input-tabla-numero']}
-                      onChange={controladorCambiarValorPartido}
-                    />
-                    <span>-</span>
-                    <input
-                      name="sets_jugador_2"
-                      defaultValue={partido.sets_jugador_2}
-                      className={classes['input-tabla-numero']}
-                      onChange={controladorCambiarValorPartido}
-                    />
-                  </>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={controladorSetearSetsEditandose.bind(
-                      null,
-                      partido.id,
-                      partido.jugador_1_nombre
-                        ? obtenerNombreCompleto(
-                            partido.jugador_1_nombre,
-                            partido.jugador_1_segundo_nombre,
-                            partido.jugador_1_apellido,
-                            partido.jugador_1_segundo_apellido
-                          )
-                        : 'No Definido',
-                      partido.jugador_2_nombre
-                        ? obtenerNombreCompleto(
-                            partido.jugador_2_nombre,
-                            partido.jugador_2_segundo_nombre,
-                            partido.jugador_2_apellido,
-                            partido.jugador_2_segundo_apellido
-                          )
-                        : 'No Definido'
-                    )}
-                  >
-                    {partido.sets_jugador_1} - {partido.sets_jugador_2}
-                  </button>
-                )}
-              </td>
-              <td>
-                {partido.id === idPartidoEditandose ? (
-                  <select
-                    name="id_jugador_2"
-                    defaultValue={
-                      partido.id_jugador_2 ? partido.id_jugador_2 : ''
-                    }
-                    onChange={controladorCambiarValorPartido}
-                  >
-                    <option value="">Elegir jugador</option>
-                    {jugadores.map((jugador) => (
-                      <option key={jugador.id} value={+jugador.id}>
-                        {obtenerNombreCompleto(
-                          jugador.nombre,
-                          jugador.segundo_nombre,
-                          jugador.apellido,
-                          jugador.segundo_apellido
-                        )}
-                      </option>
-                    ))}
-                  </select>
-                ) : partido.jugador_2_nombre ? (
-                  obtenerNombreCompleto(
-                    partido.jugador_2_nombre,
-                    partido.jugador_2_segundo_nombre,
-                    partido.jugador_2_apellido,
-                    partido.jugador_2_segundo_apellido
-                  )
-                ) : (
-                  'No Definido'
-                )}
-              </td>
+    <>
+      <form className={classes.partidos}>
+        <table className={classes.table} style={{ width: '100%' }}>
+          <thead>
+            <tr>
+              <th>Etapa</th>
+              <th>Número</th>
+              <th>Jugador 1</th>
+              <th style={{ width: '110px' }}>vs.</th>
+              <th>Jugador 2</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </form>
+          </thead>
+          <tbody>
+            {partidosDeLaEliminatoria.map((partido) => (
+              <tr key={partido.id}>
+                <td style={{ width: '150px' }}>
+                  {obtenerEtapaEliminatoria(partido.orden)}
+                </td>
+                <td>
+                  {filasEditandose ? (
+                    <input
+                      name={`orden-${partido.id}`}
+                      defaultValue={partido.orden}
+                      className={classes['input-tabla-numero']}
+                      onChange={controladorCambiarValorFila}
+                    />
+                  ) : (
+                    partido.orden
+                  )}
+                </td>
+                <td>
+                  {filasEditandose ? (
+                    <select
+                      name={`id_jugador_1-${partido.id}`}
+                      defaultValue={
+                        partido.id_jugador_1 ? partido.id_jugador_1 : ''
+                      }
+                      onChange={controladorCambiarValorFila}
+                    >
+                      <option value="">Elegir jugador</option>
+                      {jugadores.map((jugador) => (
+                        <option key={jugador.id} value={+jugador.id}>
+                          {obtenerNombreCompleto(
+                            jugador.nombre,
+                            jugador.segundo_nombre,
+                            jugador.apellido,
+                            jugador.segundo_apellido
+                          )}
+                        </option>
+                      ))}
+                    </select>
+                  ) : partido.jugador_1_nombre ? (
+                    obtenerNombreCompleto(
+                      partido.jugador_1_nombre,
+                      partido.jugador_1_segundo_nombre,
+                      partido.jugador_1_apellido,
+                      partido.jugador_1_segundo_apellido
+                    )
+                  ) : (
+                    'No Definido'
+                  )}
+                </td>
+                <td>
+                  {filasEditandose ? (
+                    <>
+                      <input
+                        name={`sets_jugador_1-${partido.id}`}
+                        defaultValue={partido.sets_jugador_1}
+                        className={classes['input-tabla-numero']}
+                        onChange={controladorCambiarValorFila}
+                      />
+                      <span>-</span>
+                      <input
+                        name={`sets_jugador_2-${partido.id}`}
+                        defaultValue={partido.sets_jugador_2}
+                        className={classes['input-tabla-numero']}
+                        onChange={controladorCambiarValorFila}
+                      />
+                    </>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={controladorSetearSetsEditandose.bind(
+                        null,
+                        partido.id,
+                        partido.jugador_1_nombre
+                          ? obtenerNombreCompleto(
+                              partido.jugador_1_nombre,
+                              partido.jugador_1_segundo_nombre,
+                              partido.jugador_1_apellido,
+                              partido.jugador_1_segundo_apellido
+                            )
+                          : 'No Definido',
+                        partido.jugador_2_nombre
+                          ? obtenerNombreCompleto(
+                              partido.jugador_2_nombre,
+                              partido.jugador_2_segundo_nombre,
+                              partido.jugador_2_apellido,
+                              partido.jugador_2_segundo_apellido
+                            )
+                          : 'No Definido'
+                      )}
+                    >
+                      {partido.sets_jugador_1} - {partido.sets_jugador_2}
+                    </button>
+                  )}
+                </td>
+                <td>
+                  {filasEditandose ? (
+                    <select
+                      name={`id_jugador_2-${partido.id}`}
+                      defaultValue={
+                        partido.id_jugador_2 ? partido.id_jugador_2 : ''
+                      }
+                      onChange={controladorCambiarValorFila}
+                    >
+                      <option value="">No Definido</option>
+                      {jugadores.map((jugador) => (
+                        <option key={jugador.id} value={+jugador.id}>
+                          {obtenerNombreCompleto(
+                            jugador.nombre,
+                            jugador.segundo_nombre,
+                            jugador.apellido,
+                            jugador.segundo_apellido
+                          )}
+                        </option>
+                      ))}
+                    </select>
+                  ) : partido.jugador_2_nombre ? (
+                    obtenerNombreCompleto(
+                      partido.jugador_2_nombre,
+                      partido.jugador_2_segundo_nombre,
+                      partido.jugador_2_apellido,
+                      partido.jugador_2_segundo_apellido
+                    )
+                  ) : (
+                    'No Definido'
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </form>
+
+      <button
+        type="button"
+        className={classes['btn-editar']}
+        onClick={controladorEditarFilas}
+      >
+        {filasEditandose ? (
+          <span>Guardar Cambios</span>
+        ) : (
+          <span>Editar Partidos</span>
+        )}
+      </button>
+    </>
   );
 };
 
