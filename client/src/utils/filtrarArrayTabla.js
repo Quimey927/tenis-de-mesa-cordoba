@@ -8,7 +8,14 @@ export const filtrarArrayTabla = (filtro, array, encabezadosColumnas) => {
             elem[columna]
               .toString()
               .toLowerCase()
-              .includes(filtro.toLowerCase())
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '') // elimina acentos
+              .includes(
+                filtro
+                  .normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .toLowerCase()
+              )
           )
             elemEsFiltrado = true;
         }
