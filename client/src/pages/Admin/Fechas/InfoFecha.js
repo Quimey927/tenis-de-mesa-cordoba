@@ -19,6 +19,10 @@ const PaginaInfoFecha = () => {
       valor: fecha[0].nombre,
     },
     {
+      nombre: 'Fecha número',
+      valor: fecha[0].num_fecha,
+    },
+    {
       nombre: 'Torneo al que pertenece',
       valor: `${fecha[0].torneo} ${fecha[0].temporada}`,
     },

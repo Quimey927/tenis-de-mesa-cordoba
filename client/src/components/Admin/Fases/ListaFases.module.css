@@ -1,0 +1,27 @@
+.titulo {
+  color: #333;
+  margin-top: 4rem;
+}
+
+.btn-agregar {
+  display: inline-block;
+  border: none;
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 300ms ease;
+  color: #fff;
+  background-color: #5cb85c;
+}
+
+.btn-agregar:hover {
+  background-color: #4cae4c;
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+}

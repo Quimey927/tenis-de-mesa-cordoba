@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
@@ -11,18 +11,12 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
   const { state } = useLocation();
 
   const [slugTorneo, setSlugTorneo] = useState(fecha ? fecha.slug_torneo : '');
-  const [numFecha, setNumFecha] = useState(fecha ? fecha[0].num_fecha : '');
 
   const fechasDelTorneo = slugTorneo
     ? fechas.filter((fecha) => fecha.slug_torneo === slugTorneo)
     : state !== null
     ? fechas.filter((fecha) => fecha.id_torneo === state)
     : [];
-
-  useEffect(() => {
-    setNumFecha(fechasDelTorneo.length + 1);
-    // eslint-disable-next-line
-  }, [slugTorneo]);
 
   const controladorCambio = (evt) => {
     const { options, selectedIndex } = evt.target;
@@ -46,6 +40,13 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
         label="Nombre*"
         defaultValue={fecha ? fecha[0].nombre : ''}
         style={method === 'PUT' ? { cursor: 'not-allowed' } : {}}
+      />
+
+      <Input
+        id="num_fecha"
+        required={true}
+        label="Número fecha"
+        defaultValue={fecha ? fecha[0].num_fecha : fechasDelTorneo.length + 1}
       />
 
       <Select
@@ -104,15 +105,6 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
             ? fecha[0].fecha_finalizacion.substring(0, 10)
             : ''
         }
-      />
-
-      {/* este input no se muestra, es para pasar num_fecha al action */}
-      <input
-        name="num_fecha"
-        required
-        value={numFecha}
-        readOnly
-        style={{ display: 'none' }}
       />
 
       {/* este input no se muestra, es para pasar el slug del torneo al action */}

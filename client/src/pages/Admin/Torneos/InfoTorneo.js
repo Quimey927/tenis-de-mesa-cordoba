@@ -49,15 +49,15 @@ const PaginaInfoTorneo = () => {
         imagen={torneo[0].imagen_torneo}
       />
 
-      <ListaCategoriasTorneo
-        categoriasTorneo={categoriasTorneo ? categoriasTorneo : []}
-        navegarA={`/admin/torneos/${torneo[0].id}`}
-      />
-
       <ListaFechasTorneo
         fechasTorneo={fechasTorneo ? fechasTorneo : []}
         navegarA={`/admin/torneos/${torneo[0].id}`}
         state={torneo[0].id}
+      />
+
+      <ListaCategoriasTorneo
+        categoriasTorneo={categoriasTorneo ? categoriasTorneo : []}
+        navegarA={`/admin/torneos/${torneo[0].id}`}
       />
     </>
   );

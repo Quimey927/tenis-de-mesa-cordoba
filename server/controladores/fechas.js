@@ -120,7 +120,8 @@ export const obtenerFechaPorSlug = async (req, res) => {
 
 export const editarFecha = async (req, res) => {
   const id = parseInt(req.params.idFecha);
-  const { nombre, id_club, fecha_inicio, fecha_finalizacion, slug } = req.body;
+  const { nombre, id_club, fecha_inicio, fecha_finalizacion, slug, num_fecha } =
+    req.body;
 
   try {
     pool.query(consultasFechas.obtenerFecha, [id], (err, results) => {
@@ -140,6 +141,7 @@ export const editarFecha = async (req, res) => {
           fecha_inicio !== '' ? fecha_inicio : null,
           fecha_finalizacion !== '' ? fecha_finalizacion : null,
           slug,
+          num_fecha,
           id,
         ],
         (err, results) => {

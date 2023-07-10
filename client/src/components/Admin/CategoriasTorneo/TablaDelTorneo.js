@@ -139,7 +139,7 @@ const TablaDelTorneo = ({
   if (datosTablaCategoriaTorneo.length === 0) {
     return (
       <>
-        <AdminTituloPagina titulo="Tabla del Torneo" />
+        <AdminTituloPagina titulo="Tabla del torneo" />
         <p>No hay jugadores registrados aún en esta categoría</p>
         {crearJugador}
       </>
@@ -159,7 +159,7 @@ const TablaDelTorneo = ({
 
   return (
     <>
-      <AdminTituloPagina titulo="Tabla del Torneo" />
+      <AdminTituloPagina titulo="Tabla del torneo" />
 
       <form className={classes.posiciones}>
         <table className={classes.table} style={{ width: '100%' }}>

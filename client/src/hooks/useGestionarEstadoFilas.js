@@ -36,6 +36,7 @@ const useGestionarEstadoFilas = (
     filasEditandose,
     controladorEditarFilas,
     controladorCambiarValorFila,
+    setNuevasFilas,
   };
 };
 

@@ -1,3 +1,8 @@
+.titulo {
+  color: #333;
+  margin-top: 4rem;
+}
+
 .posiciones {
   margin-block: 1rem 3rem;
   color: #333;
@@ -81,7 +86,8 @@
 }
 
 .btn-editar {
-  background-color: #5cb85c;
+  background-color: #337ab7;
+  border: 1px solid #2e6da4;
   font: inherit;
   font-size: 0.9rem;
   color: #fff;
@@ -93,7 +99,7 @@
 }
 
 .btn-editar:hover {
-  background-color: #4cae4c;
+  background-color: #2e6da4;
 }
 
 .input-tabla-numero {
