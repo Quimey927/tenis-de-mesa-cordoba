@@ -63,7 +63,7 @@ const ListaPartidos = ({
           <tbody>
             {partidosDeLaEliminatoria.map((partido) => (
               <tr key={partido.id}>
-                <td style={{ width: '150px' }}>
+                <td style={{ width: '150px', fontWeight: '700' }}>
                   {obtenerEtapaEliminatoria(partido.orden)}
                 </td>
                 <td>
