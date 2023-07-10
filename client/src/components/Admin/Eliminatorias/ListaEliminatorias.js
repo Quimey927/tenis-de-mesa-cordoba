@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import AccionesEliminatoria from './AccionesEliminatoria';
-import CrearEliminatoria from './CrearEliminatoria';
 import CrearPartidos from './CrearPartidos';
 import ListaPartidos from './ListaPartidos';
 import ListaSets from './ListaSets';
@@ -16,8 +14,6 @@ const ListaEliminatorias = ({
   partidosDeLaEliminatoria,
   idPartido,
   setsDelPartido,
-  eliminatorias,
-  eliminatoria,
   jugadores,
   jugadoresDeLaCategoriaFecha,
 }) => {
@@ -43,20 +39,14 @@ const ListaEliminatorias = ({
 
   return (
     <>
-      {!idEliminatoria ? (
-        <CrearEliminatoria
-          idFase={idFase}
-          controladorRedireccionar={controladorRedireccionar}
-        />
-      ) : partidosDeLaEliminatoria.length === 0 ? (
+      {!idEliminatoria || partidosDeLaEliminatoria.length === 0 ? (
         <CrearPartidos
-          idEliminatoria={idEliminatoria}
-          dia={eliminatorias[0].dia.substring(0, 10)}
+          idFase={idFase}
+          dia={categoriaFecha[0].dia.substring(0, 10)}
           controladorRedireccionar={controladorRedireccionar}
         />
       ) : !idPartido ? (
         <>
-          <AccionesEliminatoria eliminatoria={eliminatoria} />
           <ListaPartidos
             idEliminatoria={+idEliminatoria}
             partidosDeLaEliminatoria={partidosDeLaEliminatoria}

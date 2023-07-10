@@ -10,22 +10,15 @@ const obtenerEliminatorias = `SELECT
 
 const crearEliminatoria = `INSERT INTO eliminatorias
   (
-    descripcion,
     id_fase
   )
-  VALUES ($1, $2)
+  VALUES ($1)
   RETURNING id`;
-
-const editarEliminatoria = `UPDATE eliminatorias
-  SET
-    descripcion = $1
-  WHERE id = $2`;
 
 const obtenerEliminatoria = 'SELECT * FROM eliminatorias WHERE id = $1';
 
 export default {
   obtenerEliminatorias,
   crearEliminatoria,
-  editarEliminatoria,
   obtenerEliminatoria,
 };

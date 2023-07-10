@@ -13,9 +13,10 @@ const crearFase = `INSERT INTO fases
     nombre,
     orden,
     tipo,
-    id_categoria_fecha
+    id_categoria_fecha,
+    descripcion
   )
-  VALUES ($1, $2, $3, $4)
+  VALUES ($1, $2, $3, $4, $5)
   RETURNING id`;
 
 const obtenerFase = 'SELECT * FROM fases WHERE id = $1';
@@ -23,8 +24,9 @@ const obtenerFase = 'SELECT * FROM fases WHERE id = $1';
 const editarFase = `UPDATE fases
   SET
     nombre = $1,
-    orden = $2 
-  WHERE id = $3`;
+    orden = $2,
+    descripcion = $3
+  WHERE id = $4`;
 
 const borrarFase = 'DELETE FROM fases WHERE id = $1';
 

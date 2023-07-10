@@ -33,6 +33,8 @@ const CrearGrupos = ({ idCategoriaFecha, idFecha, idFase }) => {
         id="cant_grupos"
         label="Cantidad de Grupos"
         defaultValue={1}
+        style={{ width: '8ch', display: 'inline' }}
+        autoFocus
         onChange={(evt) => setCantidadGrupos(evt.target.value)}
       />
       <Button type="submit" className={classes.btn}>

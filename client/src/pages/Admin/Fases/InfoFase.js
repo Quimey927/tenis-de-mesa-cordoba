@@ -9,7 +9,6 @@ import {
   obtenerFase,
   obtenerGrupos,
   obtenerEliminatorias,
-  obtenerEliminatoria,
   obtenerJugadores,
   obtenerFilasTabla,
   obtenerColoresTabla,
@@ -25,7 +24,6 @@ const PaginaInfoFase = () => {
     fase,
     grupos,
     eliminatorias,
-    eliminatoria,
     categoriaFecha,
     idCategoriaFecha,
     idFecha,
@@ -48,7 +46,7 @@ const PaginaInfoFase = () => {
 
   const { state } = useLocation();
 
-  const { nombre, orden, tipo } = fase[0];
+  const { nombre, orden, tipo, descripcion } = fase[0];
 
   const campos = [
     {
@@ -62,6 +60,10 @@ const PaginaInfoFase = () => {
     {
       nombre: 'Tipo',
       valor: tipo === 'G' ? 'Grupos' : 'Eliminatoria',
+    },
+    {
+      nombre: 'Descripción',
+      valor: descripcion,
     },
   ];
 
@@ -106,7 +108,6 @@ const PaginaInfoFase = () => {
       ) : (
         <ListaEliminatorias
           eliminatorias={eliminatorias}
-          eliminatoria={eliminatoria}
           categoriaFecha={categoriaFecha}
           idCategoriaFecha={idCategoriaFecha}
           idFase={idFase}
@@ -139,9 +140,6 @@ export async function loader({ params }) {
     fase: await obtenerFase(idFase),
     grupos: await obtenerGrupos(idFase),
     eliminatorias: await obtenerEliminatorias(idFase),
-    eliminatoria: idEliminatoria
-      ? await obtenerEliminatoria(idEliminatoria)
-      : undefined,
     idFase,
     categoriaFecha: await obtenerCategoriaFecha(idCategoriaFecha),
     idCategoriaFecha,

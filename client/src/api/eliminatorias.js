@@ -13,13 +13,13 @@ export const obtenerEliminatorias = async (idFase) => {
   return response.json();
 };
 
-export const crearEliminatoria = async (datosEliminatoria) => {
+export const crearEliminatoria = async (idFase) => {
   const response = await fetch(baseUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(datosEliminatoria),
+    body: JSON.stringify({ idFase }),
   });
 
   if (!response.ok) {

@@ -2,25 +2,27 @@ import { useState } from 'react';
 
 import Select from '../../UI/Select/Select';
 import Button from '../../UI/Button/Button';
-import { crearPartidosDeLaEliminatoria } from '../../../api';
+import { crearEliminatoria, crearPartidosDeLaEliminatoria } from '../../../api';
 import classes from './CrearPartidos.module.css';
 
-const CrearPartidos = ({ idEliminatoria, dia, controladorRedireccionar }) => {
+const CrearPartidos = ({ idFase, dia, controladorRedireccionar }) => {
   const [dondeEmpieza, setDondeEmpieza] = useState(1);
   const [tercerPuesto, setTercerPuesto] = useState('N');
 
   const controladorCrearPartidos = async (evt) => {
     evt.preventDefault();
 
+    const idEliminatoria = await crearEliminatoria(idFase);
+
     const datosPartidosEliminatoria = {
       dondeEmpieza,
       tercerPuesto,
-      idEliminatoria: +idEliminatoria,
+      idEliminatoria: +idEliminatoria[0].id,
       dia,
     };
 
-    crearPartidosDeLaEliminatoria(datosPartidosEliminatoria);
-    controladorRedireccionar(idEliminatoria);
+    await crearPartidosDeLaEliminatoria(datosPartidosEliminatoria);
+    controladorRedireccionar(idEliminatoria[0].id);
   };
 
   return (
@@ -37,6 +39,7 @@ const CrearPartidos = ({ idEliminatoria, dia, controladorRedireccionar }) => {
             { value: 4, texto: 'Octavos (16 Equipos)' },
             { value: 5, texto: '16-avos (32 Equipos)' },
             { value: 6, texto: '32-avos (64 Equipos)' },
+            { value: 7, texto: '64-avos (128 Equipos)' },
           ]}
           onChange={(evt) => setDondeEmpieza(+evt.target.value)}
         />

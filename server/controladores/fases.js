@@ -20,12 +20,12 @@ export const obtenerFases = async (req, res) => {
 };
 
 export const crearFase = async (req, res) => {
-  const { nombre, orden, tipo, id_categoria_fecha } = req.body;
+  const { nombre, orden, tipo, id_categoria_fecha, descripcion } = req.body;
 
   try {
     pool.query(
       consultasFases.crearFase,
-      [nombre, orden, tipo, id_categoria_fecha],
+      [nombre, orden, tipo, id_categoria_fecha, descripcion],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(201).json(results.rows);
@@ -53,7 +53,7 @@ export const obtenerFase = async (req, res) => {
 
 export const editarFase = async (req, res) => {
   const id = parseInt(req.params.idFase);
-  const { nombre, orden } = req.body;
+  const { nombre, orden, descripcion } = req.body;
 
   try {
     pool.query(consultasFases.obtenerFase, [id], (err, results) => {
@@ -67,7 +67,7 @@ export const editarFase = async (req, res) => {
 
       pool.query(
         consultasFases.editarFase,
-        [nombre, orden, id],
+        [nombre, orden, descripcion, id],
         (err, results) => {
           if (err) throw new Error();
           res.status(200).send('Fase editada correctamente.');

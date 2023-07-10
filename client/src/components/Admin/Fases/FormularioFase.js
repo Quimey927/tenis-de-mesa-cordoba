@@ -1,6 +1,7 @@
 import AdminFormulario from '../AdminFormulario/AdminFormulario';
 import Input from '../../UI/Input/Input';
 import Select from '../../UI/Select/Select';
+import Textarea from '../../UI/Textarea/Textarea';
 import { crearFase, editarFase } from '../../../api';
 
 const FormularioFase = ({ method, fase }) => {
@@ -39,6 +40,13 @@ const FormularioFase = ({ method, fase }) => {
           ]}
         />
       )}
+
+      <Textarea
+        id="descripcion"
+        label="Descripción"
+        placeholder="Añadir descripción"
+        defaultValue={fase ? fase[0].descripcion : ''}
+      />
     </AdminFormulario>
   );
 };
@@ -53,6 +61,7 @@ export async function action({ request, params }) {
     nombre: data.get('nombre'),
     orden: data.get('orden'),
     tipo: data.get('tipo'),
+    descripcion: data.get('descripcion'),
     id_categoria_fecha: params.idCategoriaFecha,
   };
 

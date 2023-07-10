@@ -63,7 +63,7 @@ const FormularioCategoriaFecha = ({
       )}
 
       <Select
-        label="Categoría Torneo para el que Suma Puntos"
+        label="Categoría torneo por default para la que suma puntos"
         id="id_categoria_torneo_default"
         defaultValue={
           categoriaFecha
