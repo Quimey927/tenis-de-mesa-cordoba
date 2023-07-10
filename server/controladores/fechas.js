@@ -61,6 +61,7 @@ export const crearFecha = async (req, res) => {
     fecha_inicio,
     fecha_finalizacion,
     slug,
+    se_muestra_en_front,
   } = req.body;
 
   try {
@@ -74,6 +75,7 @@ export const crearFecha = async (req, res) => {
         fecha_inicio !== '' ? fecha_inicio : null,
         fecha_finalizacion !== '' ? fecha_finalizacion : null,
         slug,
+        se_muestra_en_front,
       ],
       (err, results) => {
         if (err) throw new Error(err);
@@ -120,8 +122,15 @@ export const obtenerFechaPorSlug = async (req, res) => {
 
 export const editarFecha = async (req, res) => {
   const id = parseInt(req.params.idFecha);
-  const { nombre, id_club, fecha_inicio, fecha_finalizacion, slug, num_fecha } =
-    req.body;
+  const {
+    nombre,
+    id_club,
+    fecha_inicio,
+    fecha_finalizacion,
+    slug,
+    num_fecha,
+    se_muestra_en_front,
+  } = req.body;
 
   try {
     pool.query(consultasFechas.obtenerFecha, [id], (err, results) => {
@@ -142,6 +151,7 @@ export const editarFecha = async (req, res) => {
           fecha_finalizacion !== '' ? fecha_finalizacion : null,
           slug,
           num_fecha,
+          se_muestra_en_front,
           id,
         ],
         (err, results) => {

@@ -70,8 +70,9 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
       />
 
       <Select
-        label="Lugar"
+        label="Lugar*"
         id="id_club"
+        required={true}
         defaultValue={fecha ? fecha[0].id_club : 'elegir_club'}
         options={[
           { value: 'elegir_club', key: 0, texto: 'Elegir Lugar' },
@@ -107,6 +108,18 @@ const FormularioFecha = ({ method, fecha, torneos, clubes, fechas }) => {
         }
       />
 
+      <Select
+        label="Se muestra en front"
+        id="se_muestra_en_front"
+        defaultValue={
+          fecha ? (fecha[0].se_muestra_en_front ? 'si' : 'no') : 'si'
+        }
+        options={[
+          { value: 'no', key: 'no', texto: 'No' },
+          { value: 'si', key: 'si', texto: 'Sí' },
+        ]}
+      />
+
       {/* este input no se muestra, es para pasar el slug del torneo al action */}
       <input
         name="slug_torneo"
@@ -135,6 +148,8 @@ export async function action({ request, params }) {
     fecha_inicio: data.get('fecha_inicio'),
     fecha_finalizacion: data.get('fecha_finalizacion'),
     slug: `${obtenerSlug(data.get('nombre'))}-${data.get('slug_torneo')}`,
+    se_muestra_en_front:
+      data.get('se_muestra_en_front') === 'si' ? true : false,
   };
 
   if (method === 'POST') {

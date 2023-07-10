@@ -18,6 +18,7 @@ const obtenerFechasDelMes = `SELECT
     t.titulo AS titulo_torneo,
     f.fecha_inicio AS fecha_inicio,
     f.fecha_finalizacion AS fecha_finalizacion,
+    f.se_muestra_en_front AS se_muestra_en_inicio,
     c.nombre AS club,
     t.imagen_torneo AS imagen_torneo,
     c.direccion AS direccion,
@@ -25,7 +26,7 @@ const obtenerFechasDelMes = `SELECT
   FROM fechas as f
   INNER JOIN torneos AS t ON t.id = f.id_torneo
   LEFT JOIN clubes AS c ON c.id = f.id_club
-  WHERE (f.fecha_inicio >= $1 AND f.fecha_inicio < $2) OR (f.fecha_finalizacion >= $1 AND f.fecha_finalizacion < $2)
+  WHERE (f.fecha_inicio >= $1 AND f.fecha_inicio < $2 AND f.se_muestra_en_front IS TRUE) OR (f.fecha_finalizacion >= $1 AND f.fecha_finalizacion < $2 AND f.se_muestra_en_front IS TRUE)
   ORDER BY f.fecha_inicio`;
 
 const crearFecha = `INSERT INTO fechas
@@ -36,8 +37,9 @@ const crearFecha = `INSERT INTO fechas
     id_club,
     fecha_inicio,
     fecha_finalizacion,
-    slug
-  ) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+    slug,
+    se_muestra_en_front
+  ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
 
 const obtenerFecha = `SELECT
     f.*,
@@ -71,8 +73,9 @@ const editarFecha = `UPDATE fechas
     fecha_inicio = $3,
     fecha_finalizacion = $4,
     slug = $5,
-    num_fecha = $6
-  WHERE id = $7`;
+    num_fecha = $6,
+    se_muestra_en_front = $7
+  WHERE id = $8`;
 
 const borrarFecha = 'DELETE FROM fechas WHERE id = $1';
 
