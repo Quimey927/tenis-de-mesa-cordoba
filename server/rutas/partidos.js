@@ -3,7 +3,6 @@ import express from 'express';
 import {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
-  intercambiarJugadoresPartido,
   editarPartido,
   editarSetsPartido,
   obtenerPartidosDeLaEliminatoria,
@@ -23,8 +22,6 @@ router
   .route('/eliminatoria/:idEliminatoria')
   .get(obtenerPartidosDeLaEliminatoria)
   .post(crearPartidosDeLaEliminatoria);
-
-router.route('/intercambio/:idPartido').put(intercambiarJugadoresPartido);
 
 router.route('/sets/:idPartido').put(editarSetsPartido);
 
