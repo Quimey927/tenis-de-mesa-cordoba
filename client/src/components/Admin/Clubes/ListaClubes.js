@@ -29,6 +29,7 @@ const ListaJugadores = ({ clubes }) => {
         array={clubes}
         controladorBorrarElemento={controladorBorrarClub}
         encabezadosColumnas={['nombre']}
+        sufijoLinkEditar="/editar"
       />
     </>
   );
