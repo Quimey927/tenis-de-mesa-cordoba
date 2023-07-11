@@ -3,7 +3,8 @@ import { useState } from 'react';
 const useGestionarEstadoFilas = (
   filas,
   editarFila,
-  controladorRedireccionar
+  controladorRedireccionar,
+  borrarElemento
 ) => {
   const [filasEditandose, setFilasEditandose] = useState(false);
   const [nuevasFilas, setNuevasFilas] = useState(filas);
@@ -32,10 +33,22 @@ const useGestionarEstadoFilas = (
     });
   };
 
+  const controladorBorrarJugadorCategoriaTorneo = (id) => {
+    const continuar = window.confirm(
+      '¿Estás seguro de que querés eliminar el elemento?'
+    );
+
+    if (continuar) {
+      borrarElemento(id);
+      controladorRedireccionar();
+    }
+  };
+
   return {
     filasEditandose,
     controladorEditarFilas,
     controladorCambiarValorFila,
+    controladorBorrarJugadorCategoriaTorneo,
   };
 };
 
