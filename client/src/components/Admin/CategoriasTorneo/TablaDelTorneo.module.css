@@ -25,7 +25,6 @@
 }
 
 .table tr th {
-  border-bottom: 2px solid #ddd;
   border-top: none;
 }
 
@@ -54,6 +53,7 @@
   gap: 1rem;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 4rem;
 }
 
 .btn {
@@ -87,18 +87,6 @@
   width: 7ch;
 }
 
-.crear-jugador {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.crear-jugador button {
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-}
-
 .btn-editar {
   background-color: #337ab7;
   border: 1px solid #2e6da4;
@@ -115,4 +103,28 @@
 
 .btn-editar:hover {
   background-color: #2e6da4;
+}
+
+.border-right-light {
+  border-right: 1px solid #ccc;
+}
+
+.border-right {
+  border-right: 1px solid #333;
+}
+
+.border-left {
+  border-left: 1px solid #333;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #333;
+}
+
+.border-bottom-dashed {
+  border-bottom: 1px dashed #555;
+}
+
+.vertical-align-bottom {
+  vertical-align: bottom;
 }

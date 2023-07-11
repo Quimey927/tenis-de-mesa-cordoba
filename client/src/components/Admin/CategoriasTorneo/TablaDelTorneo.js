@@ -76,39 +76,26 @@ const TablaDelTorneo = ({
             <tr>
               <th
                 rowSpan="2"
-                style={{
-                  borderBottom: '1px solid #333',
-                  verticalAlign: 'bottom',
-                }}
+                className={`${classes['border-bottom']} ${classes['vertical-align-bottom']}`}
               >
                 Pos
               </th>
               <th
                 rowSpan="2"
-                style={{
-                  borderBottom: '1px solid #333',
-                  verticalAlign: 'bottom',
-                }}
+                className={`${classes['border-bottom']} ${classes['vertical-align-bottom']}`}
               >
                 Jugador
               </th>
               <th
                 rowSpan="2"
-                style={{
-                  borderBottom: '1px solid #333',
-                  verticalAlign: 'bottom',
-                }}
+                className={`${classes['border-bottom']} ${classes['vertical-align-bottom']}`}
               >
                 Puntaje Total
               </th>
               {fechas.map((fecha) => (
                 <th
                   key={fecha}
-                  style={{
-                    borderLeft: '1px solid #333',
-                    borderRight: '1px solid #333',
-                    borderBottom: '1px dashed #555',
-                  }}
+                  className={`${classes['border-right']} ${classes['border-left']} ${classes['border-bottom-dashed']}`}
                   colSpan="2"
                 >
                   {fecha}
@@ -116,10 +103,7 @@ const TablaDelTorneo = ({
               ))}
               <th
                 rowSpan="2"
-                style={{
-                  borderBottom: '1px solid #333',
-                  verticalAlign: 'bottom',
-                }}
+                className={`${classes['border-bottom']} ${classes['vertical-align-bottom']}`}
               >
                 Eliminar
               </th>
@@ -129,20 +113,13 @@ const TablaDelTorneo = ({
                 <>
                   <th
                     key={i}
-                    style={{
-                      borderLeft: '1px solid #333',
-                      borderBottom: '1px solid #333',
-                      borderRight: '1px solid #ccc',
-                    }}
+                    className={`${classes['border-right-light']} ${classes['border-left']} ${classes['border-bottom']}`}
                   >
                     Pos
                   </th>
                   <th
                     key={-i}
-                    style={{
-                      borderRight: '1px solid #333',
-                      borderBottom: '1px solid #333',
-                    }}
+                    className={`${classes['border-right']} ${classes['border-bottom']}`}
                   >
                     Pts
                   </th>
@@ -201,10 +178,7 @@ const TablaDelTorneo = ({
                     <>
                       <td
                         key={i}
-                        style={{
-                          borderLeft: '1px solid #333',
-                          borderRight: '1px solid #ccc',
-                        }}
+                        className={`${classes['border-right-light']} ${classes['border-left']}`}
                       >
                         {
                           datosTablaCategoriaTorneo.filter(
@@ -214,7 +188,7 @@ const TablaDelTorneo = ({
                           )[0].posicion
                         }
                       </td>
-                      <td key={-i} style={{ borderRight: '1px solid #333' }}>
+                      <td key={-i} className={classes['border-right']}>
                         {Math.abs(
                           datosTablaCategoriaTorneo.filter(
                             (dato) =>
@@ -228,15 +202,9 @@ const TablaDelTorneo = ({
                     <>
                       <td
                         key={i}
-                        style={{
-                          borderLeft: '1px solid #333',
-                          borderRight: '1px solid #ccc',
-                        }}
+                        className={`${classes['border-right-light']} ${classes['border-left']}`}
                       ></td>
-                      <td
-                        key={-i}
-                        style={{ borderRight: '1px solid #333' }}
-                      ></td>
+                      <td key={-i} className={classes['border-right']}></td>
                     </>
                   )
                 )}
