@@ -153,7 +153,7 @@ export const crearPartido = async (req, res) => {
   try {
     pool.query(
       consultasPartidos.crearPartido,
-      [dia, idGrupo ? idGrupo : null, idEliminatoria ? idEliminatoria : null],
+      [dia, idGrupo, idEliminatoria],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(200).send('Partido creado correctamente.');

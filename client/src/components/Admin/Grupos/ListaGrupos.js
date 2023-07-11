@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AgregarJugadores from './AgregarJugadores.js';
@@ -26,9 +25,6 @@ const ListaGrupos = ({
   jugadores,
   jugadoresDeLaCategoriaFecha,
 }) => {
-  const [jugador1, setJugador1] = useState('');
-  const [jugador2, setJugador2] = useState('');
-
   const navigate = useNavigate();
 
   const controladorBorrarGrupo = (id) => {
@@ -64,6 +60,11 @@ const ListaGrupos = ({
   };
 
   const nombreGrupo = grupos.find((grupo) => grupo.id === +idGrupo).nombre;
+
+  const idsJugadoresGrupo = filasTabla.map((fila) => fila.id_jugador);
+  const jugadoresDelGrupo = jugadores.filter((jugador) =>
+    idsJugadoresGrupo.includes(jugador.id)
+  );
 
   return (
     <>
@@ -113,20 +114,15 @@ const ListaGrupos = ({
             <ListaPartidos
               idGrupo={+idGrupo}
               partidosDelGrupo={partidosDelGrupo}
-              setJugador1={setJugador1}
-              setJugador2={setJugador2}
               controladorRedireccionar={controladorRedireccionar}
-              jugadores={jugadores}
+              dia={grupos[0].dia.substring(0, 10)}
+              jugadoresDelGrupo={jugadoresDelGrupo}
             />
           ) : (
             <ListaSets
               idGrupo={idGrupo}
               idPartido={idPartido}
               setsDelPartido={setsDelPartido}
-              jugador1={jugador1}
-              jugador2={jugador2}
-              setJugador1={setJugador1}
-              setJugador2={setJugador2}
               filasTabla={filasTabla}
               partidosDelGrupo={partidosDelGrupo}
               controladorRedireccionar={controladorRedireccionar}

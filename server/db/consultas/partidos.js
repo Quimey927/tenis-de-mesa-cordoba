@@ -12,8 +12,8 @@ const obtenerPartidosDelGrupo = `SELECT
     SUM(set.puntos_jugador_2) AS puntos_jugador_2
   FROM partidos AS part
   LEFT JOIN sets AS set ON set.id_partido = part.id
-  INNER JOIN jugadores AS j1 ON j1.id = part.id_jugador_1
-  INNER JOIN jugadores AS j2 ON j2.id = part.id_jugador_2
+  LEFT JOIN jugadores AS j1 ON j1.id = part.id_jugador_1
+  LEFT JOIN jugadores AS j2 ON j2.id = part.id_jugador_2
   WHERE id_grupo = $1
   GROUP BY j1.nombre, j1.apellido, j1.segundo_nombre, j1.segundo_apellido, j2.nombre, j2.apellido, j2.segundo_nombre, j2.segundo_apellido, part.id
   ORDER BY part.orden`;

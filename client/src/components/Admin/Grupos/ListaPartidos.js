@@ -1,28 +1,34 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightLeft } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import { editarPartido } from '../../../api';
+import { editarPartido, crearPartido, borrarPartido } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import useGestionarEstadoFilas from '../../../hooks/useGestionarEstadoFilas';
 import classes from './ListaPartidos.module.css';
 
 const ListaPartidos = ({
-  idEliminatoria,
+  idGrupo,
   partidosDelGrupo,
-  setJugador1,
-  setJugador2,
   controladorRedireccionar,
-  jugadores,
+  dia,
+  jugadoresDelGrupo,
 }) => {
   const {
     filasEditandose,
     controladorEditarFilas,
     controladorCambiarValorFila,
+    controladorBorrarElemento: controladorBorrarPartidoDelGrupo,
   } = useGestionarEstadoFilas(
     partidosDelGrupo,
     editarPartido,
-    controladorRedireccionar
+    controladorRedireccionar,
+    borrarPartido
   );
+
+  const controladorAgregarPartido = async (evt) => {
+    await crearPartido(idGrupo, null, dia);
+    controladorRedireccionar();
+  };
 
   return (
     <>
@@ -35,6 +41,7 @@ const ListaPartidos = ({
               <th>Jugador 1</th>
               <th style={{ width: '110px' }}>vs.</th>
               <th>Jugador 2</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -77,7 +84,7 @@ const ListaPartidos = ({
                       onChange={controladorCambiarValorFila}
                     >
                       <option value="">Elegir jugador</option>
-                      {jugadores.map((jugador) => (
+                      {jugadoresDelGrupo.map((jugador) => (
                         <option key={jugador.id} value={+jugador.id}>
                           {obtenerNombreCompleto(
                             jugador.nombre,
@@ -132,7 +139,7 @@ const ListaPartidos = ({
                       onChange={controladorCambiarValorFila}
                     >
                       <option value="">Elegir jugador</option>
-                      {jugadores.map((jugador) => (
+                      {jugadoresDelGrupo.map((jugador) => (
                         <option key={jugador.id} value={+jugador.id}>
                           {obtenerNombreCompleto(
                             jugador.nombre,
@@ -154,23 +161,47 @@ const ListaPartidos = ({
                     'No Definido'
                   )}
                 </td>
+                <td role="cell" data-cell="eliminar">
+                  <button
+                    type="button"
+                    className={classes['btn-eliminar']}
+                    onClick={controladorBorrarPartidoDelGrupo.bind(
+                      null,
+                      partido.id
+                    )}
+                  >
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      style={{ color: 'rgb(197, 12, 12)' }}
+                    />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </form>
 
-      <button
-        type="button"
-        className={classes['btn-editar']}
-        onClick={controladorEditarFilas}
-      >
-        {filasEditandose ? (
-          <span>Guardar Cambios</span>
-        ) : (
-          <span>Editar Partidos</span>
-        )}
-      </button>
+      <div className={classes.acciones}>
+        <button
+          type="button"
+          className={classes['btn-crear']}
+          onClick={controladorAgregarPartido}
+        >
+          Agregar partido
+        </button>
+        <button
+          type="button"
+          className={classes['btn-editar']}
+          onClick={controladorEditarFilas}
+        >
+          {filasEditandose ? (
+            <span>Guardar Cambios</span>
+          ) : (
+            <span>Editar Tabla</span>
+          )}
+        </button>
+      </div>
     </>
   );
 };
