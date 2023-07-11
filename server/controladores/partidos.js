@@ -22,12 +22,14 @@ export const obtenerPartidosDelGrupo = async (req, res) => {
 export const crearPartidosDelGrupo = async (req, res) => {
   const idGrupo = parseInt(req.params.idGrupo);
 
-  const { dia, jugadores } = req.body;
+  const { dia, idJugadores } = req.body;
+
+  const cant_partidos = idJugadores.length / 2;
 
   try {
     pool.query(
-      consultasPartidos.crearPartidosDelGrupo(jugadores),
-      [idGrupo, dia],
+      consultasPartidos.crearPartidosDelGrupo(cant_partidos),
+      [idGrupo, dia, ...idJugadores],
       (err, results) => {
         if (err) throw new Error(err);
         res.status(200).json(results.rows);

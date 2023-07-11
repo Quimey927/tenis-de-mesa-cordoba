@@ -11,6 +11,7 @@ const Input = ({
   defaultValue,
   readOnly,
   style = {},
+  placeholder,
 }) => {
   return (
     <div className={classes.input}>
@@ -19,7 +20,7 @@ const Input = ({
         type={type ? type : 'text'}
         name={id}
         id={id}
-        placeholder={`${label}...`}
+        placeholder={placeholder !== undefined ? placeholder : `${label}...`}
         autoFocus={autoFocus ? true : false}
         required={required ? true : false}
         disabled={disabled ? true : false}

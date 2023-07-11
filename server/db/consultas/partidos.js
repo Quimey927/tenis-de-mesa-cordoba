@@ -18,16 +18,14 @@ const obtenerPartidosDelGrupo = `SELECT
   GROUP BY j1.nombre, j1.apellido, j1.segundo_nombre, j1.segundo_apellido, j2.nombre, j2.apellido, j2.segundo_nombre, j2.segundo_apellido, part.id
   ORDER BY part.orden`;
 
-const crearPartidosDelGrupo = (jugadores) => {
+const crearPartidosDelGrupo = (cant_partidos) => {
   let valoresConsulta = '';
 
   let orden = 1;
 
-  for (let i = 0; i < jugadores.length - 1; i++) {
-    for (let j = i + 1; j < jugadores.length; j++) {
-      valoresConsulta += `($1, $2, ${orden}, ${jugadores[i]}, ${jugadores[j]}), `;
-      orden++;
-    }
+  for (let i = 0; i < cant_partidos; i++) {
+    valoresConsulta += `($1, $2, ${orden}, $${2 * i + 3}, $${2 * i + 4}), `;
+    orden++;
   }
 
   const valoresConsultaAjustado = valoresConsulta.substring(

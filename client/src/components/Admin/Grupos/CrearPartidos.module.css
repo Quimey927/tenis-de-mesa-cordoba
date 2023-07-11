@@ -1,3 +1,10 @@
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  margin-top: 3rem;
+}
+
 .btn {
   color: #fff;
   display: block;

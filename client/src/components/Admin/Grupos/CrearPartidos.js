@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import Input from '../../UI/Input/Input';
 import { crearPartidosDelGrupo } from '../../../api';
 import classes from './CrearPartidos.module.css';
 
@@ -7,26 +10,64 @@ const CrearPartidos = ({
   idGrupo,
   controladorRedireccionar,
 }) => {
-  const jugadores = [];
+  const [orden, setOrden] = useState('');
+  const [cantFechas, setCantFechas] = useState(1);
 
-  for (let fila of filasTabla) {
-    jugadores.push(fila.id_jugador);
-  }
+  const controladorCrearPartidos = (evt) => {
+    evt.preventDefault();
 
-  const controladorCrearPartidos = () => {
+    const idJugadores = orden
+      .split('-')
+      .map((num) => filasTabla[num - 1].id_jugador);
+
     const datosPartidos = {
+      idJugadores,
       dia,
-      jugadores,
     };
 
     crearPartidosDelGrupo(idGrupo, datosPartidos);
     controladorRedireccionar();
   };
 
+  const controladorCrearPartidosConFecha = (evt) => {
+    evt.preventDefault();
+
+    const datosPartidos = {
+      cantFechas,
+      dia,
+    };
+
+    console.log(datosPartidos);
+
+    /* crearPartidosDelGrupo(idGrupo, datosPartidos);
+    controladorRedireccionar(); */
+  };
+
   return (
-    <button className={classes.btn} onClick={controladorCrearPartidos}>
-      Crear Partidos
-    </button>
+    <div className={classes.grilla}>
+      <form onSubmit={controladorCrearPartidos}>
+        <button className={classes.btn}>Crear partidos sin fechas</button>
+
+        <Input
+          placeholder="Orden..."
+          required={true}
+          value={orden}
+          onChange={(evt) => setOrden(evt.target.value)}
+        />
+      </form>
+
+      <form onSubmit={controladorCrearPartidosConFecha}>
+        <button className={classes.btn}>Crear partidos con fechas</button>
+
+        <Input
+          type="number"
+          placeholder="Cant. Fechas..."
+          required={true}
+          value={cantFechas}
+          onChange={(evt) => setCantFechas(+evt.target.value)}
+        />
+      </form>
+    </div>
   );
 };
 
