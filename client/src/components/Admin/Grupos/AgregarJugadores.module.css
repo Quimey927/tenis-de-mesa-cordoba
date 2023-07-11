@@ -8,17 +8,21 @@
   color: #777;
 }
 
+.listas {
+  position: relative;
+}
+
 .lista-jugadores-grupo {
   display: flex;
   column-gap: 0.5rem;
   row-gap: 0.3rem;
   flex-wrap: wrap;
   margin-block: 0;
-  padding: 0;
+  padding: 0.2rem;
+  padding-right: 3rem;
   width: 100%;
   max-width: 700px;
   border: 1px solid #ccc;
-  padding: 0.2rem;
   border-radius: 3px;
   font-size: 0.8rem;
 }
@@ -58,7 +62,6 @@
   overflow-y: scroll;
   max-width: 700px;
   border: 1px solid #ccc;
-  position: relative;
 }
 
 .btn {

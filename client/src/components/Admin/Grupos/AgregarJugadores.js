@@ -62,60 +62,62 @@ const AgregarJugadores = ({
         <small>{nombreGrupo} - </small>
         Elegir jugadores
       </h3>
-      <ul className={classes['lista-jugadores-grupo']}>
-        {jugadoresGrupo.map((jugador) => (
-          <li key={jugador.id}>
-            <span>
+      <div className={classes['listas']}>
+        <ul className={classes['lista-jugadores-grupo']}>
+          {jugadoresGrupo.map((jugador) => (
+            <li key={jugador.id}>
+              <span>
+                {obtenerNombreCompleto(
+                  jugador.nombre,
+                  jugador.segundo_nombre,
+                  jugador.apellido,
+                  jugador.segundo_apellido
+                )}
+              </span>
+              <button
+                className={`${classes.btn} ${classes['btn-eliminar']}`}
+                onClick={controladorEliminarJugador.bind(null, jugador.id)}
+              >
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            </li>
+          ))}
+          <input
+            className={classes['input-transparente']}
+            id="input-transparente"
+            value={filtro ? filtro : ''}
+            onChange={(evt) => setFiltro(evt.target.value)}
+            onFocus={() => setSeMuestranOpciones(true)}
+          />
+        </ul>
+        <ul
+          className={`${classes['lista-jugadores-posibles']} ${
+            seMuestranOpciones ? '' : classes['display-none']
+          }`}
+        >
+          {jugadoresFiltrados.map((jugador) => (
+            <button
+              key={jugador.id}
+              className={classes['jugador-elegible']}
+              onClick={controladorAgregarJugador.bind(null, jugador.id)}
+              onBlur={() => setSeMuestranOpciones(true)}
+            >
               {obtenerNombreCompleto(
                 jugador.nombre,
                 jugador.segundo_nombre,
                 jugador.apellido,
                 jugador.segundo_apellido
               )}
-            </span>
-            <button
-              className={`${classes.btn} ${classes['btn-eliminar']}`}
-              onClick={controladorEliminarJugador.bind(null, jugador.id)}
-            >
-              <FontAwesomeIcon icon={faXmark} />
             </button>
-          </li>
-        ))}
-        <input
-          className={classes['input-transparente']}
-          id="input-transparente"
-          value={filtro ? filtro : ''}
-          onChange={(evt) => setFiltro(evt.target.value)}
-          onFocus={() => setSeMuestranOpciones(true)}
-        />
-      </ul>
-      <ul
-        className={`${classes['lista-jugadores-posibles']} ${
-          seMuestranOpciones ? '' : classes['display-none']
-        }`}
-      >
-        {jugadoresFiltrados.map((jugador) => (
+          ))}
           <button
-            key={jugador.id}
-            className={classes['jugador-elegible']}
-            onClick={controladorAgregarJugador.bind(null, jugador.id)}
-            onBlur={() => setSeMuestranOpciones(true)}
+            className={classes['cerrar-opciones']}
+            onClick={() => setSeMuestranOpciones(false)}
           >
-            {obtenerNombreCompleto(
-              jugador.nombre,
-              jugador.segundo_nombre,
-              jugador.apellido,
-              jugador.segundo_apellido
-            )}
+            <FontAwesomeIcon icon={faXmark} />
           </button>
-        ))}
-        <button
-          className={classes['cerrar-opciones']}
-          onClick={() => setSeMuestranOpciones(false)}
-        >
-          <FontAwesomeIcon icon={faXmark} />
-        </button>
-      </ul>
+        </ul>
+      </div>
       <Button
         type="submit"
         onClick={controladorAgregarJugadores}
