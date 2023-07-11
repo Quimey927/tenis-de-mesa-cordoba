@@ -82,13 +82,6 @@ const AgregarJugadores = ({
               </button>
             </li>
           ))}
-          <input
-            className={classes['input-transparente']}
-            id="input-transparente"
-            value={filtro ? filtro : ''}
-            onChange={(evt) => setFiltro(evt.target.value)}
-            onFocus={() => setSeMuestranOpciones(true)}
-          />
           {seMuestranOpciones && (
             <button
               className={classes['cerrar-opciones']}
@@ -97,6 +90,13 @@ const AgregarJugadores = ({
               <FontAwesomeIcon icon={faXmark} />
             </button>
           )}
+          <input
+            className={classes['input-transparente']}
+            id="input-transparente"
+            value={filtro ? filtro : ''}
+            onChange={(evt) => setFiltro(evt.target.value)}
+            onFocus={() => setSeMuestranOpciones(true)}
+          />
         </ul>
         <ul
           className={`${classes['lista-jugadores-posibles']} ${
