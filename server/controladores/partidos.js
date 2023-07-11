@@ -148,3 +148,35 @@ export const crearPartidosDeLaEliminatoria = async (req, res) => {
     res.status(500).send('No pudimos crear los partidos de la eliminatoria.');
   }
 };
+
+export const borrarPartido = async (req, res) => {
+  const idPartido = parseInt(req.params.idPartido);
+
+  try {
+    pool.query(consultasPartidos.borrarPartido, [idPartido], (err, results) => {
+      if (err) throw new Error(err);
+      res.status(200).send('Partido eliminado correctamente.');
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('No pudimos eliminar el partido.');
+  }
+};
+
+export const crearPartido = async (req, res) => {
+  const { idGrupo, idEliminatoria, dia } = req.body;
+
+  try {
+    pool.query(
+      consultasPartidos.crearPartido,
+      [dia, idGrupo ? idGrupo : null, idEliminatoria ? idEliminatoria : null],
+      (err, results) => {
+        if (err) throw new Error(err);
+        res.status(200).send('Partido creado correctamente.');
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('No pudimos crear el partido.');
+  }
+};

@@ -112,3 +112,37 @@ export const crearPartidosDeLaEliminatoria = async (
     );
   }
 };
+
+export const borrarPartido = async (id) => {
+  const response = await fetch(`${baseUrl}/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    throw json(
+      {
+        message: 'No pudimos eliminar el partido de la instancia.',
+      },
+      { status: 500 }
+    );
+  }
+};
+
+export const crearPartido = async (idGrupo, idEliminatoria, dia) => {
+  const response = await fetch(baseUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ idGrupo, idEliminatoria, dia }),
+  });
+
+  if (!response.ok) {
+    throw json(
+      {
+        message: 'No pudimos agregar el jugador a la categoría del torneo.',
+      },
+      { status: 500 }
+    );
+  }
+};

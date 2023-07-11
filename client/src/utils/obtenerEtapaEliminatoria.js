@@ -1,4 +1,5 @@
 export const obtenerEtapaEliminatoria = (orden) => {
+  if (orden === null) return '';
   if (orden === 0) return 'Tercer Puesto';
   if (orden === 1) return 'Final';
   if (orden < 4) return 'Semifinal';

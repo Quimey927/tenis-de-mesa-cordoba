@@ -102,6 +102,16 @@ const crearPartidosDeLaEliminatoria = (cant_partidos, hay_tercer_puesto) => {
   return consulta;
 };
 
+const borrarPartido = 'DELETE FROM partidos WHERE id = $1';
+
+const crearPartido = `INSERT INTO partidos
+  (
+    fecha,
+    id_grupo,
+    id_eliminatoria
+  )
+  VALUES ($1, $2, $3)`;
+
 export default {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
@@ -110,4 +120,6 @@ export default {
   editarSetsPartido,
   obtenerPartidosDeLaEliminatoria,
   crearPartidosDeLaEliminatoria,
+  borrarPartido,
+  crearPartido,
 };

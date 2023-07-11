@@ -12,7 +12,7 @@ import {
   crearSet,
   borrarSet,
 } from '../../../api';
-import classes from './ListaPartidosYSets.module.css';
+import classes from './ListaPartidos.module.css';
 
 const ListaSets = ({
   idEliminatoria,

@@ -132,6 +132,8 @@ export {
   editarSetsPartido,
   obtenerPartidosDeLaEliminatoria,
   crearPartidosDeLaEliminatoria,
+  borrarPartido,
+  crearPartido,
 } from './partidos';
 
 export { obtenerSets, editarSet, borrarSet, crearSet } from './sets';

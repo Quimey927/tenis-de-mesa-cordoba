@@ -50,13 +50,12 @@ const ListaEliminatorias = ({
           <ListaPartidos
             idEliminatoria={+idEliminatoria}
             partidosDeLaEliminatoria={partidosDeLaEliminatoria}
-            setJugador1={setJugador1}
-            setJugador2={setJugador2}
             controladorRedireccionar={controladorRedireccionar}
             jugadores={jugadores}
             jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
             categoriaFecha={categoriaFecha}
             idCategoriaFecha={idCategoriaFecha}
+            dia={categoriaFecha[0].dia.substring(0, 10)}
           />
         </>
       ) : (

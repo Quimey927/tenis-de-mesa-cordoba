@@ -60,7 +60,7 @@
 .acciones {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -76,7 +76,6 @@
   font-size: 0.9rem;
   cursor: pointer;
   text-decoration: none;
-  margin: 2rem auto;
 }
 
 .btn:hover {
@@ -99,22 +98,38 @@
   width: max-content;
 }
 
+.btn-crear,
 .btn-editar {
-  background-color: #337ab7;
-  border: 1px solid #2e6da4;
-  font: inherit;
-  font-size: 0.9rem;
   color: #fff;
   border: none;
   padding: 0.5rem 1.5rem;
   outline: inherit;
   cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
   border-radius: 5px;
   display: block;
-  margin-block: 1rem;
-  margin-inline: auto;
 }
 
+.btn-crear {
+  background-color: #5cb85c;
+  background-color: #4cae4c;
+}
+.btn-crear:hover {
+  background-color: #4cae4c;
+}
+
+.btn-editar {
+  background-color: #337ab7;
+  border: 1px solid #2e6da4;
+}
 .btn-editar:hover {
   background-color: #2e6da4;
+}
+
+.partidos select {
+  font: inherit;
+  font-size: 0.8rem;
+  color: #333;
+  display: inline;
 }

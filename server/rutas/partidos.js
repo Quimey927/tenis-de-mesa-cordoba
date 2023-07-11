@@ -8,6 +8,8 @@ import {
   editarSetsPartido,
   obtenerPartidosDeLaEliminatoria,
   crearPartidosDeLaEliminatoria,
+  borrarPartido,
+  crearPartido,
 } from '../controladores/partidos.js';
 
 const router = express.Router();
@@ -26,6 +28,8 @@ router.route('/intercambio/:idPartido').put(intercambiarJugadoresPartido);
 
 router.route('/sets/:idPartido').put(editarSetsPartido);
 
-router.route('/:idPartido').put(editarPartido);
+router.route('/').post(crearPartido);
+
+router.route('/:idPartido').put(editarPartido).delete(borrarPartido);
 
 export default router;
