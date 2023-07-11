@@ -33,7 +33,7 @@ const useGestionarEstadoFilas = (
     });
   };
 
-  const controladorBorrarJugadorCategoriaTorneo = (id) => {
+  const controladorBorrarElemento = (id) => {
     const continuar = window.confirm(
       '¿Estás seguro de que querés eliminar el elemento?'
     );
@@ -48,7 +48,7 @@ const useGestionarEstadoFilas = (
     filasEditandose,
     controladorEditarFilas,
     controladorCambiarValorFila,
-    controladorBorrarJugadorCategoriaTorneo,
+    controladorBorrarElemento,
   };
 };
 
