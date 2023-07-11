@@ -38,12 +38,6 @@ const crearPartidosDelGrupo = (cant_partidos) => {
   return consulta;
 };
 
-const intercambiarJugadoresPartido = `UPDATE partidos
-  SET
-    (id_jugador_1, id_jugador_2) = (id_jugador_2, id_jugador_1),
-    (sets_jugador_1, sets_jugador_2) = (sets_jugador_2, sets_jugador_1)
-  WHERE id = $1`;
-
 const editarPartido = `UPDATE partidos
   SET
     orden = $1,
@@ -113,7 +107,6 @@ const crearPartido = `INSERT INTO partidos
 export default {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
-  intercambiarJugadoresPartido,
   editarPartido,
   editarSetsPartido,
   obtenerPartidosDeLaEliminatoria,

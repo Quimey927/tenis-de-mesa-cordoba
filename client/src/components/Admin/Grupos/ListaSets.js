@@ -13,7 +13,7 @@ import {
   borrarSet,
   editarFilaTabla,
 } from '../../../api';
-import classes from './ListaPartidosYSets.module.css';
+import classes from './ListaPartidos.module.css';
 import { calcularNuevasFilas } from '../../../utils/calcularNuevasFilas';
 
 const ListaSets = ({

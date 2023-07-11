@@ -30,22 +30,6 @@ export const crearPartidosDelGrupo = async (idGrupo, datosPartidos) => {
   }
 };
 
-export const intercambiarJugadoresPartido = async (idPartido) => {
-  const response = await fetch(`${baseUrl}/intercambio/${idPartido}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!response.ok) {
-    throw json(
-      { message: 'No pudimos intercambiar los jugadores del partido.' },
-      { status: 500 }
-    );
-  }
-};
-
 export const editarPartido = async (partidoEditandose) => {
   const response = await fetch(`${baseUrl}/${partidoEditandose.id}`, {
     method: 'PUT',

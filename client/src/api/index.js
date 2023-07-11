@@ -127,7 +127,6 @@ export {
 export {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
-  intercambiarJugadoresPartido,
   editarPartido,
   editarSetsPartido,
   obtenerPartidosDeLaEliminatoria,
