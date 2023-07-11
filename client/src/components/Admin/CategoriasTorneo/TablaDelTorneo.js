@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSave,
@@ -15,6 +14,7 @@ import {
 } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import useGestionarEstadoFilas from '../../../hooks/useGestionarEstadoFilas';
+import useAgregarElementosAUnaLista from '../../../hooks/useAgregarElementosAUnaLista';
 import classes from './TablaDelTorneo.module.css';
 
 const TablaDelTorneo = ({
@@ -28,45 +28,24 @@ const TablaDelTorneo = ({
     filasEditandose,
     controladorEditarFilas,
     controladorCambiarValorFila,
+    controladorBorrarElemento: controladorBorrarJugadorCategoriaTorneo,
   } = useGestionarEstadoFilas(
     jugadoresDeLaCategoriaTorneo,
     editarPosicionYPuntajeCategoriaTorneo,
-    controladorRedireccionar
+    controladorRedireccionar,
+    borrarJugadorDeCategoriaTorneo
   );
 
-  const [nuevoJugador, setNuevoJugador] = useState(null);
-  const [agregandoNuevoJugador, setAgregandoNuevoJugador] = useState(false);
-
-  const controladorBorrarJugadorCategoriaTorneo = (id) => {
-    const continuar = window.confirm(
-      '¿Estás seguro de que querés eliminar el jugador de la categoria del torneo?'
-    );
-
-    if (continuar) {
-      borrarJugadorDeCategoriaTorneo(id);
-      controladorRedireccionar();
-    }
-  };
-
-  const controladorCerrarAgregarJugador = () => {
-    setNuevoJugador(null);
-    setAgregandoNuevoJugador(false);
-  };
-
-  const controladorCambiarNuevoJugador = (evt) => {
-    setNuevoJugador(+evt.target.value);
-  };
-
-  const controladorAgregarNuevoJugador = () => {
-    if (!agregandoNuevoJugador) {
-      setAgregandoNuevoJugador(true);
-    } else {
-      crearNuevoJugadorCategoriaTorneo(nuevoJugador, idCategoriaTorneo);
-      setNuevoJugador(null);
-      setAgregandoNuevoJugador(false);
-      controladorRedireccionar();
-    }
-  };
+  const {
+    controladorCerrarAgregarElemento: controladorCerrarAgregarJugador,
+    controladorCambiarNuevoElemento: controladorCambiarNuevoJugador,
+    controladorAgregarNuevoElemento: controladorAgregarNuevoJugador,
+    agregandoNuevoElemento: agregandoNuevoJugador,
+  } = useAgregarElementosAUnaLista(
+    crearNuevoJugadorCategoriaTorneo,
+    controladorRedireccionar,
+    [idCategoriaTorneo]
+  );
 
   const fechas = [];
 
@@ -76,7 +55,7 @@ const TablaDelTorneo = ({
     }
   }
 
-  const crearJugador = (
+  const jsxCrearJugador = (
     <div className={classes['crear-jugador']}>
       <button type="button" onClick={controladorAgregarNuevoJugador}>
         {!agregandoNuevoJugador ? (
@@ -91,7 +70,7 @@ const TablaDelTorneo = ({
       {agregandoNuevoJugador && (
         <>
           <select
-            name="color"
+            name="jugador"
             onChange={controladorCambiarNuevoJugador}
             required={true}
           >
@@ -121,7 +100,7 @@ const TablaDelTorneo = ({
       <>
         <AdminTituloPagina titulo="Tabla del torneo" />
         <p>No hay jugadores registrados aún en esta categoría</p>
-        {crearJugador}
+        {jsxCrearJugador}
       </>
     );
   }
@@ -331,6 +310,7 @@ const TablaDelTorneo = ({
           </tbody>
         </table>
       </form>
+
       <button
         type="button"
         className={classes['btn-editar']}
@@ -342,7 +322,8 @@ const TablaDelTorneo = ({
           <span>Editar Tabla</span>
         )}
       </button>
-      {crearJugador}
+
+      {jsxCrearJugador}
     </>
   );
 };

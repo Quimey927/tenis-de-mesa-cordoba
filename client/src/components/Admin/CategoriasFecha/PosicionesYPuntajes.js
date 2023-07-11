@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSave,
@@ -16,6 +15,7 @@ import {
 } from '../../../api';
 import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
 import useGestionarEstadoFilas from '../../../hooks/useGestionarEstadoFilas';
+import useAgregarElementosAUnaLista from '../../../hooks/useAgregarElementosAUnaLista';
 import classes from './PosicionesYPuntajes.module.css';
 
 const PosicionesYPuntajes = ({
@@ -31,14 +31,24 @@ const PosicionesYPuntajes = ({
     filasEditandose,
     controladorEditarFilas,
     controladorCambiarValorFila,
+    controladorBorrarElemento: controladorBorrarJugadorCategoriaFecha,
   } = useGestionarEstadoFilas(
     jugadoresDeLaCategoriaFecha,
     editarPosicionYPuntaje,
-    controladorRedireccionar
+    controladorRedireccionar,
+    borrarJugadorDeCategoriaFecha
   );
 
-  const [nuevoJugador, setNuevoJugador] = useState(null);
-  const [agregandoNuevoJugador, setAgregandoNuevoJugador] = useState(false);
+  const {
+    controladorCerrarAgregarElemento: controladorCerrarAgregarJugador,
+    controladorCambiarNuevoElemento: controladorCambiarNuevoJugador,
+    controladorAgregarNuevoElemento: controladorAgregarNuevoJugador,
+    agregandoNuevoElemento: agregandoNuevoJugador,
+  } = useAgregarElementosAUnaLista(
+    crearNuevoJugador,
+    controladorRedireccionar,
+    [idCategoriaFecha, categoriaFecha[0].id_categoria_torneo_default]
+  );
 
   /* for (let fila of jugadoresDeLaCategoriaFecha) {
     
@@ -65,40 +75,55 @@ const PosicionesYPuntajes = ({
   }
  */
 
-  const controladorBorrarJugadorCategoriaFecha = (id) => {
-    const continuar = window.confirm(
-      '¿Estás seguro de que querés eliminar el jugador de la categoria de la fecha?'
+  const jsxCrearJugador = (
+    <div className={classes['crear-jugador']}>
+      <button type="button" onClick={controladorAgregarNuevoJugador}>
+        {!agregandoNuevoJugador ? (
+          <>
+            <FontAwesomeIcon icon={faPlus} />
+            <span> Agregar Jugador</span>
+          </>
+        ) : (
+          <FontAwesomeIcon icon={faSave} />
+        )}
+      </button>
+      {agregandoNuevoJugador && (
+        <>
+          <select
+            name="color"
+            onChange={controladorCambiarNuevoJugador}
+            required={true}
+          >
+            <option value="">Elegir jugador</option>
+            {jugadores.map((jugador) => (
+              <option key={jugador.id} value={jugador.id}>
+                {obtenerNombreCompleto(
+                  jugador.nombre,
+                  jugador.segundo_nombre,
+                  jugador.apellido,
+                  jugador.segundo_apellido
+                )}
+              </option>
+            ))}
+          </select>
+
+          <button type="button" onClick={controladorCerrarAgregarJugador}>
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
+        </>
+      )}
+    </div>
+  );
+
+  if (jugadoresDeLaCategoriaFecha.length === 0) {
+    return (
+      <>
+        <AdminTituloPagina titulo="Posiciones y puntajes" />
+        <p>No hay jugadores registrados aún en esta categoría</p>
+        {jsxCrearJugador}
+      </>
     );
-
-    if (continuar) {
-      borrarJugadorDeCategoriaFecha(id);
-      controladorRedireccionar();
-    }
-  };
-
-  const controladorCerrarAgregarJugador = () => {
-    setNuevoJugador(null);
-    setAgregandoNuevoJugador(false);
-  };
-
-  const controladorCambiarNuevoJugador = (evt) => {
-    setNuevoJugador(+evt.target.value);
-  };
-
-  const controladorAgregarNuevoJugador = () => {
-    if (!agregandoNuevoJugador) {
-      setAgregandoNuevoJugador(true);
-    } else {
-      crearNuevoJugador(
-        nuevoJugador,
-        idCategoriaFecha,
-        categoriaFecha[0].id_categoria_torneo_default
-      );
-      setNuevoJugador(null);
-      setAgregandoNuevoJugador(false);
-      controladorRedireccionar();
-    }
-  };
+  }
 
   return (
     <>
@@ -201,43 +226,7 @@ const PosicionesYPuntajes = ({
         </table>
 
         <div className={classes.acciones}>
-          <div className={classes['crear-jugador']}>
-            <button type="button" onClick={controladorAgregarNuevoJugador}>
-              {!agregandoNuevoJugador ? (
-                <>
-                  <FontAwesomeIcon icon={faPlus} />
-                  <span> Agregar Jugador</span>
-                </>
-              ) : (
-                <FontAwesomeIcon icon={faSave} />
-              )}
-            </button>
-            {agregandoNuevoJugador && (
-              <>
-                <select
-                  name="color"
-                  onChange={controladorCambiarNuevoJugador}
-                  required={true}
-                >
-                  <option value="">Elegir jugador</option>
-                  {jugadores.map((jugador) => (
-                    <option key={jugador.id} value={jugador.id}>
-                      {obtenerNombreCompleto(
-                        jugador.nombre,
-                        jugador.segundo_nombre,
-                        jugador.apellido,
-                        jugador.segundo_apellido
-                      )}
-                    </option>
-                  ))}
-                </select>
-
-                <button type="button" onClick={controladorCerrarAgregarJugador}>
-                  <FontAwesomeIcon icon={faXmark} />
-                </button>
-              </>
-            )}
-          </div>
+          {jsxCrearJugador}
 
           <button
             type="button"
