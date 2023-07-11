@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
 import Input from '../../UI/Input/Input';
-import { crearPartidosDelGrupo } from '../../../api';
+import {
+  crearPartidosDelGrupo,
+  crearPartidosDelGrupoConFecha,
+} from '../../../api';
 import classes from './CrearPartidos.module.css';
 
 const CrearPartidos = ({
@@ -34,13 +37,12 @@ const CrearPartidos = ({
 
     const datosPartidos = {
       cantFechas,
+      cantJugadores: filasTabla.length,
       dia,
     };
 
-    console.log(datosPartidos);
-
-    /* crearPartidosDelGrupo(idGrupo, datosPartidos);
-    controladorRedireccionar(); */
+    crearPartidosDelGrupoConFecha(idGrupo, datosPartidos);
+    controladorRedireccionar();
   };
 
   return (

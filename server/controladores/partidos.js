@@ -41,16 +41,47 @@ export const crearPartidosDelGrupo = async (req, res) => {
   }
 };
 
+export const crearPartidosDelGrupoConFecha = async (req, res) => {
+  const idGrupo = parseInt(req.params.idGrupo);
+  const { cantFechas, cantJugadores, dia } = req.body;
+
+  const cantPartidosPorFecha = Math.floor(cantJugadores / 2);
+
+  try {
+    pool.query(
+      consultasPartidos.crearPartidosDelGrupoConFecha(
+        cantFechas,
+        cantPartidosPorFecha
+      ),
+      [idGrupo, dia],
+      (err, results) => {
+        if (err) throw new Error(err);
+        res.status(200).json(results.rows);
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('No pudimos crear los partidos del grupo.');
+  }
+};
+
 export const editarPartido = async (req, res) => {
   const idPartido = parseInt(req.params.idPartido);
 
-  const { orden, sets_jugador_1, sets_jugador_2, id_jugador_1, id_jugador_2 } =
-    req.body;
+  const {
+    num_fecha,
+    orden,
+    sets_jugador_1,
+    sets_jugador_2,
+    id_jugador_1,
+    id_jugador_2,
+  } = req.body;
 
   try {
     pool.query(
       consultasPartidos.editarPartido,
       [
+        num_fecha ? num_fecha : null,
         orden,
         sets_jugador_1,
         sets_jugador_2,

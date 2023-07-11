@@ -30,13 +30,18 @@ const ListaPartidos = ({
     controladorRedireccionar();
   };
 
+  const algunPartidoTieneNumFecha =
+    partidosDelGrupo
+      .map((partido) => partido.num_fecha)
+      .filter((num_fecha) => num_fecha !== null).length > 0;
+
   return (
     <>
       <form className={classes.partidos}>
         <table className={classes.table} style={{ width: '100%' }}>
           <thead>
             <tr>
-              <th>{partidosDelGrupo[0].num_fecha ? 'Fecha' : ''}</th>
+              <th>{algunPartidoTieneNumFecha ? 'Fecha' : ''}</th>
               <th>Orden</th>
               <th>Jugador 1</th>
               <th style={{ width: '110px' }}>vs.</th>
@@ -48,17 +53,17 @@ const ListaPartidos = ({
             {partidosDelGrupo.map((partido) => (
               <tr key={partido.id}>
                 <td>
-                  {!partidosDelGrupo[0].num_fecha ? (
+                  {!algunPartidoTieneNumFecha ? (
                     ''
                   ) : filasEditandose ? (
                     <input
-                      name={`fecha-${partido.id}`}
-                      defaultValue={partido.fecha}
+                      name={`num_fecha-${partido.id}`}
+                      defaultValue={partido.num_fecha}
                       className={classes['input-tabla-numero']}
                       onChange={controladorCambiarValorFila}
                     />
                   ) : (
-                    partido.fecha
+                    partido.num_fecha
                   )}
                 </td>
                 <td>

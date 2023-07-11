@@ -30,6 +30,23 @@ export const crearPartidosDelGrupo = async (idGrupo, datosPartidos) => {
   }
 };
 
+export const crearPartidosDelGrupoConFecha = async (idGrupo, datosPartidos) => {
+  const response = await fetch(`${baseUrl}/grupo/fechas/${idGrupo}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(datosPartidos),
+  });
+
+  if (!response.ok) {
+    throw json(
+      { message: 'No pudimos crear los partidos del grupo.' },
+      { status: 500 }
+    );
+  }
+};
+
 export const editarPartido = async (partidoEditandose) => {
   const response = await fetch(`${baseUrl}/${partidoEditandose.id}`, {
     method: 'PUT',

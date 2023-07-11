@@ -3,6 +3,7 @@ import express from 'express';
 import {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
+  crearPartidosDelGrupoConFecha,
   editarPartido,
   editarSetsPartido,
   obtenerPartidosDeLaEliminatoria,
@@ -17,6 +18,8 @@ router
   .route('/grupo/:idGrupo')
   .get(obtenerPartidosDelGrupo)
   .post(crearPartidosDelGrupo);
+
+router.route('/grupo/fechas/:idGrupo').post(crearPartidosDelGrupoConFecha);
 
 router
   .route('/eliminatoria/:idEliminatoria')

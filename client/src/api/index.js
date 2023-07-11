@@ -127,6 +127,7 @@ export {
 export {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
+  crearPartidosDelGrupoConFecha,
   editarPartido,
   editarSetsPartido,
   obtenerPartidosDeLaEliminatoria,

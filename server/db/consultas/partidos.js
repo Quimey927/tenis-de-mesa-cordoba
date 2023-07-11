@@ -16,7 +16,7 @@ const obtenerPartidosDelGrupo = `SELECT
   LEFT JOIN jugadores AS j2 ON j2.id = part.id_jugador_2
   WHERE id_grupo = $1
   GROUP BY j1.nombre, j1.apellido, j1.segundo_nombre, j1.segundo_apellido, j2.nombre, j2.apellido, j2.segundo_nombre, j2.segundo_apellido, part.id
-  ORDER BY part.orden`;
+  ORDER BY part.num_fecha, part.orden, part.id`;
 
 const crearPartidosDelGrupo = (cant_partidos) => {
   let valoresConsulta = '';
@@ -38,14 +38,34 @@ const crearPartidosDelGrupo = (cant_partidos) => {
   return consulta;
 };
 
+const crearPartidosDelGrupoConFecha = (cantFechas, cantPartidosPorFecha) => {
+  let valoresConsulta = '';
+
+  for (let i = 0; i < cantFechas; i++) {
+    for (let j = 0; j < cantPartidosPorFecha; j++) {
+      valoresConsulta += `($1, $2, ${i + 1}, ${j + 1}), `;
+    }
+  }
+
+  const valoresConsultaAjustado = valoresConsulta.substring(
+    0,
+    valoresConsulta.length - 2
+  );
+
+  let consulta = `INSERT INTO partidos (id_grupo, fecha, num_fecha, orden) VALUES ${valoresConsultaAjustado};`;
+
+  return consulta;
+};
+
 const editarPartido = `UPDATE partidos
   SET
-    orden = $1,
-    sets_jugador_1 = $2,
-    sets_jugador_2 = $3,
-    id_jugador_1 = $4,
-    id_jugador_2 = $5
-  WHERE id = $6`;
+    num_fecha = $1,
+    orden = $2,
+    sets_jugador_1 = $3,
+    sets_jugador_2 = $4,
+    id_jugador_1 = $5,
+    id_jugador_2 = $6
+  WHERE id = $7`;
 
 const editarSetsPartido = `UPDATE partidos
   SET
@@ -107,6 +127,7 @@ const crearPartido = `INSERT INTO partidos
 export default {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
+  crearPartidosDelGrupoConFecha,
   editarPartido,
   editarSetsPartido,
   obtenerPartidosDeLaEliminatoria,

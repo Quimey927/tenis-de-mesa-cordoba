@@ -62,7 +62,7 @@ const ListaPartidos = ({
           <thead>
             <tr>
               <th>Etapa</th>
-              <th>Número</th>
+              <th>Orden</th>
               <th>Jugador 1</th>
               <th style={{ width: '110px' }}>vs.</th>
               <th>Jugador 2</th>
