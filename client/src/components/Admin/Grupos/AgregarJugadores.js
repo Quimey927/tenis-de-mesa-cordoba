@@ -89,6 +89,14 @@ const AgregarJugadores = ({
             onChange={(evt) => setFiltro(evt.target.value)}
             onFocus={() => setSeMuestranOpciones(true)}
           />
+          {seMuestranOpciones && (
+            <button
+              className={classes['cerrar-opciones']}
+              onClick={() => setSeMuestranOpciones(false)}
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          )}
         </ul>
         <ul
           className={`${classes['lista-jugadores-posibles']} ${
@@ -110,12 +118,6 @@ const AgregarJugadores = ({
               )}
             </button>
           ))}
-          <button
-            className={classes['cerrar-opciones']}
-            onClick={() => setSeMuestranOpciones(false)}
-          >
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
         </ul>
       </div>
       <Button

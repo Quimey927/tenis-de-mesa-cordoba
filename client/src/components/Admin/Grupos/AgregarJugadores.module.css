@@ -8,10 +8,6 @@
   color: #777;
 }
 
-.listas {
-  position: relative;
-}
-
 .lista-jugadores-grupo {
   display: flex;
   column-gap: 0.5rem;
@@ -25,6 +21,7 @@
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 0.8rem;
+  position: relative;
 }
 
 .lista-jugadores-grupo input {
@@ -47,7 +44,7 @@
   background-image: linear-gradient(to bottom, white 0%, #eeeeee 100%);
 }
 
-.lista-jugadores-grupo button {
+.lista-jugadores-grupo .btn-eliminar {
   border: none;
   background-color: transparent;
   color: red;
@@ -121,8 +118,8 @@
 
 .cerrar-opciones {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 1px;
+  right: 1px;
   z-index: 1;
   cursor: pointer;
 }
