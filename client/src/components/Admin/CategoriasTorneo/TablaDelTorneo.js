@@ -1,10 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faSave,
-  faTrash,
-  faPlus,
-  faXmark,
-} from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import {
@@ -36,12 +31,7 @@ const TablaDelTorneo = ({
     borrarJugadorDeCategoriaTorneo
   );
 
-  const {
-    controladorCerrarAgregarElemento: controladorCerrarAgregarJugador,
-    controladorCambiarNuevoElemento: controladorCambiarNuevoJugador,
-    controladorAgregarNuevoElemento: controladorAgregarNuevoJugador,
-    agregandoNuevoElemento: agregandoNuevoJugador,
-  } = useAgregarElementosAUnaLista(
+  const { jsxCrearJugador } = useAgregarElementosAUnaLista(
     crearNuevoJugadorCategoriaTorneo,
     controladorRedireccionar,
     [idCategoriaTorneo]
@@ -55,52 +45,12 @@ const TablaDelTorneo = ({
     }
   }
 
-  const jsxCrearJugador = (
-    <div className={classes['crear-jugador']}>
-      <button type="button" onClick={controladorAgregarNuevoJugador}>
-        {!agregandoNuevoJugador ? (
-          <>
-            <FontAwesomeIcon icon={faPlus} />
-            <span> Agregar Jugador</span>
-          </>
-        ) : (
-          <FontAwesomeIcon icon={faSave} />
-        )}
-      </button>
-      {agregandoNuevoJugador && (
-        <>
-          <select
-            name="jugador"
-            onChange={controladorCambiarNuevoJugador}
-            required={true}
-          >
-            <option value="">Elegir jugador</option>
-            {jugadores.map((jugador) => (
-              <option key={jugador.id} value={jugador.id}>
-                {obtenerNombreCompleto(
-                  jugador.nombre,
-                  jugador.segundo_nombre,
-                  jugador.apellido,
-                  jugador.segundo_apellido
-                )}
-              </option>
-            ))}
-          </select>
-
-          <button type="button" onClick={controladorCerrarAgregarJugador}>
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
-        </>
-      )}
-    </div>
-  );
-
   if (jugadoresDeLaCategoriaTorneo.length === 0) {
     return (
       <>
         <AdminTituloPagina titulo="Tabla del torneo" />
         <p>No hay jugadores registrados aún en esta categoría</p>
-        {jsxCrearJugador}
+        {jsxCrearJugador(jugadores)}
       </>
     );
   }
@@ -311,19 +261,21 @@ const TablaDelTorneo = ({
         </table>
       </form>
 
-      <button
-        type="button"
-        className={classes['btn-editar']}
-        onClick={controladorEditarFilas}
-      >
-        {filasEditandose ? (
-          <span>Guardar Cambios</span>
-        ) : (
-          <span>Editar Tabla</span>
-        )}
-      </button>
+      <div className={classes.acciones}>
+        {jsxCrearJugador(jugadores)}
 
-      {jsxCrearJugador}
+        <button
+          type="button"
+          className={classes['btn-editar']}
+          onClick={controladorEditarFilas}
+        >
+          {filasEditandose ? (
+            <span>Guardar Cambios</span>
+          ) : (
+            <span>Editar Tabla</span>
+          )}
+        </button>
+      </div>
     </>
   );
 };

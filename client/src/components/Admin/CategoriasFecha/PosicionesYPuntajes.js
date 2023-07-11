@@ -1,10 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faSave,
-  faTrash,
-  faPlus,
-  faXmark,
-} from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import AdminTituloPagina from '../AdminTituloPagina/AdminTituloPagina';
 import {
@@ -39,12 +34,7 @@ const PosicionesYPuntajes = ({
     borrarJugadorDeCategoriaFecha
   );
 
-  const {
-    controladorCerrarAgregarElemento: controladorCerrarAgregarJugador,
-    controladorCambiarNuevoElemento: controladorCambiarNuevoJugador,
-    controladorAgregarNuevoElemento: controladorAgregarNuevoJugador,
-    agregandoNuevoElemento: agregandoNuevoJugador,
-  } = useAgregarElementosAUnaLista(
+  const { jsxCrearJugador } = useAgregarElementosAUnaLista(
     crearNuevoJugador,
     controladorRedireccionar,
     [idCategoriaFecha, categoriaFecha[0].id_categoria_torneo_default]
@@ -75,52 +65,12 @@ const PosicionesYPuntajes = ({
   }
  */
 
-  const jsxCrearJugador = (
-    <div className={classes['crear-jugador']}>
-      <button type="button" onClick={controladorAgregarNuevoJugador}>
-        {!agregandoNuevoJugador ? (
-          <>
-            <FontAwesomeIcon icon={faPlus} />
-            <span> Agregar Jugador</span>
-          </>
-        ) : (
-          <FontAwesomeIcon icon={faSave} />
-        )}
-      </button>
-      {agregandoNuevoJugador && (
-        <>
-          <select
-            name="color"
-            onChange={controladorCambiarNuevoJugador}
-            required={true}
-          >
-            <option value="">Elegir jugador</option>
-            {jugadores.map((jugador) => (
-              <option key={jugador.id} value={jugador.id}>
-                {obtenerNombreCompleto(
-                  jugador.nombre,
-                  jugador.segundo_nombre,
-                  jugador.apellido,
-                  jugador.segundo_apellido
-                )}
-              </option>
-            ))}
-          </select>
-
-          <button type="button" onClick={controladorCerrarAgregarJugador}>
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
-        </>
-      )}
-    </div>
-  );
-
   if (jugadoresDeLaCategoriaFecha.length === 0) {
     return (
       <>
         <AdminTituloPagina titulo="Posiciones y puntajes" />
         <p>No hay jugadores registrados aún en esta categoría</p>
-        {jsxCrearJugador}
+        {jsxCrearJugador(jugadores)}
       </>
     );
   }
@@ -224,23 +174,23 @@ const PosicionesYPuntajes = ({
             ))}
           </tbody>
         </table>
-
-        <div className={classes.acciones}>
-          {jsxCrearJugador}
-
-          <button
-            type="button"
-            className={classes['btn-editar']}
-            onClick={controladorEditarFilas}
-          >
-            {filasEditandose ? (
-              <span>Guardar Cambios</span>
-            ) : (
-              <span>Editar Tabla</span>
-            )}
-          </button>
-        </div>
       </form>
+
+      <div className={classes.acciones}>
+        {jsxCrearJugador(jugadores)}
+
+        <button
+          type="button"
+          className={classes['btn-editar']}
+          onClick={controladorEditarFilas}
+        >
+          {filasEditandose ? (
+            <span>Guardar Cambios</span>
+          ) : (
+            <span>Editar Tabla</span>
+          )}
+        </button>
+      </div>
     </>
   );
 };

@@ -52,7 +52,7 @@
 .acciones {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -111,8 +111,6 @@
   cursor: pointer;
   border-radius: 5px;
   display: block;
-  margin-block: 1rem;
-  margin-inline: auto;
 }
 
 .btn-editar:hover {
