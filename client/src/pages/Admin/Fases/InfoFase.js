@@ -30,18 +30,20 @@ const PaginaInfoFase = () => {
     idFase,
     idGrupo,
     idEliminatoria,
-    idPartido,
     filasTabla,
     coloresTabla,
     partidosDelGrupo,
     partidosDeLaEliminatoria,
-    setsDelPartido,
+    sets,
     jugadores,
     jugadoresDeLaCategoriaFecha,
   } = useLoaderData();
 
-  for (let i = 0; i < jugadoresDeLaCategoriaFecha.length; i++) {
-    jugadoresDeLaCategoriaFecha[i] = jugadoresDeLaCategoriaFecha[i].id_jugador;
+  if (jugadoresDeLaCategoriaFecha) {
+    for (let i = 0; i < jugadoresDeLaCategoriaFecha.length; i++) {
+      jugadoresDeLaCategoriaFecha[i] =
+        jugadoresDeLaCategoriaFecha[i].id_jugador;
+    }
   }
 
   const { state } = useLocation();
@@ -97,11 +99,10 @@ const PaginaInfoFase = () => {
           idFase={idFase}
           idFecha={idFecha}
           idGrupo={idGrupo}
-          idPartido={idPartido}
           filasTabla={filasTabla}
           coloresTabla={coloresTabla}
           partidosDelGrupo={partidosDelGrupo}
-          setsDelPartido={setsDelPartido}
+          sets={sets}
           jugadores={jugadores}
           jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
         />
@@ -113,9 +114,8 @@ const PaginaInfoFase = () => {
           idFase={idFase}
           idFecha={idFecha}
           idEliminatoria={idEliminatoria}
-          idPartido={idPartido}
           partidosDeLaEliminatoria={partidosDeLaEliminatoria}
-          setsDelPartido={setsDelPartido}
+          sets={sets}
           jugadores={jugadores}
           jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
         />
@@ -127,14 +127,7 @@ const PaginaInfoFase = () => {
 export default PaginaInfoFase;
 
 export async function loader({ params }) {
-  const {
-    idFase,
-    idCategoriaFecha,
-    idFecha,
-    idGrupo,
-    idEliminatoria,
-    idPartido,
-  } = params;
+  const { idFase, idCategoriaFecha, idFecha, idGrupo, idEliminatoria } = params;
 
   return {
     fase: await obtenerFase(idFase),
@@ -147,7 +140,6 @@ export async function loader({ params }) {
     jugadores: await obtenerJugadores(),
     idGrupo,
     idEliminatoria,
-    idPartido,
     filasTabla: idGrupo ? await obtenerFilasTabla(idGrupo) : undefined,
     coloresTabla: idGrupo ? await obtenerColoresTabla(idGrupo) : undefined,
     partidosDelGrupo: idGrupo
@@ -156,7 +148,10 @@ export async function loader({ params }) {
     partidosDeLaEliminatoria: idEliminatoria
       ? await obtenerPartidosDeLaEliminatoria(idEliminatoria)
       : [],
-    setsDelPartido: idPartido ? await obtenerSets(idPartido) : undefined,
+    sets:
+      idGrupo || idEliminatoria
+        ? await obtenerSets(idGrupo, idEliminatoria)
+        : undefined,
     jugadoresDeLaCategoriaFecha: await obtenerJugadoresDeLaCategoriaFecha(
       idCategoriaFecha
     ),

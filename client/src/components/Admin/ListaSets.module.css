@@ -1,0 +1,51 @@
+.partidos {
+  max-width: 600px;
+  margin: 3rem auto;
+  text-align: center;
+  color: #333;
+  font-size: 0.85rem;
+}
+
+.partido {
+  display: grid;
+  grid-template-columns: 1fr 50px 50px 50px 50px 50px 50px 50px;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  line-height: 1.6;
+  border-bottom: 1px solid #ccc;
+}
+
+.acciones {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-editar {
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  outline: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  display: block;
+  background-color: #337ab7;
+  border: 1px solid #2e6da4;
+}
+
+.btn-editar:disabled {
+  cursor: not-allowed;
+}
+
+.btn-editar:hover {
+  background-color: #2e6da4;
+}
+
+.input-tabla-numero {
+  text-align: center;
+  margin: 0;
+  width: 4ch;
+}

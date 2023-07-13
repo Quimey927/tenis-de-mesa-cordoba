@@ -2,7 +2,11 @@ import { useState } from 'react';
 
 import Select from '../../UI/Select/Select';
 import Button from '../../UI/Button/Button';
-import { crearEliminatoria, crearPartidosDeLaEliminatoria } from '../../../api';
+import {
+  crearEliminatoria,
+  crearPartidosDeLaEliminatoria,
+  crearSetsPartido,
+} from '../../../api';
 import classes from './CrearPartidos.module.css';
 
 const CrearPartidos = ({ idFase, dia, controladorRedireccionar }) => {
@@ -21,7 +25,14 @@ const CrearPartidos = ({ idFase, dia, controladorRedireccionar }) => {
       dia,
     };
 
-    await crearPartidosDeLaEliminatoria(datosPartidosEliminatoria);
+    const idPartidos = await crearPartidosDeLaEliminatoria(
+      datosPartidosEliminatoria
+    );
+
+    for (let partido of idPartidos) {
+      await crearSetsPartido(partido.id);
+    }
+
     controladorRedireccionar(idEliminatoria[0].id);
   };
 

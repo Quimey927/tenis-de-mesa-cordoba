@@ -129,11 +129,11 @@ export {
   crearPartidosDelGrupo,
   crearPartidosDelGrupoConFecha,
   editarPartido,
-  editarSetsPartido,
+  editarResultadoPartido,
   obtenerPartidosDeLaEliminatoria,
   crearPartidosDeLaEliminatoria,
   borrarPartido,
   crearPartido,
 } from './partidos';
 
-export { obtenerSets, editarSet, borrarSet, crearSet } from './sets';
+export { obtenerSets, editarSet, crearSetsPartido } from './sets';

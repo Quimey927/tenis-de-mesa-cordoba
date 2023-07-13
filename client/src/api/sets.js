@@ -2,13 +2,13 @@ import { json } from 'react-router-dom';
 
 const baseUrl = 'http://localhost:8080/api/sets';
 
-export const obtenerSets = async (idPartido) => {
-  const response = await fetch(`${baseUrl}/partido/${idPartido}`);
+export const obtenerSets = async (idGrupo, idEliminatoria) => {
+  const url = idGrupo
+    ? `${baseUrl}/grupo/${idGrupo}`
+    : `${baseUrl}/eliminatoria/${idEliminatoria}`;
+  const response = await fetch(url);
   if (!response.ok) {
-    throw json(
-      { message: 'No pudimos cargar los sets del partido.' },
-      { status: 500 }
-    );
+    throw json({ message: 'No pudimos cargar los sets.' }, { status: 500 });
   }
   return response.json();
 };
@@ -27,7 +27,23 @@ export const editarSet = async (set) => {
   }
 };
 
-export const borrarSet = async (id) => {
+export const crearSetsPartido = async (idPartido) => {
+  const response = await fetch(`${baseUrl}/partido/${idPartido}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw json(
+      { message: 'No pudimos crear los sets del partido.' },
+      { status: 500 }
+    );
+  }
+};
+
+/* export const borrarSet = async (id) => {
   const response = await fetch(`${baseUrl}/${id}`, {
     method: 'DELETE',
   });
@@ -50,3 +66,4 @@ export const crearSet = async (idPartido, cantSets) => {
     throw json({ message: 'No pudimos crear el set.' }, { status: 500 });
   }
 };
+ */

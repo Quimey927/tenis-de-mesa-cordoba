@@ -18,6 +18,7 @@ const FormularioFase = ({ method, fase }) => {
         required="true"
         label="Nombre*"
         defaultValue={fase ? fase[0].nombre : ''}
+        autoFocus={true}
       />
 
       <Input

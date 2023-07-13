@@ -4,6 +4,7 @@ import Input from '../../UI/Input/Input';
 import {
   crearPartidosDelGrupo,
   crearPartidosDelGrupoConFecha,
+  crearSetsPartido,
 } from '../../../api';
 import classes from './CrearPartidos.module.css';
 
@@ -16,7 +17,7 @@ const CrearPartidos = ({
   const [orden, setOrden] = useState('');
   const [cantFechas, setCantFechas] = useState(1);
 
-  const controladorCrearPartidos = (evt) => {
+  const controladorCrearPartidos = async (evt) => {
     evt.preventDefault();
 
     const idJugadores = orden
@@ -28,11 +29,16 @@ const CrearPartidos = ({
       dia,
     };
 
-    crearPartidosDelGrupo(idGrupo, datosPartidos);
+    const idPartidos = await crearPartidosDelGrupo(idGrupo, datosPartidos);
+
+    for (let partido of idPartidos) {
+      await crearSetsPartido(partido.id);
+    }
+
     controladorRedireccionar();
   };
 
-  const controladorCrearPartidosConFecha = (evt) => {
+  const controladorCrearPartidosConFecha = async (evt) => {
     evt.preventDefault();
 
     const datosPartidos = {
@@ -41,7 +47,15 @@ const CrearPartidos = ({
       dia,
     };
 
-    crearPartidosDelGrupoConFecha(idGrupo, datosPartidos);
+    const idPartidos = await crearPartidosDelGrupoConFecha(
+      idGrupo,
+      datosPartidos
+    );
+
+    for (let partido of idPartidos) {
+      await crearSetsPartido(partido.id);
+    }
+
     controladorRedireccionar();
   };
 

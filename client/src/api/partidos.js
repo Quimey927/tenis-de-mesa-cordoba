@@ -28,6 +28,8 @@ export const crearPartidosDelGrupo = async (idGrupo, datosPartidos) => {
       { status: 500 }
     );
   }
+
+  return response.json();
 };
 
 export const crearPartidosDelGrupoConFecha = async (idGrupo, datosPartidos) => {
@@ -45,6 +47,8 @@ export const crearPartidosDelGrupoConFecha = async (idGrupo, datosPartidos) => {
       { status: 500 }
     );
   }
+
+  return response.json();
 };
 
 export const editarPartido = async (partidoEditandose) => {
@@ -64,7 +68,7 @@ export const editarPartido = async (partidoEditandose) => {
   }
 };
 
-export const editarSetsPartido = async (partido) => {
+export const editarResultadoPartido = async (partido) => {
   const response = await fetch(`${baseUrl}/sets/${partido.id}`, {
     method: 'PUT',
     headers: {
@@ -112,6 +116,8 @@ export const crearPartidosDeLaEliminatoria = async (
       { status: 500 }
     );
   }
+
+  return response.json();
 };
 
 export const borrarPartido = async (id) => {
@@ -146,4 +152,6 @@ export const crearPartido = async (idGrupo, idEliminatoria, dia) => {
       { status: 500 }
     );
   }
+
+  return response.json();
 };

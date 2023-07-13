@@ -1,39 +1,73 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { editarPartido, crearPartido, borrarPartido } from '../../../api';
-import { obtenerNombreCompleto } from '../../../utils/obtenerNombreCompleto';
-import useGestionarEstadoFilas from '../../../hooks/useGestionarEstadoFilas';
+import {
+  editarPartido,
+  crearPartido,
+  borrarPartido,
+  crearSetsPartido,
+} from '../../api';
+import { obtenerEtapaEliminatoria } from '../../utils/obtenerEtapaEliminatoria';
+import { obtenerNombreCompleto } from '../../utils/obtenerNombreCompleto';
+import useGestionarEstadoFilas from '../../hooks/useGestionarEstadoFilas';
 import classes from './ListaPartidos.module.css';
 
 const ListaPartidos = ({
   idGrupo,
+  idEliminatoria,
   partidosDelGrupo,
+  partidosDeLaEliminatoria,
   controladorRedireccionar,
-  dia,
+  jugadores,
   jugadoresDelGrupo,
+  dia,
+  setMostrarSets,
+  agregarJugadoresALaCategoriaFecha,
 }) => {
   const {
     filasEditandose,
+    nuevasFilas,
     controladorEditarFilas,
     controladorCambiarValorFila,
-    controladorBorrarElemento: controladorBorrarPartidoDelGrupo,
+    controladorBorrarElemento: controladorBorrarPartidoDeLaEtapa, //etapa puede ser un grupo o una eliminatoria
   } = useGestionarEstadoFilas(
-    partidosDelGrupo,
+    partidosDeLaEliminatoria ? partidosDeLaEliminatoria : partidosDelGrupo,
     editarPartido,
     controladorRedireccionar,
     borrarPartido
   );
 
   const controladorAgregarPartido = async (evt) => {
-    await crearPartido(idGrupo, null, dia);
+    const idPartido = await crearPartido(
+      idGrupo ? idGrupo : null,
+      idEliminatoria ? idEliminatoria : null,
+      dia
+    );
+    await crearSetsPartido(idPartido[0].id);
     controladorRedireccionar();
   };
 
-  const algunPartidoTieneNumFecha =
-    partidosDelGrupo
-      .map((partido) => partido.num_fecha)
-      .filter((num_fecha) => num_fecha !== null).length > 0;
+  const controladorEditarSets = () => {
+    setMostrarSets(true);
+  };
+
+  const controladorTerminarEdicionPartidos = async () => {
+    await controladorEditarFilas();
+    agregarJugadoresALaCategoriaFecha !== undefined &&
+      (await agregarJugadoresALaCategoriaFecha(nuevasFilas));
+  };
+
+  const algunPartidoTieneNumFecha = partidosDelGrupo
+    ? partidosDelGrupo
+        .map((partido) => partido.num_fecha)
+        .filter((num_fecha) => num_fecha !== null).length > 0
+    : false;
+
+  const partidosDeLaEtapa = partidosDelGrupo
+    ? partidosDelGrupo
+    : partidosDeLaEliminatoria;
+
+  const jugadoresPosibles = idEliminatoria ? jugadores : jugadoresDelGrupo;
 
   return (
     <>
@@ -41,7 +75,9 @@ const ListaPartidos = ({
         <table className={classes.table} style={{ width: '100%' }}>
           <thead>
             <tr>
-              <th>{algunPartidoTieneNumFecha ? 'Fecha' : ''}</th>
+              <th>
+                {idGrupo ? (algunPartidoTieneNumFecha ? 'Fecha' : '') : 'Etapa'}
+              </th>
               <th>Orden</th>
               <th>Jugador 1</th>
               <th style={{ width: '110px' }}>vs.</th>
@@ -49,11 +85,18 @@ const ListaPartidos = ({
               <th></th>
             </tr>
           </thead>
+
           <tbody>
-            {partidosDelGrupo.map((partido) => (
+            {partidosDeLaEtapa.map((partido) => (
               <tr key={partido.id}>
-                <td>
-                  {!algunPartidoTieneNumFecha ? (
+                <td
+                  style={
+                    idEliminatoria ? { width: '150px', fontWeight: '700' } : {}
+                  }
+                >
+                  {idEliminatoria ? (
+                    obtenerEtapaEliminatoria(partido.orden)
+                  ) : !algunPartidoTieneNumFecha ? (
                     ''
                   ) : filasEditandose ? (
                     <input
@@ -89,7 +132,7 @@ const ListaPartidos = ({
                       onChange={controladorCambiarValorFila}
                     >
                       <option value="">Elegir jugador</option>
-                      {jugadoresDelGrupo.map((jugador) => (
+                      {jugadoresPosibles.map((jugador) => (
                         <option key={jugador.id} value={+jugador.id}>
                           {obtenerNombreCompleto(
                             jugador.nombre,
@@ -129,9 +172,11 @@ const ListaPartidos = ({
                       />
                     </>
                   ) : (
-                    <span>
-                      {partido.sets_jugador_1} - {partido.sets_jugador_2}
-                    </span>
+                    <button type="button" onClick={controladorEditarSets}>
+                      <span>
+                        {partido.sets_jugador_1} - {partido.sets_jugador_2}
+                      </span>
+                    </button>
                   )}
                 </td>
                 <td>
@@ -143,8 +188,8 @@ const ListaPartidos = ({
                       }
                       onChange={controladorCambiarValorFila}
                     >
-                      <option value="">Elegir jugador</option>
-                      {jugadoresDelGrupo.map((jugador) => (
+                      <option value="">No Definido</option>
+                      {jugadoresPosibles.map((jugador) => (
                         <option key={jugador.id} value={+jugador.id}>
                           {obtenerNombreCompleto(
                             jugador.nombre,
@@ -170,7 +215,7 @@ const ListaPartidos = ({
                   <button
                     type="button"
                     className={classes['btn-eliminar']}
-                    onClick={controladorBorrarPartidoDelGrupo.bind(
+                    onClick={controladorBorrarPartidoDeLaEtapa.bind(
                       null,
                       partido.id
                     )}
@@ -190,15 +235,19 @@ const ListaPartidos = ({
       <div className={classes.acciones}>
         <button
           type="button"
-          className={classes['btn-crear']}
+          className="crear-jugador--button"
           onClick={controladorAgregarPartido}
         >
-          Agregar partido
+          <>
+            <FontAwesomeIcon icon={faPlus} />
+            <span> Agregar Partido</span>
+          </>
         </button>
+
         <button
           type="button"
           className={classes['btn-editar']}
-          onClick={controladorEditarFilas}
+          onClick={controladorTerminarEdicionPartidos}
         >
           {filasEditandose ? (
             <span>Guardar Cambios</span>

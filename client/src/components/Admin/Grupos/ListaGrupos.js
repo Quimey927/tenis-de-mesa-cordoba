@@ -1,14 +1,16 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AgregarJugadores from './AgregarJugadores.js';
 import AccionesGrupo from './AccionesGrupo';
 import TablaPosiciones from './TablaPosiciones';
 import CrearPartidos from './CrearPartidos';
-import ListaPartidos from './ListaPartidos.js';
-import ListaSets from './ListaSets.js';
+import ListaPartidos from '../ListaPartidos.js';
+import ListaSets from '../ListaSets.js';
 import Solapas from '../../UI/Solapas/Solapas';
 import ListaColoresTabla from './ListaColoresTabla.js';
-import { borrarGrupo } from '../../../api';
+import { calcularNuevasFilas } from '../../../utils/calcularNuevasFilas';
+import { borrarGrupo, editarFilaTabla } from '../../../api';
 
 const ListaGrupos = ({
   grupos,
@@ -17,14 +19,15 @@ const ListaGrupos = ({
   idFecha,
   idFase,
   idGrupo,
-  idPartido,
   coloresTabla,
   filasTabla,
   partidosDelGrupo,
-  setsDelPartido,
+  sets,
   jugadores,
   jugadoresDeLaCategoriaFecha,
 }) => {
+  const [mostrarSets, setMostrarSets] = useState(false);
+
   const navigate = useNavigate();
 
   const controladorBorrarGrupo = (id) => {
@@ -65,6 +68,13 @@ const ListaGrupos = ({
   const jugadoresDelGrupo = jugadores.filter((jugador) =>
     idsJugadoresGrupo.includes(jugador.id)
   );
+
+  const actualizarTablaPosiciones = async (nuevosSets) => {
+    const nuevasFilasTabla = calcularNuevasFilas(filasTabla, nuevosSets);
+    for (let fila of nuevasFilasTabla) {
+      await editarFilaTabla(fila);
+    }
+  };
 
   return (
     <>
@@ -110,22 +120,22 @@ const ListaGrupos = ({
               idGrupo={+idGrupo}
               controladorRedireccionar={controladorRedireccionar}
             />
-          ) : !idPartido ? (
+          ) : !mostrarSets ? (
             <ListaPartidos
               idGrupo={+idGrupo}
               partidosDelGrupo={partidosDelGrupo}
               controladorRedireccionar={controladorRedireccionar}
-              dia={grupos[0].dia.substring(0, 10)}
               jugadoresDelGrupo={jugadoresDelGrupo}
+              dia={grupos[0].dia.substring(0, 10)}
+              setMostrarSets={setMostrarSets}
             />
           ) : (
             <ListaSets
-              idGrupo={idGrupo}
-              idPartido={idPartido}
-              setsDelPartido={setsDelPartido}
-              filasTabla={filasTabla}
-              partidosDelGrupo={partidosDelGrupo}
+              sets={sets}
+              partidosDeLaEtapa={partidosDelGrupo}
               controladorRedireccionar={controladorRedireccionar}
+              setMostrarSets={setMostrarSets}
+              actualizarTablaPosiciones={actualizarTablaPosiciones}
             />
           )}
         </>

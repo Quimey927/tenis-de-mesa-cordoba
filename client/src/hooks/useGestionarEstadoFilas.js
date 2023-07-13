@@ -49,6 +49,7 @@ const useGestionarEstadoFilas = (
     controladorEditarFilas,
     controladorCambiarValorFila,
     controladorBorrarElemento,
+    nuevasFilas,
   };
 };
 

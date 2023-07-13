@@ -100,14 +100,14 @@ export const editarPartido = async (req, res) => {
   }
 };
 
-export const editarSetsPartido = async (req, res) => {
+export const editarResultadoPartido = async (req, res) => {
   const idPartido = parseInt(req.params.idPartido);
 
   const { sets_jugador_1, sets_jugador_2 } = req.body;
 
   try {
     pool.query(
-      consultasPartidos.editarSetsPartido,
+      consultasPartidos.editarResultadoPartido,
       [sets_jugador_1, sets_jugador_2, idPartido],
       (err, results) => {
         if (err) throw new Error(err);
@@ -153,9 +153,7 @@ export const crearPartidosDeLaEliminatoria = async (req, res) => {
       [idEliminatoria, dia],
       (err, results) => {
         if (err) throw new Error(err);
-        res
-          .status(200)
-          .send('Partidos de la eliminatoria creados correctamente');
+        res.status(200).json(results.rows);
       }
     );
   } catch (err) {
@@ -187,7 +185,7 @@ export const crearPartido = async (req, res) => {
       [dia, idGrupo, idEliminatoria],
       (err, results) => {
         if (err) throw new Error(err);
-        res.status(200).send('Partido creado correctamente.');
+        res.status(200).json(results.rows);
       }
     );
   } catch (err) {

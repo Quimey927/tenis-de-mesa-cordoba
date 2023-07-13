@@ -21,7 +21,9 @@ export const obtenerColoresFila = (coloresTabla) => {
 // y dada una posición, detecta el color de la fila cuya posición es la ingresada
 
 export const encontrarColorFila = (coloresFila, pos) => {
-  const fila = coloresFila.find((fila) => fila.posicion === pos.toString());
+  let fila;
+  if (pos !== null)
+    fila = coloresFila.find((fila) => fila.posicion === pos.toString());
   if (!fila) return 'none';
   return fila.color;
 };

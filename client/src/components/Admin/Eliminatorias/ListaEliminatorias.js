@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import CrearPartidos from './CrearPartidos';
-import ListaPartidos from './ListaPartidos';
-import ListaSets from './ListaSets';
+import ListaPartidos from '../ListaPartidos';
+import ListaSets from '../ListaSets';
+import { agregarJugadoresACategoriaFecha } from '../../../api';
 
 const ListaEliminatorias = ({
   idFecha,
@@ -12,13 +13,11 @@ const ListaEliminatorias = ({
   idFase,
   idEliminatoria,
   partidosDeLaEliminatoria,
-  idPartido,
-  setsDelPartido,
+  sets,
   jugadores,
   jugadoresDeLaCategoriaFecha,
 }) => {
-  const [jugador1, setJugador1] = useState('');
-  const [jugador2, setJugador2] = useState('');
+  const [mostrarSets, setMostrarSets] = useState(false);
 
   const navigate = useNavigate();
 
@@ -37,6 +36,36 @@ const ListaEliminatorias = ({
     }
   };
 
+  const agregarJugadoresALaCategoriaFecha = async (nuevasFilas) => {
+    let jugadoresPartidos = [];
+
+    if (nuevasFilas) {
+      jugadoresPartidos = [
+        ...nuevasFilas
+          .map((fila) => fila.id_jugador_1)
+          .filter((fila) => fila !== null),
+        ...nuevasFilas
+          .map((fila) => fila.id_jugador_2)
+          .filter((fila) => fila !== null),
+      ];
+    }
+
+    if (jugadoresPartidos) {
+      const nuevosJugadores = jugadoresPartidos.filter(
+        (jugador) =>
+          jugador > 0 && !jugadoresDeLaCategoriaFecha.includes(jugador)
+      );
+
+      if (nuevosJugadores.length > 0) {
+        await agregarJugadoresACategoriaFecha(
+          nuevosJugadores,
+          idCategoriaFecha,
+          categoriaFecha[0].id_categoria_torneo_default
+        );
+      }
+    }
+  };
+
   return (
     <>
       {!idEliminatoria || partidosDeLaEliminatoria.length === 0 ? (
@@ -45,30 +74,27 @@ const ListaEliminatorias = ({
           dia={categoriaFecha[0].dia.substring(0, 10)}
           controladorRedireccionar={controladorRedireccionar}
         />
-      ) : !idPartido ? (
+      ) : !mostrarSets ? (
         <>
           <ListaPartidos
             idEliminatoria={+idEliminatoria}
             partidosDeLaEliminatoria={partidosDeLaEliminatoria}
             controladorRedireccionar={controladorRedireccionar}
             jugadores={jugadores}
-            jugadoresDeLaCategoriaFecha={jugadoresDeLaCategoriaFecha}
-            categoriaFecha={categoriaFecha}
-            idCategoriaFecha={idCategoriaFecha}
             dia={categoriaFecha[0].dia.substring(0, 10)}
+            setMostrarSets={setMostrarSets}
+            agregarJugadoresALaCategoriaFecha={
+              agregarJugadoresALaCategoriaFecha
+            }
           />
         </>
       ) : (
         <>
           <ListaSets
-            idEliminatoria={idEliminatoria}
-            idPartido={idPartido}
-            setsDelPartido={setsDelPartido}
-            jugador1={jugador1}
-            jugador2={jugador2}
-            setJugador1={setJugador1}
-            setJugador2={setJugador2}
+            sets={sets}
+            partidosDeLaEtapa={partidosDeLaEliminatoria}
             controladorRedireccionar={controladorRedireccionar}
+            setMostrarSets={setMostrarSets}
           />
         </>
       )}

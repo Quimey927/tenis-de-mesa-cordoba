@@ -5,7 +5,7 @@ import {
   crearPartidosDelGrupo,
   crearPartidosDelGrupoConFecha,
   editarPartido,
-  editarSetsPartido,
+  editarResultadoPartido,
   obtenerPartidosDeLaEliminatoria,
   crearPartidosDeLaEliminatoria,
   borrarPartido,
@@ -26,7 +26,7 @@ router
   .get(obtenerPartidosDeLaEliminatoria)
   .post(crearPartidosDeLaEliminatoria);
 
-router.route('/sets/:idPartido').put(editarSetsPartido);
+router.route('/sets/:idPartido').put(editarResultadoPartido);
 
 router.route('/').post(crearPartido);
 

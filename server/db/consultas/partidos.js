@@ -33,7 +33,7 @@ const crearPartidosDelGrupo = (cant_partidos) => {
     valoresConsulta.length - 2
   );
 
-  let consulta = `INSERT INTO partidos (id_grupo, fecha, orden, id_jugador_1, id_jugador_2) VALUES ${valoresConsultaAjustado};`;
+  let consulta = `INSERT INTO partidos (id_grupo, fecha, orden, id_jugador_1, id_jugador_2) VALUES ${valoresConsultaAjustado} RETURNING id`;
 
   return consulta;
 };
@@ -52,7 +52,7 @@ const crearPartidosDelGrupoConFecha = (cantFechas, cantPartidosPorFecha) => {
     valoresConsulta.length - 2
   );
 
-  let consulta = `INSERT INTO partidos (id_grupo, fecha, num_fecha, orden) VALUES ${valoresConsultaAjustado};`;
+  let consulta = `INSERT INTO partidos (id_grupo, fecha, num_fecha, orden) VALUES ${valoresConsultaAjustado} RETURNING id`;
 
   return consulta;
 };
@@ -67,7 +67,7 @@ const editarPartido = `UPDATE partidos
     id_jugador_2 = $6
   WHERE id = $7`;
 
-const editarSetsPartido = `UPDATE partidos
+const editarResultadoPartido = `UPDATE partidos
   SET
     sets_jugador_1 = $1,
     sets_jugador_2 = $2
@@ -109,7 +109,7 @@ const crearPartidosDeLaEliminatoria = (cant_partidos, hay_tercer_puesto) => {
     valoresConsulta.length - 2
   );
 
-  let consulta = `INSERT INTO partidos (id_eliminatoria, fecha, orden) VALUES ${valoresConsultaAjustado};`;
+  let consulta = `INSERT INTO partidos (id_eliminatoria, fecha, orden) VALUES ${valoresConsultaAjustado} RETURNING id`;
 
   return consulta;
 };
@@ -122,14 +122,15 @@ const crearPartido = `INSERT INTO partidos
     id_grupo,
     id_eliminatoria
   )
-  VALUES ($1, $2, $3)`;
+  VALUES ($1, $2, $3)
+  RETURNING id`;
 
 export default {
   obtenerPartidosDelGrupo,
   crearPartidosDelGrupo,
   crearPartidosDelGrupoConFecha,
   editarPartido,
-  editarSetsPartido,
+  editarResultadoPartido,
   obtenerPartidosDeLaEliminatoria,
   crearPartidosDeLaEliminatoria,
   borrarPartido,
