@@ -14,11 +14,9 @@ const FormularioCategoriaFecha = ({
     <AdminFormulario
       method={method}
       textoTitulo={
-        method === 'POST'
-          ? ' Agregar categoría fecha'
-          : `Editar ${categoriaFecha[0].categoria}`
+        method === 'POST' ? ' Agregar categoría fecha' : categoriaFecha[0].fecha
       }
-      subtitulo={method !== 'POST' && categoriaFecha[0].fecha}
+      subtitulo={method !== 'POST' && `Editar ${categoriaFecha[0].categoria}`}
       navegarAlCancelar={method === 'POST' ? '../../..' : '..'}
     >
       <Input

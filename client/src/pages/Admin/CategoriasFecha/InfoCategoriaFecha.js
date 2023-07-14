@@ -49,8 +49,8 @@ const PaginaInfoCategoriaFecha = () => {
   return (
     <>
       <AdminInfo
-        titulo={categoriaFecha[0].categoria}
-        subtitulo={categoriaFecha[0].fecha}
+        titulo={categoriaFecha[0].fecha}
+        subtitulo={categoriaFecha[0].categoria}
         campos={campos}
         to="../../.."
       />
